@@ -1,0 +1,470 @@
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:22:03 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:22:06 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:22:08 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:23:38 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:27:10 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:35:14 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:35:50 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:35:55 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:38:41 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:38:43 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:39:10 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:39:27 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:39:28 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:39:41 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:39:59 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:41:46 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:41:48 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:42:20 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:43:35 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:43:42 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:49:41 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:59:04 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 12:59:35 - Error creating reservation: Missing required field: firstName
+[FRONTDESK_RESERVATIONS] 2025-08-16 13:00:47 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 13:00:51 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-16 16:39:49 - Access denied for user role: admin
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:07:04 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:08:20 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:08:26 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:09:23 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:09:23 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:09:23 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:12:24 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:12:24 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:12:24 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:12:59 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:12:59 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:12:59 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:18:00 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:18:04 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:18:04 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:18:04 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:25:08 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:25:38 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:25:38 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:25:38 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:34:09 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:34:22 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:34:22 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:34:22 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:38:39 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:38:44 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:38:44 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:38:44 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:40:02 - Error deleting reservation: Missing reservation_id
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:11 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:17 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:17 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:17 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:25 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:26 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:29 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:29 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:53:29 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:10 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:17 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:17 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:17 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:18 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:18 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:18 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:20 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:20 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:20 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:21 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:21 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:21 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:23 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:23 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:23 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:25 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:25 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:54:25 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:00 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:01 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:03 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:03 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:03 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:04 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:04 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:04 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:05 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:05 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:05 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:08 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:12 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:12 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:55:12 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:41 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:42 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:47 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:50 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:50 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:50 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:52 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:52 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:52 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:53 - Error retrieving single reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:53 - Error retrieving reservations: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 03:57:53 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:06:36 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:06:38 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:06:38 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:06:38 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:20:24 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:20:26 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:23:41 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:06 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:09 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:09 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:09 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:13 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:13 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:13 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:17 - Error retrieving services for reservation 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:17 - Error retrieving menu items for reservation 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:17 - Front desk retrieved single reservation: 6
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:26 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:26 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:26 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:41 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:41 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:41 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:44 - Error retrieving services for reservation 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:44 - Error retrieving menu items for reservation 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:44 - Front desk retrieved single reservation: 6
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:47 - Error retrieving services for reservation 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:47 - Error retrieving menu items for reservation 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:47 - Front desk retrieved single reservation: 3
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:54 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:59 - Error retrieving services for reservation 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:59 - Error retrieving menu items for reservation 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:28:59 - Front desk retrieved single reservation: 1
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:03 - Error retrieving services for reservation 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:03 - Error retrieving menu items for reservation 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:03 - Front desk retrieved single reservation: 1
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:05 - Error retrieving services for reservation 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:05 - Error retrieving menu items for reservation 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:05 - Front desk retrieved single reservation: 1
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:19 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:20 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:20 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:20 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:22 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:22 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:22 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:24 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:24 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:24 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:29:36 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:13 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:15 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:16 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:17 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:18 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:49 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 04:30:49 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:20:09 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:20:11 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:21:52 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:22:00 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:24:45 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:24:51 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:28:22 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:28:23 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:28:24 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:36 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:37 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:39 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:39 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:41 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:41 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:32:54 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:33:50 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:33:57 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:33:58 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:33:59 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:35:29 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:35:30 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:35:33 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:35:33 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:36:32 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:37:44 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:37:50 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:37:51 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:37:55 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:39:09 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:39:56 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:39:56 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:40:57 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:41:43 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:41:45 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:41:46 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 06:41:50 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 07:36:09 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 07:36:10 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 07:36:15 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 08:08:23 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:43 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:44 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:45 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:47 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:48 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:48 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:17:52 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:19:05 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 09:19:06 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 10:22:55 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 10:23:02 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 10:45:32 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 11:39:09 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-17 11:39:10 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 11:39:19 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-17 11:39:21 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:18:52 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:19:18 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:19:26 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:19:34 - Error retrieving services for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'hs.price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:19:34 - Error retrieving menu items for reservation 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'mi.menu_item_id' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:19:34 - Front desk retrieved single reservation: 7
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:19:42 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:21:02 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 02:21:09 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 07:35:18 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:00:42 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:28:40 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Received booking data: {"first_name":"John Lester","last_name":"Zarsosa","email":"john@hotel.com","phone_number":"0966343734643","room_id":1,"check_in_date":"2025-08-18","check_out_date":"2025-08-19","guest_count":1,"special_requests":null,"reservation_status_id":1,"total_amount":1500,"advance_payment":750,"payment_method_id":1,"reference_number":"543463545345345","services":[4,5,6,10,9],"menu_items":[]}
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Customer ID: 9
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Reservation ID: 10
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Adding services: [4,5,6,10,9]
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Error adding service 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Error adding service 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Error adding service 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Error adding service 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Created advance payment ID: 2
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Front desk created reservation with ID: 10
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:30 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:30:57 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:41:34 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:41:44 - Front desk updated reservation with ID: 2
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:41:44 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:41:50 - Front desk retrieved single reservation: 2
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:41:58 - Front desk updated reservation with ID: 6
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:41:58 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:00 - Front desk updated reservation with ID: 11
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:00 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:06 - Front desk updated reservation with ID: 10
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:06 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:11 - Front desk updated reservation with ID: 9
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:11 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:16 - Front desk updated reservation with ID: 8
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:16 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:42:18 - Front desk retrieved single reservation: 1
+[FRONTDESK_RESERVATIONS] 2025-08-18 08:43:46 - Front desk retrieved 0 reservations (total: 0)
+[FRONTDESK_RESERVATIONS] 2025-08-18 13:53:04 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-18 13:53:10 - Front desk updated reservation with ID: 13
+[FRONTDESK_RESERVATIONS] 2025-08-18 13:53:10 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-18 13:56:59 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 14:08:43 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 21:47:35 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 21:47:35 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[FRONTDESK_RESERVATIONS] 2025-08-18 21:47:35 - GET error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:01:11 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:01:11 - GET error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:01:12 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:02:08 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:02:08 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:02:08 - GET error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:45:18 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:45:18 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:45:19 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:45:19 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:45:54 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:45:55 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Received booking data: {"first_name":"Janice","last_name":"Jamito","email":"janice@hotel.com","phone_number":"09354623235","room_id":33,"check_in_date":"2025-08-19","check_out_date":"2025-08-21","guest_count":1,"special_requests":null,"reservation_status_id":1,"total_amount":2580,"advance_payment":600,"payment_method_id":2,"reference_number":"543463545345345","services":[10,1],"menu_items":[{"id":16,"quantity":1},{"id":11,"quantity":1}]}
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Customer ID: 2
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Reservation ID: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Adding services: [10,1]
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Error adding service 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Error adding service 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Adding menu items: [{"id":16,"quantity":1},{"id":11,"quantity":1}]
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Added menu item 16 with quantity 1 and total 120
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Added menu item 11 with quantity 1 and total 60
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Updated total amount to: 2760
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Created advance payment ID: 7
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Front desk created reservation with ID: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:35 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:49:39 - Front desk retrieved single reservation: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:50:01 - Front desk retrieved single reservation: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:50:16 - Front desk retrieved single reservation: 14
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:50:26 - Front desk retrieved single reservation: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:50:28 - Front desk retrieved single reservation: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:50:38 - Front desk retrieved single reservation: 15
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:52:59 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:52:59 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-18 22:53:48 - Front desk retrieved single reservation: 13
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:07:44 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:07:44 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:07:46 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:07:46 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:07:47 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:11:36 - Front desk retrieved single reservation: 12
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:11:39 - Front desk retrieved single reservation: 12
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:11:55 - Front desk updated reservation with ID: 12
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:11:55 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Received booking data: {"first_name":"John Lester","last_name":"Zarsosa","email":"john@hotel.com","phone_number":"0848395839","room_id":9,"check_in_date":"2025-08-19","check_out_date":"2025-08-20","guest_count":1,"special_requests":null,"reservation_status_id":1,"total_amount":8480,"advance_payment":5000,"payment_method_id":2,"reference_number":"543463545345345","services":[7,1],"menu_items":[{"id":1,"quantity":1},{"id":23,"quantity":1},{"id":11,"quantity":1},{"id":14,"quantity":1},{"id":6,"quantity":1},{"id":5,"quantity":1},{"id":7,"quantity":1}]}
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Customer ID: 9
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Reservation ID: 16
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Adding services: [7,1]
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Error adding service 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Error adding service 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Adding menu items: [{"id":1,"quantity":1},{"id":23,"quantity":1},{"id":11,"quantity":1},{"id":14,"quantity":1},{"id":6,"quantity":1},{"id":5,"quantity":1},{"id":7,"quantity":1}]
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 1 with quantity 1 and total 320
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 23 with quantity 1 and total 100
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 11 with quantity 1 and total 60
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 14 with quantity 1 and total 80
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 6 with quantity 1 and total 690
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 5 with quantity 1 and total 450
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Added menu item 7 with quantity 1 and total 780
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Updated total amount to: 10960
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Created advance payment ID: 8
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Front desk created reservation with ID: 16
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:15:52 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:17 - Front desk updated reservation with ID: 16
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:17 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:22 - Front desk updated reservation with ID: 15
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:22 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:25 - Front desk updated reservation with ID: 14
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:25 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:17:43 - Front desk retrieved single reservation: 13
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:18:27 - Front desk updated reservation with ID: 13
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:18:27 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:18:38 - Front desk retrieved single reservation: 13
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:22:57 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:22:58 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:22:58 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:22:59 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:22:59 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:00 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:00 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:01 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:02 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:19 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:19 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:23:24 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:24:46 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:24:46 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 03:24:56 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:35:37 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:35:37 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:35:38 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:35:41 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:35:41 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:36:40 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:36:41 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:36:41 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:26 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:26 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:27 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:46 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:46 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:47 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:48 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 04:37:48 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 11:50:10 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-19 11:50:10 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-19 11:50:15 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:53:27 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:53:27 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:53:38 - Front desk updated reservation with ID: 13
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:53:38 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:54:26 - Front desk updated reservation with ID: 13
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:54:26 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:54:53 - Front desk updated reservation with ID: 13
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:54:53 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:55:43 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 01:56:16 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 02:57:36 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 02:57:36 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 02:57:42 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 02:57:51 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 02:57:51 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:40:57 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:41:00 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:41:00 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:41:34 - Front desk updated reservation with ID: 18
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:41:34 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:41:50 - Front desk updated reservation with ID: 18
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:41:50 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:18 - Front desk retrieved single reservation: 18
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:25 - Front desk retrieved single reservation: 18
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:30 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:33 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:33 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:44 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:44 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:49 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:56 - Front desk retrieved 0 reservations (total: 0)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:42:57 - Front desk retrieved 0 reservations (total: 0)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:01 - Front desk retrieved 0 reservations (total: 0)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:05 - Front desk retrieved 0 reservations (total: 0)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:10 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:11 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:17 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:20 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:22 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:43:25 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:50:04 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:50:04 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 07:50:05 - Front desk retrieved 7 reservations (total: 7)
+[FRONTDESK_RESERVATIONS] 2025-08-20 08:54:58 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 08:54:58 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 08:55:13 - Front desk updated reservation with ID: 19
+[FRONTDESK_RESERVATIONS] 2025-08-20 08:55:13 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:04:11 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:04:11 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:04:13 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:04:13 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:04:16 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:04:19 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:14:06 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:14:06 - Front desk retrieved 8 reservations (total: 8)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:14:17 - Front desk retrieved single reservation: 18
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:16:06 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:16:06 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:16:37 - Front desk updated reservation with ID: 20
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:16:37 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:17:33 - Front desk updated reservation with ID: 20
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:17:33 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:17:54 - Front desk updated reservation with ID: 20
+[FRONTDESK_RESERVATIONS] 2025-08-20 09:17:54 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 10:34:38 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 10:34:38 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 10:34:40 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 10:34:43 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 10:34:43 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 11:48:43 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:07 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:07 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:09 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:20 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:20 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:23 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:25 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:41 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:41 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:46 - Front desk retrieved 9 reservations (total: 9)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:51 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:53 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:12:58 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:33:38 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:33:38 - Front desk retrieved 10 reservations (total: 10)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:33:39 - Front desk retrieved 10 reservations (total: 10)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:33:41 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:33:41 - Front desk retrieved 10 reservations (total: 10)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:49:30 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:49:30 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-20 12:49:39 - Front desk retrieved 11 reservations (total: 11)

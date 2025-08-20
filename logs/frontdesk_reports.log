@@ -1,0 +1,204 @@
+[2025-08-19 12:02:50] === REPORT SUBMISSION START ===
+[2025-08-19 12:02:50] Request Method | Data: POST
+[2025-08-19 12:02:50] Session Data | Data: Array
+(
+    [user_id] => 2
+    [role] => front desk
+    [role_id] => 2
+    [name] => Christian Boncales
+    [email] => christianboncales@gmail.com
+    [login_time] => 1755597005
+    [logged_in] => 1
+)
+
+[2025-08-19 12:02:50] Headers | Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 589
+    [sec-ch-ua-platform] => "Windows"
+    [Cache-Control] => no-cache
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+    [Accept] => application/json
+    [sec-ch-ua] => "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/reservation/html/frontdesk/frontdashboard.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-US,en;q=0.9
+    [Cookie] => PHPSESSID=nmrqvt34aoct4gjidsuj81h4js
+)
+
+[2025-08-19 12:02:50] Checking authentication
+[2025-08-19 12:02:50] User role check | Data: Array
+(
+    [user_role] => front desk
+    [allowed_roles] => Array
+        (
+            [0] => frontdesk
+            [1] => front_desk
+            [2] => front-desk
+            [3] => reception
+            [4] => receptionist
+            [5] => admin
+            [6] => administrator
+            [7] => staff
+            [8] => manager
+        )
+
+)
+
+[2025-08-19 12:02:50] Permission denied | Data: Array
+(
+    [user_role] => front desk
+)
+
+[2025-08-19 12:05:09] === REPORT SUBMISSION START ===
+[2025-08-19 12:05:09] Request Method | Data: POST
+[2025-08-19 12:05:09] Session Data | Data: Array
+(
+    [user_id] => 2
+    [role] => front desk
+    [role_id] => 2
+    [name] => Christian Boncales
+    [email] => christianboncales@gmail.com
+    [login_time] => 1755597005
+    [logged_in] => 1
+)
+
+[2025-08-19 12:05:09] Headers | Data: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 638
+    [sec-ch-ua-platform] => "Windows"
+    [Cache-Control] => no-cache
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+    [Accept] => application/json
+    [sec-ch-ua] => "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/reservation/html/frontdesk/frontdashboard.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+    [Accept-Language] => en-US,en;q=0.9
+    [Cookie] => PHPSESSID=nmrqvt34aoct4gjidsuj81h4js
+)
+
+[2025-08-19 12:05:09] Checking authentication
+[2025-08-19 12:05:09] Authorization check | Data: Array
+(
+    [original_role] => front desk
+    [normalized_role] => front desk
+    [clean_role] => frontdesk
+    [is_authorized] => 1
+    [allowed_roles] => Array
+        (
+            [0] => frontdesk
+            [1] => front_desk
+            [2] => front-desk
+            [3] => reception
+            [4] => receptionist
+            [5] => admin
+            [6] => administrator
+            [7] => staff
+            [8] => manager
+            [9] => front desk
+            [frontdesk] => frontdesk
+        )
+
+)
+
+[2025-08-19 12:05:09] Authentication successful | Data: Array
+(
+    [user_id] => 2
+    [role] => front desk
+)
+
+[2025-08-19 12:05:09] Trying DB path | Data: C:\xampp\htdocs\reservation\api\frontdesk/../../config/db.php
+[2025-08-19 12:05:09] Trying DB path | Data: C:\xampp\htdocs\reservation\api\frontdesk/../config/db.php
+[2025-08-19 12:05:09] DB config loaded from | Data: C:\xampp\htdocs\reservation\api\frontdesk/../config/db.php
+[2025-08-19 12:05:09] Database connection successful
+[2025-08-19 12:05:09] Raw input received | Data: {"summary":"fsdffsdfadfhkljdhkjhklbjkbjkbjkbjk","details":{"daily_notes":"bjkbjkbjkbjkbuivuifvuigbkhuihgjuihbu","issues_encountered":"uibjkbjkbuijgvbuivbjkbjibvjuibvui","recommendations":"vbjibvjkbjkbjkbjkbjkvuivuij","submission_metadata":{"submitted_at":"2025-08-19T10:05:09.298Z","dashboard_stats":{"total_reservations":4,"checkins_today":2,"checkouts_today":0,"revenue_today":0,"unpaid_balance":10465,"available_rooms":0,"occupied_rooms":0,"maintenance_rooms":0,"total_rooms":0},"user_agent":"Mozi...
+[2025-08-19 12:05:09] Input parsed successfully | Data: Array
+(
+    [summary] => fsdffsdfadfhkljdhkjhklbjkbjkbjkbjk
+    [details] => Array
+        (
+            [daily_notes] => bjkbjkbjkbjkbuivuifvuigbkhuihgjuihbu
+            [issues_encountered] => uibjkbjkbuijgvbuivbjkbjibvjuibvui
+            [recommendations] => vbjibvjkbjkbjkbjkbjkvuivuij
+            [submission_metadata] => Array
+                (
+                    [submitted_at] => 2025-08-19T10:05:09.298Z
+                    [dashboard_stats] => Array
+                        (
+                            [total_reservations] => 4
+                            [checkins_today] => 2
+                            [checkouts_today] => 0
+                            [revenue_today] => 0
+                            [unpaid_balance] => 10465
+                            [available_rooms] => 0
+                            [occupied_rooms] => 0
+                            [maintenance_rooms] => 0
+                            [total_rooms] => 0
+                        )
+
+                    [user_agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+                    [timezone] => Asia/Shanghai
+                )
+
+        )
+
+)
+
+[2025-08-19 12:05:09] Report data prepared | Data: Array
+(
+    [summary_length] => 34
+    [details_keys] => Array
+        (
+            [0] => daily_notes
+            [1] => issues_encountered
+            [2] => recommendations
+            [3] => submission_metadata
+            [4] => submitted_by
+            [5] => submission_timestamp
+            [6] => ip_address
+        )
+
+    [staff_id] => 2
+)
+
+[2025-08-19 12:05:09] Table created/verified
+[2025-08-19 12:05:09] Inserting new report
+[2025-08-19 12:05:09] Report created successfully | Data: Array
+(
+    [report_id] => 3
+)
+
+[2025-08-19 12:05:09] Notification table created/verified
+[2025-08-19 12:05:09] Notification creation failed | Data: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'role' in 'where clause'
+[2025-08-19 12:05:09] SUCCESS - Report submission complete | Data: Array
+(
+    [success] => 1
+    [report_id] => 3
+    [action] => created
+    [message] => Report created successfully
+    [data] => Array
+        (
+            [report_date] => 2025-08-19
+            [summary] => fsdffsdfadfhkljdhkjhklbjkbjkbjkbjk
+            [staff_id] => 2
+            [created_at] => 2025-08-19 12:05:09
+        )
+
+)
+
+[2025-08-19 12:05:09] === REPORT SUBMISSION END ===

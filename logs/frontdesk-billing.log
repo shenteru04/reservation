@@ -1,0 +1,8 @@
+[FRONTDESK-BILLING] 2025-08-14 11:19:45 - Error retrieving billing data: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:19:45 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:20:26 - Error retrieving billing data: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:20:26 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:23:12 - Error retrieving billing data: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:23:12 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:23:35 - Error retrieving billing data: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'
+[FRONTDESK-BILLING] 2025-08-14 11:23:35 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.customer_id' in 'on clause'

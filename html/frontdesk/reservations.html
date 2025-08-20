@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Oro Hotel - Reservations Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'bounce-subtle': 'bounceSubtle 2s infinite',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .sidebar-active {
+            background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+            position: relative;
+        }
+        
+        .sidebar-active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #60a5fa;
+        }
+        
+        .stat-card-icon {
+            background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .notification-badge {
+            animation: pulse 2s infinite;
+        }
+
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .table-row:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .status-pending { @apply bg-yellow-100 text-yellow-800; }
+        .status-confirmed { @apply bg-blue-100 text-blue-800; }
+        .status-checked-in { @apply bg-green-100 text-green-800; }
+        .status-checked-out { @apply bg-gray-100 text-gray-800; }
+        .status-cancelled { @apply bg-red-100 text-red-800; }
+
+        .filter-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .filter-card {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-section {
+            border-left: 4px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .form-section:hover {
+            border-left-color: #3b82f6;
+        }
+
+        .service-section, .menu-section {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            background: #fafafa;
+        }
+
+        .price-item {
+            transition: all 0.3s ease;
+        }
+        .price-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                position: fixed;
+                z-index: 50;
+            }
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 40;
+            }
+            .mobile-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Quick Actions Button */
+        .quick-actions-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 40;
+        }
+
+        .quick-actions-menu {
+            position: absolute;
+            bottom: 4rem;
+            right: 0;
+            opacity: 0;
+            scale: 0.95;
+            transform-origin: bottom right;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .quick-actions-menu.show {
+            opacity: 1;
+            scale: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Mobile overlay -->
+    <div id="mobileOverlay" class="mobile-overlay"></div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-white bg-opacity-90 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-500">
+        <div class="text-center">
+            <div class="loading-spinner mx-auto mb-4 w-8 h-8 border-4"></div>
+            <p class="text-gray-600 font-medium animate-pulse">Loading Reservations Management...</p>
+        </div>
+    </div>
+    
+    <div class="flex h-screen">
+        <!-- Enhanced Sidebar -->
+        <div id="sidebar" class="sidebar w-72 gradient-bg text-white shadow-2xl relative overflow-hidden">
+            <!-- Animated Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full mix-blend-overlay animate-float"></div>
+                <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full mix-blend-overlay animate-float" style="animation-delay: -3s;"></div>
+            </div>
+            
+            <!-- Hotel Brand Header -->
+            <div class="relative p-6 border-b border-white/20 bg-black/10 backdrop-blur-sm">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-crown text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold tracking-tight">Sky Oro Hotel</h1>
+                            <p class="text-blue-200 text-sm opacity-90" id="staffName">Reservations Management</p>
+                        </div>
+                    </div>
+                    <button id="closeSidebar" class="lg:hidden text-white hover:text-blue-200 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Enhanced Navigation -->
+            <nav class="mt-4 px-3">
+                <a href="frontdashboard.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-tachometer-alt text-white"></i>
+                    </div>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+                
+                <a href="reservations.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl bg-black/20 backdrop-blur-sm sidebar-active transition-all duration-300 hover:bg-white/10">
+                    <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-calendar-check text-white"></i>
+                    </div>
+                    <span class="font-medium">Reservations</span>
+                    <div class="ml-auto notification-badge w-2 h-2 bg-green-400 rounded-full"></div>
+                </a>
+                
+                <a href="billing.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-receipt text-white"></i>
+                    </div>
+                    <span class="font-medium">Billing</span>
+                </a>
+                
+                <!-- Logout Section -->
+                <div class="border-t border-white/20 mt-6 pt-4">
+                    <a href="#" id="logoutLink" class="nav-link flex items-center px-4 py-4 rounded-xl hover:bg-red-500/20 transition-all duration-300 text-red-200">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-sign-out-alt text-white"></i>
+                        </div>
+                        <span class="font-medium">Logout</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- Bottom Branding -->
+            <div class="absolute bottom-4 left-4 right-4">
+                <div class="text-center text-white/60 text-xs">
+                    <p>© 2025 Sky Oro Hotel</p>
+                    <p class="mt-1">Reservation Operations</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto lg:ml-0">
+            <!-- Enhanced Header -->
+            <header class="bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 sticky top-0 z-40">
+                <div class="px-8 py-6">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <button id="openSidebar" class="lg:hidden text-gray-600 hover:text-gray-800 mr-4 p-2">
+                                <i class="fas fa-bars text-xl"></i>
+                            </button>
+                            <div class="animate-fade-in">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-calendar-check text-white text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-2xl font-bold text-gray-800">Reservations Management</h2>
+                                        <p class="text-sm text-gray-500 mt-1 flex items-center">
+                                            <i class="fas fa-bed mr-2 text-emerald-500"></i>
+                                            Manage hotel reservations and bookings
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <!-- Real-time Clock -->
+                            <div class="glass-effect rounded-xl px-4 py-2">
+                                <div class="flex items-center space-x-2 text-gray-700">
+                                    <i class="fas fa-clock text-emerald-500"></i>
+                                    <span id="currentDateTime" class="font-medium">Loading...</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex items-center space-x-2">
+                                <button id="exportBtn" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-xl font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center">
+                                    <i class="fas fa-download mr-2"></i>Export
+                                </button>
+                                <button id="addReservationBtn" class="btn-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2 shadow-lg hover:shadow-xl">
+                                    <i class="fas fa-plus"></i>
+                                    <span>New Reservation</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <main class="p-8 space-y-8">
+                <!-- Enhanced Filter Section -->
+                <div class="filter-section rounded-2xl p-1 animate-fade-in">
+                    <div class="filter-card rounded-xl shadow-xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-search mr-3 text-emerald-600"></i>
+                                Search & Filter Reservations
+                            </h3>
+                            <div class="flex items-center space-x-2">
+                                <button id="quickSearch" class="text-emerald-600 hover:text-emerald-800 text-sm flex items-center">
+                                    <i class="fas fa-magic mr-2"></i>Quick Search
+                                </button>
+                                <button id="advancedToggle" class="text-gray-600 hover:text-gray-800 text-sm">
+                                    <i class="fas fa-sliders-h mr-2"></i>Advanced
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-search mr-2 text-gray-500"></i>Search
+                                </label>
+                                <div class="relative">
+                                    <input type="text" id="searchInput" placeholder="Customer name, room number, ID..." 
+                                           class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all backdrop-blur-sm">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-flag mr-2 text-gray-500"></i>Status
+                                </label>
+                                <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                                    <option value="">All Status</option>
+                                    <option value="1">🟡 Pending</option>
+                                    <option value="2">🔵 Confirmed</option>
+                                    <option value="3">🟢 Checked-in</option>
+                                    <option value="4">⚫ Checked-out</option>
+                                    <option value="5">🔴 Cancelled</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-calendar mr-2 text-gray-500"></i>Check-in Date
+                                </label>
+                                <input type="date" id="checkinFilter" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <i class="fas fa-bed mr-2 text-gray-500"></i>Room Type
+                                </label>
+                                <select id="roomTypeFilter" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                                    <option value="">All Types</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
+                            <div class="flex items-center space-x-2">
+                                <button id="clearFilters" class="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-4 py-2 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center">
+                                    <i class="fas fa-eraser mr-2"></i>Clear Filters
+                                </button>
+                                <button id="saveFilter" class="text-emerald-600 hover:text-emerald-800 px-3 py-2 text-sm">
+                                    <i class="fas fa-bookmark mr-1"></i>Save Filter
+                                </button>
+                            </div>
+                            <div class="text-sm text-gray-500">
+                                <span id="filterCount">0</span> filters active
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Reservations Table -->
+                <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 animate-fade-in overflow-hidden">
+                    <div class="p-8 border-b border-gray-100 bg-gradient-to-r from-emerald-50 to-green-50">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                    <i class="fas fa-list mr-3 text-emerald-600"></i>
+                                    All Reservations
+                                </h3>
+                                <div class="text-sm text-gray-600 mt-1 flex items-center space-x-4">
+                                    <span>Total: <span id="totalReservations" class="font-medium text-emerald-600">0</span> reservations</span>
+                                    <span>•</span>
+                                    <span id="lastUpdated" class="text-xs text-gray-500">Last updated: Loading...</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button id="refreshBtn" class="p-2 text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors" title="Refresh Data">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                                <button id="printBtn" class="p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-xl transition-colors" title="Print Report">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                                <button id="viewToggle" class="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" title="Toggle View">
+                                    <i class="fas fa-th-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50/80 backdrop-blur-sm">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-hashtag text-gray-400"></i>
+                                            <span>Reservation</span>
+                                            <i class="fas fa-sort ml-1 text-gray-400"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-user text-gray-400"></i>
+                                            <span>Customer</span>
+                                            <i class="fas fa-sort ml-1 text-gray-400"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-bed text-gray-400"></i>
+                                            <span>Room</span>
+                                            <i class="fas fa-sort ml-1 text-gray-400"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-calendar text-gray-400"></i>
+                                            <span>Dates</span>
+                                            <i class="fas fa-sort ml-1 text-gray-400"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-peso-sign text-gray-400"></i>
+                                            <span>Amount</span>
+                                            <i class="fas fa-sort ml-1 text-gray-400"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-flag text-gray-400"></i>
+                                            <span>Status</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center justify-end space-x-1">
+                                            <i class="fas fa-cog text-gray-400"></i>
+                                            <span>Actions</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservationsTableBody" class="bg-white/50 backdrop-blur-sm divide-y divide-gray-200">
+                                <tr class="skeleton-row">
+                                    <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                                        <div class="flex flex-col items-center">
+                                            <div class="loading-spinner mx-auto mb-4"></div>
+                                            <p class="text-lg mb-2">Loading reservations...</p>
+                                            <p class="text-sm text-gray-400">Please wait while we fetch the latest data</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Enhanced Pagination -->
+                    <div id="paginationContainer" class="bg-gray-50/80 backdrop-blur-sm px-8 py-4 border-t border-gray-200">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-sm text-gray-500" id="paginationInfo">
+                                    Showing 0 to 0 of 0 results
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <label class="text-sm text-gray-600">Show:</label>
+                                    <select id="pageSizeSelect" class="text-sm border border-gray-300 rounded-xl px-3 py-1">
+                                        <option value="10">10</option>
+                                        <option value="20" selected>20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <span class="text-sm text-gray-600">per page</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2" id="paginationButtons">
+                                <!-- Pagination buttons will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Enhanced New Reservation Modal -->
+    <div id="reservationModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50 p-4 modal-overlay">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-plus-circle mr-3 text-emerald-600"></i>
+                        New Reservation
+                    </h3>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-full">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="mt-2 text-sm text-gray-600">
+                    <span id="modalSubtitle">Create a new reservation for your guest</span>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <form id="reservationForm">
+                    <input type="hidden" id="reservationId">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Left Column -->
+                        <div class="space-y-6">
+                            <!-- Customer Information -->
+                            <div class="form-section p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-blue-200 pb-2 flex items-center">
+                                    <i class="fas fa-user-circle mr-3 text-blue-600"></i>
+                                    Customer Information
+                                </h4>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                        <input type="text" id="firstName" required maxlength="50" autocomplete="given-name"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                        <input type="text" id="lastName" required maxlength="50" autocomplete="family-name"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                        <input type="email" id="email" maxlength="100" autocomplete="email"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                        <input type="tel" id="phoneNumber" maxlength="20" autocomplete="tel"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reservation Details -->
+                            <div class="form-section p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-green-200 pb-2 flex items-center">
+                                    <i class="fas fa-calendar-alt mr-3 text-green-600"></i>
+                                    Reservation Details
+                                </h4>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Room Type *</label>
+                                        <select id="roomTypeSelect" required 
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                            <option value="">Loading room types...</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Available Rooms *</label>
+                                        <select id="roomSelect" required disabled
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                            <option value="">Select room type first</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Check-in Date *</label>
+                                        <input type="date" id="checkinDate" required 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Check-out Date *</label>
+                                        <input type="date" id="checkoutDate" required 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    </div>
+                                    
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Number of Guests *</label>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="number" id="guestCount" required min="1" max="10" value="1"
+                                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                            <div class="text-sm text-gray-500 bg-gray-100 px-3 py-2 rounded-xl">
+                                                <i class="fas fa-users mr-1"></i>
+                                                guests
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Special Requests</label>
+                                        <textarea id="specialRequests" rows="3" maxlength="500"
+                                                  placeholder="Any special requirements, accessibility needs, or preferences..."
+                                                  class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"></textarea>
+                                        <div class="text-xs text-gray-500 mt-1">
+                                            <span id="specialRequestsCount">0</span>/500 characters
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-6">
+                            <!-- Hotel Services -->
+                            <div class="form-section p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-purple-200 pb-2 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-concierge-bell mr-3 text-purple-600"></i>
+                                        Hotel Services
+                                    </div>
+                                    <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-full">Optional</span>
+                                </h4>
+                                <div id="servicesList" class="service-section space-y-2">
+                                    <div class="flex items-center justify-center py-8">
+                                        <div class="text-center">
+                                            <div class="loading-spinner mx-auto mb-2"></div>
+                                            <p class="text-gray-500 text-sm">Loading services...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Menu Items -->
+                            <div class="form-section p-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-orange-200 pb-2 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-utensils mr-3 text-orange-600"></i>
+                                        Menu Items
+                                    </div>
+                                    <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-full">Optional</span>
+                                </h4>
+                                <div id="menuItemsList" class="menu-section space-y-2">
+                                    <div class="flex items-center justify-center py-8">
+                                        <div class="text-center">
+                                            <div class="loading-spinner mx-auto mb-2"></div>
+                                            <p class="text-gray-500 text-sm">Loading menu items...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Enhanced Price Calculation -->
+                            <div class="form-section p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border-2 border-blue-200">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-blue-200 pb-2 flex items-center">
+                                    <i class="fas fa-calculator mr-3 text-blue-600"></i>
+                                    Price Breakdown
+                                    <div class="ml-auto">
+                                        <button type="button" id="recalculateBtn" class="text-xs text-blue-600 hover:text-blue-800 bg-white px-2 py-1 rounded-full border">
+                                            <i class="fas fa-sync-alt mr-1"></i>Recalculate
+                                        </button>
+                                    </div>
+                                </h4>
+                                
+                                <div class="space-y-3 text-sm">
+                                    <div class="price-item flex justify-between items-center p-2 rounded">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-bed mr-2 text-gray-500"></i>
+                                            <span class="font-medium">Room Rate:</span>
+                                        </div>
+                                        <span id="roomRate" class="font-mono font-semibold">₱0.00</span>
+                                    </div>
+                                    <div class="price-item flex justify-between items-center p-2 rounded">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-calendar-day mr-2 text-gray-500"></i>
+                                            <span class="font-medium">Number of Nights:</span>
+                                        </div>
+                                        <span id="nightsCount" class="font-mono font-semibold">0</span>
+                                    </div>
+                                    <div class="border-t border-gray-300 my-3"></div>
+                                    <div id="totalAmount" class="font-bold text-lg text-right p-3 bg-gradient-to-r from-blue-100 to-green-100 rounded-xl border">
+                                        <div class="flex items-center justify-between">
+                                            <span class="flex items-center text-gray-700">
+                                                <i class="fas fa-receipt mr-2"></i>
+                                                Total Amount:
+                                            </span>
+                                            <span class="text-2xl text-blue-600">₱0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Enhanced Payment Information -->
+                            <div class="form-section p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border border-yellow-200">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-yellow-200 pb-2 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-credit-card mr-3 text-yellow-600"></i>
+                                        Advance Payment
+                                    </div>
+                                    <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-full">Optional</span>
+                                </h4>
+                                
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
+                                        <select id="paymentMethodSelect" 
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                            <option value="">No advance payment</option>
+                                            <option value="cash">💵 Cash</option>
+                                            <option value="gcash">📱 GCash</option>
+                                            <option value="bank_transfer">🏦 Bank Transfer</option>
+                                            <option value="credit_card">💳 Credit Card</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div id="advancePaymentFields" class="space-y-4 hidden bg-white p-4 rounded-xl border-2 border-dashed border-yellow-300">
+                                        <div class="text-sm text-yellow-800 bg-yellow-100 p-2 rounded flex items-center">
+                                            <i class="fas fa-info-circle mr-2"></i>
+                                            Enter advance payment details below
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Advance Amount *</label>
+                                            <div class="relative">
+                                                <span class="absolute left-3 top-2 text-gray-500">₱</span>
+                                                <input type="number" id="advanceAmount" min="0" step="0.01" placeholder="0.00"
+                                                       class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Reference Number</label>
+                                            <input type="text" id="referenceNumber" maxlength="50"
+                                                   placeholder="Transaction/Reference number (optional)"
+                                                   class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                        </div>
+                                        
+                                        <div id="balanceDisplay" class="text-sm text-gray-600 bg-gray-100 p-2 rounded-xl">
+                                            Remaining Balance: <span id="remainingBalance" class="font-semibold">₱0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Action Buttons -->
+                    <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t pt-6 bg-gray-50 -mx-6 px-6 py-4 rounded-b-2xl">
+                        <div class="text-sm text-gray-600 flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-yellow-500"></i>
+                            <span>All required fields must be completed before saving</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button type="button" id="cancelReservationBtn" 
+                                    class="px-6 py-2 text-gray-600 bg-white hover:bg-gray-50 border border-gray-300 rounded-xl transition-all shadow-sm hover:shadow flex items-center">
+                                <i class="fas fa-times mr-2"></i>Cancel
+                            </button>
+                            <button type="button" id="previewBtn"
+                                    class="px-6 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-300 rounded-xl transition-all shadow-sm hover:shadow flex items-center">
+                                <i class="fas fa-eye mr-2"></i>Preview
+                            </button>
+                            <button type="submit" id="saveReservationBtn" 
+                                    class="px-8 py-2 btn-primary text-white rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center">
+                                <i class="fas fa-save mr-2"></i>
+                                <span class="btn-text">Save Reservation</span>
+                                <span class="loading-spinner hidden ml-2"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Status Update Modal -->
+    <div id="statusModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50 p-4 modal-overlay">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+            <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-blue-100 rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-edit mr-3 text-blue-600"></i>
+                        Update Reservation Status
+                    </h3>
+                    <button id="closeStatusModal" class="text-gray-500 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-full">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <form id="statusForm">
+                    <input type="hidden" id="statusReservationId">
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-3">New Status *</label>
+                        <select id="newStatus" required 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                            <option value="">Select Status</option>
+                            <option value="1">🟡 Pending</option>
+                            <option value="2">🔵 Confirmed</option>
+                            <option value="3">🟢 Checked-in</option>
+                            <option value="4">⚫ Checked-out</option>
+                            <option value="5">🔴 Cancelled</option>
+                        </select>
+                        <div class="text-xs text-gray-500 mt-2 flex items-center">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Only valid status transitions are shown
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end gap-3">
+                        <button type="button" id="cancelStatusBtn" 
+                                class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" id="saveStatusBtn" 
+                                class="px-6 py-2 btn-primary text-white rounded-xl transition-colors flex items-center shadow-lg hover:shadow-xl">
+                            <i class="fas fa-check mr-2"></i>
+                            <span class="btn-text">Update Status</span>
+                            <span class="loading-spinner hidden ml-2"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Reservation Details Modal -->
+    <div id="detailsModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50 p-4 modal-overlay">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-file-alt mr-3 text-purple-600"></i>
+                        Reservation Details
+                    </h3>
+                    <div class="flex items-center space-x-2">
+                        <button id="printDetailsBtn" class="text-gray-600 hover:text-blue-600 p-2 hover:bg-blue-50 rounded-full transition-colors" title="Print Details">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <button id="closeDetailsModal" class="text-gray-500 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-full">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div id="reservationDetails" class="space-y-6">
+                    <!-- Details will be populated here -->
+                    <div class="flex items-center justify-center py-12">
+                        <div class="text-center">
+                            <div class="loading-spinner mx-auto mb-4"></div>
+                            <p class="text-gray-500">Loading reservation details...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Floating Button -->
+    <div class="quick-actions-btn">
+        <div class="relative group">
+            <button id="quickActionsBtn" class="btn-primary text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 group-hover:rotate-45">
+                <i class="fas fa-plus text-xl"></i>
+            </button>
+            
+            <!-- Quick Actions Menu -->
+            <div id="quickActionsMenu" class="quick-actions-menu bg-white rounded-xl shadow-xl border border-gray-200 py-2 w-48">
+                <button class="w-full text-left px-4 py-2 hover:bg-emerald-50 text-gray-700 hover:text-emerald-600 transition-colors flex items-center">
+                    <i class="fas fa-plus mr-3 text-emerald-600"></i>New Reservation
+                </button>
+                <button class="w-full text-left px-4 py-2 hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors flex items-center">
+                    <i class="fas fa-sync-alt mr-3 text-blue-600"></i>Refresh Data
+                </button>
+                <button class="w-full text-left px-4 py-2 hover:bg-purple-50 text-gray-700 hover:text-purple-600 transition-colors flex items-center">
+                    <i class="fas fa-download mr-3 text-purple-600"></i>Export Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/frontdesk/reservations.js"></script>
+    <script src="../../js/frontdesk/util/mobile-view.js"></script>
+    <script src="../../js/auth/logout.js"></script>
+    <script src="../../js/frontdesk/util/reserveutil.js"></script>
+</body>
+</html>

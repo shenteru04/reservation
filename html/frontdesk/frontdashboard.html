@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Oro Hotel - Front Desk Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'bounce-subtle': 'bounceSubtle 2s infinite',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .sidebar-active {
+            background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+            position: relative;
+        }
+        
+        .sidebar-active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #60a5fa;
+        }
+        
+        .stat-card-icon {
+            background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Advanced Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .notification-badge {
+            animation: pulse 2s infinite;
+        }
+
+        /* Modal transitions */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-white bg-opacity-90 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-500">
+        <div class="text-center">
+            <div class="loading-spinner mx-auto mb-4 w-8 h-8 border-4"></div>
+            <p class="text-gray-600 font-medium animate-pulse">Loading Front Desk Dashboard...</p>
+        </div>
+    </div>
+    
+    <div class="flex h-screen">
+        <!-- Enhanced Sidebar -->
+        <div class="w-72 gradient-bg text-white shadow-2xl relative overflow-hidden">
+            <!-- Animated Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full mix-blend-overlay animate-float"></div>
+                <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full mix-blend-overlay animate-float" style="animation-delay: -3s;"></div>
+            </div>
+            
+            <!-- Hotel Brand Header -->
+            <div class="relative p-6 border-b border-white/20 bg-black/10 backdrop-blur-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-crown text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight">Sky Oro Hotel</h1>
+                        <p class="text-blue-200 text-sm opacity-90" id="staffName">Front Desk Operations</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Navigation -->
+            <nav class="mt-4 px-3">
+                <a href="frontdashboard.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl bg-black/20 backdrop-blur-sm sidebar-active transition-all duration-300 hover:bg-white/10">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-tachometer-alt text-white"></i>
+                    </div>
+                    <span class="font-medium">Dashboard</span>
+                    <div class="ml-auto notification-badge w-2 h-2 bg-green-400 rounded-full"></div>
+                </a>
+                
+                <a href="reservations.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-calendar-check text-white"></i>
+                    </div>
+                    <span class="font-medium">Reservations</span>
+                </a>
+                
+                <a href="billing.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-receipt text-white"></i>
+                    </div>
+                    <span class="font-medium">Billing</span>
+                </a>
+                
+                <!-- Logout Section -->
+                <div class="border-t border-white/20 mt-6 pt-4">
+                    <a href="#" id="logoutLink" class="nav-link flex items-center px-4 py-4 rounded-xl hover:bg-red-500/20 transition-all duration-300 text-red-200">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-sign-out-alt text-white"></i>
+                        </div>
+                        <span class="font-medium">Logout</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- Bottom Branding -->
+            <div class="absolute bottom-4 left-4 right-4">
+                <div class="text-center text-white/60 text-xs">
+                    <p>© 2025 Sky Oro Hotel</p>
+                    <p class="mt-1">Front Desk Operations</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Enhanced Header -->
+            <header class="bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 sticky top-0 z-40">
+                <div class="px-8 py-6">
+                    <div class="flex justify-between items-center">
+                        <div class="animate-fade-in">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-user-check text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-800">Front Desk Dashboard</h2>
+                                    <p class="text-sm text-gray-500 mt-1 flex items-center">
+                                        <i class="fas fa-concierge-bell mr-2 text-blue-500"></i>
+                                        Guest Services & Operations
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <!-- Real-time Clock -->
+                            <div class="glass-effect rounded-xl px-4 py-2">
+                                <div class="flex items-center space-x-2 text-gray-700">
+                                    <i class="fas fa-clock text-blue-500"></i>
+                                    <span id="currentDateTime" class="font-medium">Loading...</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Send Report Button -->
+                            <button id="sendReportBtn" class="btn-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Report</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <main class="p-8 space-y-8">
+                <!-- Enhanced Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Total Reservations Card -->
+                    <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-50"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-14 h-14 stat-card-icon rounded-2xl flex items-center justify-center from-blue-500 to-blue-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-calendar-check fa-xl text-white"></i>
+                                </div>
+                                <div class="text-right">
+                                    <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium mb-1">Total Reservations</p>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors" id="statTotalReservations">
+                                    <span class="loading-spinner"></span>
+                                </h3>
+                                <p class="text-xs text-blue-600 font-medium mt-1">Active bookings</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 right-0 w-24 h-24 bg-blue-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
+                    </div>
+                    
+                    <!-- Check-ins Today Card -->
+                    <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-green-50 opacity-50"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-14 h-14 stat-card-icon rounded-2xl flex items-center justify-center from-emerald-500 to-emerald-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-sign-in-alt fa-xl text-white"></i>
+                                </div>
+                                <div class="text-right">
+                                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium mb-1">Check-ins Today</p>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-emerald-600 transition-colors" id="statCheckinsToday">
+                                    <span class="loading-spinner"></span>
+                                </h3>
+                                <p class="text-xs text-emerald-600 font-medium mt-1">New arrivals</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 right-0 w-24 h-24 bg-emerald-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
+                    </div>
+                    
+                    <!-- Revenue Today Card -->
+                    <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 to-orange-50 opacity-50"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-14 h-14 stat-card-icon rounded-2xl flex items-center justify-center from-yellow-500 to-yellow-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-peso-sign fa-xl text-white"></i>
+                                </div>
+                                <div class="text-right">
+                                    <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium mb-1">Revenue Today</p>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-yellow-600 transition-colors" id="statRevenueToday">
+                                    <span class="loading-spinner"></span>
+                                </h3>
+                                <p class="text-xs text-yellow-600 font-medium mt-1">Daily earnings</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 right-0 w-24 h-24 bg-yellow-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
+                    </div>
+                    
+                    <!-- Unpaid Balance Card -->
+                    <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-red-50 to-pink-50 opacity-50"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-14 h-14 stat-card-icon rounded-2xl flex items-center justify-center from-red-500 to-red-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-exclamation-triangle fa-xl text-white"></i>
+                                </div>
+                                <div class="text-right">
+                                    <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 text-sm font-medium mb-1">Unpaid Balance</p>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-red-600 transition-colors" id="statUnpaidBalance">
+                                    <span class="loading-spinner"></span>
+                                </h3>
+                                <p class="text-xs text-red-600 font-medium mt-1">Outstanding amount</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 right-0 w-24 h-24 bg-red-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activities -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-fade-in">
+                    <!-- Recent Reservations -->
+                    <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20">
+                        <div class="p-8 border-b border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-calendar-alt text-blue-500 mr-3"></i>
+                                Recent Reservations
+                            </h3>
+                            <p class="text-gray-600 text-sm mt-1">Latest guest bookings and activity</p>
+                        </div>
+                        <div id="recentReservations" class="p-8 space-y-4">
+                            <div class="flex items-center justify-center py-8 text-gray-500">
+                                <div class="loading-spinner mr-2"></div>
+                                Loading recent reservations...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Payments -->
+                    <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20">
+                        <div class="p-8 border-b border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-credit-card text-red-500 mr-3"></i>
+                                Pending Payments
+                            </h3>
+                            <p class="text-gray-600 text-sm mt-1">Outstanding payments requiring attention</p>
+                        </div>
+                        <div id="pendingPayments" class="p-8 space-y-4">
+                            <div class="flex items-center justify-center py-8 text-gray-500">
+                                <div class="loading-spinner mr-2"></div>
+                                Loading pending payments...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions & System Status -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in">
+                    <!-- Quick Actions -->
+                    <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
+                        <h4 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-bolt text-yellow-500 mr-3"></i>
+                            Quick Actions
+                        </h4>
+                        <div class="space-y-4">
+                            <button onclick="window.location.href='reservations.html'" class="w-full btn-primary text-white px-6 py-4 rounded-xl font-medium flex items-center justify-center space-x-3 transition-all duration-300">
+                                <i class="fas fa-plus"></i>
+                                <span>New Reservation</span>
+                            </button>
+                            <button onclick="window.location.href='reservations.html'" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-4 rounded-xl font-medium flex items-center justify-center space-x-3 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Manage Reservations</span>
+                            </button>
+                            <button onclick="window.location.href='billing.html'" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-4 rounded-xl font-medium flex items-center justify-center space-x-3 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i class="fas fa-receipt"></i>
+                                <span>Manage Billing</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- System Status -->
+                    <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
+                        <h4 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-server text-green-500 mr-3"></i>
+                            System Status
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 font-medium">Connection</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span class="text-sm font-semibold text-green-600">Online</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 font-medium">Last Sync</span>
+                                <span class="text-sm text-gray-600 font-semibold" id="lastSync">Just now</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 font-medium">Active Sessions</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <span class="text-sm font-bold text-blue-600" id="activeSessions">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Today's Summary -->
+                    <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
+                        <h4 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                            <i class="fas fa-chart-pie text-indigo-500 mr-3"></i>
+                            Today's Summary
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 font-medium">Check-ins Completed</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                        <span class="text-sm font-bold text-green-600" id="completedCheckins">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 font-medium">Check-outs Processed</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <span class="text-sm font-bold text-blue-600" id="processedCheckouts">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 font-medium">Payments Received</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                        <span class="text-sm font-bold text-yellow-600" id="paymentsReceived">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Report Submission Modal -->
+    <div id="reportModal" class="fixed inset-0 z-50 hidden modal-overlay">
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50"></div>
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-paper-plane mr-3 text-blue-500"></i>
+                        Submit Daily Report
+                    </h3>
+                    <p class="text-sm text-gray-500 mt-1">Provide a summary of today's activities and any important notes</p>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <!-- Summary -->
+                    <div>
+                        <label for="reportSummary" class="block text-sm font-medium text-gray-700 mb-2">
+                            Summary <span class="text-red-500">*</span>
+                        </label>
+                        <textarea 
+                            id="reportSummary" 
+                            rows="3" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Brief summary of today's activities..."
+                            required
+                        ></textarea>
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div>
+                        <label for="reportNotes" class="block text-sm font-medium text-gray-700 mb-2">
+                            Daily Notes
+                        </label>
+                        <textarea 
+                            id="reportNotes" 
+                            rows="4" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Additional notes about today's operations..."
+                        ></textarea>
+                    </div>
+                    
+                    <!-- Issues -->
+                    <div>
+                        <label for="reportIssues" class="block text-sm font-medium text-gray-700 mb-2">
+                            Issues Encountered
+                        </label>
+                        <textarea 
+                            id="reportIssues" 
+                            rows="3" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Any issues or problems encountered today..."
+                        ></textarea>
+                    </div>
+                    
+                    <!-- Recommendations -->
+                    <div>
+                        <label for="reportRecommendations" class="block text-sm font-medium text-gray-700 mb-2">
+                            Recommendations
+                        </label>
+                        <textarea 
+                            id="reportRecommendations" 
+                            rows="3" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Suggestions for improvements or next steps..."
+                        ></textarea>
+                    </div>
+                </div>
+                
+                <div class="p-6 border-t border-gray-200 flex justify-end gap-3">
+                    <button 
+                        id="cancelReportBtn"
+                        type="button" 
+                        class="px-6 py-3 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-xl font-medium transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        id="submitReportBtn"
+                        type="button" 
+                        class="btn-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2"
+                    >
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Submit Report</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="../../js/frontdesk/frontdashboard.js"></script>
+    <script src="../../js/auth/logout.js"></script>
+    <script src="../../js/frontdesk/util/frontutil.js"></script>
+</body>
+</html>

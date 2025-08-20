@@ -1,0 +1,6 @@
+[BOOKING-STATUS] 2025-08-12 06:29:29 - Looking up booking ID: 3 with contact: bobo@gmail.com
+[BOOKING-STATUS] 2025-08-12 06:29:29 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.first_name' in 'field list'
+[BOOKING-STATUS] 2025-08-12 06:29:52 - Looking up booking ID: 3 with contact: bobo@gmail.com
+[BOOKING-STATUS] 2025-08-12 06:29:52 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.first_name' in 'field list'
+[BOOKING-STATUS] 2025-08-12 06:31:25 - Looking up booking ID: 3 with contact: bobo@gmail.com
+[BOOKING-STATUS] 2025-08-12 06:31:25 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.first_name' in 'field list'

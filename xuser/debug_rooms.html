@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Available Rooms API</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .debug-output { background: #f5f5f5; padding: 10px; border-radius: 3px; white-space: pre-wrap; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        input, select { margin: 5px; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Debug Available Rooms API</h1>
+    
+    <div class="debug-section">
+        <h3>Test Parameters</h3>
+        <label>Room Type ID: <input type="number" id="roomTypeId" value="1"></label><br>
+        <label>Check-in Date: <input type="date" id="checkinDate"></label><br>
+        <label>Check-out Date: <input type="date" id="checkoutDate"></label><br>
+        <label>Guest Count: <input type="number" id="guestCount" value="2" min="1"></label><br>
+        <button onclick="testAPI()">Test API Call</button>
+        <button onclick="testAllRoomTypes()">Test All Room Types</button>
+    </div>
+    
+    <div class="debug-section">
+        <h3>API Response</h3>
+        <div id="output" class="debug-output">Click "Test API Call" to see results...</div>
+    </div>
+
+    <script>
+        // Set default dates
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+        
+        document.getElementById('checkinDate').value = today.toISOString().split('T')[0];
+        document.getElementById('checkoutDate').value = tomorrow.toISOString().split('T')[0];
+
+        function log(message) {
+            const output = document.getElementById('output');
+            output.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+        }
+
+        function clearLog() {
+            document.getElementById('output').textContent = '';
+        }
+
+        async function testAPI() {
+            clearLog();
+            
+            const roomTypeId = document.getElementById('roomTypeId').value;
+            const checkinDate = document.getElementById('checkinDate').value;
+            const checkoutDate = document.getElementById('checkoutDate').value;
+            const guestCount = document.getElementById('guestCount').value;
+
+            log(`Testing with parameters:`);
+            log(`  Room Type ID: ${roomTypeId}`);
+            log(`  Check-in: ${checkinDate}`);
+            log(`  Check-out: ${checkoutDate}`);
+            log(`  Guests: ${guestCount}`);
+
+            const params = new URLSearchParams({
+                room_type_id: roomTypeId,
+                checkin_date: checkinDate,
+                checkout_date: checkoutDate,
+                guest_count: guestCount
+            });
+
+            const url = `${window.location.origin}/reservation/api/admin/pages/available-rooms.php?${params.toString()}`;
+            log(`\nRequest URL: ${url}`);
+
+            try {
+                const response = await fetch(url);
+                log(`\nResponse Status: ${response.status} ${response.statusText}`);
+                
+                const responseText = await response.text();
+                log(`\nRaw Response: ${responseText}`);
+
+                if (response.ok) {
+                    try {
+                        const data = JSON.parse(responseText);
+                        log(`\nParsed JSON:`);
+                        log(JSON.stringify(data, null, 2));
+                        
+                        if (data.success && data.rooms) {
+                            log(`\nFound ${data.rooms.length} available rooms`);
+                        }
+                    } catch (parseError) {
+                        log(`\nJSON Parse Error: ${parseError.message}`);
+                    }
+                } else {
+                    log(`\nHTTP Error: ${response.status}`);
+                }
+            } catch (error) {
+                log(`\nFetch Error: ${error.message}`);
+            }
+        }
+
+        async function testAllRoomTypes() {
+            clearLog();
+            log('Testing all room types from 1 to 10...');
+            
+            const checkinDate = document.getElementById('checkinDate').value;
+            const checkoutDate = document.getElementById('checkoutDate').value;
+            const guestCount = document.getElementById('guestCount').value;
+
+            for (let roomTypeId = 1; roomTypeId <= 10; roomTypeId++) {
+                log(`\n--- Testing Room Type ID: ${roomTypeId} ---`);
+                
+                const params = new URLSearchParams({
+                    room_type_id: roomTypeId,
+                    checkin_date: checkinDate,
+                    checkout_date: checkoutDate,
+                    guest_count: guestCount
+                });
+
+                const url = `${window.location.origin}/reservation/api/admin/pages/available-rooms.php?${params.toString()}`;
+                
+                try {
+                    const response = await fetch(url);
+                    const responseText = await response.text();
+                    
+                    if (response.ok) {
+                        try {
+                            const data = JSON.parse(responseText);
+                            if (data.success && data.rooms && data.rooms.length > 0) {
+                                log(`✓ Room Type ${roomTypeId}: Found ${data.rooms.length} rooms`);
+                            } else {
+                                log(`- Room Type ${roomTypeId}: No rooms available`);
+                            }
+                        } catch (parseError) {
+                            log(`✗ Room Type ${roomTypeId}: Invalid JSON response`);
+                        }
+                    } else {
+                        log(`✗ Room Type ${roomTypeId}: HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    log(`✗ Room Type ${roomTypeId}: ${error.message}`);
+                }
+                
+                // Small delay to avoid overwhelming the server
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            
+            log('\n--- Testing Complete ---');
+        }
+    </script>
+</body>
+</html>

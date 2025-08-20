@@ -1,0 +1,5 @@
+[FRONTDESK REPORTS] 2025-08-17 08:38:47 - Unauthorized access attempt
+[FRONTDESK REPORTS] 2025-08-17 08:39:37 - Unauthorized access attempt
+[FRONTDESK REPORTS] 2025-08-17 08:39:38 - Unauthorized access attempt
+[FRONTDESK REPORTS] 2025-08-17 08:50:17 - Database error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (temp file operation failed)
+[FRONTDESK REPORTS] 2025-08-17 08:51:22 - Database error: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (temp file operation failed)

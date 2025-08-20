@@ -1,0 +1,209 @@
+[USER_RESERVATIONS] 2025-08-16 16:48:18 - Error creating reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-16 17:10:10 - Error creating reservation: Missing required field: first_name
+[USER_RESERVATIONS] 2025-08-16 17:10:21 - Error creating reservation: Missing required field: first_name
+[USER_RESERVATIONS] 2025-08-16 17:14:48 - Error creating reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - Received booking data: {"first_name":"Shankai","last_name":"Bai","email":"shangkaibai@hotel.com","phone_number":"686898888989","room_id":33,"check_in_date":"2025-08-16","check_out_date":"2025-08-17","guest_count":1,"special_requests":"","total_amount":1200,"advance_payment":0,"services":[8],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - Customer ID: 6
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - Reservation ID: 6
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - Adding services: [8]
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - Error adding service 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-16 17:25:06 - User created reservation with ID: 6
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Received booking data: {"first_name":"Gregor","last_name":"Mac","email":"macgregor@hotel.com","phone_number":"09354623235","room_id":25,"check_in_date":"2025-08-17","check_out_date":"2025-08-18","guest_count":1,"special_requests":"","total_amount":2600,"advance_payment":0,"services":[4,5],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Customer ID: 7
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Reservation ID: 7
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Adding services: [4,5]
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - Error adding service 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-17 03:05:44 - User created reservation with ID: 7
+[USER_RESERVATIONS] 2025-08-17 04:30:39 - Received booking data: {"first_name":"yoyo","last_name":"vill","email":"yoyo@gmail.com","phone_number":"09354623235","room_id":28,"check_in_date":"2025-08-17","check_out_date":"2025-08-18","guest_count":1,"special_requests":"","total_amount":4000,"advance_payment":0,"services":[4,5],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-17 04:30:39 - Customer ID: 1
+[USER_RESERVATIONS] 2025-08-17 04:30:39 - Reservation ID: 8
+[USER_RESERVATIONS] 2025-08-17 04:30:39 - Adding services: [4,5]
+[USER_RESERVATIONS] 2025-08-17 04:30:40 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-17 04:30:40 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-17 04:30:40 - Error adding service 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-17 04:30:40 - User created reservation with ID: 8
+[USER_RESERVATIONS] 2025-08-17 11:33:24 - Received booking data: {"first_name":"yoyo","last_name":"vill","email":"yoyo@gmail.com","phone_number":"686898888989","room_id":7,"check_in_date":"2025-08-17","check_out_date":"2025-08-18","guest_count":1,"special_requests":"","total_amount":4000,"advance_payment":2200,"advance_payment_percentage":55,"services":[4,5],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-17 11:33:24 - Error creating reservation: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'updated_at' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Received booking data: {"first_name":"Christian","last_name":"Boncales","email":"christianboncales@gmail.com","phone_number":"09354623235","room_id":7,"check_in_date":"2025-08-18","check_out_date":"2025-08-19","guest_count":1,"special_requests":"","total_amount":4000,"advance_payment":2000,"payment_method_id":1,"reference_number":"","services":[4,5],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Customer ID: 8
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Reservation ID: 9
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Adding services: [4,5]
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Error adding service 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - Created advance payment ID: 1
+[USER_RESERVATIONS] 2025-08-18 08:00:01 - User created reservation with ID: 9
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Received booking data: {"first_name":"Gardo","last_name":"vill","email":"gardo@hotel.com","phone_number":"24625462342642","room_id":29,"check_in_date":"2025-08-18","check_out_date":"2025-08-19","guest_count":1,"special_requests":"","total_amount":4000,"advance_payment":2000,"payment_method_id":2,"reference_number":"543463545345345","services":[3,8],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Customer ID: 10
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Reservation ID: 11
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Adding services: [3,8]
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Error adding service 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Error adding service 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - Created advance payment ID: 3
+[USER_RESERVATIONS] 2025-08-18 08:32:03 - User created reservation with ID: 11
+[USER_RESERVATIONS] 2025-08-18 08:46:39 - Received booking data: {"first_name":"Christian","last_name":"Boncales","email":"christianboncales@gmail.com","phone_number":"09354623235","room_id":7,"check_in_date":"2025-08-18","check_out_date":"2025-08-19","guest_count":3,"special_requests":"","total_amount":4000,"advance_payment":2000,"payment_method_id":2,"reference_number":"543463545345345","services":[],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-18 08:46:39 - Customer ID: 8
+[USER_RESERVATIONS] 2025-08-18 08:46:39 - Reservation ID: 12
+[USER_RESERVATIONS] 2025-08-18 08:46:39 - Created advance payment ID: 4
+[USER_RESERVATIONS] 2025-08-18 08:46:39 - User created reservation with ID: 12
+[USER_RESERVATIONS] 2025-08-18 13:51:29 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Received booking data: {"first_name":"Christian","last_name":"Boncales","email":"christianboncales@gmail.com","phone_number":"0966343734643","room_id":28,"check_in_date":"2025-08-18","check_out_date":"2025-08-19","guest_count":1,"special_requests":"","total_amount":4550,"advance_payment":2275,"payment_method_id":2,"reference_number":"543463545345345","services":[4],"menu_items":[{"id":2,"quantity":1},{"id":4,"quantity":1}]}
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Customer ID: 8
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Reservation ID: 13
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Adding services: [4]
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Adding menu items: [{"id":2,"quantity":1},{"id":4,"quantity":1}]
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Menu items table columns: ["menu_id","item_name","description","price","category","is_available","created_at","updated_at"]
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Error adding menu item 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Error adding menu item 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - Created advance payment ID: 5
+[USER_RESERVATIONS] 2025-08-18 13:52:22 - User created reservation with ID: 13
+[USER_RESERVATIONS] 2025-08-18 13:52:25 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:55:04 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:55:07 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:55:08 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:55:47 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:55:49 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Received booking data: {"first_name":"Shankai","last_name":"Bai","email":"shangkaibai@hotel.com","phone_number":"0848395839","room_id":29,"check_in_date":"2025-08-18","check_out_date":"2025-08-19","guest_count":1,"special_requests":"","total_amount":4690,"advance_payment":2345,"payment_method_id":2,"reference_number":"543463545345345","services":[4],"menu_items":[{"id":2,"quantity":1},{"id":3,"quantity":1},{"id":15,"quantity":1}]}
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Customer ID: 6
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Reservation ID: 14
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Adding services: [4]
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Adding menu items: [{"id":2,"quantity":1},{"id":3,"quantity":1},{"id":15,"quantity":1}]
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Menu items table columns: ["menu_id","item_name","description","price","category","is_available","created_at","updated_at"]
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Error adding menu item 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Error adding menu item 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Error adding menu item 15: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - Created advance payment ID: 6
+[USER_RESERVATIONS] 2025-08-18 13:56:39 - User created reservation with ID: 14
+[USER_RESERVATIONS] 2025-08-18 13:56:42 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 14:08:34 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-18 22:45:17 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-19 04:21:27 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-19 04:25:04 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-19 11:50:24 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 01:52:00 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 01:53:01 - Received booking data: {"first_name":"Christian","last_name":"Boncales","email":"christianboncales@gmail.com","phone_number":"0966343734643","room_id":7,"check_in_date":"2025-08-19","check_out_date":"2025-08-20","guest_count":1,"special_requests":"","total_amount":4000,"advance_payment":2000,"payment_method_id":2,"reference_number":"543463545345345","services":[],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-20 01:53:01 - Customer ID: 8
+[USER_RESERVATIONS] 2025-08-20 01:53:01 - Reservation ID: 17
+[USER_RESERVATIONS] 2025-08-20 01:53:01 - Created advance payment ID: 9
+[USER_RESERVATIONS] 2025-08-20 01:53:01 - User created reservation with ID: 17
+[USER_RESERVATIONS] 2025-08-20 01:53:06 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 02:47:05 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:28:58 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:36:00 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:36:18 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Received booking data: {"first_name":"Apple","last_name":"Edrolin","email":"apple@gmail.com","phone_number":"09112034321342","room_id":34,"check_in_date":"2025-08-21","check_out_date":"2025-08-24","guest_count":2,"special_requests":"","total_amount":12980,"advance_payment":3245,"payment_method_id":2,"reference_number":"543463545345345","services":[3,8,11,10],"menu_items":[{"id":1,"quantity":1},{"id":4,"quantity":1},{"id":23,"quantity":1},{"id":18,"quantity":1},{"id":11,"quantity":1},{"id":14,"quantity":1}]}
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Customer ID: 11
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Reservation ID: 18
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Adding services: [3,8,11,10]
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding service 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding service 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding service 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding service 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Adding menu items: [{"id":1,"quantity":1},{"id":4,"quantity":1},{"id":23,"quantity":1},{"id":18,"quantity":1},{"id":11,"quantity":1},{"id":14,"quantity":1}]
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Menu items table columns: ["menu_id","item_name","description","price","category","is_available","created_at","updated_at"]
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding menu item 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding menu item 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding menu item 23: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding menu item 18: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding menu item 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Error adding menu item 14: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - Created advance payment ID: 10
+[USER_RESERVATIONS] 2025-08-20 07:40:02 - User created reservation with ID: 18
+[USER_RESERVATIONS] 2025-08-20 07:40:06 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:46:19 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 07:50:18 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 08:25:41 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 08:25:49 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 08:27:09 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Received booking data: {"first_name":"Kenneth","last_name":"Lopez","email":"kennethlopez@gmail.com","phone_number":"09123456789","room_id":10,"check_in_date":"2025-08-21","check_out_date":"2025-08-22","guest_count":1,"special_requests":"","total_amount":4910,"advance_payment":2455,"payment_method_id":1,"reference_number":"","services":[3,12],"menu_items":[{"id":1,"quantity":1},{"id":13,"quantity":1}]}
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Customer ID: 12
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Reservation ID: 19
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Adding services: [3,12]
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Error adding service 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Error adding service 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Adding menu items: [{"id":1,"quantity":1},{"id":13,"quantity":1}]
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Menu items table columns: ["menu_id","item_name","description","price","category","is_available","created_at","updated_at"]
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Error adding menu item 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Error adding menu item 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - Created advance payment ID: 11
+[USER_RESERVATIONS] 2025-08-20 08:54:17 - User created reservation with ID: 19
+[USER_RESERVATIONS] 2025-08-20 08:54:24 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 09:12:51 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 09:15:58 - Received booking data: {"first_name":"Clint Denzel","last_name":"Plaza","email":"clintdenzelplaza@gmail.com","phone_number":"09123456789","room_id":18,"check_in_date":"2025-08-21","check_out_date":"2025-08-22","guest_count":2,"special_requests":"","total_amount":4000,"advance_payment":2000,"payment_method_id":1,"reference_number":"","services":[],"menu_items":[]}
+[USER_RESERVATIONS] 2025-08-20 09:15:58 - Customer ID: 13
+[USER_RESERVATIONS] 2025-08-20 09:15:58 - Reservation ID: 20
+[USER_RESERVATIONS] 2025-08-20 09:15:58 - Created advance payment ID: 12
+[USER_RESERVATIONS] 2025-08-20 09:15:58 - User created reservation with ID: 20
+[USER_RESERVATIONS] 2025-08-20 09:16:16 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 09:25:32 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:13:46 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:23:10 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:27:34 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:30:02 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Received booking data: {"first_name":"Arline","last_name":"Boncales","email":"arline@gmail.com","phone_number":"09678714583","room_id":25,"check_in_date":"2025-08-20","check_out_date":"2025-08-21","guest_count":1,"special_requests":"","total_amount":2920,"advance_payment":730,"payment_method_id":2,"reference_number":"62964926983628","services":[4],"menu_items":[{"id":1,"quantity":1}]}
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Customer ID: 14
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Reservation ID: 21
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Adding services: [4]
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Adding menu items: [{"id":1,"quantity":1}]
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Menu items table columns: ["menu_id","item_name","description","price","category","is_available","created_at","updated_at"]
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Error adding menu item 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - Created advance payment ID: 13
+[USER_RESERVATIONS] 2025-08-20 12:31:12 - User created reservation with ID: 21
+[USER_RESERVATIONS] 2025-08-20 12:31:17 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:32:10 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:39:01 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:41:11 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:42:35 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:42:50 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:43:40 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:44:24 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Received booking data: {"first_name":"Haro","last_name":"Kart","email":"haro@gmail.com","phone_number":"09678715483","room_id":31,"check_in_date":"2025-08-20","check_out_date":"2025-08-21","guest_count":1,"special_requests":"","total_amount":4600,"advance_payment":2300,"payment_method_id":2,"reference_number":"62964926983628","services":[4],"menu_items":[{"id":1,"quantity":1},{"id":2,"quantity":1}]}
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Customer ID: 15
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Reservation ID: 22
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Adding services: [4]
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Hotel services table columns: ["service_id","service_name","description","fee","is_complimentary"]
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price' in 'field list'
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Adding menu items: [{"id":1,"quantity":1},{"id":2,"quantity":1}]
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Menu items table columns: ["menu_id","item_name","description","price","category","is_available","created_at","updated_at"]
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Error adding menu item 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Error adding menu item 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'menu_item_id' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - Created advance payment ID: 14
+[USER_RESERVATIONS] 2025-08-20 12:46:18 - User created reservation with ID: 22
+[USER_RESERVATIONS] 2025-08-20 12:46:22 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:53:18 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:53:24 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:54:03 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 12:54:10 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 17:15:38 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 17:16:36 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 17:16:58 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:17:40 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:17:44 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:17:59 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:18:02 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:19:14 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:19:19 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:19:23 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:19:33 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:21:29 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:21:43 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:21:50 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:24:31 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:25:04 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:26:16 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:41:03 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:41:11 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:42:44 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'
+[USER_RESERVATIONS] 2025-08-20 20:43:14 - Error fetching payment methods: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause'

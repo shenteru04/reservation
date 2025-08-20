@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms Management - Sky Oro Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'bounce-subtle': 'bounceSubtle 2s infinite',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .sidebar-active {
+            background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+            position: relative;
+        }
+        
+        .sidebar-active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #60a5fa;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .room-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .status-available { @apply bg-green-100 text-green-800; }
+        .status-occupied { @apply bg-red-100 text-red-800; }
+        .status-reserved { @apply bg-yellow-100 text-yellow-800; }
+        .status-maintenance { @apply bg-gray-100 text-gray-800; }
+        .status-out-of-order { @apply bg-purple-100 text-purple-800; }
+        
+        .display-mode-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .display-mode-btn:hover {
+            transform: translateY(-1px);
+        }
+        
+        .display-mode-btn.active {
+            @apply bg-blue-600 text-white;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .notification-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        .modal {
+            transition: all 0.3s ease;
+        }
+        
+        .amenities-grid {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .amenity-checkbox {
+            transition: all 0.2s ease;
+        }
+        
+        .amenity-checkbox:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 min-h-screen">
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-white bg-opacity-90 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-500">
+        <div class="text-center">
+            <div class="loading-spinner mx-auto mb-4 w-8 h-8 border-4"></div>
+            <p class="text-gray-600 font-medium animate-pulse">Loading Rooms Management...</p>
+        </div>
+    </div>
+    
+    <div class="flex h-screen">
+        <!-- Enhanced Sidebar -->
+        <div class="w-72 gradient-bg text-white shadow-2xl relative overflow-hidden">
+            <!-- Animated Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full mix-blend-overlay animate-float"></div>
+                <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full mix-blend-overlay animate-float" style="animation-delay: -3s;"></div>
+            </div>
+            
+            <!-- Hotel Brand Header -->
+            <div class="relative p-6 border-b border-white/20 bg-black/10 backdrop-blur-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-crown text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight">Sky Oro Hotel</h1>
+                        <p class="text-blue-200 text-sm opacity-90" id="adminName">Premium Management</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Navigation -->
+            <nav class="mt-4 px-3">
+                <a href="dashboard.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-tachometer-alt text-white"></i>
+                    </div>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+                
+                <a href="rooms.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl bg-black/20 backdrop-blur-sm sidebar-active transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-bed text-white"></i>
+                    </div>
+                    <span class="font-medium">Rooms</span>
+                    <div class="ml-auto notification-badge w-2 h-2 bg-green-400 rounded-full"></div>
+                </a>
+                
+                <a href="room-types.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-home text-white"></i>
+                    </div>
+                    <span class="font-medium">Room Types</span>
+                </a>
+                
+                <a href="hotel-services.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-concierge-bell text-white"></i>
+                    </div>
+                    <span class="font-medium">Hotel Services</span>
+                </a>
+                
+                <a href="menu-items.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-utensils text-white"></i>
+                    </div>
+                    <span class="font-medium">Menu Items</span>
+                </a>
+                
+                <a href="users.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-users text-white"></i>
+                    </div>
+                    <span class="font-medium">Users</span>
+                </a>
+                
+                <a href="reports.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <div class="w-10 h-10 bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg flex items-center justify-center mr-4">
+                        <i class="fas fa-chart-bar text-white"></i>
+                    </div>
+                    <span class="font-medium">Reports</span>
+                </a>
+                
+                <!-- Logout Section -->
+                <div class="border-t border-white/20 mt-6 pt-4">
+                    <a href="#" id="logoutLink" class="nav-link flex items-center px-4 py-4 rounded-xl hover:bg-red-500/20 transition-all duration-300 text-red-200">
+                        <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-sign-out-alt text-white"></i>
+                        </div>
+                        <span class="font-medium">Logout</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- Bottom Branding -->
+            <div class="absolute bottom-4 left-4 right-4">
+                <div class="text-center text-white/60 text-xs">
+                    <p>© 2025 Sky Oro Hotel</p>
+                    <p class="mt-1">Premium Management Suite</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <!-- Enhanced Header -->
+            <header class="bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 sticky top-0 z-40">
+                <div class="px-8 py-6">
+                    <div class="flex justify-between items-center">
+                        <div class="animate-fade-in">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-bed text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-800">Rooms Management</h2>
+                                    <p class="text-sm text-gray-500 mt-1 flex items-center">
+                                        <i class="fas fa-door-open mr-2 text-emerald-500"></i>
+                                        Manage hotel rooms, types, services and amenities
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <!-- Real-time Clock -->
+                            <div class="glass-effect rounded-xl px-4 py-2">
+                                <div class="flex items-center space-x-2 text-gray-700">
+                                    <i class="fas fa-clock text-emerald-500"></i>
+                                    <span id="currentDateTime" class="font-medium">Loading...</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <button id="bulkAddBtn" class="btn-secondary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Bulk Add</span>
+                            </button>
+                            <button id="addRoomBtn" class="btn-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                <i class="fas fa-plus"></i>
+                                <span>Add Room</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="p-8 space-y-8">
+                <!-- Filter and Search Section -->
+                <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden animate-fade-in">
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-search text-blue-500 mr-2"></i>Search
+                                </label>
+                                <input type="text" id="searchInput" placeholder="Room number or type..." 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-toggle-on text-green-500 mr-2"></i>Status
+                                </label>
+                                <select id="statusFilter" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                    <option value="">All Status</option>
+                                    <option value="1">Available</option>
+                                    <option value="2">Occupied</option>
+                                    <option value="3">Reserved</option>
+                                    <option value="4">Out of Order</option>
+                                    <option value="5">Under Maintenance</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-home text-purple-500 mr-2"></i>Room Type
+                                </label>
+                                <select id="typeFilter" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                    <option value="">All Types</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-building text-indigo-500 mr-2"></i>Floor
+                                </label>
+                                <select id="floorFilter" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                    <option value="">All Floors</option>
+                                    <option value="1">1st Floor</option>
+                                    <option value="2">2nd Floor</option>
+                                    <option value="3">3rd Floor</option>
+                                    <option value="4">4th Floor</option>
+                                    <option value="5">5th Floor</option>
+                                    <option value="6">6th Floor</option>
+                                    <option value="7">7th Floor</option>
+                                    <option value="8">8th Floor</option>
+                                    <option value="9">9th Floor</option>
+                                    <option value="10">10th Floor</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-list-ol text-gray-500 mr-2"></i>Results per page
+                                </label>
+                                <select id="limitSelect" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                    <option value="20">20 per page</option>
+                                    <option value="50" selected>50 per page</option>
+                                    <option value="100">100 per page</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 pt-6 border-t border-gray-200">
+                            <div class="text-center group">
+                                <div class="text-3xl font-bold text-green-600 group-hover:scale-110 transition-transform" id="availableCount">0</div>
+                                <div class="text-sm text-gray-500 mt-1">Available</div>
+                            </div>
+                            <div class="text-center group">
+                                <div class="text-3xl font-bold text-red-600 group-hover:scale-110 transition-transform" id="occupiedCount">0</div>
+                                <div class="text-sm text-gray-500 mt-1">Occupied</div>
+                            </div>
+                            <div class="text-center group">
+                                <div class="text-3xl font-bold text-yellow-600 group-hover:scale-110 transition-transform" id="reservedCount">0</div>
+                                <div class="text-sm text-gray-500 mt-1">Reserved</div>
+                            </div>
+                            <div class="text-center group">
+                                <div class="text-3xl font-bold text-gray-600 group-hover:scale-110 transition-transform" id="maintenanceCount">0</div>
+                                <div class="text-sm text-gray-500 mt-1">Maintenance</div>
+                            </div>
+                            <div class="text-center group">
+                                <div class="text-3xl font-bold text-blue-600 group-hover:scale-110 transition-transform" id="totalCount">0</div>
+                                <div class="text-sm text-gray-500 mt-1">Total Rooms</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rooms Display -->
+                <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden animate-fade-in">
+                    <div class="p-8 border-b border-gray-100">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                    <i class="fas fa-door-open text-emerald-500 mr-3"></i>
+                                    Rooms Collection
+                                </h3>
+                                <p class="text-gray-600 text-sm mt-1">Manage your hotel's room inventory and status</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <!-- Display Mode Buttons -->
+                                <div class="flex items-center space-x-1 bg-gray-100 rounded-xl p-1">
+                                    <button id="gridModeBtn" class="display-mode-btn px-4 py-2 rounded-lg text-sm font-medium active transition-colors" title="Grid View">
+                                        <i class="fas fa-th-large mr-1"></i> Grid
+                                    </button>
+                                    <button id="listModeBtn" class="display-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors" title="List View">
+                                        <i class="fas fa-list mr-1"></i> List
+                                    </button>
+                                    <button id="tableModeBtn" class="display-mode-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors" title="Table View">
+                                        <i class="fas fa-table mr-1"></i> Table
+                                    </button>
+                                </div>
+                                
+                                <div class="glass-effect rounded-xl px-4 py-2">
+                                    <span class="text-sm font-medium text-gray-700">
+                                        <i class="fas fa-bed text-emerald-500 mr-2"></i>
+                                        Showing: <span id="showingRange">0</span>
+                                    </span>
+                                </div>
+                                
+                                <div class="flex space-x-2">
+                                    <button id="prevPage" class="px-4 py-2 bg-gray-200 text-gray-600 rounded-xl hover:bg-gray-300 disabled:opacity-50 transition-colors" disabled>
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <span id="pageInfo" class="px-4 py-2 text-sm text-gray-700 font-medium">Page 1</span>
+                                    <button id="nextPage" class="px-4 py-2 bg-gray-200 text-gray-600 rounded-xl hover:bg-gray-300 disabled:opacity-50 transition-colors" disabled>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                
+                                <button onclick="window.roomsManager?.refresh()" class="btn-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>Refresh</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8">
+                        <div id="roomsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <!-- Loading state -->
+                            <div class="col-span-full text-center py-12">
+                                <div class="loading-spinner mx-auto mb-4 w-8 h-8 border-4"></div>
+                                <p class="text-gray-500 font-medium">Loading rooms...</p>
+                                <p class="text-gray-400 text-sm mt-2">Please wait while we fetch your room data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add/Edit Room Modal -->
+    <div id="roomModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="bg-gradient-to-r from-emerald-500 to-green-600 p-6 text-white">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 id="modalTitle" class="text-xl font-bold">Add New Room</h3>
+                        <p class="text-emerald-100 text-sm mt-1">Create a new room in your hotel</p>
+                    </div>
+                    <button id="closeModal" class="text-emerald-200 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <form id="roomForm">
+                    <input type="hidden" id="roomId">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-door-closed text-emerald-500 mr-2"></i>
+                                Room Number
+                            </label>
+                            <input type="text" id="roomNumber" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                                   placeholder="e.g., 101, 205A">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-home text-purple-500 mr-2"></i>
+                                Room Type
+                            </label>
+                            <select id="roomType" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                <option value="">Select Room Type</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-toggle-on text-blue-500 mr-2"></i>
+                                Room Status
+                            </label>
+                            <select id="roomStatus" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                <option value="1">Available</option>
+                                <option value="2">Occupied</option>
+                                <option value="3">Reserved</option>
+                                <option value="4">Out of Order</option>
+                                <option value="5">Under Maintenance</option>
+                            </select>
+                            <small id="statusNote" class="text-gray-500 text-xs mt-1" style="display: none;">
+                                New rooms are automatically set to Available status
+                            </small>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-building text-indigo-500 mr-2"></i>
+                                Floor Number
+                            </label>
+                            <select id="floorNumber" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300">
+                                <option value="1">1st Floor</option>
+                                <option value="2">2nd Floor</option>
+                                <option value="3">3rd Floor</option>
+                                <option value="4">4th Floor</option>
+                                <option value="5">5th Floor</option>
+                                <option value="6">6th Floor</option>
+                                <option value="7">7th Floor</option>
+                                <option value="8">8th Floor</option>
+                                <option value="9">9th Floor</option>
+                                <option value="10">10th Floor</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Amenities Section -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>
+                            Room Amenities
+                            <span class="text-xs text-gray-500 ml-2">Select all that apply</span>
+                        </label>
+                        <div id="amenitiesContainer" class="amenities-grid border border-gray-200 rounded-xl p-4 bg-gray-50">
+                            <div class="text-center py-6 text-gray-500">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>Loading amenities...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-6 border-t border-gray-100">
+                        <button type="button" id="cancelBtn" class="px-6 py-3 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors font-medium">
+                            Cancel
+                        </button>
+                        <button type="submit" id="saveBtn" class="px-6 py-3 btn-primary text-white rounded-xl font-medium flex items-center space-x-2">
+                            <i class="fas fa-save"></i>
+                            <span id="saveBtnText">Save Room</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Add Modal -->
+    <div id="bulkModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4">
+            <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6 text-white">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold">Bulk Add Rooms</h3>
+                        <p class="text-green-100 text-sm mt-1">Create multiple rooms at once</p>
+                    </div>
+                    <button id="closeBulkModal" class="text-green-200 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <form id="bulkForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-building text-indigo-500 mr-2"></i>
+                                Floor
+                            </label>
+                            <select id="bulkFloor" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+                                <option value="">Select Floor</option>
+                                <option value="1">1st Floor</option>
+                                <option value="2">2nd Floor</option>
+                                <option value="3">3rd Floor</option>
+                                <option value="4">4th Floor</option>
+                                <option value="5">5th Floor</option>
+                                <option value="6">6th Floor</option>
+                                <option value="7">7th Floor</option>
+                                <option value="8">8th Floor</option>
+                                <option value="9">9th Floor</option>
+                                <option value="10">10th Floor</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-home text-purple-500 mr-2"></i>
+                                Room Type
+                            </label>
+                            <select id="bulkRoomType" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+                                <option value="">Select Room Type</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-hashtag text-blue-500 mr-2"></i>
+                                Starting Room Number
+                            </label>
+                            <input type="text" id="startingNumber" placeholder="e.g., 101" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-plus-circle text-green-500 mr-2"></i>
+                                Number of Rooms
+                            </label>
+                            <input type="number" id="roomCount" min="1" max="50" placeholder="e.g., 10" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-sort-numeric-up text-orange-500 mr-2"></i>
+                            Room Number Pattern
+                        </label>
+                        <select id="numberPattern" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+                            <option value="sequential">Sequential (101, 102, 103...)</option>
+                            <option value="skip">Skip pattern (101, 103, 105...)</option>
+                        </select>
+                    </div>
+                    
+                    <div id="roomPreview" class="mb-6 p-4 bg-green-50 rounded-xl border border-green-200 hidden">
+                        <label class="block text-sm font-semibold text-green-700 mb-2">
+                            <i class="fas fa-eye text-green-500 mr-2"></i>
+                            Preview:
+                        </label>
+                        <div id="previewList" class="text-sm text-green-600"></div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-6 border-t border-gray-100">
+                        <button type="button" id="cancelBulkBtn" class="px-6 py-3 text-gray-600 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors font-medium">
+                            Cancel
+                        </button>
+                        <button type="button" id="previewBtn" class="px-6 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-colors font-medium flex items-center space-x-2">
+                            <i class="fas fa-eye"></i>
+                            <span>Preview</span>
+                        </button>
+                        <button type="submit" id="bulkSaveBtn" class="px-6 py-3 btn-secondary text-white rounded-xl font-medium flex items-center space-x-2">
+                            <i class="fas fa-plus-circle"></i>
+                            <span id="bulkSaveBtnText">Create Rooms</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="../../js/admin/rooms.js"></script>
+    <script src="../../js/auth/logout.js"></script>
+    <script src="../../js/admin/util/roomutil.js"></script>
+</body>
+</html>

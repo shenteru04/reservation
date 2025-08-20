@@ -1,0 +1,57 @@
+[FRONTDESK_BILLING] 2025-08-16 12:23:38 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:23:38 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:23:38 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:24:09 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:24:09 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:24:09 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:24:38 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:24:38 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:24:38 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:25:08 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:25:08 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:25:08 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:25:38 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:25:38 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:25:38 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:26:08 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:26:08 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:26:08 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:26:39 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:26:39 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:26:39 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:27:08 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:27:08 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 12:27:08 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 13:00:51 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 13:00:51 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 13:00:51 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 13:01:21 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 13:01:21 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-16 13:01:21 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:29:36 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:29:36 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:29:36 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:07 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:07 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:07 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:15 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:15 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:15 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:18 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:18 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:18 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:48 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:48 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 04:30:48 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 06:20:11 - Error retrieving invoices: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 06:20:11 - Error in GET request: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 06:20:11 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.invoices' doesn't exist
+[FRONTDESK_BILLING] 2025-08-17 06:20:11 - Invoice tables created successfully
+[FRONTDESK_BILLING] 2025-08-17 06:22:34 - Invoice created with ID: 1 for reservation: 3
+[FRONTDESK_BILLING] 2025-08-17 06:23:08 - Payment recorded: ₱70 for invoice ID: 1
+[FRONTDESK_BILLING] 2025-08-17 06:23:39 - Payment recorded: ₱710 for invoice ID: 1
+[FRONTDESK_BILLING] 2025-08-17 11:39:59 - Error handling POST request: Failed to create invoice: Invoice already exists for this reservation
+[FRONTDESK_BILLING] 2025-08-17 11:40:11 - Invoice created with ID: 2 for reservation: 6
+[FRONTDESK_BILLING] 2025-08-18 02:20:13 - Error handling POST request: Failed to create invoice: Invoice already exists for this reservation
+[FRONTDESK_BILLING] 2025-08-19 03:23:49 - Invoice created with ID: 3 for reservation: 16
+[FRONTDESK_BILLING] 2025-08-19 03:24:23 - Payment recorded: ₱5000 for invoice ID: 3

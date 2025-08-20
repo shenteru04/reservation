@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation - Book Your Perfect Stay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'hotel-blue': {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .image-loading {
+            background: linear-gradient(90deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+            position: relative;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&h=1080&fit=crop') center/cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .step-indicator {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+        
+        .step-active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .step-active::before {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .step-completed {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .room-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .room-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .room-card:hover::before {
+            left: 100%;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .room-card.selected {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.3);
+        }
+
+        .room-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .service-item, .menu-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+        }
+        
+        .service-item:hover, .menu-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+            border-left-color: #3b82f6;
+            transform: translateX(5px);
+        }
+
+        .service-item input:checked ~ div, .menu-item input:checked ~ div {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+        
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.3);
+            border-radius: 4px;
+        }
+        
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            border: none;
+        }
+
+        .notification-enter {
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .price-highlight {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+            border-radius: 8px;
+            padding: 8px;
+            color: #3b82f6;
+        }
+
+        /* Enhanced Modal */
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            animation: modalSlideIn 0.4s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced Form Inputs */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+        }
+
+        .form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Payment Section Styles */
+        .payment-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .payment-card.active {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border-color: #3b82f6;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .payment-method-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .payment-method-option:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .payment-method-option.selected {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+        }
+
+        .advance-payment-slider {
+            background: linear-gradient(to right, #10b981 0%, #10b981 var(--progress, 0%), #e2e8f0 var(--progress, 0%), #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Hero Header -->
+    <header class="hero-gradient text-white relative overflow-hidden">
+        <div class="hero-content">
+            <!-- Top Navigation -->
+            <nav class="border-b border-white/20 backdrop-blur-sm">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
+                                <img src="../img/logo.png" alt="Hotel Logo" class="w-6 h-6">
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-bold">Sky Oro Hotel</h1>
+                                <p class="text-xs text-white/80">Luxury Redefined</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-6 text-sm">
+                            <a href="booking_status.html" class="hover:text-blue-200 transition-colors">
+                                <i class="fas fa-search mr-1"></i>
+                                Track Reservation
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Hero Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center">
+                    <h2 class="text-5xl md:text-6xl font-bold mb-6 animate-float">
+                        Book Your
+                        <span class="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+                            Perfect Stay
+                        </span>
+                    </h2>
+                    <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+                        Experience luxury and comfort like never before. Create unforgettable memories at our world-class hotel.
+                    </p>
+                    <div class="flex justify-center space-x-8 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span>5-Star Rating</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-car"></i>
+                            <span>Free Parking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+        <!-- Progress Steps -->
+        <div class="mb-12">
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex items-center justify-center space-x-4 md:space-x-8">
+                    <div class="flex items-center">
+                        <div id="step1-indicator" class="step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm">
+                            1
+                        </div>
+                        <span class="ml-3 font-medium text-gray-700 hidden sm:block">Room Selection</span>
+                    </div>
+                    <div class="h-1 w-8 md:w-16 bg-gray-200 rounded"></div>
+                    <div class="flex items-center">
+                        <div id="step2-indicator" class="step-indicator w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm text-gray-500">
+                            2
+                        </div>
+                        <span class="ml-3 font-medium text-gray-500 hidden sm:block">Extras</span>
+                    </div>
+                    <div class="h-1 w-8 md:w-16 bg-gray-200 rounded"></div>
+                    <div class="flex items-center">
+                        <div id="step3-indicator" class="step-indicator w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm text-gray-500">
+                            3
+                        </div>
+                        <span class="ml-3 font-medium text-gray-500 hidden sm:block">Guest Details</span>
+                    </div>
+                    <div class="h-1 w-8 md:w-16 bg-gray-200 rounded"></div>
+                    <div class="flex items-center">
+                        <div id="step4-indicator" class="step-indicator w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm text-gray-500">
+                            4
+                        </div>
+                        <span class="ml-3 font-medium text-gray-500 hidden sm:block">Payment</span>
+                    </div>
+                    <div class="h-1 w-8 md:w-16 bg-gray-200 rounded"></div>
+                    <div class="flex items-center">
+                        <div id="step5-indicator" class="step-indicator w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm text-gray-500">
+                            5
+                        </div>
+                        <span class="ml-3 font-medium text-gray-500 hidden sm:block">Confirmation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reservation Form Container -->
+        <div class="glass-card rounded-3xl shadow-2xl overflow-hidden">
+            <!-- Step 1: Room Selection -->
+            <div id="step1" class="step-content p-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Choose Your Perfect Room</h3>
+                    <p class="text-gray-600 text-lg">Select your dates and discover our luxury accommodations</p>
+                </div>
+
+                <!-- Date Selection Card -->
+                <div class="glass-card-light rounded-2xl p-6 mb-8">
+                    <h4 class="text-xl font-semibold mb-6 flex items-center">
+                        <div class="feature-icon mr-3">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        Select Your Dates
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Check-in Date</label>
+                            <input type="date" id="checkinDate" required
+                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Check-out Date</label>
+                            <input type="date" id="checkoutDate" required
+                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Number of Guests</label>
+                            <select id="guestCount" required
+                                    class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5+ Guests</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Rooms -->
+                <div id="roomsSection" class="hidden">
+                    <h4 class="text-xl font-semibold mb-6 flex items-center">
+                        <div class="feature-icon mr-3">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        Available Rooms
+                    </h4>
+                    <div id="roomsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                        <!-- Rooms will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="roomsLoading" class="hidden text-center py-16">
+                    <div class="loading-spinner mx-auto mb-4 w-8 h-8"></div>
+                    <p class="text-gray-600 text-lg">Finding the perfect rooms for you...</p>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-end mt-12">
+                    <button id="step1Next" disabled
+                            class="btn-primary px-8 py-4 text-white rounded-xl font-semibold hover:shadow-lg disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300">
+                        Next: Add Extras <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Services & Menu -->
+            <div id="step2" class="step-content hidden p-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Enhance Your Experience</h3>
+                    <p class="text-gray-600 text-lg">Add premium services and dining options to make your stay exceptional</p>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Hotel Services -->
+                    <div class="glass-card-light rounded-2xl p-6">
+                        <h4 class="text-xl font-semibold mb-6 flex items-center">
+                            <div class="feature-icon mr-3 text-purple-600">
+                                <i class="fas fa-concierge-bell"></i>
+                            </div>
+                            Premium Services
+                        </h4>
+                        <div id="servicesList" class="space-y-4 max-h-96 overflow-y-auto custom-scroll pr-2">
+                            <div class="text-center py-12">
+                                <div class="loading-spinner mx-auto mb-4"></div>
+                                <p class="text-gray-500">Loading premium services...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Items -->
+                    <div class="glass-card-light rounded-2xl p-6">
+                        <h4 class="text-xl font-semibold mb-6 flex items-center">
+                            <div class="feature-icon mr-3 text-orange-600">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            Gourmet Dining
+                        </h4>
+                        <div id="menuItemsList" class="space-y-4 max-h-96 overflow-y-auto custom-scroll pr-2">
+                            <div class="text-center py-12">
+                                <div class="loading-spinner mx-auto mb-4"></div>
+                                <p class="text-gray-500">Loading dining options...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between mt-12">
+                    <button id="step2Back" 
+                            class="px-8 py-4 bg-gray-500 text-white rounded-xl font-semibold hover:bg-gray-600 transition-all duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button id="step2Next"
+                            class="btn-primary px-8 py-4 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                        Next: Guest Details <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Guest Details -->
+            <div id="step3" class="step-content hidden p-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Guest Information</h3>
+                    <p class="text-gray-600 text-lg">Tell us about yourself so we can provide the best service</p>
+                </div>
+
+                <form id="guestForm" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                First Name <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="firstName" required placeholder="Enter your first name"
+                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                Last Name <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="lastName" required placeholder="Enter your last name"
+                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                Email Address <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="email" required placeholder="your.email@example.com"
+                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                Phone Number <span class="text-red-500">*</span>
+                            </label>
+                            <input type="tel" id="phoneNumber" required placeholder="+63 XXX XXX XXXX"
+                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Special Requests (Optional)</label>
+                        <textarea id="specialRequests" rows="4" 
+                                  placeholder="Any special requests, dietary preferences, or accessibility needs..."
+                                  class="form-input w-full px-4 py-4 rounded-xl focus:outline-none resize-none"></textarea>
+                    </div>
+                </form>
+
+                <!-- Navigation -->
+                <div class="flex justify-between mt-12">
+                    <button id="step3Back" 
+                            class="px-8 py-4 bg-gray-500 text-white rounded-xl font-semibold hover:bg-gray-600 transition-all duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button id="step3Next"
+                            class="btn-primary px-8 py-4 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                        Next: Payment <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Payment & Advance Payment -->
+            <div id="step4" class="step-content hidden p-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Payment Information</h3>
+                    <p class="text-gray-600 text-lg">Secure your reservation with an advance payment</p>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Booking Summary -->
+                    <div class="glass-card-light rounded-2xl p-6">
+                        <h4 class="text-xl font-semibold mb-6 flex items-center">
+                            <div class="feature-icon mr-3 text-green-600">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            Booking Summary
+                        </h4>
+                        <div id="paymentBookingSummary" class="space-y-4">
+                            <!-- Will be populated -->
+                        </div>
+                    </div>
+
+                    <!-- Payment Options -->
+                    <div class="space-y-6">
+                        <!-- Advance Payment Amount -->
+                        <div class="payment-card rounded-2xl p-6">
+                            <h5 class="text-lg font-semibold mb-4 flex items-center">
+                                <div class="feature-icon mr-3 text-blue-600">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                Advance Payment
+                            </h5>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">Amount</span>
+                                    <span id="advanceAmountDisplay" class="text-sm font-semibold">₱0.00</span>
+                                </div>
+                                <input type="range" id="advanceSlider" 
+                                       class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                       min="0" max="100" value="20" step="5">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>No Advance (0%)</span>
+                                    <span>Full Payment (100%)</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2">
+                                    Secure your booking with an advance payment. You can pay the remaining amount upon check-in.
+                                </p>
+                            </div>
+
+                            <!-- Quick Amount Buttons -->
+                            <div class="grid grid-cols-4 gap-2 mb-4">
+                                <button class="advance-quick-btn py-2 px-3 text-sm border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all" data-percent="0">
+                                    No Advance
+                                </button>
+                                <button class="advance-quick-btn py-2 px-3 text-sm border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all" data-percent="25">
+                                    25%
+                                </button>
+                                <button class="advance-quick-btn py-2 px-3 text-sm border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all" data-percent="50">
+                                    50%
+                                </button>
+                                <button class="advance-quick-btn py-2 px-3 text-sm border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all" data-percent="100">
+                                    Full
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method Selection -->
+                        <div class="payment-card rounded-2xl p-6" id="paymentMethodSection">
+                            <h5 class="text-lg font-semibold mb-4 flex items-center">
+                                <div class="feature-icon mr-3 text-purple-600">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                Payment Method
+                            </h5>
+                            <div id="paymentMethodsList" class="space-y-3">
+                                <div class="text-center py-8">
+                                    <div class="loading-spinner mx-auto mb-2"></div>
+                                    <p class="text-gray-500 text-sm">Loading payment methods...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reference Number (for non-cash payments) -->
+                        <div id="referenceSection" class="payment-card rounded-2xl p-6 hidden">
+                            <h5 class="text-lg font-semibold mb-4 flex items-center">
+                                <div class="feature-icon mr-3 text-orange-600">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                                Payment Reference
+                            </h5>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Reference Number (Optional)
+                                    </label>
+                                    <input type="text" id="referenceNumber" 
+                                           placeholder="Enter transaction/reference number"
+                                           class="form-input w-full px-4 py-3 rounded-lg focus:outline-none">
+                                    <p class="text-xs text-gray-500 mt-1">
+                                        Provide your payment reference number if you've already made the payment
+                                    </p>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-info-circle text-blue-600 mt-1 mr-3"></i>
+                                        <div class="text-sm">
+                                            <p class="font-semibold text-blue-800 mb-2">Payment Instructions:</p>
+                                            <div id="paymentInstructions" class="text-blue-700 space-y-1">
+                                                <!-- Payment instructions will be populated here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between mt-12">
+                    <button id="step4Back" 
+                            class="px-8 py-4 bg-gray-500 text-white rounded-xl font-semibold hover:bg-gray-600 transition-all duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button id="step4Next"
+                            class="btn-primary px-8 py-4 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                        Review Booking <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 5: Final Confirmation -->
+            <div id="step5" class="step-content hidden p-8">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Booking Confirmation</h3>
+                    <p class="text-gray-600 text-lg">Please review your reservation details before confirming</p>
+                </div>
+
+                <!-- Final Booking Summary -->
+                <div class="glass-card-light rounded-2xl p-8 mb-8">
+                    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                        <!-- Left Column: Booking Details -->
+                        <div class="xl:col-span-2 space-y-6">
+                            <!-- Guest Info -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                <h5 class="font-semibold mb-4 flex items-center text-lg">
+                                    <div class="feature-icon mr-3">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    Guest Information
+                                </h5>
+                                <div id="finalGuestSummary" class="text-gray-600 space-y-2">
+                                    <!-- Will be populated -->
+                                </div>
+                            </div>
+
+                            <!-- Room Details -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                <h5 class="font-semibold mb-4 flex items-center text-lg">
+                                    <div class="feature-icon mr-3 text-green-600">
+                                        <i class="fas fa-bed"></i>
+                                    </div>
+                                    Room Details
+                                </h5>
+                                <div id="finalRoomSummary" class="text-gray-600 space-y-2">
+                                    <!-- Will be populated -->
+                                </div>
+                            </div>
+
+                            <!-- Stay Details -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                                <h5 class="font-semibold mb-4 flex items-center text-lg">
+                                    <div class="feature-icon mr-3 text-purple-600">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    Stay Details
+                                </h5>
+                                <div id="finalStaySummary" class="text-gray-600 space-y-2">
+                                    <!-- Will be populated -->
+                                </div>
+                            </div>
+
+                            <!-- Additional Services -->
+                            <div id="finalExtrasSummary" class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hidden">
+                                <h5 class="font-semibold mb-4 flex items-center text-lg">
+                                    <div class="feature-icon mr-3 text-orange-600">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    Additional Services
+                                </h5>
+                                <div id="finalExtrasDetails" class="text-gray-600">
+                                    <!-- Will be populated -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Price and Payment Breakdown -->
+                        <div class="space-y-6">
+                            <!-- Total Price Breakdown -->
+                            <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+                                <h5 class="font-semibold mb-6 flex items-center text-lg">
+                                    <div class="feature-icon mr-3 text-green-600">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    Price Breakdown
+                                </h5>
+                                <div id="finalPriceSummary" class="space-y-3">
+                                    <!-- Will be populated -->
+                                </div>
+                            </div>
+
+                            <!-- Payment Summary -->
+                            <div id="finalPaymentSummary" class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 border border-green-100">
+                                <h5 class="font-semibold mb-4 flex items-center text-lg">
+                                    <div class="feature-icon mr-3 text-blue-600">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    Payment Summary
+                                </h5>
+                                <div id="finalPaymentDetails" class="space-y-3">
+                                    <!-- Will be populated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="bg-gray-50 rounded-2xl p-6 mb-8">
+                    <label class="flex items-start cursor-pointer">
+                        <input type="checkbox" id="agreeTerms" required
+                               class="mt-1 mr-4 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <span class="text-sm text-gray-700 leading-relaxed">
+                            I agree to the 
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Terms and Conditions</a> 
+                            and 
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Privacy Policy</a>. 
+                            I understand that this reservation is subject to availability and confirmation from the hotel management.
+                            <br><br>
+                            <strong>Payment Policy:</strong> Advance payments are non-refundable but can be credited towards future bookings. 
+                            The remaining balance must be paid upon check-in. Cancellations must be made at least 24 hours before check-in.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between">
+                    <button id="step5Back" 
+                            class="px-8 py-4 bg-gray-500 text-white rounded-xl font-semibold hover:bg-gray-600 transition-all duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button id="confirmBooking"
+                            class="btn-success px-8 py-4 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center">
+                        <i class="fas fa-check mr-2"></i>
+                        <span class="btn-text">Confirm Booking</span>
+                        <span class="loading-spinner hidden ml-3"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal-backdrop fixed inset-0 hidden items-center justify-center z-50 p-4">
+            <div class="modal-content bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-8 text-center max-h-screen overflow-y-auto">
+                <div class="mb-8">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+                        <i class="fas fa-check text-green-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-3xl font-bold text-gray-800 mb-3">Booking Confirmed!</h4>
+                    <p class="text-gray-600 text-lg">Your reservation has been successfully submitted and is being processed.</p>
+                </div>
+                
+                <div id="bookingDetails" class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 mb-8 text-left border border-blue-100">
+                    <!-- Booking details will be populated here -->
+                </div>
+                
+                <div class="text-sm text-gray-500 mb-8 bg-yellow-50 rounded-xl p-4 border border-yellow-200">
+                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
+                    A detailed confirmation email has been sent to your email address with all booking information and next steps.
+                </div>
+                
+                <div class="space-y-3">
+                    <button onclick="window.location.reload()" 
+                            class="w-full px-6 py-4 btn-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fas fa-plus mr-2"></i>
+                        Make Another Booking
+                    </button>
+                    <button onclick="window.print()" 
+                            class="w-full px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-300">
+                        <i class="fas fa-print mr-2"></i>
+                        Print Confirmation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-gray-900 text-white py-16 mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <img src="../img/logo.png" alt="Hotel Logo" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Sky Oro Hotel</h3>
+                            <p class="text-gray-400">Luxury Redefined</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Experience unparalleled luxury and comfort at our world-class hotel. 
+                        Every stay is crafted to create unforgettable memories.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-3 text-gray-400">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone w-4"></i>
+                            <span>+63 123 456 7890</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope w-4"></i>
+                            <span>info@skyorohotel.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-map-marker-alt w-4"></i>
+                            <span>123 Luxury Ave, City Center</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <a href="#" class="block hover:text-white transition-colors">About Us</a>
+                        <a href="#" class="block hover:text-white transition-colors">Amenities</a>
+                        <a href="#" class="block hover:text-white transition-colors">Gallery</a>
+                        <a href="#" class="block hover:text-white transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Sky Oro Hotel. All rights reserved. | Crafted with excellence for your comfort.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Notification Container -->
+    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-3 max-w-sm"></div>
+
+    <!-- Scripts -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="/reservation/js/user/userReservation.js"></script>
+    <script src="/reservation/js/user/utils/userutils.js"></script>
+
+</body>
+</html>
