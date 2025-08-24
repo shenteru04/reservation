@@ -1,20 +1,21 @@
-// js/admin/room-types.js - Room Types Management with Default Images
-class RoomTypesManager {
+// js/admin/room-types.js - Room Types Management with Default Images using Axios
+
+class RoomTypesManager extends BaseManager {
     constructor() {
-        this.baseURL = window.location.origin + '/reservation';
+        super('RoomTypesManager');
         this.roomTypes = [];
         this.currentEditId = null;
         
         // Default images for different room types
         this.defaultImages = {
-    room: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400&h=300&fit=crop&crop=center',
-    deluxe: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&h=300&fit=crop&crop=center',
-    suite: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop&crop=center',
-    standard: 'https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=400&h=300&fit=crop&crop=center',
-    single: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=400&h=300&fit=crop&crop=center',
-    double: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop&crop=center',
-      family: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center'
-};
+            room: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400&h=300&fit=crop&crop=center',
+            deluxe: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&h=300&fit=crop&crop=center',
+            suite: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop&crop=center',
+            standard: 'https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=400&h=300&fit=crop&crop=center',
+            single: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=400&h=300&fit=crop&crop=center',
+            double: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop&crop=center',
+            family: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop&crop=center'
+        };
         
         this.init();
     }
@@ -56,51 +57,10 @@ class RoomTypesManager {
         }
     }
     
-    async checkAuthentication() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/check.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Authentication check failed: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.authenticated) {
-                window.location.href = `${this.baseURL}/api/auth/login.html`;
-                return false;
-            }
-            
-            // Update admin name
-            const adminNameEl = document.getElementById('adminName');
-            if (adminNameEl && result.user) {
-                const userName = result.user.name || `${result.user.first_name || ''} ${result.user.last_name || ''}`.trim() || 'Admin User';
-                adminNameEl.textContent = userName;
-            }
-            
-            return true;
-        } catch (error) {
-            console.error('Auth check failed:', error);
-            this.showError('Authentication failed. Please refresh the page.');
-            return false;
-        }
-    }
-    
     async loadRoomTypes() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/room-types.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Failed to load room types: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const response = await this.api.get('/api/admin/pages/room-types.php');
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load room types');
@@ -112,7 +72,8 @@ class RoomTypesManager {
             
         } catch (error) {
             console.error('Failed to load room types:', error);
-            this.showError('Failed to load room types: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load room types: ' + errorMessage);
             this.renderEmptyState();
         }
     }
@@ -166,7 +127,7 @@ class RoomTypesManager {
                     <div class="space-y-3">
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Price per Night:</span>
-                            <span class="text-lg font-semibold text-green-600">₱${parseFloat(type.price_per_night).toLocaleString()}</span>
+                            <span class="text-lg font-semibold text-green-600">${this.formatCurrency(type.price_per_night)}</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Capacity:</span>
@@ -221,7 +182,7 @@ class RoomTypesManager {
         
         [closeBtn, cancelBtn].forEach(btn => {
             if (btn) {
-                btn.addEventListener('click', () => this.hideModal());
+                btn.addEventListener('click', () => this.hideModal('roomTypeModal'));
             }
         });
         
@@ -229,7 +190,7 @@ class RoomTypesManager {
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    this.hideModal();
+                    this.hideModal('roomTypeModal');
                 }
             });
         }
@@ -251,14 +212,8 @@ class RoomTypesManager {
             });
         }
         
-        // Logout functionality
-        const logoutLink = document.getElementById('logoutLink');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', async (e) => {
-                e.preventDefault();
-                await this.handleLogout();
-            });
-        }
+        // Setup common event listeners
+        this.setupCommonEventListeners();
     }
     
     updateImagePreview() {
@@ -287,7 +242,7 @@ class RoomTypesManager {
             imagePreview.style.display = 'none';
         }
         
-        this.showModal();
+        this.showModal('roomTypeModal');
     }
     
     editRoomType(roomTypeId) {
@@ -312,7 +267,7 @@ class RoomTypesManager {
             imagePreview.style.display = 'block';
         }
         
-        this.showModal();
+        this.showModal('roomTypeModal');
     }
     
     async deleteRoomType(roomTypeId) {
@@ -329,31 +284,17 @@ class RoomTypesManager {
         }
         
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/room-types.php`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({ room_type_id: roomTypeId })
+            await this.api.delete('/api/admin/pages/room-types.php', {
+                data: { room_type_id: roomTypeId }
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.success) {
-                throw new Error(result.error || 'Failed to delete room type');
-            }
             
             this.showSuccess('Room type deleted successfully');
             await this.loadRoomTypes();
             
         } catch (error) {
             console.error('Failed to delete room type:', error);
-            this.showError('Failed to delete room type: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to delete room type: ' + errorMessage);
         }
     }
     
@@ -395,32 +336,24 @@ class RoomTypesManager {
                 formData.room_type_id = this.currentEditId;
             }
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/room-types.php`, {
-                method: isEdit ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(formData)
-            });
+            const response = isEdit 
+                ? await this.api.put('/api/admin/pages/room-types.php', formData)
+                : await this.api.post('/api/admin/pages/room-types.php', formData);
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
+            const result = response.data;
             
             if (!result.success) {
                 throw new Error(result.error || 'Failed to save room type');
             }
             
             this.showSuccess(`Room type ${isEdit ? 'updated' : 'created'} successfully`);
-            this.hideModal();
+            this.hideModal('roomTypeModal');
             await this.loadRoomTypes();
             
         } catch (error) {
             console.error('Failed to save room type:', error);
-            this.showError('Failed to save room type: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to save room type: ' + errorMessage);
         } finally {
             // Re-enable button
             const saveBtn = document.getElementById('saveBtn');
@@ -428,74 +361,6 @@ class RoomTypesManager {
             saveBtn.disabled = false;
             saveBtnText.textContent = 'Save Room Type';
         }
-    }
-    
-    showModal() {
-        const modal = document.getElementById('roomTypeModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    }
-    
-    hideModal() {
-        const modal = document.getElementById('roomTypeModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-        this.currentEditId = null;
-    }
-    
-    async handleLogout() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/logout.php`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin'
-            });
-            
-            window.location.href = `${this.baseURL}/api/auth/login.html`;
-        } catch (error) {
-            console.error('Logout error:', error);
-            window.location.href = `${this.baseURL}/api/auth/login.html`;
-        }
-    }
-    
-    showSuccess(message) {
-        this.showNotification(message, 'success');
-    }
-    
-    showError(message) {
-        this.showNotification(message, 'error');
-    }
-    
-    showNotification(message, type = 'info') {
-        const colors = {
-            info: 'bg-blue-100 border-blue-400 text-blue-700',
-            success: 'bg-green-100 border-green-400 text-green-700',
-            warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-            error: 'bg-red-100 border-red-400 text-red-700'
-        };
-        
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 ${colors[type]} px-4 py-3 rounded shadow-lg z-50 max-w-md border`;
-        notification.innerHTML = `
-            <div class="flex items-center">
-                <span>${message}</span>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-lg">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 5000);
     }
 }
 
@@ -509,6 +374,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {
     if (roomTypesManager) {
-        // Cleanup if needed
+        roomTypesManager.destroy();
     }
 });

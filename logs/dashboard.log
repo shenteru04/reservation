@@ -2595,3 +2595,307 @@
 [DASHBOARD] 2025-08-20 20:20:51 - Pending reservations: 3
 [DASHBOARD] 2025-08-20 20:20:51 - Recent checkins retrieved: 5
 [DASHBOARD] 2025-08-20 20:20:51 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 03:59:04 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 03:59:04 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 03:59:04 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 03:59:04 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 03:59:04 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 03:59:04 - Pending reservations: 3
+[DASHBOARD] 2025-08-21 03:59:04 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 03:59:04 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 04:02:04 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 04:02:04 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 04:02:04 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 04:02:04 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 04:02:04 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 04:02:04 - Pending reservations: 3
+[DASHBOARD] 2025-08-21 04:02:04 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 04:02:04 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 05:22:25 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 05:22:25 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 05:22:25 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 05:22:25 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 05:22:25 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 05:22:25 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 05:22:25 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 05:22:25 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 06:30:44 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 06:30:44 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 06:30:44 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 06:30:44 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 06:30:44 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 06:30:44 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 06:30:44 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 06:30:44 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 06:30:49 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 06:30:49 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 06:30:49 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 06:30:49 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 06:30:49 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 06:30:49 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 06:30:49 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 06:30:49 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 06:30:52 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 06:30:52 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 06:30:52 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 06:30:52 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 06:30:52 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 06:30:52 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 06:30:52 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 06:30:52 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 06:30:53 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 06:30:53 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 06:30:53 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 06:30:53 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 06:30:53 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 06:30:53 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 06:30:53 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 06:30:53 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 06:42:44 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 06:42:44 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 06:42:44 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 06:42:44 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 06:42:44 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 06:42:44 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 06:42:44 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 06:42:44 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 06:42:49 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 06:42:49 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 06:42:49 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 06:42:49 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 06:42:49 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 06:42:49 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 06:42:49 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 06:42:49 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 07:20:45 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 07:20:45 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 07:20:45 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 07:20:45 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 07:20:45 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 07:20:45 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 07:20:45 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 07:20:45 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 07:21:12 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 07:21:12 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 07:21:12 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 07:21:12 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 07:21:12 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 07:21:12 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 07:21:12 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 07:21:12 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-21 07:22:17 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-21 07:22:17 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-21 07:22:17 - Occupied rooms: 1
+[DASHBOARD] 2025-08-21 07:22:17 - Today's checkins: 1
+[DASHBOARD] 2025-08-21 07:22:17 - Today's revenue: 21890
+[DASHBOARD] 2025-08-21 07:22:17 - Pending reservations: 4
+[DASHBOARD] 2025-08-21 07:22:17 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-21 07:22:17 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 01:15:49 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 01:15:49 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 01:15:49 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 01:15:49 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 01:15:49 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 01:15:49 - Pending reservations: 0
+[DASHBOARD] 2025-08-22 01:15:49 - Recent checkins retrieved: 7
+[DASHBOARD] 2025-08-22 01:15:49 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 01:20:50 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 01:20:50 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 01:20:50 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 01:20:50 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 01:20:50 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 01:20:50 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 01:20:50 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-22 01:20:50 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 03:35:53 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 03:35:53 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 03:35:53 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 03:35:53 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 03:35:53 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 03:35:53 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 03:35:54 - Recent checkins retrieved: 9
+[DASHBOARD] 2025-08-22 03:35:54 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 03:48:07 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 03:48:07 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 03:48:07 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 03:48:07 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 03:48:07 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 03:48:07 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 03:48:07 - Recent checkins retrieved: 9
+[DASHBOARD] 2025-08-22 03:48:07 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 03:52:11 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 03:52:11 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 03:52:11 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 03:52:11 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 03:52:11 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 03:52:11 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 03:52:11 - Recent checkins retrieved: 9
+[DASHBOARD] 2025-08-22 03:52:11 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 03:52:36 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 03:52:36 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 03:52:36 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 03:52:36 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 03:52:36 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 03:52:36 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 03:52:36 - Recent checkins retrieved: 9
+[DASHBOARD] 2025-08-22 03:52:36 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 03:55:31 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 03:55:31 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 03:55:31 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 03:55:31 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 03:55:31 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 03:55:31 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 03:55:31 - Recent checkins retrieved: 9
+[DASHBOARD] 2025-08-22 03:55:31 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 05:05:34 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 05:05:34 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 05:05:34 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 05:05:34 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 05:05:34 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 05:05:34 - Pending reservations: 2
+[DASHBOARD] 2025-08-22 05:05:34 - Recent checkins retrieved: 6
+[DASHBOARD] 2025-08-22 05:05:34 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 12:00:51 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 12:00:51 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 12:00:51 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 12:00:51 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 12:00:51 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 12:00:51 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 12:00:51 - Recent checkins retrieved: 7
+[DASHBOARD] 2025-08-22 12:00:51 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 12:05:52 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 12:05:52 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 12:05:52 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 12:05:52 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 12:05:52 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 12:05:52 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 12:05:52 - Recent checkins retrieved: 7
+[DASHBOARD] 2025-08-22 12:05:52 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 12:10:52 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 12:10:52 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 12:10:52 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 12:10:52 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 12:10:52 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 12:10:52 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 12:10:52 - Recent checkins retrieved: 7
+[DASHBOARD] 2025-08-22 12:10:52 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 12:15:52 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 12:15:52 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 12:15:52 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 12:15:52 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 12:15:52 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 12:15:52 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 12:15:52 - Recent checkins retrieved: 7
+[DASHBOARD] 2025-08-22 12:15:52 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-22 12:20:52 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-22 12:20:52 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-22 12:20:52 - Occupied rooms: 1
+[DASHBOARD] 2025-08-22 12:20:52 - Today's checkins: 0
+[DASHBOARD] 2025-08-22 12:20:52 - Today's revenue: 0
+[DASHBOARD] 2025-08-22 12:20:52 - Pending reservations: 1
+[DASHBOARD] 2025-08-22 12:20:52 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-22 12:20:52 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 02:27:37 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 02:27:37 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 02:27:37 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 02:27:37 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 02:27:37 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 02:27:37 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 02:27:37 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 02:27:37 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 02:28:34 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 02:28:34 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 02:28:34 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 02:28:34 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 02:28:34 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 02:28:34 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 02:28:34 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 02:28:34 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 02:29:15 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 02:29:15 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 02:29:15 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 02:29:15 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 02:29:15 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 02:29:15 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 02:29:15 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 02:29:15 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 02:29:18 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 02:29:18 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 02:29:18 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 02:29:18 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 02:29:18 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 02:29:18 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 02:29:18 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 02:29:18 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 02:29:19 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 02:29:19 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 02:29:19 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 02:29:19 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 02:29:19 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 02:29:19 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 02:29:19 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 02:29:19 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 02:29:20 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 02:29:20 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 02:29:20 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 02:29:20 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 02:29:20 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 02:29:20 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 02:29:20 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 02:29:20 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-23 16:20:10 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-23 16:20:10 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-23 16:20:11 - Occupied rooms: 1
+[DASHBOARD] 2025-08-23 16:20:11 - Today's checkins: 0
+[DASHBOARD] 2025-08-23 16:20:11 - Today's revenue: 12300
+[DASHBOARD] 2025-08-23 16:20:11 - Pending reservations: 1
+[DASHBOARD] 2025-08-23 16:20:11 - Recent checkins retrieved: 8
+[DASHBOARD] 2025-08-23 16:20:11 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-24 03:59:52 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-24 03:59:52 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-24 03:59:52 - Occupied rooms: 1
+[DASHBOARD] 2025-08-24 03:59:52 - Today's checkins: 0
+[DASHBOARD] 2025-08-24 03:59:52 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-24 03:59:52 - Pending reservations: 1
+[DASHBOARD] 2025-08-24 03:59:52 - Recent checkins retrieved: 1
+[DASHBOARD] 2025-08-24 03:59:52 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-24 05:45:35 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-24 05:45:35 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-24 05:45:35 - Occupied rooms: 0
+[DASHBOARD] 2025-08-24 05:45:35 - Today's checkins: 0
+[DASHBOARD] 2025-08-24 05:45:35 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-24 05:45:35 - Pending reservations: 0
+[DASHBOARD] 2025-08-24 05:45:35 - Recent checkins retrieved: 3
+[DASHBOARD] 2025-08-24 05:45:35 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-24 05:45:39 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-24 05:45:39 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-24 05:45:39 - Occupied rooms: 0
+[DASHBOARD] 2025-08-24 05:45:39 - Today's checkins: 0
+[DASHBOARD] 2025-08-24 05:45:39 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-24 05:45:39 - Pending reservations: 0
+[DASHBOARD] 2025-08-24 05:45:39 - Recent checkins retrieved: 3
+[DASHBOARD] 2025-08-24 05:45:39 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-24 05:45:42 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-24 05:45:42 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-24 05:45:42 - Occupied rooms: 0
+[DASHBOARD] 2025-08-24 05:45:42 - Today's checkins: 0
+[DASHBOARD] 2025-08-24 05:45:42 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-24 05:45:42 - Pending reservations: 0
+[DASHBOARD] 2025-08-24 05:45:42 - Recent checkins retrieved: 3
+[DASHBOARD] 2025-08-24 05:45:42 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-24 17:01:01 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-24 17:01:01 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-24 17:01:01 - Occupied rooms: 1
+[DASHBOARD] 2025-08-24 17:01:01 - Today's checkins: 0
+[DASHBOARD] 2025-08-24 17:01:01 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-24 17:01:01 - Pending reservations: 0
+[DASHBOARD] 2025-08-24 17:01:01 - Recent checkins retrieved: 3
+[DASHBOARD] 2025-08-24 17:01:01 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-24 17:05:46 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-24 17:05:46 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-24 17:05:46 - Occupied rooms: 1
+[DASHBOARD] 2025-08-24 17:05:46 - Today's checkins: 0
+[DASHBOARD] 2025-08-24 17:05:46 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-24 17:05:46 - Pending reservations: 1
+[DASHBOARD] 2025-08-24 17:05:46 - Recent checkins retrieved: 3
+[DASHBOARD] 2025-08-24 17:05:46 - Dashboard data compiled successfully

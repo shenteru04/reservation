@@ -13,6 +13,12 @@ class FrontDeskReservations {
         this.pageSize = 20;
         this.totalCount = 0;
         this.currentStatusId = null;
+        // Add logs properties
+        this.reservationLogs = [];
+        this.logsCurrentPage = 0;
+        this.logsPageSize = 50;
+        this.logsTotalCount = 0;
+        this.logsUserRequested = false; // Track if logs were requested by user
     }
     
     async init() {
@@ -37,6 +43,21 @@ class FrontDeskReservations {
             
             // Load reservations after other data is loaded
             await this.loadReservations();
+            
+            // Check if logs API is available and load reservation logs
+            const logsAvailable = await this.checkLogsAPIAvailability();
+            if (logsAvailable) {
+                try {
+                    await this.loadReservationLogs();
+                } catch (error) {
+                    console.warn('Failed to load reservation logs, but continuing with initialization:', error);
+                    this.showNotification('Warning: Could not load activity logs. Some features may be limited.', 'warning');
+                }
+            } else {
+                console.warn('Logs API not available - hiding logs section');
+                this.hideLogsSection();
+                this.showNotification('Note: Activity logs are not available. Reservation management will continue to work normally.', 'info');
+            }
             
             // Set minimum dates
             this.setMinimumDates();
@@ -276,6 +297,164 @@ class FrontDeskReservations {
         }
     }
     
+    async checkLogsAPIAvailability() {
+        try {
+            const response = await fetch(`${this.baseURL}/api/frontdesk/reservation_logs.php?action=all_logs&page=1&limit=1`, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: { 
+                    'Cache-Control': 'no-cache',
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                return data.success;
+            }
+            
+            return false;
+        } catch (error) {
+            console.warn('Logs API availability check failed:', error);
+            return false;
+        }
+    }
+    
+    async loadReservationLogs(page = 0) {
+        try {
+            console.log('Loading reservation logs, page:', page);
+            
+            // Build query parameters
+            const params = new URLSearchParams({
+                action: 'all_logs',
+                page: (page + 1).toString(),
+                limit: this.logsPageSize.toString()
+            });
+            
+            // Add logs filters
+            this.addLogsFiltersToParams(params);
+            
+            const response = await fetch(`${this.baseURL}/api/frontdesk/reservation_logs.php?${params}`, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: { 
+                    'Cache-Control': 'no-cache',
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Reservation logs API response:', errorText);
+                
+                // If it's a 400 error, it might be a parameter issue
+                if (response.status === 400) {
+                    console.warn('Logs API returned 400 - trying without filters');
+                    // Try again without filters
+                    const simpleParams = new URLSearchParams({
+                        action: 'all_logs',
+                        page: (page + 1).toString(),
+                        limit: this.logsPageSize.toString()
+                    });
+                    
+                    const retryResponse = await fetch(`${this.baseURL}/api/frontdesk/reservation_logs.php?${simpleParams}`, {
+                        method: 'GET',
+                        credentials: 'same-origin',
+                        headers: { 
+                            'Cache-Control': 'no-cache',
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (!retryResponse.ok) {
+                        throw new Error(`Reservation logs API error: ${retryResponse.status} - ${await retryResponse.text()}`);
+                    }
+                    
+                    const retryData = await retryResponse.json();
+                    if (!retryData.success) {
+                        throw new Error(retryData.error || 'Failed to load reservation logs');
+                    }
+                    
+                    // Use the retry data
+                    this.reservationLogs = retryData.logs || [];
+                    this.logsCurrentPage = page;
+                    this.logsTotalCount = retryData.pagination?.total_logs || 0;
+                    
+                    this.renderReservationLogs();
+                    this.updateLogsPagination(retryData.pagination);
+                    this.updateLogsTotalCount();
+                    this.updateLogsLastUpdated();
+                    
+                    if (!retryData.pagination) {
+                        this.updateLogsPaginationInfo({
+                            total_logs: this.logsTotalCount,
+                            limit: this.logsPageSize,
+                            current_page: 1
+                        });
+                    }
+                    
+                    console.log('Loaded reservation logs (retry):', this.reservationLogs.length);
+                    
+                    // Reset user requested flag after successful retry
+                    this.logsUserRequested = false;
+                    return;
+                }
+                
+                throw new Error(`Reservation logs API error: ${response.status} - ${errorText}`);
+            }
+            
+            const data = await response.json();
+            
+            if (!data.success) {
+                throw new Error(data.error || 'Failed to load reservation logs');
+            }
+            
+            this.reservationLogs = data.logs || [];
+            this.logsCurrentPage = page;
+            this.logsTotalCount = data.pagination?.total_logs || 0;
+            
+            this.renderReservationLogs();
+            this.updateLogsPagination(data.pagination);
+            this.updateLogsTotalCount();
+            this.updateLogsLastUpdated();
+            
+            // Update pagination info even if no pagination data
+            if (!data.pagination) {
+                this.updateLogsPaginationInfo({
+                    total_logs: this.logsTotalCount,
+                    limit: this.logsPageSize,
+                    current_page: 1
+                });
+            }
+            
+            console.log('Loaded reservation logs:', this.reservationLogs.length);
+            
+            // Reset user requested flag after successful load
+            this.logsUserRequested = false;
+            
+        } catch (error) {
+            console.error('Failed to load reservation logs:', error);
+            
+            // Don't show error to user if this is a background refresh
+            // Only show error if user explicitly requested logs
+            if (this.logsUserRequested) {
+                this.showError('Failed to load reservation logs: ' + error.message);
+            }
+            
+            this.renderLogsEmptyState();
+            
+            // Update pagination info for error state
+            this.updateLogsPaginationInfo({
+                total_logs: 0,
+                limit: this.logsPageSize,
+                current_page: 1
+            });
+            
+            // Reset user requested flag after error
+            this.logsUserRequested = false;
+        }
+    }
+    
     addFiltersToParams(params) {
         const searchInput = document.getElementById('searchInput');
         if (searchInput?.value?.trim()) {
@@ -295,6 +474,23 @@ class FrontDeskReservations {
         const roomTypeFilter = document.getElementById('roomTypeFilter');
         if (roomTypeFilter?.value) {
             params.append('room_type', roomTypeFilter.value);
+        }
+    }
+    
+    addLogsFiltersToParams(params) {
+        const actionFilter = document.getElementById('logsActionFilter');
+        if (actionFilter?.value) {
+            params.append('action_type', actionFilter.value);
+        }
+        
+        const dateFromFilter = document.getElementById('logsDateFrom');
+        if (dateFromFilter?.value) {
+            params.append('date_from', dateFromFilter.value);
+        }
+        
+        const dateToFilter = document.getElementById('logsDateTo');
+        if (dateToFilter?.value) {
+            params.append('date_to', dateToFilter.value);
         }
     }
     
@@ -661,72 +857,160 @@ class FrontDeskReservations {
         tbody.innerHTML = this.reservations.map(reservation => this.createReservationRow(reservation)).join('');
     }
     
-    createReservationRow(reservation) {
-        const statusColors = {
-            'Pending': 'bg-yellow-100 text-yellow-800',
-            'Confirmed': 'bg-blue-100 text-blue-800',
-            'Checked-in': 'bg-green-100 text-green-800',
-            'Checked-out': 'bg-gray-100 text-gray-800',
-            'Cancelled': 'bg-red-100 text-red-800'
+    renderReservationLogs() {
+        const tbody = document.getElementById('logsTableBody');
+        if (!tbody) return;
+        
+        if (this.reservationLogs.length === 0) {
+            this.renderLogsEmptyState();
+            return;
+        }
+        
+        tbody.innerHTML = this.reservationLogs.map(log => this.createLogRow(log)).join('');
+    }
+    
+createReservationRow(reservation) {
+    const statusColors = {
+        'Pending': 'bg-yellow-100 text-yellow-800',
+        'Confirmed': 'bg-blue-100 text-blue-800',
+        'Checked-in': 'bg-green-100 text-green-800',
+        'Checked-out': 'bg-gray-100 text-gray-800',
+        'Cancelled': 'bg-red-100 text-red-800'
+    };
+    const statusClass = statusColors[reservation.status_name] || 'bg-gray-100 text-gray-800';
+
+    const checkinDate = new Date(reservation.check_in_date).toLocaleDateString();
+    const checkoutDate = new Date(reservation.check_out_date).toLocaleDateString();
+
+    // Time extraction
+    let checkinTime = '';
+    let checkoutTime = '';
+    if (reservation.checkin_datetime && reservation.checkin_datetime.includes(' ')) {
+        checkinTime = reservation.checkin_datetime.split(' ')[1]?.substring(0, 5) || '';
+    }
+    if (reservation.checkout_datetime && reservation.checkout_datetime.includes(' ')) {
+        checkoutTime = reservation.checkout_datetime.split(' ')[1]?.substring(0, 5) || '';
+    }
+    const timeInfo =
+        `<div class="text-xs text-gray-500">
+            <div>Time: ${checkinTime || 'N/A'} - ${checkoutTime || 'N/A'}</div>
+        </div>`;
+
+    // Reservation type: always "Walk-In" for front desk
+    let reservationType = reservation.reservation_type_name || '';
+    if (!reservationType || reservationType.toLowerCase().includes('front') || reservationType.toLowerCase().includes('walk')) {
+        reservationType = 'Walk-In';
+    }
+ const showAssignRoom = 
+        (reservation.status_name === 'Pending' || reservation.status_name === 'Confirmed') && 
+        (!reservation.room_id || !reservation.room_number) && 
+        reservation.room_type_id;
+
+        return `
+        <tr class="hover:bg-gray-50 transition-colors table-row">
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">#${reservation.reservation_id}</div>
+                <div class="text-xs text-gray-500">${reservationType}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">${reservation.customer_name || `${reservation.first_name} ${reservation.last_name}`}</div>
+                <div class="text-sm text-gray-500">${reservation.email || 'No email'}</div>
+                <div class="text-sm text-gray-500">${reservation.phone_number || 'No phone'}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">${reservation.room_type_name || reservation.type_name || 'Room Type'}</div>
+                <div class="text-sm text-gray-500">
+                    ${reservation.room_number ? `Room ${reservation.room_number}` : '<span class="text-orange-600 font-medium">No room assigned</span>'}
+                </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                    <div><strong>In:</strong> ${checkinDate} ${checkinTime ? `<span class="text-xs">(${checkinTime})</span>` : ''}</div>
+                    <div><strong>Out:</strong> ${checkoutDate} ${checkoutTime ? `<span class="text-xs">(${checkoutTime})</span>` : ''}</div>
+                    ${timeInfo}
+                </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">₱${parseFloat(reservation.total_amount || 0).toLocaleString()}</div>
+                ${reservation.advance_payment > 0 ? `<div class="text-sm text-green-600 advance-payment">Advance: ₱${parseFloat(reservation.advance_payment).toLocaleString()}</div>` : ''}
+                <div class="text-sm text-gray-500">Guests: ${reservation.guest_count || 1}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
+                    ${reservation.status_name}
+                </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex justify-end space-x-2">
+                    <button onclick="window.reservationsManager.editReservation(${reservation.reservation_id})"
+                            class="text-blue-600 hover:text-blue-900 action-btn p-1" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button onclick="window.reservationsManager.updateStatus(${reservation.reservation_id}, '${reservation.status_name}')"
+                            class="text-green-600 hover:text-green-900 action-btn p-1" title="Update Status">
+                        <i class="fas fa-clipboard-check"></i>
+                    </button>
+                    <button onclick="window.reservationsManager.viewReservation(${reservation.reservation_id})"
+                            class="text-purple-600 hover:text-purple-900 action-btn p-1" title="View Details">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                 ${showAssignRoom ? `
+                <button onclick="window.reservationsManager.showRoomAssignmentModal(${reservation.reservation_id}, ${reservation.room_type_id})"
+                    class="text-orange-600 hover:text-orange-900 action-btn p-1" title="Assign Room">
+                    <i class="fas fa-door-open"></i>
+                </button>
+                ` : ''}
+                </div>
+            </td>
+        </tr>
+    `;
+}
+
+    
+    createLogRow(log) {
+        const actionColors = {
+            'created': 'bg-green-100 text-green-800',
+            'updated': 'bg-blue-100 text-blue-800',
+            'status_changed': 'bg-yellow-100 text-yellow-800',
+            'room_assigned': 'bg-purple-100 text-purple-800',
+            'cancelled': 'bg-red-100 text-red-800'
         };
         
-        const statusClass = statusColors[reservation.status_name] || 'bg-gray-100 text-gray-800';
-        const checkinDate = new Date(reservation.check_in_date).toLocaleDateString();
-        const checkoutDate = new Date(reservation.check_out_date).toLocaleDateString();
+        const actionClass = actionColors[log.action_type] || 'bg-gray-100 text-gray-800';
+        const timestamp = new Date(log.timestamp).toLocaleString();
+        const customerName = log.customer?.name || 'N/A';
+        const roomInfo = log.room?.room_number ? `Room ${log.room.room_number}` : 'N/A';
+        const userInfo = log.user_type ? `${log.user_type} (ID: ${log.user_id || 'N/A'})` : 'System';
         
         return `
-            <tr class="hover:bg-gray-50 transition-colors table-row">
+            <tr class="hover:bg-gray-50 transition-colors">
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">#${reservation.reservation_id}</div>
-                    <div class="text-sm text-gray-500">${reservation.type_name || 'Walk-in'}</div>
+                    <div class="text-sm text-gray-900">${timestamp}</div>
+                    <div class="text-xs text-gray-500">${log.formatted_timestamp || ''}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">${reservation.customer_name || `${reservation.first_name} ${reservation.last_name}`}</div>
-                    <div class="text-sm text-gray-500">${reservation.email || 'No email'}</div>
-                    <div class="text-sm text-gray-500">${reservation.phone_number || 'No phone'}</div>
+                    <div class="text-sm font-medium text-gray-900">#${log.reservation_id}</div>
+                    <div class="text-xs text-gray-500">Reservation</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">Room ${reservation.room_number}</div>
-                    <div class="text-sm text-gray-500">${reservation.room_type_name || reservation.type_name}</div>
-                    <div class="text-sm text-gray-500">Floor ${reservation.floor_number || 'N/A'}</div>
+                    <div class="text-sm font-medium text-gray-900">${customerName}</div>
+                    <div class="text-xs text-gray-500">${log.customer?.email || 'No email'}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">
-                        <div><strong>In:</strong> ${checkinDate}</div>
-                        <div><strong>Out:</strong> ${checkoutDate}</div>
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">₱${parseFloat(reservation.total_amount || 0).toLocaleString()}</div>
-                    ${reservation.advance_payment > 0 ? 
-                        `<div class="text-sm text-green-600 advance-payment">Advance: ₱${parseFloat(reservation.advance_payment).toLocaleString()}</div>` : ''
-                    }
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
-                        ${reservation.status_name}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${actionClass}">
+                        ${log.action_type.replace('_', ' ').toUpperCase()}
                     </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div class="flex justify-end space-x-2">
-                        <button onclick="window.reservationsManager.editReservation(${reservation.reservation_id})" 
-                                class="text-blue-600 hover:text-blue-900 action-btn p-1" title="Edit">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button onclick="window.reservationsManager.updateStatus(${reservation.reservation_id}, '${reservation.status_name}')" 
-                                class="text-green-600 hover:text-green-900 action-btn p-1" title="Update Status">
-                            <i class="fas fa-clipboard-check"></i>
-                        </button>
-                        ${reservation.status_name === 'Pending' || reservation.status_name === 'Confirmed' ? 
-                            `<button onclick="window.reservationsManager.cancelReservation(${reservation.reservation_id})" 
-                                    class="text-red-600 hover:text-red-900 action-btn p-1" title="Cancel">
-                                <i class="fas fa-times-circle"></i>
-                            </button>` : ''
-                        }
-                        <button onclick="window.reservationsManager.viewReservation(${reservation.reservation_id})" 
-                                class="text-purple-600 hover:text-purple-900 action-btn p-1" title="View Details">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">${roomInfo}</div>
+                    <div class="text-xs text-gray-500">${log.room?.room_type || ''}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">${userInfo}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900 max-w-xs truncate" title="${log.notes || 'No notes'}">
+                        ${log.notes || 'No notes'}
                     </div>
                 </td>
             </tr>
@@ -746,6 +1030,27 @@ class FrontDeskReservations {
                             <button onclick="window.reservationsManager.showAddModal()" 
                                     class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                                 <i class="fas fa-plus mr-2"></i>New Reservation
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+    
+    renderLogsEmptyState() {
+        const tbody = document.getElementById('logsTableBody');
+        if (tbody) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-history text-gray-300 text-4xl mb-4"></i>
+                            <p class="text-lg mb-2">No activity logs found</p>
+                            <p class="text-sm mb-4">Try adjusting your filters or check back later</p>
+                            <button onclick="window.reservationsManager.logsUserRequested = true; window.reservationsManager.loadReservationLogs(0)" 
+                                    class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                <i class="fas fa-sync-alt mr-2"></i>Retry Loading Logs
                             </button>
                         </div>
                     </td>
@@ -788,6 +1093,20 @@ class FrontDeskReservations {
     
     updateLastUpdated() {
         const lastUpdatedEl = document.getElementById('lastUpdated');
+        if (lastUpdatedEl) {
+            lastUpdatedEl.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+        }
+    }
+    
+    updateLogsTotalCount() {
+        const totalEl = document.getElementById('totalLogs');
+        if (totalEl) {
+            totalEl.textContent = this.logsTotalCount.toString();
+        }
+    }
+    
+    updateLogsLastUpdated() {
+        const lastUpdatedEl = document.getElementById('logsLastUpdated');
         if (lastUpdatedEl) {
             lastUpdatedEl.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
         }
@@ -840,6 +1159,77 @@ class FrontDeskReservations {
             nextBtn.className = 'px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors';
             nextBtn.onclick = () => this.loadReservations(currentPage + 1);
             buttonsContainer.appendChild(nextBtn);
+        }
+    }
+    
+    updateLogsPagination(pagination) {
+        const buttonsContainer = document.getElementById('logsPaginationButtons');
+        if (!buttonsContainer || !pagination) return;
+        
+        buttonsContainer.innerHTML = '';
+        
+        const { total_logs, limit, current_page } = pagination;
+        const totalPages = Math.ceil(total_logs / limit);
+        
+        if (totalPages <= 1) return;
+        
+        // Previous button
+        if (current_page > 1) {
+            const prevBtn = document.createElement('button');
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.className = 'px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors';
+            prevBtn.onclick = () => {
+                this.logsUserRequested = true;
+                this.loadReservationLogs(current_page - 2);
+            };
+            buttonsContainer.appendChild(prevBtn);
+        }
+        
+        // Page numbers
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, current_page - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.textContent = i.toString();
+            pageBtn.className = `px-3 py-1 text-sm border border-gray-300 rounded-md transition-colors ${
+                i === current_page ? 'bg-purple-600 text-white' : 'hover:bg-gray-50'
+            }`;
+            pageBtn.onclick = () => {
+                this.logsUserRequested = true;
+                this.loadReservationLogs(i - 1);
+            };
+            buttonsContainer.appendChild(pageBtn);
+        }
+        
+        // Next button
+        if (current_page < totalPages) {
+            const nextBtn = document.createElement('button');
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.className = 'px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors';
+            nextBtn.onclick = () => {
+                this.logsUserRequested = true;
+                this.loadReservationLogs(current_page);
+            };
+            buttonsContainer.appendChild(nextBtn);
+        }
+        
+        // Update pagination info
+        this.updateLogsPaginationInfo(pagination);
+    }
+    
+    updateLogsPaginationInfo(pagination) {
+        const paginationInfo = document.getElementById('logsPaginationInfo');
+        if (paginationInfo && pagination) {
+            const { total_logs, limit, current_page } = pagination;
+            const start = (current_page - 1) * limit + 1;
+            const end = Math.min(current_page * limit, total_logs);
+            paginationInfo.textContent = `Showing ${start} to ${end} of ${total_logs} results`;
         }
     }
     
@@ -896,6 +1286,9 @@ class FrontDeskReservations {
         
         // Mobile sidebar
         this.setupMobileSidebar();
+        
+        // Logs events
+        this.setupLogsEventListeners();
         
         // Logout
         const logoutLink = document.getElementById('logoutLink');
@@ -970,6 +1363,49 @@ class FrontDeskReservations {
                 }
             });
         }
+        
+        // Room assignment modal
+        const roomAssignmentModal = document.getElementById('roomAssignmentModal');
+        const roomAssignmentCloseBtn = document.getElementById('closeRoomAssignmentModal');
+        const roomAssignmentCancelBtn = document.getElementById('cancelRoomAssignmentBtn');
+        
+        console.log('Setting up room assignment modal event listeners');
+        console.log('Modal element:', roomAssignmentModal);
+        console.log('Close button:', roomAssignmentCloseBtn);
+        console.log('Cancel button:', roomAssignmentCancelBtn);
+        
+        [roomAssignmentCloseBtn, roomAssignmentCancelBtn].forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('Room assignment modal close button clicked');
+                    this.hideRoomAssignmentModal();
+                });
+            }
+        });
+        
+        if (roomAssignmentModal) {
+            roomAssignmentModal.addEventListener('click', (e) => {
+                if (e.target === roomAssignmentModal) {
+                    console.log('Room assignment modal background clicked');
+                    this.hideRoomAssignmentModal();
+                }
+        
+            });
+        }
+        if (roomAssignmentCloseBtn) {
+    roomAssignmentCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.hideRoomAssignmentModal();
+    });
+}
+
+if (roomAssignmentCancelBtn) {
+    roomAssignmentCancelBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.hideRoomAssignmentModal();
+    });
+}
     }
     
     setupFormEvents() {
@@ -989,6 +1425,17 @@ class FrontDeskReservations {
                 e.preventDefault();
                 this.saveStatusUpdate();
             });
+        }
+        
+        // Room assignment form
+       const roomAssignmentForm = document.getElementById('roomAssignmentForm');
+        if (roomAssignmentForm) {
+            roomAssignmentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.saveRoomAssignment();
+            });
+        } else {
+            console.error('Room assignment form not found!');
         }
         
         // Room type change
@@ -1581,162 +2028,147 @@ class FrontDeskReservations {
     }
     
     // Save reservation method
-    async saveReservation() {
-        try {
-            console.log('Saving reservation...');
-            
-            // Show loading state
-            const saveBtn = document.getElementById('saveReservationBtn');
-            const btnText = saveBtn?.querySelector('.btn-text');
-            const btnSpinner = saveBtn?.querySelector('.loading-spinner');
-            
-            if (saveBtn) {
-                saveBtn.disabled = true;
-                if (btnText) btnText.textContent = this.currentEditId ? 'Updating...' : 'Saving...';
-                if (btnSpinner) btnSpinner.classList.remove('hidden');
-            }
-
-            // Validate form data
-            const formData = this.collectFormData();
-            console.log('Form data collected:', formData);
-            
-            if (!this.validateFormData(formData)) {
-                return;
-            }
-
-            // Prepare request data
-            const requestData = {
-                // Customer information
-                first_name: formData.firstName,
-                last_name: formData.lastName,
-                email: formData.email || null,
-                phone_number: formData.phoneNumber || null,
-                
-                // Reservation details
-                room_id: parseInt(formData.roomId),
-                check_in_date: formData.checkinDate,
-                check_out_date: formData.checkoutDate,
-                guest_count: parseInt(formData.guestCount),
-                special_requests: formData.specialRequests || null,
-                reservation_status_id: 1, // Pending
-                
-                // Financial information
-                total_amount: formData.totalAmount,
-                advance_payment: formData.advanceAmount || 0,
-                payment_method_id: formData.paymentMethodId ? parseInt(formData.paymentMethodId) : null,
-                reference_number: formData.referenceNumber || null,
-                
-                // Services and menu items
-                services: formData.selectedServices.map(s => s.service_id),
-                menu_items: formData.selectedMenuItems.map(item => ({
-                    id: item.menu_id,
-                    quantity: item.quantity
-                }))
-            };
-
-            // Add reservation ID for updates
-            if (this.currentEditId) {
-                requestData.reservation_id = this.currentEditId;
-            }
-
-            console.log('Sending reservation data:', requestData);
-
-            // Make API request
-            const url = `${this.baseURL}/api/frontdesk/reservations.php`;
-                
-            const response = await fetch(url, {
-                method: this.currentEditId ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(requestData)
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Server response:', errorText);
-                throw new Error(`Server responded with ${response.status}: ${errorText}`);
-            }
-
-            const result = await response.json();
-
-            if (!result.success) {
-                throw new Error(result.error || 'Failed to save reservation');
-            }
-
-            // Show success message
-            this.showSuccess(
-                this.currentEditId 
-                    ? 'Reservation updated successfully!' 
-                    : `Reservation created successfully! ID: #${result.reservation_id}`
-            );
-
-            // Close modal and refresh data
-            this.hideModal();
-            await this.loadReservations(this.currentPage);
-
-        } catch (error) {
-            console.error('Failed to save reservation:', error);
-            this.showError('Failed to save reservation: ' + error.message);
-        } finally {
-            // Reset button state
-            const saveBtn = document.getElementById('saveReservationBtn');
-            const btnText = saveBtn?.querySelector('.btn-text');
-            const btnSpinner = saveBtn?.querySelector('.loading-spinner');
-            
+async saveReservation() {
+    try {
+        const saveBtn = document.getElementById('saveReservationBtn');
+        const btnText = saveBtn?.querySelector('.btn-text');
+        const btnSpinner = saveBtn?.querySelector('.loading-spinner');
+        if (saveBtn) {
+            saveBtn.disabled = true;
+            if (btnText) btnText.textContent = this.currentEditId ? 'Updating...' : 'Saving...';
+            if (btnSpinner) btnSpinner.classList.remove('hidden');
+        }
+        const formData = this.collectFormData();
+        if (!this.validateFormData(formData)) {
             if (saveBtn) {
                 saveBtn.disabled = false;
                 if (btnText) btnText.textContent = this.currentEditId ? 'Update Reservation' : 'Save Reservation';
                 if (btnSpinner) btnSpinner.classList.add('hidden');
             }
+            return;
+        }
+
+        // Always set Walk-In type for front desk
+        let reservationTypeId = 1;
+
+        // Get times from form (fix: use fallback to avoid undefined!)
+        const checkinDate = formData.checkinDate;
+        const checkoutDate = formData.checkoutDate;
+        // Use fallback if elements are missing
+        let checkinTime = '15:00:00';
+        let checkoutTime = '12:00:00';
+        const checkinTimeEl = document.getElementById('checkinTime');
+        const checkoutTimeEl = document.getElementById('checkoutTime');
+        if (checkinTimeEl && checkinTimeEl.value) checkinTime = checkinTimeEl.value;
+        if (checkoutTimeEl && checkoutTimeEl.value) checkoutTime = checkoutTimeEl.value;
+
+        // Fix: Ensure variables are defined before using
+        const checkin_datetime = (checkinDate && checkinTime) ? `${checkinDate} ${checkinTime}` : '';
+        const checkout_datetime = (checkoutDate && checkoutTime) ? `${checkoutDate} ${checkoutTime}` : '';
+
+        const requestData = {
+            // Customer info
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email || null,
+            phone_number: formData.phoneNumber || null,
+            // Reservation details
+            room_id: formData.roomId ? parseInt(formData.roomId) : null,
+            room_type_id: document.getElementById('roomTypeSelect')?.value ? parseInt(document.getElementById('roomTypeSelect').value) : null,
+            check_in_date: checkinDate,
+            check_out_date: checkoutDate,
+            checkin_datetime, // fixed variable name!
+            checkout_datetime, // fixed variable name!
+            guest_count: parseInt(formData.guestCount),
+            special_requests: formData.specialRequests || null,
+            reservation_type_id: reservationTypeId,
+            booking_type: "room", // always room for front desk
+            room_assignment_pending: 0,
+            reservation_status_id: 1, // Pending
+            // Financial info
+            total_amount: formData.totalAmount,
+            advance_payment: formData.advanceAmount || 0,
+            payment_method_id: formData.paymentMethodId ? parseInt(formData.paymentMethodId) : null,
+            reference_number: formData.referenceNumber || null,
+            // Services and menu
+            services: formData.selectedServices.map(s => s.service_id),
+            menu_items: formData.selectedMenuItems.map(item => ({
+                id: item.menu_id,
+                quantity: item.quantity
+            }))
+        };
+        if (this.currentEditId) {
+            requestData.reservation_id = this.currentEditId;
+        }
+        const url = `${this.baseURL}/api/frontdesk/reservations.php`;
+        const response = await fetch(url, {
+            method: this.currentEditId ? 'PUT' : 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(requestData)
+        });
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Server responded with ${response.status}: ${errorText}`);
+        }
+        const result = await response.json();
+        if (!result.success) {
+            throw new Error(result.error || 'Failed to save reservation');
+        }
+        this.showSuccess(
+            this.currentEditId
+                ? 'Reservation updated successfully!'
+                : `Reservation created successfully! ID: #${result.reservation_id}`
+        );
+        this.hideModal();
+        await this.loadReservations(this.currentPage);
+    } catch (error) {
+        this.showError('Failed to save reservation: ' + error.message);
+    } finally {
+        const saveBtn = document.getElementById('saveReservationBtn');
+        const btnText = saveBtn?.querySelector('.btn-text');
+        const btnSpinner = saveBtn?.querySelector('.loading-spinner');
+        if (saveBtn) {
+            saveBtn.disabled = false;
+            if (btnText) btnText.textContent = this.currentEditId ? 'Update Reservation' : 'Save Reservation';
+            if (btnSpinner) btnSpinner.classList.add('hidden');
         }
     }
-    
-    // Edit reservation method
-    async editReservation(reservationId) {
+}
+// PATCH editReservation: If booking_type is 'room_type_selection' or room_assignment_pending==1 treat as room type (no room_id required)
+// and set checkin_datetime/checkout_datetime if available
+
+ async editReservation(reservationId) {
         try {
-            console.log(`Editing reservation ID: ${reservationId}`);
-            
-            // Load reservation data
             const response = await fetch(`${this.baseURL}/api/frontdesk/reservations.php?id=${reservationId}`, {
                 method: 'GET',
                 credentials: 'same-origin',
-                headers: { 
+                headers: {
                     'Cache-Control': 'no-cache',
                     'Accept': 'application/json'
                 }
             });
-
             if (!response.ok) {
                 throw new Error(`Server responded with ${response.status}`);
             }
-
             const data = await response.json();
-
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load reservation details');
             }
-
             const reservation = data.reservation;
             this.currentEditId = reservationId;
-
-            // Update modal title
             document.getElementById('modalTitle').textContent = `Edit Reservation #${reservationId}`;
-            document.getElementById('modalSubtitle').textContent = 'Update reservation details';
+            document.getElementById('modalSubtitle').textContent = 'Update reservation details (Type: Walk-In)';
             document.getElementById('reservationId').value = reservationId;
-
-            // Populate customer information
             document.getElementById('firstName').value = reservation.first_name || '';
             document.getElementById('lastName').value = reservation.last_name || '';
             document.getElementById('email').value = reservation.email || '';
             document.getElementById('phoneNumber').value = reservation.phone_number || '';
 
-            // Get room type from current room
-            const roomTypeId = await this.getRoomTypeFromRoomId(reservation.room_id);
-            
-            // Populate reservation details
+            let roomTypeId = reservation.room_type_id;
             if (roomTypeId) {
                 document.getElementById('roomTypeSelect').value = roomTypeId;
             }
@@ -1745,16 +2177,23 @@ class FrontDeskReservations {
             document.getElementById('guestCount').value = reservation.guest_count || 1;
             document.getElementById('specialRequests').value = reservation.special_requests || '';
 
+            // PATCH: Set checkin/checkout time if available
+            if (document.getElementById('checkinTime') && reservation.checkin_datetime) {
+                document.getElementById('checkinTime').value = reservation.checkin_datetime.split(' ')[1] || '15:00:00';
+            }
+            if (document.getElementById('checkoutTime') && reservation.checkout_datetime) {
+                document.getElementById('checkoutTime').value = reservation.checkout_datetime.split(' ')[1] || '12:00:00';
+            }
+
             // Load available rooms for this type and dates
             if (roomTypeId) {
                 await this.loadAvailableRooms(roomTypeId, reservation.check_in_date, reservation.check_out_date);
-                // Set selected room
                 setTimeout(() => {
                     document.getElementById('roomSelect').value = reservation.room_id;
                 }, 100);
+            } else {
+                this.resetRoomSelect();
             }
-
-            // Populate services and menu items
             this.populateHotelServices();
             this.populateMenuItems();
 
@@ -1763,37 +2202,25 @@ class FrontDeskReservations {
                 document.getElementById('paymentMethodSelect').value = reservation.payment_method_id || '';
                 document.getElementById('advanceAmount').value = reservation.advance_payment;
                 document.getElementById('referenceNumber').value = reservation.reference_number || '';
-                
-                // Show advance payment fields
                 if (reservation.payment_method_id) {
                     document.getElementById('advancePaymentFields').classList.remove('hidden');
                 }
             }
 
-            // Update minimum dates for editing
             this.setMinimumDates();
             this.updateCheckoutMinDate();
-
-            // Calculate totals
             setTimeout(() => {
                 this.calculateTotalAmount();
             }, 200);
-
-            // Show modal
             this.showModal();
-
-            // Focus on first name field
             setTimeout(() => {
                 const firstNameField = document.getElementById('firstName');
                 if (firstNameField) firstNameField.focus();
             }, 300);
-
         } catch (error) {
-            console.error('Failed to edit reservation:', error);
             this.showError('Failed to load reservation details: ' + error.message);
         }
     }
-
     // Helper method to get room type from room ID
     async getRoomTypeFromRoomId(roomId) {
         try {
@@ -2052,7 +2479,21 @@ class FrontDeskReservations {
         }
     }
     
-    generateReservationDetailsHTML(reservation, checkinDate, checkoutDate) {
+     generateReservationDetailsHTML(reservation, checkinDate, checkoutDate) {
+        let checkinTime = '';
+        let checkoutTime = '';
+        if (reservation.checkin_datetime && reservation.checkin_datetime.includes(' ')) {
+            checkinTime = reservation.checkin_datetime.split(' ')[1]?.substring(0, 5) || '';
+        }
+        if (reservation.checkout_datetime && reservation.checkout_datetime.includes(' ')) {
+            checkoutTime = reservation.checkout_datetime.split(' ')[1]?.substring(0, 5) || '';
+        }
+
+        let reservationType = reservation.reservation_type_name || '';
+        if (!reservationType || reservationType.toLowerCase().includes('front') || reservationType.toLowerCase().includes('walk')) {
+            reservationType = 'Walk-In';
+        }
+
         return `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-4">
@@ -2068,11 +2509,19 @@ class FrontDeskReservations {
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Type:</span>
-                                <span class="font-medium">${reservation.reservation_type_name || 'Walk-in'}</span>
+                                <span class="font-medium">${reservationType}</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Status:</span>
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${this.getStatusBadgeClass(reservation.reservation_status)}">${reservation.reservation_status}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Check-in Time:</span>
+                                <span class="font-medium">${checkinTime || 'N/A'}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Check-out Time:</span>
+                                <span class="font-medium">${checkoutTime || 'N/A'}</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Created:</span>
@@ -2738,6 +3187,405 @@ class FrontDeskReservations {
             }
         });
     }
+    
+    // Room assignment for room type bookings
+    async assignRoomToReservation(reservationId, roomId) {
+        try {
+            console.log('Assigning room', roomId, 'to reservation', reservationId);
+            
+            const response = await fetch(`${this.baseURL}/api/frontdesk/reservations.php`, {
+                method: 'PUT',
+                credentials: 'same-origin',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache'
+                },
+                body: JSON.stringify({
+                    reservation_id: parseInt(reservationId),
+                    room_id: parseInt(roomId),
+                    action: 'assign_room'
+                })
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Room assignment response:', errorText);
+                throw new Error(`Room assignment failed: ${response.status} - ${errorText}`);
+            }
+            
+            const result = await response.json();
+            
+            if (!result.success) {
+                throw new Error(result.error || 'Failed to assign room');
+            }
+            
+            this.showSuccess('Room assigned successfully!');
+            
+            // Refresh reservations first (required)
+            await this.loadReservations(this.currentPage);
+            
+            // Try to refresh logs (optional - don't fail if it doesn't work)
+            try {
+                await this.loadReservationLogs(this.logsCurrentPage);
+            } catch (error) {
+                console.warn('Failed to refresh logs after room assignment:', error);
+                // Don't show error to user since room assignment was successful
+            }
+            
+        } catch (error) {
+            console.error('Failed to assign room:', error);
+            this.showError('Failed to assign room: ' + error.message);
+            throw error; // Re-throw to be handled by caller
+        }
+    }
+    
+    // Show room assignment modal
+showRoomAssignmentModal(reservationId, roomTypeId) {
+    console.log('Showing room assignment modal for reservation:', reservationId, 'room type:', roomTypeId);
+    const modal = document.getElementById('roomAssignmentModal');
+    if (!modal) {
+        this.showError('Room assignment modal not found');
+        return;
+    }
+
+    // Store reservation ID for assignment
+    modal.dataset.reservationId = reservationId;
+    modal.dataset.roomTypeId = roomTypeId;
+
+    // Use the same modal system as other modals
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+    
+    console.log('Modal shown, loading available rooms...');
+    
+    // Load available rooms of this type
+    this.loadAvailableRoomsForAssignment(roomTypeId);
+}
+    
+    // Load available rooms for assignment
+async loadAvailableRoomsForAssignment(roomTypeId) {
+    try {
+        console.log('Loading available rooms for assignment, room type:', roomTypeId);
+        
+        // First try to get available rooms based on room type and status
+        let response = await fetch(`${this.baseURL}/api/admin/pages/rooms.php?type=${roomTypeId}&status=1`, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: { 
+                'Cache-Control': 'no-cache',
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            // Fallback: try to get all rooms of this type
+            console.warn('First attempt failed, trying fallback approach...');
+            response = await fetch(`${this.baseURL}/api/admin/pages/rooms.php?type=${roomTypeId}`, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: { 
+                    'Cache-Control': 'no-cache',
+                    'Accept': 'application/json'
+                }
+            });
+        }
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Available rooms API response:', errorText);
+            throw new Error(`Failed to load rooms: ${response.status} - ${errorText}`);
+        }
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+            throw new Error(result.error || 'Failed to load rooms');
+        }
+        
+        console.log('All rooms from API:', result.rooms);
+        
+        let availableRooms = result.rooms || [];
+        
+        // Filter for available rooms (status 1 = available)
+        if (availableRooms.length > 0) {
+            const filteredRooms = availableRooms.filter(room => 
+                room.room_status_id == 1 || room.status_name === 'Available'
+            );
+            
+            // Use filtered rooms if we found any, otherwise use all rooms
+            availableRooms = filteredRooms.length > 0 ? filteredRooms : availableRooms;
+        }
+        
+        console.log('Available rooms for assignment:', availableRooms);
+        this.populateRoomAssignmentSelect(availableRooms);
+        
+    } catch (error) {
+        console.error('Failed to load available rooms for assignment:', error);
+        
+        const select = document.getElementById('roomAssignmentSelect');
+        if (select) {
+            select.innerHTML = '<option value="">Error loading rooms - Please contact support</option>';
+            select.disabled = true;
+        }
+        this.showError('Failed to load available rooms: ' + error.message);
+    }
+}
+    
+    // Populate room assignment select
+    populateRoomAssignmentSelect(rooms) {
+        console.log('Populating room assignment select with rooms:', rooms);
+        
+        const select = document.getElementById('roomAssignmentSelect');
+        if (!select) {
+            console.error('Room assignment select element not found!');
+            return;
+        }
+        
+        select.innerHTML = '<option value="">Select a room</option>';
+        
+        if (!rooms || rooms.length === 0) {
+            select.innerHTML = '<option value="">No available rooms of this type</option>';
+            select.disabled = true;
+            console.warn('No rooms provided to populate select');
+            return;
+        }
+        
+        rooms.forEach(room => {
+            const option = document.createElement('option');
+            option.value = room.room_id;
+            option.textContent = `Room ${room.room_number} - Floor ${room.floor_number}`;
+            select.appendChild(option);
+        });
+        
+        console.log('Room assignment select populated with', rooms.length, 'rooms');
+        console.log('Select element:', select);
+    }
+    
+    // Hide room assignment modal
+hideRoomAssignmentModal() {
+    console.log('Hiding room assignment modal');
+    const modal = document.getElementById('roomAssignmentModal');
+    if (modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 300);
+        
+        // Reset the form
+        const select = document.getElementById('roomAssignmentSelect');
+        if (select) {
+            select.innerHTML = '<option value="">Loading available rooms...</option>';
+            select.disabled = false;
+        }
+        
+        // Clear stored data
+        delete modal.dataset.reservationId;
+        delete modal.dataset.roomTypeId;
+    }
+}
+    
+    // Save room assignment
+    async saveRoomAssignment() {
+        console.log('saveRoomAssignment method called');
+        
+        const modal = document.getElementById('roomAssignmentModal');
+        const select = document.getElementById('roomAssignmentSelect');
+        const saveBtn = document.getElementById('saveRoomAssignmentBtn');
+        const btnText = saveBtn?.querySelector('.btn-text');
+        const spinner = saveBtn?.querySelector('.loading-spinner');
+        
+        console.log('Room assignment elements:', { modal, select, saveBtn });
+        
+        if (!modal || !select || !saveBtn) {
+            this.showError('Room assignment form elements not found');
+            return;
+        }
+        
+        const roomId = select.value;
+        const reservationId = modal.dataset.reservationId;
+        
+        if (!roomId) {
+            this.showError('Please select a room to assign');
+            return;
+        }
+        
+        if (!reservationId) {
+            this.showError('Reservation ID not found');
+            return;
+        }
+        
+        try {
+            // Show loading state
+            if (btnText) btnText.style.display = 'none';
+            if (spinner) spinner.classList.remove('hidden');
+            saveBtn.disabled = true;
+            
+            console.log('Assigning room', roomId, 'to reservation', reservationId);
+            
+            // Assign room
+            await this.assignRoomToReservation(reservationId, roomId);
+            
+            // Hide modal
+            this.hideRoomAssignmentModal();
+            
+        } catch (error) {
+            console.error('Failed to save room assignment:', error);
+            this.showError('Failed to save room assignment: ' + error.message);
+        } finally {
+            // Reset button state
+            if (btnText) btnText.style.display = 'inline';
+            if (spinner) spinner.classList.add('hidden');
+            saveBtn.disabled = false;
+        }
+    }
+    
+    setupLogsEventListeners() {
+        // Refresh logs button
+        const refreshLogsBtn = document.getElementById('refreshLogsBtn');
+        if (refreshLogsBtn) {
+            refreshLogsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.logsUserRequested = true;
+                this.loadReservationLogs(this.logsCurrentPage);
+            });
+        }
+        
+        // Export logs button
+        const exportLogsBtn = document.getElementById('exportLogsBtn');
+        if (exportLogsBtn) {
+            exportLogsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.exportReservationLogs();
+            });
+        }
+        
+        // Logs filter toggle button
+        const logsFilterBtn = document.getElementById('logsFilterBtn');
+        if (logsFilterBtn) {
+            logsFilterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.toggleLogsFilter();
+            });
+        }
+        
+        // Apply logs filter button
+        const applyLogsFilter = document.getElementById('applyLogsFilter');
+        if (applyLogsFilter) {
+            applyLogsFilter.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.logsUserRequested = true;
+                this.loadReservationLogs(0);
+            });
+        }
+        
+        // Clear logs filter button
+        const clearLogsFilter = document.getElementById('clearLogsFilter');
+        if (clearLogsFilter) {
+            clearLogsFilter.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.logsUserRequested = true;
+                this.clearLogsFilters();
+            });
+        }
+        
+        // Logs page size selector
+        const logsPageSizeSelect = document.getElementById('logsPageSizeSelect');
+        if (logsPageSizeSelect) {
+            logsPageSizeSelect.addEventListener('change', (e) => {
+                this.logsPageSize = parseInt(e.target.value);
+                this.logsUserRequested = true;
+                this.loadReservationLogs(0);
+            });
+        }
+    }
+    
+    toggleLogsFilter() {
+        const filterSection = document.getElementById('logsFilterSection');
+        if (filterSection) {
+            const isHidden = filterSection.classList.contains('hidden');
+            filterSection.classList.toggle('hidden', !isHidden);
+            
+            // Set default dates if showing filters
+            if (!isHidden) {
+                const today = new Date();
+                const thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(today.getDate() - 30);
+                
+                const dateFrom = document.getElementById('logsDateFrom');
+                const dateTo = document.getElementById('logsDateTo');
+                
+                if (dateFrom) dateFrom.value = thirtyDaysAgo.toISOString().split('T')[0];
+                if (dateTo) dateTo.value = today.toISOString().split('T')[0];
+            }
+        }
+    }
+    
+    clearLogsFilters() {
+        const elements = [
+            { id: 'logsActionFilter', value: '' },
+            { id: 'logsDateFrom', value: '' },
+            { id: 'logsDateTo', value: '' }
+        ];
+        
+        elements.forEach(({ id, value }) => {
+            const el = document.getElementById(id);
+            if (el) el.value = value;
+        });
+        
+        this.loadReservationLogs(0);
+        this.showSuccess('Logs filters cleared!');
+    }
+    
+    async exportReservationLogs() {
+        try {
+            console.log('Exporting reservation logs...');
+            
+            // Build query parameters for export
+            const params = new URLSearchParams({
+                action: 'export_logs',
+                format: 'csv'
+            });
+            
+            // Add current filters
+            this.addLogsFiltersToParams(params);
+            
+            // Create download link
+            const url = `${this.baseURL}/api/frontdesk/reservation_logs.php?${params}`;
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `reservation_logs_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            this.showSuccess('Reservation logs export started. Check your downloads folder.');
+            
+        } catch (error) {
+            console.error('Failed to export reservation logs:', error);
+            this.showError('Failed to export reservation logs: ' + error.message);
+        }
+    }
+    
+    hideLogsSection() {
+        // Find the logs section by looking for the heading text
+        const logsHeading = Array.from(document.querySelectorAll('h3')).find(h3 => 
+            h3.textContent.includes('Reservation Activity Logs')
+        );
+        
+        if (logsHeading) {
+            const logsSection = logsHeading.closest('.card-hover');
+            if (logsSection) {
+                logsSection.style.display = 'none';
+                console.log('Logs section hidden successfully');
+            }
+        } else {
+            console.warn('Could not find logs section to hide');
+        }
+    }
 }
 
 // Add CSS animations
@@ -2799,6 +3647,17 @@ style.textContent = `
     }
     
     #reservationModal.show, #statusModal.show, #detailsModal.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+        /* Room assignment modal styles - ADD THIS */
+    #roomAssignmentModal {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    #roomAssignmentModal.show {
         opacity: 1;
         pointer-events: auto;
     }

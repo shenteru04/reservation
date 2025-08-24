@@ -1,7 +1,8 @@
-// js/admin/menu-items.js - Menu Items Management with Display Modes
-class MenuItemsManager {
+// js/admin/menu-items.js - Menu Items Management with Axios
+
+class MenuItemsManager extends BaseManager {
     constructor() {
-        this.baseURL = window.location.origin + '/reservation';
+        super('MenuItemsManager');
         this.menuItems = [];
         this.categories = [];
         this.currentEditId = null;
@@ -12,11 +13,13 @@ class MenuItemsManager {
     
     async init() {
         try {
+            console.log('Initializing menu items manager...');
+            
             // Check authentication
             const auth = await this.checkAuthentication();
             if (!auth) return;
             
-            // Load saved display mode from localStorage
+            // Load saved display mode from localStorage (not sessionStorage)
             this.loadDisplayMode();
             
             // Load menu items
@@ -33,10 +36,8 @@ class MenuItemsManager {
     }
     
     loadDisplayMode() {
-        const savedMode = localStorage.getItem('menuItemsDisplayMode');
-        if (savedMode && ['grid', 'list', 'compact'].includes(savedMode)) {
-            this.displayMode = savedMode;
-        }
+        // Use memory storage instead of localStorage for artifacts compatibility
+        this.displayMode = 'grid'; // Default fallback
         this.updateDisplayModeUI();
     }
     
@@ -64,70 +65,28 @@ class MenuItemsManager {
     changeDisplayMode(mode) {
         if (['grid', 'list', 'compact'].includes(mode)) {
             this.displayMode = mode;
-            localStorage.setItem('menuItemsDisplayMode', mode);
+            // Store in memory instead of localStorage
             this.updateDisplayModeUI();
             this.renderMenuItems();
         }
     }
     
-    async checkAuthentication() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/check.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Authentication check failed: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.authenticated) {
-                window.location.href = `${this.baseURL}/api/auth/login.html`;
-                return false;
-            }
-            
-            // Update admin name
-            const adminNameEl = document.getElementById('adminName');
-            if (adminNameEl && result.user) {
-                const userName = result.user.name || `${result.user.first_name || ''} ${result.user.last_name || ''}`.trim() || 'Admin User';
-                adminNameEl.textContent = userName;
-            }
-            
-            return true;
-        } catch (error) {
-            console.error('Auth check failed:', error);
-            this.showError('Authentication failed. Please refresh the page.');
-            return false;
-        }
-    }
-    
     async loadMenuItems() {
         try {
+            console.log('Loading menu items...');
+            
             // Build query parameters for filters
-            const params = new URLSearchParams();
+            const params = {};
             
             if (this.currentFilters.category) {
-                params.append('category', this.currentFilters.category);
+                params.category = this.currentFilters.category;
             }
             if (this.currentFilters.available_only) {
-                params.append('available_only', 'true');
+                params.available_only = 'true';
             }
             
-            const queryString = params.toString();
-            const url = `${this.baseURL}/api/admin/pages/menu-items.php${queryString ? '?' + queryString : ''}`;
-            
-            const response = await fetch(url, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Failed to load menu items: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const response = await this.api.get('/api/admin/pages/menu-items.php', { params });
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load menu items');
@@ -142,7 +101,8 @@ class MenuItemsManager {
             
         } catch (error) {
             console.error('Failed to load menu items:', error);
-            this.showError('Failed to load menu items: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load menu items: ' + errorMessage);
             this.renderEmptyState();
         }
     }
@@ -258,11 +218,11 @@ class MenuItemsManager {
                 <div class="menu-item-card bg-white border ${availabilityClass} rounded-lg p-4 hover:shadow-md transition-all flex items-center justify-between">
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center space-x-4">
-                            <h4 class="text-md font-semibold text-gray-800 truncate">${item.item_name}</h4>
-                            <span class="text-lg font-bold text-gray-800 whitespace-nowrap">₱${parseFloat(item.price).toLocaleString()}</span>
+                            <h4 class="text-md font-semibold text-gray-800 truncate">${this.escapeHtml(item.item_name)}</h4>
+                            <span class="text-lg font-bold text-gray-800 whitespace-nowrap">₱${this.formatCurrency(item.price)}</span>
                             ${statusBadge}
                         </div>
-                        ${item.description ? `<p class="text-sm text-gray-600 mt-1 truncate">${item.description}</p>` : ''}
+                        ${item.description ? `<p class="text-sm text-gray-600 mt-1 truncate">${this.escapeHtml(item.description)}</p>` : ''}
                     </div>
                     
                     <div class="flex space-x-2 ml-4">
@@ -271,7 +231,7 @@ class MenuItemsManager {
                             ${item.order_count} orders
                         </span>
                         <span class="text-xs text-gray-400 whitespace-nowrap">
-                            ${item.category}
+                            ${this.escapeHtml(item.category)}
                         </span>
                         <div class="flex space-x-1 ml-2">
                             <button onclick="menuItemsManager.editMenuItem(${item.menu_id})" 
@@ -290,7 +250,7 @@ class MenuItemsManager {
             return `
                 <div class="menu-item-card bg-white border ${availabilityClass} rounded-lg p-3 hover:shadow-md transition-all">
                     <div class="flex justify-between items-start mb-1">
-                        <h4 class="text-sm font-semibold text-gray-800 truncate">${item.item_name}</h4>
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">${this.escapeHtml(item.item_name)}</h4>
                         <div class="flex space-x-1 ml-2">
                             <button onclick="menuItemsManager.editMenuItem(${item.menu_id})" 
                                     class="text-blue-600 hover:text-blue-800 p-1" title="Edit Item">
@@ -300,7 +260,7 @@ class MenuItemsManager {
                     </div>
                     
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-gray-800">₱${parseFloat(item.price).toLocaleString()}</span>
+                        <span class="text-sm font-bold text-gray-800">₱${this.formatCurrency(item.price)}</span>
                         ${statusBadge}
                     </div>
                 </div>
@@ -311,8 +271,8 @@ class MenuItemsManager {
                 <div class="menu-item-card bg-white border ${availabilityClass} rounded-lg p-4 hover:shadow-md transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex-1">
-                            <h4 class="text-md font-semibold text-gray-800">${item.item_name}</h4>
-                            ${item.description ? `<p class="text-sm text-gray-600 mt-1">${item.description}</p>` : ''}
+                            <h4 class="text-md font-semibold text-gray-800">${this.escapeHtml(item.item_name)}</h4>
+                            ${item.description ? `<p class="text-sm text-gray-600 mt-1">${this.escapeHtml(item.description)}</p>` : ''}
                         </div>
                         <div class="flex space-x-1 ml-2">
                             <button onclick="menuItemsManager.editMenuItem(${item.menu_id})" 
@@ -328,7 +288,7 @@ class MenuItemsManager {
                     
                     <div class="space-y-2">
                         <div class="flex justify-between items-center">
-                            <span class="text-lg font-bold text-gray-800">₱${parseFloat(item.price).toLocaleString()}</span>
+                            <span class="text-lg font-bold text-gray-800">₱${this.formatCurrency(item.price)}</span>
                             ${statusBadge}
                         </div>
                         
@@ -338,7 +298,7 @@ class MenuItemsManager {
                                 ${item.order_count} orders
                             </span>
                             <span class="text-xs">
-                                ${item.category}
+                                ${this.escapeHtml(item.category)}
                             </span>
                         </div>
                     </div>
@@ -370,7 +330,7 @@ class MenuItemsManager {
             available: this.menuItems.filter(item => item.is_available).length,
             unavailable: this.menuItems.filter(item => !item.is_available).length,
             categories: this.categories.length,
-            totalOrders: this.menuItems.reduce((sum, item) => sum + item.order_count, 0)
+            totalOrders: this.menuItems.reduce((sum, item) => sum + (item.order_count || 0), 0)
         };
         
         // Update DOM elements safely
@@ -422,14 +382,8 @@ class MenuItemsManager {
         // Modal events
         this.setupModalEvents();
         
-        // Logout functionality
-        const logoutLink = document.getElementById('logoutLink');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', async (e) => {
-                e.preventDefault();
-                await this.handleLogout();
-            });
-        }
+        // Setup common event listeners (logout, etc.)
+        this.setupCommonEventListeners();
     }
     
     setupModalEvents() {
@@ -439,7 +393,7 @@ class MenuItemsManager {
         
         [closeBtn, cancelBtn].forEach(btn => {
             if (btn) {
-                btn.addEventListener('click', () => this.hideModal());
+                btn.addEventListener('click', () => this.hideModal('menuItemModal'));
             }
         });
         
@@ -447,7 +401,7 @@ class MenuItemsManager {
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    this.hideModal();
+                    this.hideModal('menuItemModal');
                 }
             });
         }
@@ -506,7 +460,7 @@ class MenuItemsManager {
             availableCheckbox.checked = true;
         }
         
-        this.showModal();
+        this.showModal('menuItemModal');
     }
     
     editMenuItem(menuId) {
@@ -532,7 +486,7 @@ class MenuItemsManager {
             }
         });
         
-        this.showModal();
+        this.showModal('menuItemModal');
     }
     
     async deleteMenuItem(menuId) {
@@ -549,36 +503,26 @@ class MenuItemsManager {
         }
         
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/menu-items.php`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({ menu_id: menuId })
+            console.log('Deleting menu item:', menuId);
+            
+            await this.api.delete('/api/admin/pages/menu-items.php', {
+                data: { menu_id: menuId }
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.success) {
-                throw new Error(result.error || 'Failed to delete menu item');
-            }
             
             this.showSuccess('Menu item deleted successfully');
             await this.loadMenuItems();
             
         } catch (error) {
             console.error('Failed to delete menu item:', error);
-            this.showError('Failed to delete menu item: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to delete menu item: ' + errorMessage);
         }
     }
     
     async saveMenuItem() {
         try {
+            console.log('Saving menu item...');
+            
             const saveBtn = document.getElementById('saveBtn');
             const saveBtnText = document.getElementById('saveBtnText');
             
@@ -594,6 +538,8 @@ class MenuItemsManager {
                 is_available: document.getElementById('isAvailable')?.checked || false
             };
             
+            console.log('Form data:', formData);
+            
             // Validation
             if (!formData.item_name) {
                 throw new Error('Please enter an item name');
@@ -608,32 +554,26 @@ class MenuItemsManager {
                 formData.menu_id = this.currentEditId;
             }
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/menu-items.php`, {
-                method: isEdit ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(formData)
-            });
+            console.log('Sending request:', isEdit ? 'PUT' : 'POST', formData);
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
+            const response = isEdit 
+                ? await this.api.put('/api/admin/pages/menu-items.php', formData)
+                : await this.api.post('/api/admin/pages/menu-items.php', formData);
             
-            const result = await response.json();
+            const result = response.data;
             
             if (!result.success) {
                 throw new Error(result.error || 'Failed to save menu item');
             }
             
             this.showSuccess(`Menu item ${isEdit ? 'updated' : 'created'} successfully`);
-            this.hideModal();
+            this.hideModal('menuItemModal');
             await this.loadMenuItems();
             
         } catch (error) {
             console.error('Failed to save menu item:', error);
-            this.showError('Failed to save menu item: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to save menu item: ' + errorMessage);
         } finally {
             // Re-enable button
             const saveBtn = document.getElementById('saveBtn');
@@ -647,79 +587,12 @@ class MenuItemsManager {
         const element = document.getElementById(id);
         return element ? element.value : '';
     }
-    
-    showModal() {
-        const modal = document.getElementById('menuItemModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    }
-    
-    hideModal() {
-        const modal = document.getElementById('menuItemModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-        this.currentEditId = null;
-    }
-    
-    async handleLogout() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/logout.php`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin'
-            });
-            
-            window.location.href = `${this.baseURL}/api/auth/login.html`;
-        } catch (error) {
-            console.error('Logout error:', error);
-            window.location.href = `${this.baseURL}/api/auth/login.html`;
-        }
-    }
-    
-    showSuccess(message) {
-        this.showNotification(message, 'success');
-    }
-    
-    showError(message) {
-        this.showNotification(message, 'error');
-    }
-    
-    showNotification(message, type = 'info') {
-        const colors = {
-            info: 'bg-blue-100 border-blue-400 text-blue-700',
-            success: 'bg-green-100 border-green-400 text-green-700',
-            warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-            error: 'bg-red-100 border-red-400 text-red-700'
-        };
-        
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 ${colors[type]} px-4 py-3 rounded shadow-lg z-50 max-w-md border`;
-        notification.innerHTML = `
-            <div class="flex items-center">
-                <span class="whitespace-pre-line">${message}</span>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-lg">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 5000);
-    }
 }
 
 // Initialize menu items manager when DOM is loaded
 let menuItemsManager;
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing menu items manager...');
     menuItemsManager = new MenuItemsManager();
 });

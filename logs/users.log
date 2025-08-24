@@ -543,3 +543,97 @@
 [USERS] 2025-08-20 20:43:31 - Database connection established for users management
 [USERS] 2025-08-20 20:43:31 - Fetching all users
 [USERS] 2025-08-20 20:43:31 - Retrieved 3 users
+[USERS] 2025-08-21 03:59:24 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 03:59:24 - Database connection established for users management
+[USERS] 2025-08-21 03:59:24 - Fetching all users
+[USERS] 2025-08-21 03:59:24 - Retrieved 3 users
+[USERS] 2025-08-21 03:59:50 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 03:59:50 - Database connection established for users management
+[USERS] 2025-08-21 03:59:50 - Fetching all users
+[USERS] 2025-08-21 03:59:50 - Retrieved 3 users
+[USERS] 2025-08-21 06:40:37 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 06:40:37 - Database connection established for users management
+[USERS] 2025-08-21 06:40:37 - Fetching all users
+[USERS] 2025-08-21 06:40:37 - Retrieved 3 users
+[USERS] 2025-08-21 06:41:07 - Non-admin user attempted to access users management
+[USERS] 2025-08-21 06:42:18 - Non-admin user attempted to access users management
+[USERS] 2025-08-21 07:28:30 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 07:28:30 - Database connection established for users management
+[USERS] 2025-08-21 07:28:30 - Fetching all users
+[USERS] 2025-08-21 07:28:30 - Retrieved 3 users
+[USERS] 2025-08-21 07:29:33 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 07:29:33 - Database connection established for users management
+[USERS] 2025-08-21 07:29:33 - Fetching all users
+[USERS] 2025-08-21 07:29:33 - Retrieved 3 users
+[USERS] 2025-08-21 07:30:04 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 07:30:04 - Database connection established for users management
+[USERS] 2025-08-21 07:30:04 - Fetching all users
+[USERS] 2025-08-21 07:30:04 - Retrieved 3 users
+[USERS] 2025-08-21 07:31:16 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 07:31:16 - Database connection established for users management
+[USERS] 2025-08-21 07:31:16 - Creating user with data: {"employee_id":null,"first_name":"Kenneth","last_name":"Lopez","email":"kenlo@gmail.com","phone_num":"090123456789","role_id":"2","is_active":1,"password":"password"}
+[USERS] 2025-08-21 07:31:16 - New user created with ID: 6
+[USERS] 2025-08-21 07:31:16 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-21 07:31:16 - Database connection established for users management
+[USERS] 2025-08-21 07:31:16 - Fetching all users
+[USERS] 2025-08-21 07:31:16 - Retrieved 4 users
+[USERS] 2025-08-22 03:35:59 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 03:35:59 - Database connection established for users management
+[USERS] 2025-08-22 03:35:59 - Fetching all users
+[USERS] 2025-08-22 03:35:59 - Retrieved 3 users
+[USERS] 2025-08-22 03:36:06 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 03:36:06 - Database connection established for users management
+[USERS] 2025-08-22 03:36:06 - Fetching all users
+[USERS] 2025-08-22 03:36:06 - Retrieved 3 users
+[USERS] 2025-08-22 03:36:06 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 03:36:06 - Database connection established for users management
+[USERS] 2025-08-22 03:36:06 - Fetching all users
+[USERS] 2025-08-22 03:36:06 - Retrieved 3 users
+[USERS] 2025-08-22 03:36:07 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 03:36:07 - Database connection established for users management
+[USERS] 2025-08-22 03:36:07 - Fetching all users
+[USERS] 2025-08-22 03:36:07 - Retrieved 3 users
+[USERS] 2025-08-22 03:36:22 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 03:36:22 - Database connection established for users management
+[USERS] 2025-08-22 03:36:22 - Fetching all users
+[USERS] 2025-08-22 03:36:22 - Retrieved 3 users
+[USERS] 2025-08-22 03:48:09 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 03:48:09 - Database connection established for users management
+[USERS] 2025-08-22 03:48:09 - Fetching all users
+[USERS] 2025-08-22 03:48:09 - Retrieved 3 users
+[USERS] 2025-08-22 05:18:04 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-22 05:18:04 - Database connection established for users management
+[USERS] 2025-08-22 05:18:04 - Fetching all users
+[USERS] 2025-08-22 05:18:05 - Retrieved 3 users
+[USERS] 2025-08-23 02:28:18 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-23 02:28:18 - Database connection established for users management
+[USERS] 2025-08-23 02:28:18 - Fetching all users
+[USERS] 2025-08-23 02:28:18 - Retrieved 3 users
+[USERS] 2025-08-23 02:28:22 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-23 02:28:22 - Database connection established for users management
+[USERS] 2025-08-23 02:28:22 - Fetching all users
+[USERS] 2025-08-23 02:28:22 - Retrieved 3 users
+[USERS] 2025-08-23 02:32:54 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-23 02:32:54 - Database connection established for users management
+[USERS] 2025-08-23 02:32:54 - Fetching all users
+[USERS] 2025-08-23 02:32:54 - Retrieved 3 users
+[USERS] 2025-08-23 16:20:33 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-23 16:20:33 - Database connection established for users management
+[USERS] 2025-08-23 16:20:33 - Fetching all users
+[USERS] 2025-08-23 16:20:33 - Retrieved 3 users
+[USERS] 2025-08-23 16:20:59 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-23 16:20:59 - Database connection established for users management
+[USERS] 2025-08-23 16:20:59 - Fetching all users
+[USERS] 2025-08-23 16:20:59 - Retrieved 3 users
+[USERS] 2025-08-24 04:14:08 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-24 04:14:08 - Database connection established for users management
+[USERS] 2025-08-24 04:14:08 - Fetching all users
+[USERS] 2025-08-24 04:14:08 - Retrieved 3 users
+[USERS] 2025-08-24 04:14:10 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-24 04:14:10 - Database connection established for users management
+[USERS] 2025-08-24 04:14:10 - Fetching all users
+[USERS] 2025-08-24 04:14:10 - Retrieved 3 users
+[USERS] 2025-08-24 05:45:32 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-24 05:45:32 - Database connection established for users management
+[USERS] 2025-08-24 05:45:32 - Fetching all users
+[USERS] 2025-08-24 05:45:32 - Retrieved 3 users

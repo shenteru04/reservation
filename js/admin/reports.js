@@ -1,7 +1,8 @@
-// js/admin/reports.js - Reports functionality with Front Desk Reports Integration
-class ReportsManager {
+// js/admin/reports.js - Reports functionality with Front Desk Reports Integration using Axios
+
+class ReportsManager extends BaseManager {
     constructor() {
-        this.baseURL = window.location.origin + '/reservation';
+        super('ReportsManager');
         this.charts = {};
         this.currentData = {};
         this.currentTab = 'revenue';
@@ -37,45 +38,6 @@ class ReportsManager {
         } catch (error) {
             console.error('Reports initialization failed:', error);
             this.showError('Failed to initialize reports: ' + error.message);
-        }
-    }
-    
-    async checkAuthentication() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/check.php`, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Cache-Control': 'no-cache'
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.authenticated) {
-                console.log('User not authenticated, redirecting to login...');
-                window.location.href = `${this.baseURL}/html/auth/login.html`;
-                return false;
-            }
-            
-            // Update admin name in sidebar
-            const adminNameEl = document.getElementById('adminName');
-            if (adminNameEl && result.user) {
-                const userName = result.user.name || `${result.user.first_name || ''} ${result.user.last_name || ''}`.trim() || 'Admin User';
-                adminNameEl.textContent = userName;
-            }
-            
-            console.log('Authentication check passed for user:', result.user?.email);
-            return true;
-            
-        } catch (error) {
-            console.error('Auth check failed:', error);
-            this.showError('Authentication check failed. Please refresh the page.');
-            return false;
         }
     }
     
@@ -142,6 +104,9 @@ class ReportsManager {
         if (refreshFrontDeskBtn) {
             refreshFrontDeskBtn.addEventListener('click', () => this.loadFrontDeskReports());
         }
+        
+        // Setup common event listeners
+        this.setupCommonEventListeners();
     }
     
     switchTab(tab) {
@@ -179,19 +144,11 @@ class ReportsManager {
     
     async loadUnreadCount() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/reports.php?action=unread_count`, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Cache-Control': 'no-cache'
-                }
+            const response = await this.api.get('/api/admin/pages/reports.php', {
+                params: { action: 'unread_count' }
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const data = await response.json();
+            const data = response.data;
             
             if (data.success) {
                 this.unreadCount = data.unread_count;
@@ -225,19 +182,16 @@ class ReportsManager {
             const fromDate = document.getElementById('fromDate')?.value || this.getDefaultFromDate();
             const toDate = document.getElementById('toDate')?.value || this.getDefaultToDate();
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/reports.php?from_date=${fromDate}&to_date=${toDate}&limit=50&offset=0`, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Cache-Control': 'no-cache'
+            const response = await this.api.get('/api/admin/pages/reports.php', {
+                params: {
+                    from_date: fromDate,
+                    to_date: toDate,
+                    limit: 50,
+                    offset: 0
                 }
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const data = await response.json();
+            const data = response.data;
             
             if (data.success) {
                 this.updateFrontDeskTable(data.reports || []);
@@ -247,7 +201,8 @@ class ReportsManager {
             
         } catch (error) {
             console.error('Failed to load front desk reports:', error);
-            this.showError('Failed to load front desk reports: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load front desk reports: ' + errorMessage);
         }
     }
     
@@ -272,13 +227,13 @@ class ReportsManager {
             const row = document.createElement('tr');
             row.className = `hover:bg-gray-50 ${!report.is_read ? 'bg-blue-50' : ''}`;
             
-            const reportDate = new Date(report.report_date).toLocaleDateString('en-US', {
+            const reportDate = this.formatDate(report.report_date, {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric'
             });
             
-            const submittedAt = new Date(report.created_at).toLocaleDateString('en-US', {
+            const submittedAt = this.formatDate(report.created_at, {
                 month: 'short',
                 day: 'numeric',
                 hour: '2-digit',
@@ -313,19 +268,11 @@ class ReportsManager {
     
     async viewReport(reportId) {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/reports.php?id=${reportId}`, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Cache-Control': 'no-cache'
-                }
+            const response = await this.api.get('/api/admin/pages/reports.php', {
+                params: { id: reportId }
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const data = await response.json();
+            const data = response.data;
             
             if (data.success) {
                 this.showReportModal(data.report);
@@ -340,7 +287,8 @@ class ReportsManager {
             
         } catch (error) {
             console.error('Failed to view report:', error);
-            this.showError('Failed to load report: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load report: ' + errorMessage);
         }
     }
     
@@ -350,14 +298,20 @@ class ReportsManager {
         
         // Update modal content
         const elements = {
-            modalReportDate: new Date(report.report_date).toLocaleDateString('en-US', {
+            modalReportDate: this.formatDate(report.report_date, {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             }),
             modalStaffName: report.staff_name || 'Unknown Staff',
-            modalSubmittedAt: new Date(report.created_at).toLocaleString('en-US'),
+            modalSubmittedAt: this.formatDate(report.created_at, {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }),
             modalSummary: report.summary || 'No summary provided',
             modalNotes: report.daily_notes || 'No notes provided',
             modalIssues: report.issues_encountered || 'No issues reported',
@@ -384,7 +338,7 @@ class ReportsManager {
                     <div><strong>Today's Bookings:</strong> ${stats.todays_bookings || 'N/A'}</div>
                     <div><strong>Check-ins Today:</strong> ${stats.checkins_today || 'N/A'}</div>
                     <div><strong>Check-outs Today:</strong> ${stats.checkouts_today || 'N/A'}</div>
-                    <div><strong>Total Revenue:</strong> ₱${stats.total_revenue || '0.00'}</div>
+                    <div><strong>Total Revenue:</strong> ${this.formatCurrency(stats.total_revenue || 0)}</div>
                 </div>
             `;
         } else if (statsElement) {
@@ -406,24 +360,12 @@ class ReportsManager {
     
     async markReportRead(reportId, showMessage = true) {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/reports.php`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({
-                    action: 'mark_read',
-                    report_id: reportId
-                })
+            const response = await this.api.put('/api/admin/pages/reports.php', {
+                action: 'mark_read',
+                report_id: reportId
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const data = await response.json();
+            const data = response.data;
             
             if (data.success) {
                 if (showMessage) {
@@ -441,7 +383,8 @@ class ReportsManager {
         } catch (error) {
             console.error('Failed to mark report as read:', error);
             if (showMessage) {
-                this.showError('Failed to mark report as read: ' + error.message);
+                const errorMessage = error.response?.data?.error || error.message;
+                this.showError('Failed to mark report as read: ' + errorMessage);
             }
         }
     }
@@ -456,7 +399,8 @@ class ReportsManager {
             
         } catch (error) {
             console.error('Failed to mark all reports as read:', error);
-            this.showError('Failed to mark all reports as read: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to mark all reports as read: ' + errorMessage);
         }
     }
     
@@ -490,7 +434,7 @@ class ReportsManager {
             console.log('Loading report data...');
             
             // Show loading state
-            this.setLoadingState(true);
+            this.setLoadingState('reportsContent', true, 'Loading report data...');
             
             const fromDateEl = document.getElementById('fromDate');
             const toDateEl = document.getElementById('toDate');
@@ -500,35 +444,14 @@ class ReportsManager {
             const toDate = toDateEl?.value || this.getDefaultToDate();
             const reportType = reportTypeEl?.value || 'summary';
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/reports.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({
-                    from_date: fromDate,
-                    to_date: toDate,
-                    report_type: reportType,
-                    include_frontdesk: this.currentTab === 'frontdesk'
-                })
+            const response = await this.api.post('/api/admin/pages/reports.php', {
+                from_date: fromDate,
+                to_date: toDate,
+                report_type: reportType,
+                include_frontdesk: this.currentTab === 'frontdesk'
             });
             
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('API Error Response:', errorText);
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                const text = await response.text();
-                console.error('Non-JSON response received:', text);
-                throw new Error('Server returned non-JSON response: ' + text.substring(0, 200));
-            }
-            
-            const data = await response.json();
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load report data');
@@ -543,12 +466,13 @@ class ReportsManager {
             this.updateTables(data);
             
             // Hide loading state
-            this.setLoadingState(false);
+            this.setLoadingState('reportsContent', false);
             
         } catch (error) {
             console.error('Failed to load report data:', error);
-            this.showError('Failed to load report data: ' + error.message);
-            this.setLoadingState(false);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load report data: ' + errorMessage);
+            this.setLoadingState('reportsContent', false);
         }
     }
     
@@ -562,46 +486,6 @@ class ReportsManager {
         const today = new Date();
         const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         return lastDay.toISOString().split('T')[0];
-    }
-    
-    setLoadingState(isLoading) {
-        // Update summary cards with loading state
-        const summaryElements = [
-            'totalRevenue',
-            'totalBookings',
-            'occupancyRate',
-            'totalCustomers'
-        ];
-        
-        summaryElements.forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                if (isLoading) {
-                    element.innerHTML = '<span class="loading-spinner"></span>';
-                }
-            }
-        });
-        
-        // Update table loading states
-        const tableElements = [
-            { id: 'roomTypesTable', colspan: 3 },
-            { id: 'monthlyTable', colspan: 4 },
-            { id: 'transactionsTable', colspan: 5 }
-        ];
-        
-        tableElements.forEach(table => {
-            const element = document.getElementById(table.id);
-            if (element && isLoading) {
-                element.innerHTML = `
-                    <tr>
-                        <td colspan="${table.colspan}" class="px-4 py-4 text-center text-gray-500">
-                            <div class="loading-spinner mx-auto mb-2"></div>
-                            <p>Loading data...</p>
-                        </td>
-                    </tr>
-                `;
-            }
-        });
     }
     
     updateSummaryCards(data) {
@@ -860,7 +744,7 @@ class ReportsManager {
             const row = document.createElement('tr');
             row.className = 'hover:bg-gray-50';
             
-            const date = new Date(transaction.created_at || new Date()).toLocaleDateString('en-US', {
+            const date = this.formatDate(transaction.created_at, {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric'
@@ -897,7 +781,7 @@ class ReportsManager {
         // Set print date
         const printDate = document.getElementById('printDate');
         if (printDate) {
-            printDate.textContent = new Date().toLocaleDateString('en-US', {
+            printDate.textContent = this.formatDate(new Date(), {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -971,7 +855,7 @@ class ReportsManager {
                 csvContent += "Recent Transactions\n";
                 csvContent += "Date,Customer,Room,Amount,Status\n";
                 this.currentData.recent_transactions.forEach(transaction => {
-                    const date = new Date(transaction.created_at || new Date()).toLocaleDateString();
+                    const date = this.formatDate(transaction.created_at);
                     csvContent += `${date},${transaction.customer_name || 'Walk-in Guest'},Room ${transaction.room_number || 'N/A'},${transaction.total_amount || 0},${transaction.status || 'Unknown'}\n`;
                 });
             }
@@ -981,8 +865,8 @@ class ReportsManager {
                 csvContent += "\nFront Desk Reports\n";
                 csvContent += "Date,Staff,Summary,Submitted\n";
                 this.currentData.frontdesk_reports.forEach(report => {
-                    const date = new Date(report.report_date).toLocaleDateString();
-                    const submitted = new Date(report.created_at).toLocaleDateString();
+                    const date = this.formatDate(report.report_date);
+                    const submitted = this.formatDate(report.created_at);
                     const summary = (report.summary || '').replace(/,/g, ';').replace(/\n/g, ' ');
                     csvContent += `${date},${report.staff_name || 'Unknown'},${summary},${submitted}\n`;
                 });
@@ -1005,100 +889,18 @@ class ReportsManager {
         }
     }
     
-    formatCurrency(amount) {
-        const num = parseFloat(amount) || 0;
-        return '₱' + num.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-    }
-    
-    showError(message) {
-        console.error('Reports Error:', message);
+    // Cleanup method
+    destroy() {
+        super.destroy();
         
-        // Create or update error notification
-        let errorDiv = document.getElementById('reports-error');
-        if (!errorDiv) {
-            errorDiv = document.createElement('div');
-            errorDiv.id = 'reports-error';
-            errorDiv.className = 'fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded shadow-lg z-50 max-w-md';
-            document.body.appendChild(errorDiv);
+        // Cleanup charts if needed
+        if (this.charts) {
+            Object.values(this.charts).forEach(chart => {
+                if (chart && typeof chart.destroy === 'function') {
+                    chart.destroy();
+                }
+            });
         }
-        
-        errorDiv.innerHTML = `
-            <div class="flex items-start">
-                <i class="fas fa-exclamation-triangle mr-2 mt-1 flex-shrink-0"></i>
-                <div class="flex-1">
-                    <p class="text-sm">${message}</p>
-                </div>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-red-500 hover:text-red-700 flex-shrink-0">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        // Auto-remove after 8 seconds
-        setTimeout(() => {
-            if (errorDiv && errorDiv.parentNode) {
-                errorDiv.parentNode.removeChild(errorDiv);
-            }
-        }, 8000);
-    }
-    
-    showSuccess(message) {
-        console.log('Success:', message);
-        
-        // Create success notification
-        const successDiv = document.createElement('div');
-        successDiv.className = 'fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-lg z-50 max-w-md';
-        successDiv.innerHTML = `
-            <div class="flex items-start">
-                <i class="fas fa-check-circle mr-2 mt-1 flex-shrink-0"></i>
-                <div class="flex-1">
-                    <p class="text-sm">${message}</p>
-                </div>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-green-500 hover:text-green-700 flex-shrink-0">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(successDiv);
-        
-        // Auto-remove after 5 seconds
-        setTimeout(() => {
-            if (successDiv && successDiv.parentNode) {
-                successDiv.parentNode.removeChild(successDiv);
-            }
-        }, 5000);
-    }
-    
-    showWarning(message) {
-        console.warn('Warning:', message);
-        
-        // Create warning notification
-        const warningDiv = document.createElement('div');
-        warningDiv.className = 'fixed top-4 right-4 bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded shadow-lg z-50 max-w-md';
-        warningDiv.innerHTML = `
-            <div class="flex items-start">
-                <i class="fas fa-exclamation-triangle mr-2 mt-1 flex-shrink-0"></i>
-                <div class="flex-1">
-                    <p class="text-sm">${message}</p>
-                </div>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-yellow-500 hover:text-yellow-700 flex-shrink-0">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(warningDiv);
-        
-        // Auto-remove after 6 seconds
-        setTimeout(() => {
-            if (warningDiv && warningDiv.parentNode) {
-                warningDiv.parentNode.removeChild(warningDiv);
-            }
-        }, 6000);
     }
 }
 
@@ -1112,13 +914,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {
-    // Cleanup charts if needed
-    if (reportsManager && reportsManager.charts) {
-        Object.values(reportsManager.charts).forEach(chart => {
-            if (chart && typeof chart.destroy === 'function') {
-                chart.destroy();
-            }
-        });
+    if (reportsManager) {
+        reportsManager.destroy();
     }
 });
 

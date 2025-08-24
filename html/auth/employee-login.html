@@ -3,326 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Management - Employee Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../css/styles.css">
+    <title>Sky Oro Hotel - Employee Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e'
+                        }
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'bounce-subtle': 'bounceSubtle 2s infinite',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Custom styles for employee login page */
-        body {
-            background: linear-gradient( blue, lightskyblue, lightblue);
-            min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        .login-container {
-            max-width: 28rem;
-            margin: 0 auto;
-            padding-top: 4rem;
-        }
-        
-        .header-section {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: white;
-        }
-        
-        .logo-circle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-image: url('../../img/logo.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 6rem;
-            height: 6rem;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            background-color: white;
-            padding: 1rem;
-        }
-        
-        .main-title {
-            font-size: 1.875rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .subtitle {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .card {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-            padding: 1.5rem;
-            animation: fadeIn 0.3s ease-in;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-label i {
-            color: #4b6cb7;
-            margin-right: 0.5rem;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: #4b6cb7;
-            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
-        }
-        
-        .password-container {
-            position: relative;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            right: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #9ca3af;
-            cursor: pointer;
-            padding: 0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .password-toggle:hover {
-            color: #6b7280;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-size: 0.875rem;
-            text-decoration: none;
-        }
-        
-        .btn-primary {
-            background-color: #4b6cb7;
-            color: white;
-            width: 100%;
-            padding: 0.875rem;
-            font-size: 1rem;
-        }
-        
-        .btn-primary:hover:not(:disabled) {
-            background-color: #3a5a9e;
-        }
-        
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .message {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-        }
-        
-        .message.error {
-            background-color: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #dc2626;
-        }
-        
-        .message.success {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #16a34a;
-        }
-        
-        .forgot-password {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-        
-        .forgot-password a {
-            color: #4b6cb7;
-            text-decoration: none;
-            font-size: 0.875rem;
-        }
-        
-        .forgot-password a:hover {
-            color: #3a5a9e;
-            text-decoration: underline;
-        }
-        
-        .footer {
-            margin-top: 2rem;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.3s ease-in;
-        }
-        
         @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(-10px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
         }
         
-        .spinner {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            border: 2px solid transparent;
-            border-top: 2px solid currentColor;
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-glow {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+            animation: pulseSoft 3s ease-in-out infinite;
+        }
+        
+        .input-focus {
+            transition: all 0.3s ease;
+        }
+        
+        .input-focus:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+        
+        .btn-shimmer {
+            background: linear-gradient(45deg, #10b981, #059669, #10b981);
+            background-size: 200px 200px;
+            animation: shimmer 2s linear infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-shimmer:hover::before {
+            left: 100%;
+        }
+        
+        .floating-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 0.5rem;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 640px) {
-            .login-container {
-                padding-top: 2rem;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            .card {
-                padding: 1.25rem;
-            }
-        }
+        .particle:nth-child(1) { top: 10%; left: 15%; width: 60px; height: 60px; background: #10b981; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 70%; right: 15%; width: 80px; height: 80px; background: #059669; animation-delay: -2s; }
+        .particle:nth-child(3) { bottom: 15%; left: 25%; width: 100px; height: 100px; background: #34d399; animation-delay: -4s; }
+        .particle:nth-child(4) { top: 35%; right: 35%; width: 50px; height: 50px; background: #6ee7b7; animation-delay: -1s; }
+        .particle:nth-child(5) { bottom: 45%; right: 65%; width: 70px; height: 70px; background: #0d9488; animation-delay: -3s; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="login-container">
-            <!-- Header -->
-            <div class="header-section">
-                <div class="logo-circle"></div>
-                <h1 class="main-title">Employee Portal</h1>
-                <p class="subtitle">Access your work dashboard</p>
+<body class="bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 min-h-screen">
+    <!-- Floating Background Particles -->
+    <div class="floating-bg">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md animate-fade-in">
+            <!-- Back Navigation -->
+            <div class="mb-6 animate-slide-in">
+                <a href="../../index.html" class="inline-flex items-center space-x-2 text-white/80 hover:text-white transition-colors duration-300">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="text-sm font-medium">Back to Portal</span>
+                </a>
             </div>
-            
-            <!-- Login Card -->
-            <div class="card fade-in">
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="email" class="form-label">
-                            <i class="fas fa-user"></i>Employee ID or Email
-                        </label>
-                        <input 
-                            type="text" 
-                            id="email" 
-                            name="email" 
-                            class="form-input"
-                            required 
-                            autocomplete="username"
-                            placeholder="Enter your employee ID or email"
-                        >
+
+            <!-- Header Section -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center mb-6">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl logo-glow">
+                        <i class="fas fa-users text-emerald-600 text-2xl"></i>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="password" class="form-label">
-                            <i class="fas fa-lock"></i>Password
-                        </label>
-                        <div class="password-container">
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                class="form-input"
-                                required 
-                                autocomplete="current-password"
-                                placeholder="Enter your password"
-                                style="padding-right: 3rem;"
-                            >
-                            <button 
-                                type="button" 
-                                id="togglePassword"
-                                class="password-toggle"
-                            >
-                                <i class="fas fa-eye" id="eyeIcon"></i>
-                            </button>
+                </div>
+                <h1 class="text-3xl font-bold text-white mb-2 drop-shadow-lg">Employee Portal</h1>
+                <p class="text-emerald-100 text-lg">Access your work dashboard</p>
+                
+                <!-- Welcome Message -->
+                <div class="mt-6 glass-effect rounded-2xl p-4 mx-4">
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-clock text-white"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-white font-semibold" id="welcomeMessage">Good Morning, Team!</p>
+                            <p class="text-emerald-100 text-sm" id="currentShift">Day Shift • Active</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Card -->
+            <div class="glass-effect rounded-3xl shadow-2xl overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-id-badge text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-1">Staff Login</h2>
+                        <p class="text-gray-600">Enter your employee credentials</p>
+                    </div>
+
+                    <form id="loginForm" class="space-y-6">
+                        <!-- Employee ID/Email Field -->
+                        <div class="space-y-2">
+                            <label for="email" class="flex items-center text-sm font-semibold text-gray-700">
+                                <i class="fas fa-user text-emerald-500 mr-2"></i>
+                                Employee ID or Email
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="text" 
+                                    id="email" 
+                                    name="email" 
+                                    class="w-full px-4 py-3 pl-12 bg-white/90 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 input-focus focus:outline-none focus:border-emerald-500 focus:bg-white"
+                                    required 
+                                    autocomplete="username"
+                                    placeholder="EMP001 or john@skyorohotel.com"
+                                >
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <i class="fas fa-id-card text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="space-y-2">
+                            <label for="password" class="flex items-center text-sm font-semibold text-gray-700">
+                                <i class="fas fa-lock text-emerald-500 mr-2"></i>
+                                Password
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="w-full px-4 py-3 pl-12 pr-12 bg-white/90 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 input-focus focus:outline-none focus:border-emerald-500 focus:bg-white"
+                                    required 
+                                    autocomplete="current-password"
+                                    placeholder="Enter your password"
+                                >
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <i class="fas fa-key text-gray-400"></i>
+                                </div>
+                                <button 
+                                    type="button" 
+                                    id="togglePassword"
+                                    class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 transition-colors"
+                                >
+                                    <i class="fas fa-eye" id="eyeIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Department Selection -->
+                        <div class="space-y-2">
+                            <label for="department" class="flex items-center text-sm font-semibold text-gray-700">
+                                <i class="fas fa-building text-emerald-500 mr-2"></i>
+                                Department
+                            </label>
+                            <div class="relative">
+                                <select 
+                                    id="department" 
+                                    name="department"
+                                    class="w-full px-4 py-3 pl-12 bg-white/90 border border-gray-200 rounded-xl text-gray-800 input-focus focus:outline-none focus:border-emerald-500 focus:bg-white"
+                                >
+                                    <option value="">Select your department</option>
+                                    <option value="front-desk">Front Desk</option>
+                                    <option value="maintenance">Handyman</option>
+                                </select>
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <i class="fas fa-briefcase text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="w-4 h-4 text-emerald-600 bg-gray-100 border-gray-300 rounded focus:ring-emerald-500">
+                                <span class="ml-2 text-sm text-gray-600">Keep me signed in</span>
+                            </label>
+                            <a href="forgot-password.html" class="text-sm text-emerald-600 hover:text-emerald-700 font-medium transition-colors">
+                                Need help?
+                            </a>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit" 
+                            class="w-full btn-shimmer text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3"
+                        >
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Clock In & Access Dashboard</span>
+                        </button>
+                    </form>
+
+                    <!-- Error/Success Messages -->
+                    <div id="errorMessage" class="hidden mt-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-red-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-red-700" id="errorText"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="successMessage" class="hidden mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-green-700">Welcome back! Redirecting to your dashboard...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Features Footer -->
+                <div class="bg-gray-50/80 backdrop-blur-sm px-8 py-6 border-t border-gray-100">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-clock text-emerald-600"></i>
+                            </div>
+                            <p class="text-xs text-gray-600 font-medium">Time Tracking</p>
+                            <p class="text-xs text-gray-500">Automatic clock in/out</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-tasks text-blue-600"></i>
+                            </div>
+                            <p class="text-xs text-gray-600 font-medium">Task Management</p>
+                            <p class="text-xs text-gray-500">View assignments</p>
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
-                        </button>
+                    <!-- Quick Stats -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <span>Online Staff: <strong class="text-gray-700">24</strong></span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style="animation-delay: -0.5s;"></div>
+                                <span>Active Tasks: <strong class="text-gray-700">12</strong></span>
+                            </div>
+                        </div>
                     </div>
-                </form>
-                
-                <!-- Error/Success Messages -->
-                <div id="errorMessage" class="message hidden"></div>
-                
-                <!-- Forgot Password Link -->
-                <div class="forgot-password">
-                    <a href="forgot-password.html">Forgot your password?</a>
                 </div>
             </div>
-            
+
             <!-- Footer -->
-            <div class="footer">
-                <p>Need help? Contact <a href="mailto:support@hotelmanagement.com" style="color: white;">IT Support</a></p>
-                <p>&copy; 2025 Hotel Management System. All rights reserved.</p>
+            <div class="text-center mt-8">
+                <div class="glass-effect rounded-2xl p-4 mb-4">
+                    <div class="flex items-center justify-center space-x-6 text-white text-sm">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-emerald-300"></i>
+                            <span>IT Support: Ext. 101</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-emerald-300"></i>
+                            <span>hr@skyorohotel.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center space-x-4 text-white/60 text-xs mb-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span>Employee Portal: Online</span>
+                    </div>
+                    <span>•</span>
+                    <span id="currentTime">Loading...</span>
+                </div>
+                
+                <p class="text-white/40 text-xs">© 2025 Sky Oro Hotel • Employee Management System</p>
             </div>
         </div>
     </div>
-    
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
     <script>
+        // Real-time clock
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: true,
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+        
+        // Update welcome message based on time
+        function updateWelcomeMessage() {
+            const hour = new Date().getHours();
+            const welcomeEl = document.getElementById('welcomeMessage');
+            const shiftEl = document.getElementById('currentShift');
+            
+            let greeting, shift;
+            
+            if (hour >= 5 && hour < 12) {
+                greeting = 'Good Morning, Team!';
+                shift = 'Day Shift • Active';
+            } else if (hour >= 12 && hour < 17) {
+                greeting = 'Good Afternoon, Team!';
+                shift = 'Day Shift • Active';
+            } else if (hour >= 17 && hour < 22) {
+                greeting = 'Good Evening, Team!';
+                shift = 'Evening Shift • Active';
+            } else {
+                greeting = 'Night Shift Ready!';
+                shift = 'Night Shift • Active';
+            }
+            
+            welcomeEl.textContent = greeting;
+            shiftEl.textContent = shift;
+        }
+
         // Password visibility toggle
         document.addEventListener('DOMContentLoaded', function() {
             const togglePassword = document.getElementById('togglePassword');
@@ -341,6 +429,74 @@
                     }
                 });
             }
+
+            // Form submission
+            const form = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Add loading state
+                const originalContent = submitBtn.innerHTML;
+                submitBtn.innerHTML = `
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    <span>Clocking In...</span>
+                `;
+                submitBtn.disabled = true;
+
+                // Hide previous messages
+                errorMessage.classList.add('hidden');
+                successMessage.classList.add('hidden');
+
+                // Get form data
+                const email = document.getElementById('email').value;
+                const department = document.getElementById('department').value;
+
+                // Basic validation
+                if (!department) {
+                    document.getElementById('errorText').textContent = 'Please select your department.';
+                    errorMessage.classList.remove('hidden');
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalContent;
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                // Simulate authentication (replace with actual logic)
+                setTimeout(() => {
+                    // Reset button
+                    submitBtn.innerHTML = originalContent;
+                    submitBtn.disabled = false;
+
+                    // For demo purposes, show success
+                    successMessage.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        window.location.href = '../employee/dashboard.html';
+                    }, 1500);
+                }, 2000);
+            });
+
+            // Add floating animation to inputs on focus
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Initialize time and welcome message
+            updateTime();
+            updateWelcomeMessage();
+            setInterval(updateTime, 1000);
         });
     </script>
     <script src="../../js/auth/AuthService.js"></script>

@@ -277,6 +277,34 @@
             scale: 1;
             pointer-events: auto;
         }
+        /* Modal base styles */
+.modal-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Show class for modals */
+.modal-overlay.show, 
+#roomAssignmentModal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Hidden class - uses Tailwind classes */
+.hidden {
+    display: none !important;
+}
+
+/* Ensure flex display when visible */
+#roomAssignmentModal:not(.hidden) {
+    display: flex !important;
+}
+
+/* Consistent with other modals */
+#roomAssignmentModal {
+    transition: all 0.3s ease;
+}
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 min-h-screen">
@@ -607,6 +635,156 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Reservation Logs Section -->
+                <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 animate-fade-in overflow-hidden">
+                    <div class="p-8 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-indigo-50">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                    <i class="fas fa-history mr-3 text-purple-600"></i>
+                                    Reservation Activity Logs
+                                </h3>
+                                <div class="text-sm text-gray-600 mt-1 flex items-center space-x-4">
+                                    <span>Recent activities: <span id="totalLogs" class="font-medium text-purple-600">0</span> entries</span>
+                                    <span>•</span>
+                                    <span id="logsLastUpdated" class="text-xs text-gray-500">Last updated: Loading...</span>
+                                </div>
+                            </div>
+                        <div class="flex items-center space-x-2">
+                            <button id="refreshLogsBtn" class="p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-xl transition-colors" title="Refresh Logs">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button id="exportLogsBtn" class="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-xl transition-colors" title="Export Logs">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button id="logsFilterBtn" class="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" title="Filter Logs">
+                                <i class="fas fa-filter"></i>
+                            </button>
+
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Logs Filter Section -->
+                    <div id="logsFilterSection" class="hidden bg-gray-50/80 backdrop-blur-sm px-8 py-4 border-b border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Action Type</label>
+                                <select id="logsActionFilter" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
+                                    <option value="">All Actions</option>
+                                    <option value="created">Created</option>
+                                    <option value="updated">Updated</option>
+                                    <option value="status_changed">Status Changed</option>
+                                    <option value="room_assigned">Room Assigned</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Date From</label>
+                                <input type="date" id="logsDateFrom" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Date To</label>
+                                <input type="date" id="logsDateTo" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
+                            </div>
+                            <div class="flex items-end space-x-2">
+                                <button id="applyLogsFilter" class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-xl hover:bg-purple-700 transition-colors">
+                                    Apply
+                                </button>
+                                <button id="clearLogsFilter" class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50/80 backdrop-blur-sm">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-clock text-gray-400"></i>
+                                            <span>Timestamp</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-hashtag text-gray-400"></i>
+                                            <span>Reservation ID</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-user text-gray-400"></i>
+                                            <span>Customer</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-cog text-gray-400"></i>
+                                            <span>Action</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-bed text-gray-400"></i>
+                                            <span>Room</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-user-tag text-gray-400"></i>
+                                            <span>User</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-sticky-note text-gray-400"></i>
+                                            <span>Notes</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsTableBody" class="bg-white/50 backdrop-blur-sm divide-y divide-gray-200">
+                                <tr class="skeleton-row">
+                                    <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                                        <div class="flex flex-col items-center">
+                                            <div class="loading-spinner mx-auto mb-4"></div>
+                                            <p class="text-lg mb-2">Loading activity logs...</p>
+                                            <p class="text-sm text-gray-400">Please wait while we fetch the latest logs</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Logs Pagination -->
+                    <div id="logsPaginationContainer" class="bg-gray-50/80 backdrop-blur-sm px-8 py-4 border-t border-gray-200">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-sm text-gray-500" id="logsPaginationInfo">
+                                    Showing 0 to 0 of 0 results
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <label class="text-sm text-gray-600">Show:</label>
+                                    <select id="logsPageSizeSelect" class="text-sm border border-gray-300 rounded-xl px-3 py-2">
+                                        <option value="20">20</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                        <option value="200">200</option>
+                                    </select>
+                                    <span class="text-sm text-gray-600">per page</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2" id="logsPaginationButtons">
+                                <!-- Logs pagination buttons will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
@@ -671,11 +849,11 @@
                             </div>
 
                             <!-- Reservation Details -->
-                            <div class="form-section p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
-                                <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-green-200 pb-2 flex items-center">
-                                    <i class="fas fa-calendar-alt mr-3 text-green-600"></i>
-                                    Reservation Details
-                                </h4>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Reservation Type</label>
+                                <input type="text" id="reservationType" value="Walk-In" readonly
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-xl bg-gray-100 text-gray-700 cursor-not-allowed">
+                            </div>
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
@@ -705,7 +883,43 @@
                                         <input type="date" id="checkoutDate" required 
                                                class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
                                     </div>
-                                    
+                                    <div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                            Check-in Time
+                                            <span class="text-xs text-gray-500 ml-1">(Default: 3:00 PM)</span>
+                                        </label>
+                                        <select id="checkinTime" class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                                            <option value="14:00:00">2:00 PM</option>
+                                            <option value="15:00:00" selected>3:00 PM (Standard)</option>
+                                            <option value="16:00:00">4:00 PM</option>
+                                            <option value="17:00:00">5:00 PM</option>
+                                            <option value="18:00:00">6:00 PM</option>
+                                            <option value="19:00:00">7:00 PM</option>
+                                            <option value="20:00:00">8:00 PM</option>
+                                            <option value="21:00:00">9:00 PM</option>
+                                            <option value="22:00:00">10:00 PM</option>
+                                            <option value="12:00:00">12:00 PM (Early - ₱500 fee)</option>
+                                            <option value="13:00:00">1:00 PM (Early - ₱500 fee)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                            Check-out Time
+                                            <span class="text-xs text-gray-500 ml-1">(Default: 12:00 PM)</span>
+                                        </label>
+                                        <select id="checkoutTime" class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                                            <option value="08:00:00">8:00 AM (Early - ₱200 discount)</option>
+                                            <option value="09:00:00">9:00 AM (Early - ₱200 discount)</option>
+                                            <option value="10:00:00">10:00 AM (Early - ₱200 discount)</option>
+                                            <option value="11:00:00">11:00 AM</option>
+                                            <option value="12:00:00" selected>12:00 PM (Standard)</option>
+                                            <option value="13:00:00">1:00 PM (Late - ₱300 fee)</option>
+                                            <option value="14:00:00">2:00 PM (Late - ₱300 fee)</option>
+                                            <option value="15:00:00">3:00 PM (Late - ₱300 fee)</option>
+                                            <option value="16:00:00">4:00 PM (Late - ₱300 fee)</option>
+                                        </select>
+                                    </div>
                                     <div class="md:col-span-2">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Number of Guests *</label>
                                         <div class="flex items-center space-x-2">
@@ -979,6 +1193,58 @@
             </div>
         </div>
     </div>
+
+    <!-- Room Assignment Modal -->
+    <div id="roomAssignmentModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 items-center justify-center z-50 p-4 modal-overlay">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4">
+        <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-t-2xl">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold flex items-center">
+                    <i class="fas fa-bed mr-3"></i>
+                    Assign Room
+                </h3>
+                <button id="closeRoomAssignmentModal" class="text-white hover:text-orange-200 transition-colors p-2 hover:bg-orange-600 rounded-full">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            <div class="mb-6">
+                <p class="text-gray-600 mb-4">
+                    Select an available room to assign to this room type booking. The room will be marked as reserved.
+                </p>
+            </div>
+            
+            <form id="roomAssignmentForm">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Available Rooms *</label>
+                    <select id="roomAssignmentSelect" required 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all">
+                        <option value="">Loading available rooms...</option>
+                    </select>
+                    <div class="text-xs text-gray-500 mt-2 flex items-center">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Only rooms of the same type and status are shown
+                    </div>
+                </div>
+                
+                <div class="flex justify-end gap-3">
+                    <button type="button" id="cancelRoomAssignmentBtn" 
+                            class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" id="saveRoomAssignmentBtn" 
+                            class="px-6 py-2 bg-orange-600 text-white rounded-xl transition-colors flex items-center shadow-lg hover:bg-orange-700">
+                        <i class="fas fa-bed mr-2"></i>
+                        <span class="btn-text">Assign Room</span>
+                        <span class="loading-spinner hidden ml-2"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
     <!-- Quick Actions Floating Button -->
     <div class="quick-actions-btn">

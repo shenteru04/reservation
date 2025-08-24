@@ -27,9 +27,6 @@
                         'bounce-subtle': 'bounceSubtle 2s infinite',
                         'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
                         'float': 'float 6s ease-in-out infinite'
-                    },
-                    backdropBlur: {
-                        xs: '2px',
                     }
                 }
             }
@@ -56,31 +53,25 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-        
         .glass-effect {
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
-        
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
         .card-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
         .card-hover:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
-        
         .nav-link {
             position: relative;
             overflow: hidden;
         }
-        
         .nav-link::before {
             content: '';
             position: absolute;
@@ -91,11 +82,9 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
-        
         .nav-link:hover::before {
             left: 100%;
         }
-        
         .loading-spinner {
             display: inline-block;
             width: 20px;
@@ -105,17 +94,14 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
         .sidebar-active {
             background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
             position: relative;
         }
-        
         .sidebar-active::after {
             content: '';
             position: absolute;
@@ -125,43 +111,34 @@
             width: 4px;
             background: #60a5fa;
         }
-        
         .stat-card-icon {
             background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
         }
-        
         ::-webkit-scrollbar {
             width: 6px;
         }
-        
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
-        
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 3px;
         }
-        
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-        
         .btn-primary {
             background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             transition: all 0.3s ease;
         }
-        
         .btn-primary:hover {
             background: linear-gradient(135deg, #2563eb, #1e40af);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
-        
         .notification-badge {
             animation: pulse 2s infinite;
         }
-
         .modal-overlay {
             transition: opacity 0.3s ease;
             opacity: 0;
@@ -171,14 +148,12 @@
             opacity: 1;
             pointer-events: auto;
         }
-
         .table-row:hover {
             background-color: rgba(59, 130, 246, 0.05);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease;
         }
-
         .status-badge {
             font-size: 0.75rem;
             padding: 0.25rem 0.75rem;
@@ -187,26 +162,63 @@
             text-transform: uppercase;
             letter-spacing: 0.025em;
         }
-
-        .status-paid { @apply bg-green-100 text-green-800; }
-        .status-unpaid { @apply bg-red-100 text-red-800; }
-        .status-pending { @apply bg-yellow-100 text-yellow-800; }
-        .status-partial { @apply bg-blue-100 text-blue-800; }
-
+        .status-paid { 
+            background-color: rgb(220, 252, 231);
+            color: rgb(22, 101, 52);
+        }
+        .status-unpaid { 
+            background-color: rgb(254, 226, 226);
+            color: rgb(153, 27, 27);
+        }
+        .status-pending { 
+            background-color: rgb(254, 249, 195);
+            color: rgb(146, 64, 14);
+        }
+        .status-partial { 
+            background-color: rgb(219, 234, 254);
+            color: rgb(30, 58, 138);
+        }
         .filter-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
         .filter-card {
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
         @media print {
             .no-print {
                 display: none !important;
             }
+        }
+        /* Log modal styles */
+        .log-entry {
+            border-left: 4px solid #3b82f6;
+            background-color: #f8fafc;
+        }
+        .log-entry.success {
+            border-left-color: #10b981;
+        }
+        .log-entry.error {
+            border-left-color: #ef4444;
+        }
+        .log-entry.warning {
+            border-left-color: #f59e0b;
+        }
+        .log-timestamp {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        .log-content {
+            font-size: 0.875rem;
+        }
+        .log-filters {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .log-filter-card {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
@@ -218,7 +230,6 @@
             <p class="text-gray-600 font-medium animate-pulse">Loading Billing Management...</p>
         </div>
     </div>
-    
     <div class="flex h-screen">
         <!-- Enhanced Sidebar -->
         <div class="w-72 gradient-bg text-white shadow-2xl relative overflow-hidden no-print">
@@ -227,7 +238,6 @@
                 <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full mix-blend-overlay animate-float"></div>
                 <div class="absolute bottom-0 right-0 w-40 h-40 bg-white rounded-full mix-blend-overlay animate-float" style="animation-delay: -3s;"></div>
             </div>
-            
             <!-- Hotel Brand Header -->
             <div class="relative p-6 border-b border-white/20 bg-black/10 backdrop-blur-sm">
                 <div class="flex items-center space-x-3">
@@ -240,7 +250,6 @@
                     </div>
                 </div>
             </div>
-            
             <!-- Enhanced Navigation -->
             <nav class="mt-4 px-3">
                 <a href="frontdashboard.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
@@ -249,14 +258,12 @@
                     </div>
                     <span class="font-medium">Dashboard</span>
                 </a>
-                
                 <a href="reservations.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl hover:bg-white/10 transition-all duration-300">
                     <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center mr-4">
                         <i class="fas fa-calendar-check text-white"></i>
                     </div>
                     <span class="font-medium">Reservations</span>
                 </a>
-                
                 <a href="billing.html" class="nav-link flex items-center px-4 py-4 mb-2 rounded-xl bg-black/20 backdrop-blur-sm sidebar-active transition-all duration-300 hover:bg-white/10">
                     <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mr-4">
                         <i class="fas fa-receipt text-white"></i>
@@ -264,7 +271,6 @@
                     <span class="font-medium">Billing</span>
                     <div class="ml-auto notification-badge w-2 h-2 bg-green-400 rounded-full"></div>
                 </a>
-                
                 <!-- Logout Section -->
                 <div class="border-t border-white/20 mt-6 pt-4">
                     <a href="#" id="logoutLink" class="nav-link flex items-center px-4 py-4 rounded-xl hover:bg-red-500/20 transition-all duration-300 text-red-200">
@@ -275,7 +281,6 @@
                     </a>
                 </div>
             </nav>
-            
             <!-- Bottom Branding -->
             <div class="absolute bottom-4 left-4 right-4">
                 <div class="text-center text-white/60 text-xs">
@@ -284,7 +289,6 @@
                 </div>
             </div>
         </div>
-        
         <!-- Main Content -->
         <div class="flex-1 overflow-y-auto">
             <!-- Enhanced Header -->
@@ -313,17 +317,20 @@
                                     <span id="currentDateTime" class="font-medium">Loading...</span>
                                 </div>
                             </div>
-                            
                             <!-- Create Invoice Button -->
                             <button id="createBillBtn" class="btn-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2 shadow-lg hover:shadow-xl">
                                 <i class="fas fa-plus"></i>
                                 <span>Create Invoice</span>
                             </button>
+                            <!-- View Logs Button -->
+                            <button id="viewLogsBtn" class="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2 shadow-lg hover:shadow-xl">
+                                <i class="fas fa-history"></i>
+                                <span>View All Logs</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </header>
-            
             <main class="p-8 space-y-8">
                 <!-- Enhanced Filter Section -->
                 <div class="filter-section rounded-2xl p-1 animate-fade-in">
@@ -339,7 +346,6 @@
                                 </button>
                             </div>
                         </div>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
@@ -389,7 +395,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Enhanced Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 animate-fade-in">
                     <!-- Total Revenue Card -->
@@ -406,15 +411,12 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm font-medium mb-1">Total Revenue</p>
-                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-green-600 transition-colors" id="totalRevenue">
-                                    <span class="loading-spinner"></span>
-                                </h3>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-green-600 transition-colors" id="totalRevenue">₱0</h3>
                                 <p class="text-xs text-green-600 font-medium mt-1">All time</p>
                             </div>
                         </div>
                         <div class="absolute bottom-0 right-0 w-24 h-24 bg-green-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
                     </div>
-                    
                     <!-- Paid Invoices Card -->
                     <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-50"></div>
@@ -429,15 +431,12 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm font-medium mb-1">Paid Invoices</p>
-                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors" id="paidInvoices">
-                                    <span class="loading-spinner"></span>
-                                </h3>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors" id="paidInvoices">0</h3>
                                 <p class="text-xs text-blue-600 font-medium mt-1">Completed</p>
                             </div>
                         </div>
                         <div class="absolute bottom-0 right-0 w-24 h-24 bg-blue-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
                     </div>
-                    
                     <!-- Unpaid Invoices Card -->
                     <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-red-50 to-pink-50 opacity-50"></div>
@@ -452,15 +451,12 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm font-medium mb-1">Unpaid Invoices</p>
-                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-red-600 transition-colors" id="unpaidInvoices">
-                                    <span class="loading-spinner"></span>
-                                </h3>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-red-600 transition-colors" id="unpaidInvoices">0</h3>
                                 <p class="text-xs text-red-600 font-medium mt-1">Outstanding</p>
                             </div>
                         </div>
                         <div class="absolute bottom-0 right-0 w-24 h-24 bg-red-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
                     </div>
-                    
                     <!-- Pending Amount Card -->
                     <div class="group card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 overflow-hidden relative">
                         <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 to-orange-50 opacity-50"></div>
@@ -475,16 +471,13 @@
                             </div>
                             <div>
                                 <p class="text-gray-600 text-sm font-medium mb-1">Pending Amount</p>
-                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-yellow-600 transition-colors" id="pendingAmount">
-                                    <span class="loading-spinner"></span>
-                                </h3>
+                                <h3 class="text-3xl font-bold text-gray-800 group-hover:text-yellow-600 transition-colors" id="pendingAmount">₱0</h3>
                                 <p class="text-xs text-yellow-600 font-medium mt-1">Awaiting payment</p>
                             </div>
                         </div>
                         <div class="absolute bottom-0 right-0 w-24 h-24 bg-yellow-100 rounded-full opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
                     </div>
                 </div>
-
                 <!-- Enhanced Invoices Table -->
                 <div class="card-hover bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 animate-fade-in">
                     <div class="p-8 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-pink-50">
@@ -510,11 +503,34 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50/80 backdrop-blur-sm">
                                 <tr>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-file-invoice text-gray-400"></i>
+                                            <span>Invoice</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-user text-gray-400"></i>
+                                            <span>Customer</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-bed text-gray-400"></i>
+                                            <span>Reservation</span>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        <div class="flex items-center space-x-1">
+                                            <i class="fas fa-peso-sign text-gray-400"></i>
+                                            <span>Amount</span>
+                                        </div>
+                                    </th>
                                     <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                                         <div class="flex items-center space-x-1">
                                             <i class="fas fa-credit-card text-gray-400"></i>
@@ -552,9 +568,8 @@
             </main>
         </div>
     </div>
-
     <!-- Enhanced Create/Edit Invoice Modal -->
-    <div id="billingModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50 modal-overlay">
+    <div id="billingModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
             <div class="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
                 <div class="flex justify-between items-center">
@@ -570,11 +585,9 @@
                     Generate a new invoice for guest billing
                 </div>
             </div>
-            
             <div class="p-6">
                 <form id="billingForm">
                     <input type="hidden" id="billingId">
-                    
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <!-- Left Column -->
                         <div class="space-y-6">
@@ -584,7 +597,6 @@
                                     <i class="fas fa-file-invoice mr-3 text-purple-600"></i>
                                     Invoice Details
                                 </h4>
-                                
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Reservation *</label>
@@ -592,7 +604,6 @@
                                             <option value="">Select Reservation</option>
                                         </select>
                                     </div>
-                                    
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Invoice Number</label>
                                         <input type="text" id="invoiceNumber" name="invoiceNumber" readonly
@@ -600,14 +611,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Amount Details -->
                             <div class="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
                                 <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-green-200 pb-2 flex items-center">
                                     <i class="fas fa-calculator mr-3 text-green-600"></i>
                                     Amount Details
                                 </h4>
-                                
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Total Amount *</label>
@@ -617,7 +626,6 @@
                                                    class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
                                         </div>
                                     </div>
-                                    
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Paid Amount</label>
                                         <div class="relative">
@@ -626,7 +634,6 @@
                                                    class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
                                         </div>
                                     </div>
-                                    
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Balance</label>
                                         <div class="relative">
@@ -635,7 +642,6 @@
                                                    class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-xl bg-gray-50 font-mono font-semibold">
                                         </div>
                                     </div>
-                                    
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Payment Status *</label>
                                         <select id="paymentStatus" name="paymentStatus" required class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
@@ -647,7 +653,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Right Column -->
                         <div class="space-y-6">
                             <!-- Payment Information -->
@@ -656,7 +661,6 @@
                                     <i class="fas fa-credit-card mr-3 text-blue-600"></i>
                                     Payment Information
                                 </h4>
-                                
                                 <div class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
@@ -670,14 +674,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Additional Notes -->
                             <div class="p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl">
                                 <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-yellow-200 pb-2 flex items-center">
                                     <i class="fas fa-sticky-note mr-3 text-yellow-600"></i>
                                     Additional Notes
                                 </h4>
-                                
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
                                     <textarea id="notes" name="notes" rows="4" 
@@ -685,14 +687,12 @@
                                               placeholder="Optional notes about this invoice..."></textarea>
                                 </div>
                             </div>
-
                             <!-- Invoice Preview -->
                             <div class="p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border-2 border-gray-200">
                                 <h4 class="text-lg font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2 flex items-center">
                                     <i class="fas fa-eye mr-3 text-gray-600"></i>
                                     Invoice Preview
                                 </h4>
-                                
                                 <div class="space-y-3 text-sm">
                                     <div class="flex justify-between items-center p-2 rounded">
                                         <span class="font-medium">Invoice Number:</span>
@@ -714,7 +714,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <!-- Enhanced Action Buttons -->
                     <div class="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t pt-6 bg-gray-50 -mx-6 px-6 py-4 rounded-b-2xl">
                         <div class="text-sm text-gray-600 flex items-center">
@@ -738,9 +737,8 @@
             </div>
         </div>
     </div>
-
     <!-- Enhanced Payment Modal -->
-    <div id="paymentModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50 modal-overlay">
+    <div id="paymentModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4">
             <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-green-50 to-green-100 rounded-t-2xl">
                 <div class="flex justify-between items-center">
@@ -753,7 +751,6 @@
                     </button>
                 </div>
             </div>
-            
             <div class="p-6">
                 <form id="paymentForm">
                     <input type="hidden" id="paymentBillingId">
@@ -766,7 +763,6 @@
                                        class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-xl bg-gray-50 font-mono font-semibold">
                             </div>
                         </div>
-                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Payment Amount *</label>
                             <div class="relative">
@@ -775,7 +771,6 @@
                                        class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all">
                             </div>
                         </div>
-                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method *</label>
                             <select id="paymentMethodSelect" required class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all">
@@ -787,14 +782,12 @@
                                 <option value="5">💳 Debit Card</option>
                             </select>
                         </div>
-                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Reference Number</label>
                             <input type="text" id="referenceNumber" 
                                    class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                                    placeholder="Optional reference number">
                         </div>
-                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
                             <textarea id="paymentNotes" rows="2" 
@@ -802,7 +795,6 @@
                                       placeholder="Optional payment notes"></textarea>
                         </div>
                     </div>
-                    
                     <div class="flex justify-end space-x-3 mt-6">
                         <button type="button" id="cancelPaymentBtn" class="px-6 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
                             Cancel
@@ -815,12 +807,103 @@
             </div>
         </div>
     </div>
-
+    <!-- Payment Logs Modal -->
+    <div id="logsModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <h3 id="logsModalTitle" class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-history mr-3 text-blue-600"></i>
+                        Payment Logs
+                    </h3>
+                    <button id="closeLogsModal" class="text-gray-500 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-full">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="mt-2 text-sm text-gray-600">
+                    View detailed history of all billing operations
+                </div>
+            </div>
+            <!-- Log Filters -->
+            <div class="log-filters rounded-2xl p-1 m-6">
+                <div class="log-filter-card rounded-xl shadow-xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-filter mr-3 text-purple-600"></i>
+                            Filter Logs
+                        </h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-file-invoice mr-2 text-gray-500"></i>Invoice ID
+                            </label>
+                            <input type="text" id="logInvoiceFilter" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all backdrop-blur-sm"
+                                   placeholder="Filter by invoice ID">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-cogs mr-2 text-gray-500"></i>Action Type
+                            </label>
+                            <select id="logActionFilter" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
+                                <option value="">All Actions</option>
+                                <option value="create_invoice">Create Invoice</option>
+                                <option value="record_payment">Record Payment</option>
+                                <option value="update_invoice">Update Invoice</option>
+                                <option value="delete_invoice">Delete Invoice</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-calendar mr-2 text-gray-500"></i>Date From
+                            </label>
+                            <input type="date" id="logDateFromFilter" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                <i class="fas fa-calendar mr-2 text-gray-500"></i>Date To
+                            </label>
+                            <input type="date" id="logDateToFilter" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all">
+                        </div>
+                        <div class="flex items-end space-x-2">
+                            <button id="applyLogFiltersBtn" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-xl transition-all shadow-lg hover:shadow-xl">
+                                <i class="fas fa-filter mr-2"></i>Apply
+                            </button>
+                            <button id="clearLogFiltersBtn" class="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-4 py-2 rounded-xl transition-all shadow-lg hover:shadow-xl">
+                                <i class="fas fa-eraser mr-2"></i>Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-sm text-gray-600">
+                        <span id="logCount">0</span> log entries found
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="exportLogsBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center">
+                            <i class="fas fa-download mr-2"></i>Export Logs
+                        </button>
+                    </div>
+                </div>
+                <div id="logsContainer" class="space-y-3">
+                    <!-- Log entries will be inserted here -->
+                    <div class="text-center text-gray-500 py-8">
+                        <i class="fas fa-history text-4xl mb-3 opacity-50"></i>
+                        <p class="text-lg">Loading logs...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="../../js/frontdesk/billing.js"></script>
     <script src="../../js/auth/logout.js"></script>
-    <script src="../../js/frontdesk/util/billutil.js"></script>
 </body>
 </html>

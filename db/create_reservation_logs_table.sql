@@ -1,0 +1,47 @@
+-- Create reservation_logs table
+CREATE TABLE `reservation_logs` (
+  `log_id` int(11) NOT NULL AUTO_INCREMENT,
+  `reservation_id` int(11) NOT NULL,
+  `action_type` varchar(100) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) DEFAULT NULL,
+  `user_type` varchar(50) DEFAULT NULL,
+  `old_values` text DEFAULT NULL,
+  `new_values` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`log_id`),
+  KEY `idx_reservation_id` (`reservation_id`),
+  KEY `idx_timestamp` (`timestamp`),
+  KEY `idx_action_type` (`action_type`),
+  KEY `idx_user_type` (`user_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Add some sample data for testing
+INSERT INTO `reservation_logs` (`reservation_id`, `action_type`, `user_id`, `user_type`, `notes`, `ip_address`) VALUES
+(1, 'reservation_created', 1, 'front_desk', 'New reservation created for customer', '127.0.0.1'),
+(1, 'payment_received', 1, 'front_desk', 'Advance payment received', '127.0.0.1'),
+(1, 'room_assigned', 1, 'front_desk', 'Room 101 assigned to reservation', '127.0.0.1'),
+(1, 'status_changed', 1, 'front_desk', 'Reservation status changed from Pending to Confirmed', '127.0.0.1'),
+(2, 'reservation_created', 1, 'front_desk', 'New reservation created for customer', '127.0.0.1'),
+(2, 'room_assigned', 1, 'front_desk', 'Room 102 assigned to reservation', '127.0.0.1'),
+(2, 'status_changed', 1, 'front_desk', 'Reservation status changed from Pending to Confirmed', '127.0.0.1'),
+(2, 'check_in', 1, 'front_desk', 'Guest checked in', '127.0.0.1'),
+(3, 'reservation_created', 1, 'front_desk', 'New reservation created for customer', '127.0.0.1'),
+(3, 'room_assigned', 1, 'front_desk', 'Room 103 assigned to reservation', '127.0.0.1'),
+(3, 'status_changed', 1, 'front_desk', 'Reservation status changed from Pending to Confirmed', '127.0.0.1'),
+(3, 'check_in', 1, 'front_desk', 'Guest checked in', '127.0.0.1'),
+(3, 'check_out', 1, 'front_desk', 'Guest checked out', '127.0.0.1'),
+(4, 'reservation_created', 1, 'front_desk', 'New reservation created for customer', '127.0.0.1'),
+(4, 'room_assigned', 1, 'front_desk', 'Room 104 assigned to reservation', '127.0.0.1'),
+(4, 'status_changed', 1, 'front_desk', 'Reservation status changed from Pending to Confirmed', '127.0.0.1'),
+(4, 'amount_updated', 1, 'front_desk', 'Total amount updated to $500', '127.0.0.1'),
+(5, 'reservation_created', 1, 'front_desk', 'New reservation created for customer', '127.0.0.1'),
+(5, 'room_assigned', 1, 'front_desk', 'Room 105 assigned to reservation', '127.0.0.1'),
+(5, 'status_changed', 1, 'front_desk', 'Reservation status changed from Pending to Confirmed', '127.0.0.1'),
+(5, 'check_in', 1, 'front_desk', 'Guest checked in', '127.0.0.1'),
+(6, 'reservation_created', 1, 'front_desk', 'New reservation created for customer', '127.0.0.1'),
+(6, 'room_assigned', 1, 'front_desk', 'Room 201 assigned to reservation', '127.0.0.1'),
+(6, 'status_changed', 1, 'front_desk', 'Reservation status changed from Pending to Confirmed', '127.0.0.1'),
+(6, 'check_in', 1, 'front_desk', 'Guest checked in', '127.0.0.1'),
+(6, 'check_out', 1, 'front_desk', 'Guest checked out', '127.0.0.1');

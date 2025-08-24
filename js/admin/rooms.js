@@ -1,7 +1,8 @@
-// js/admin/rooms.js - Enhanced Rooms Management with Amenities and Images
-class EnhancedRoomsManager {
+// js/admin/rooms.js - Enhanced Rooms Management with Axios
+
+class EnhancedRoomsManager extends BaseManager {
     constructor() {
-        this.baseURL = window.location.origin + '/reservation';
+        super('EnhancedRoomsManager');
         this.rooms = [];
         this.roomTypes = [];
         this.amenities = [];
@@ -48,6 +49,8 @@ class EnhancedRoomsManager {
     
     async init() {
         try {
+            console.log('Initializing enhanced rooms manager...');
+            
             // Check authentication
             const auth = await this.checkAuthentication();
             if (!auth) return;
@@ -71,51 +74,12 @@ class EnhancedRoomsManager {
         }
     }
     
-    async checkAuthentication() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/check.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Authentication check failed: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.authenticated) {
-                window.location.href = `${this.baseURL}/pages/auth/login.html`;
-                return false;
-            }
-            
-            // Update admin name
-            const adminNameEl = document.getElementById('adminName');
-            if (adminNameEl && result.user) {
-                const userName = result.user.name || `${result.user.first_name || ''} ${result.user.last_name || ''}`.trim() || 'Admin User';
-                adminNameEl.textContent = userName;
-            }
-            
-            return true;
-        } catch (error) {
-            console.error('Auth check failed:', error);
-            this.showError('Authentication failed. Please refresh the page.');
-            return false;
-        }
-    }
-    
     async loadRoomTypes() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/room-types.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
+            console.log('Loading room types...');
             
-            if (!response.ok) {
-                throw new Error(`Failed to load room types: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const response = await this.api.get('/api/admin/pages/room-types.php');
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load room types');
@@ -126,22 +90,17 @@ class EnhancedRoomsManager {
             
         } catch (error) {
             console.error('Failed to load room types:', error);
-            this.showError('Failed to load room types: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load room types: ' + errorMessage);
         }
     }
     
     async loadAmenities() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/amenities.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
+            console.log('Loading amenities...');
             
-            if (!response.ok) {
-                throw new Error(`Failed to load amenities: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const response = await this.api.get('/api/admin/pages/amenities.php');
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load amenities');
@@ -152,7 +111,8 @@ class EnhancedRoomsManager {
             
         } catch (error) {
             console.error('Failed to load amenities:', error);
-            this.showError('Failed to load amenities: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load amenities: ' + errorMessage);
         }
     }
     
@@ -177,7 +137,7 @@ class EnhancedRoomsManager {
                 this.roomTypes.forEach(type => {
                     const option = document.createElement('option');
                     option.value = type.room_type_id;
-                    option.textContent = `${type.type_name} - ₱${parseFloat(type.price_per_night).toLocaleString()}`;
+                    option.textContent = `${type.type_name} - ₱${this.formatCurrency(type.price_per_night)}`;
                     select.appendChild(option);
                 });
             }
@@ -203,7 +163,7 @@ class EnhancedRoomsManager {
                                class="mr-3 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                         <label for="amenity_${amenity.amenity_id}" class="flex items-center cursor-pointer flex-1">
                             <i class="${amenity.icon || 'fas fa-star'} text-blue-600 mr-2 w-4"></i>
-                            <span class="text-sm font-medium text-gray-700">${amenity.amenity_name}</span>
+                            <span class="text-sm font-medium text-gray-700">${this.escapeHtml(amenity.amenity_name)}</span>
                         </label>
                     </div>
                 `).join('')}
@@ -225,44 +185,35 @@ class EnhancedRoomsManager {
     
     async loadRooms(page = 1, resetPage = false) {
         try {
+            console.log('Loading rooms...');
+            
             if (resetPage) {
                 page = 1;
                 this.currentPage = 1;
             }
             
             // Build query parameters
-            const params = new URLSearchParams({
+            const params = {
                 page: page,
                 limit: this.currentLimit
-            });
+            };
             
             // Add filters
             if (this.currentFilters.search) {
-                params.append('search', this.currentFilters.search);
+                params.search = this.currentFilters.search;
             }
             if (this.currentFilters.status) {
-                params.append('status', this.currentFilters.status);
+                params.status = this.currentFilters.status;
             }
             if (this.currentFilters.type) {
-                params.append('type', this.currentFilters.type);
+                params.type = this.currentFilters.type;
             }
             if (this.currentFilters.floor) {
-                params.append('floor', this.currentFilters.floor);
+                params.floor = this.currentFilters.floor;
             }
             
-            const response = await fetch(
-                `${this.baseURL}/api/admin/pages/rooms.php?${params.toString()}`,
-                {
-                    credentials: "same-origin",
-                    headers: { "Cache-Control": "no-cache" },
-                }
-            );
-            
-            if (!response.ok) {
-                throw new Error(`Failed to load rooms: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const response = await this.api.get('/api/admin/pages/rooms.php', { params });
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load rooms');
@@ -278,7 +229,8 @@ class EnhancedRoomsManager {
             
         } catch (error) {
             console.error('Failed to load rooms:', error);
-            this.showError('Failed to load rooms: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to load rooms: ' + errorMessage);
             this.renderEmptyState();
         }
     }
@@ -349,7 +301,7 @@ class EnhancedRoomsManager {
                    ${room.amenities.slice(0, 4).map(amenity => `
                      <span class="amenity-tag inline-flex items-center px-2 py-1 text-xs font-medium bg-blue-50 text-blue-700 rounded-full">
                        <i class="${amenity.icon || 'fas fa-star'} mr-1"></i>
-                       ${amenity.amenity_name}
+                       ${this.escapeHtml(amenity.amenity_name)}
                      </span>
                    `).join('')}
                    ${room.amenities.length > 4 ? `<span class="amenity-tag inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-50 text-gray-600 rounded-full">+${room.amenities.length - 4} more</span>` : ''}
@@ -367,7 +319,7 @@ class EnhancedRoomsManager {
                          onerror="this.src='${this.defaultImages.room}'; this.onerror=null;">
                     <div class="absolute top-3 left-3">
                         <span class="inline-block px-3 py-1 text-xs font-medium border rounded-full ${statusClass}">
-                            ${room.status_name}
+                            ${this.escapeHtml(room.status_name)}
                         </span>
                     </div>
                     <div class="absolute top-3 right-3 flex space-x-2">
@@ -387,14 +339,14 @@ class EnhancedRoomsManager {
                 <!-- Room Details -->
                 <div class="p-4">
                     <div class="mb-3">
-                        <h3 class="text-lg font-bold text-gray-800">Room ${room.room_number}</h3>
+                        <h3 class="text-lg font-bold text-gray-800">Room ${this.escapeHtml(room.room_number)}</h3>
                         <p class="text-sm text-gray-500">Floor ${room.floor_number}</p>
                     </div>
                     
                     <div class="space-y-2">
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Type:</span>
-                            <span class="text-sm font-medium text-gray-800">${room.type_name}</span>
+                            <span class="text-sm font-medium text-gray-800">${this.escapeHtml(room.type_name)}</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Capacity:</span>
@@ -405,7 +357,7 @@ class EnhancedRoomsManager {
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-600">Price:</span>
-                            <span class="text-sm font-bold text-green-600">₱${parseFloat(room.price_per_night).toLocaleString()}/night</span>
+                            <span class="text-sm font-bold text-green-600">₱${this.formatCurrency(room.price_per_night)}/night</span>
                         </div>
                     </div>
                     
@@ -453,9 +405,9 @@ class EnhancedRoomsManager {
                     
                     <!-- Room Info -->
                     <div class="flex-1 min-w-0">
-                        <h3 class="text-lg font-semibold text-gray-800">Room ${room.room_number}</h3>
-                        <p class="text-sm text-gray-500">Floor ${room.floor_number} • ${room.type_name}</p>
-                        <p class="text-xs text-gray-400 mt-1 truncate">${amenitiesDisplay}</p>
+                        <h3 class="text-lg font-semibold text-gray-800">Room ${this.escapeHtml(room.room_number)}</h3>
+                        <p class="text-sm text-gray-500">Floor ${room.floor_number} • ${this.escapeHtml(room.type_name)}</p>
+                        <p class="text-xs text-gray-400 mt-1 truncate">${this.escapeHtml(amenitiesDisplay)}</p>
                     </div>
                     
                     <!-- Room Stats -->
@@ -468,12 +420,12 @@ class EnhancedRoomsManager {
                             <div class="text-xs text-gray-500">Guests</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-sm font-medium text-green-600">₱${parseFloat(room.price_per_night).toLocaleString()}</div>
+                            <div class="text-sm font-medium text-green-600">₱${this.formatCurrency(room.price_per_night)}</div>
                             <div class="text-xs text-gray-500">Per Night</div>
                         </div>
                         <div>
                             <span class="inline-block px-3 py-1 text-xs font-medium border rounded-full ${statusClass}">
-                                ${room.status_name}
+                                ${this.escapeHtml(room.status_name)}
                             </span>
                         </div>
                     </div>
@@ -538,12 +490,12 @@ class EnhancedRoomsManager {
                                              class="w-10 h-10 rounded-lg object-cover border mr-3"
                                              onerror="this.src='${this.defaultImages.room}'; this.onerror=null;">
                                         <div>
-                                            <div class="text-sm font-medium text-gray-900">Room ${room.room_number}</div>
+                                            <div class="text-sm font-medium text-gray-900">Room ${this.escapeHtml(room.room_number)}</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">${room.type_name}</div>
+                                    <div class="text-sm text-gray-900">${this.escapeHtml(room.type_name)}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">${room.floor_number}</div>
@@ -555,12 +507,12 @@ class EnhancedRoomsManager {
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-green-600">₱${parseFloat(room.price_per_night).toLocaleString()}</div>
+                                    <div class="text-sm font-medium text-green-600">₱${this.formatCurrency(room.price_per_night)}</div>
                                     <div class="text-xs text-gray-500">per night</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${statusClass}">
-                                        ${room.status_name}
+                                        ${this.escapeHtml(room.status_name)}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -768,14 +720,8 @@ class EnhancedRoomsManager {
         // Bulk modal events
         this.setupBulkModalEvents();
         
-        // Logout functionality
-        const logoutLink = document.getElementById('logoutLink');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', async (e) => {
-                e.preventDefault();
-                await this.handleLogout();
-            });
-        }
+        // Setup common event listeners (logout, etc.)
+        this.setupCommonEventListeners();
     }
     
     setupModalEvents() {
@@ -785,7 +731,7 @@ class EnhancedRoomsManager {
         
         [closeBtn, cancelBtn].forEach(btn => {
             if (btn) {
-                btn.addEventListener('click', () => this.hideModal());
+                btn.addEventListener('click', () => this.hideModal('roomModal'));
             }
         });
         
@@ -793,7 +739,7 @@ class EnhancedRoomsManager {
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    this.hideModal();
+                    this.hideModal('roomModal');
                 }
             });
         }
@@ -816,7 +762,7 @@ class EnhancedRoomsManager {
         
         [closeBulkBtn, cancelBulkBtn].forEach(btn => {
             if (btn) {
-                btn.addEventListener('click', () => this.hideBulkModal());
+                btn.addEventListener('click', () => this.hideModal('bulkModal'));
             }
         });
         
@@ -824,7 +770,7 @@ class EnhancedRoomsManager {
         if (bulkModal) {
             bulkModal.addEventListener('click', (e) => {
                 if (e.target === bulkModal) {
-                    this.hideBulkModal();
+                    this.hideModal('bulkModal');
                 }
             });
         }
@@ -875,12 +821,7 @@ class EnhancedRoomsManager {
         // Clear amenities checkboxes
         this.clearAmenitiesSelection();
         
-        // Direct modal show instead of this.showModal()
-        const modal = document.getElementById('roomModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+        this.showModal('roomModal');
     }
     
     editRoom(roomId) {
@@ -922,12 +863,7 @@ class EnhancedRoomsManager {
         // Set amenities checkboxes
         this.setAmenitiesSelection(room.amenities || []);
         
-        // Direct modal show
-        const modal = document.getElementById('roomModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+        this.showModal('roomModal');
     }
     
     clearAmenitiesSelection() {
@@ -974,69 +910,45 @@ class EnhancedRoomsManager {
         }
         
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/rooms.php`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({ room_id: roomId })
+            console.log('Deleting room:', roomId);
+            
+            await this.api.delete('/api/admin/pages/rooms.php', {
+                data: { room_id: roomId }
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.success) {
-                throw new Error(result.error || 'Failed to delete room');
-            }
             
             this.showSuccess('Room deleted successfully');
             await this.loadRooms(this.currentPage);
             
         } catch (error) {
             console.error('Failed to delete room:', error);
-            this.showError('Failed to delete room: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to delete room: ' + errorMessage);
         }
     }
     
     async updateRoomStatus(roomId, statusId) {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/rooms.php`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({
-                    room_id: roomId,
-                    room_status_id: statusId
-                })
+            console.log('Updating room status:', roomId, statusId);
+            
+            await this.api.put('/api/admin/pages/rooms.php', {
+                room_id: roomId,
+                room_status_id: statusId
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.success) {
-                throw new Error(result.error || 'Failed to update room status');
-            }
             
             this.showSuccess('Room status updated successfully');
             await this.loadRooms(this.currentPage);
             
         } catch (error) {
             console.error('Failed to update room status:', error);
-            this.showError('Failed to update room status: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to update room status: ' + errorMessage);
         }
     }
     
     async saveRoom() {
         try {
+            console.log('Saving room...');
+            
             const saveBtn = document.getElementById('saveBtn');
             const saveBtnText = document.getElementById('saveBtnText');
             
@@ -1052,6 +964,8 @@ class EnhancedRoomsManager {
                 amenities: this.getSelectedAmenities()
             };
             
+            console.log('Form data:', formData);
+            
             // Validation
             if (!formData.room_number || !formData.room_type_id || !formData.room_status_id || !formData.floor_number) {
                 throw new Error('Please fill in all required fields');
@@ -1062,32 +976,26 @@ class EnhancedRoomsManager {
                 formData.room_id = this.currentEditId;
             }
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/rooms.php`, {
-                method: isEdit ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(formData)
-            });
+            console.log('Sending request:', isEdit ? 'PUT' : 'POST', formData);
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
+            const response = isEdit 
+                ? await this.api.put('/api/admin/pages/rooms.php', formData)
+                : await this.api.post('/api/admin/pages/rooms.php', formData);
             
-            const result = await response.json();
+            const result = response.data;
             
             if (!result.success) {
                 throw new Error(result.error || 'Failed to save room');
             }
             
             this.showSuccess(`Room ${isEdit ? 'updated' : 'created'} successfully`);
-            this.hideModal();
+            this.hideModal('roomModal');
             await this.loadRooms(this.currentPage);
             
         } catch (error) {
             console.error('Failed to save room:', error);
-            this.showError('Failed to save room: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to save room: ' + errorMessage);
         } finally {
             // Re-enable button
             const saveBtn = document.getElementById('saveBtn');
@@ -1109,7 +1017,7 @@ class EnhancedRoomsManager {
         if (bulkForm) bulkForm.reset();
         if (roomPreview) roomPreview.classList.add('hidden');
         
-        this.showBulkModalElement();
+        this.showModal('bulkModal');
     }
     
     previewBulkRooms() {
@@ -1172,6 +1080,8 @@ class EnhancedRoomsManager {
     
     async saveBulkRooms() {
         try {
+            console.log('Saving bulk rooms...');
+            
             const bulkSaveBtn = document.getElementById('bulkSaveBtn');
             const bulkSaveBtnText = document.getElementById('bulkSaveBtnText');
             
@@ -1209,23 +1119,14 @@ class EnhancedRoomsManager {
                 }
             }
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/rooms.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({
-                    bulk_create: true,
-                    rooms: rooms
-                })
+            console.log('Bulk room data:', { bulk_create: true, rooms });
+            
+            const response = await this.api.post('/api/admin/pages/rooms.php', {
+                bulk_create: true,
+                rooms: rooms
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
+            const result = response.data;
             
             if (!result.success) {
                 throw new Error(result.error || 'Failed to create rooms');
@@ -1237,12 +1138,13 @@ class EnhancedRoomsManager {
             }
             
             this.showSuccess(message);
-            this.hideBulkModal();
+            this.hideModal('bulkModal');
             await this.loadRooms(1, true);
             
         } catch (error) {
             console.error('Failed to create bulk rooms:', error);
-            this.showError('Failed to create rooms: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to create rooms: ' + errorMessage);
         } finally {
             // Re-enable button
             const bulkSaveBtn = document.getElementById('bulkSaveBtn');
@@ -1251,96 +1153,13 @@ class EnhancedRoomsManager {
             if (bulkSaveBtnText) bulkSaveBtnText.textContent = 'Create Rooms';
         }
     }
-    
-    showModal() {
-        const modal = document.getElementById('roomModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    }
-    
-    hideModal() {
-        const modal = document.getElementById('roomModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-        this.currentEditId = null;
-    }
-    
-    showBulkModalElement() {
-        const modal = document.getElementById('bulkModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    }
-    
-    hideBulkModal() {
-        const modal = document.getElementById('bulkModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-    }
-    
-    async handleLogout() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/logout.php`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin'
-            });
-            
-            window.location.href = `${this.baseURL}/pages/auth/login.html`;
-        } catch (error) {
-            console.error('Logout error:', error);
-            window.location.href = `${this.baseURL}/pages/auth/login.html`;
-        }
-    }
-    
-    showSuccess(message) {
-        this.showNotification(message, 'success');
-    }
-    
-    showError(message) {
-        this.showNotification(message, 'error');
-    }
-    
-    showNotification(message, type = 'info') {
-        const colors = {
-            info: 'bg-blue-100 border-blue-400 text-blue-700',
-            success: 'bg-green-100 border-green-400 text-green-700',
-            warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-            error: 'bg-red-100 border-red-400 text-red-700'
-        };
-        
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 ${colors[type]} px-4 py-3 rounded shadow-lg z-50 max-w-md border`;
-        notification.innerHTML = `
-            <div class="flex items-center">
-                <span class="whitespace-pre-line">${message}</span>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-lg">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 5000);
-    }
 }
 
 // Initialize enhanced rooms manager when DOM is loaded
 let enhancedRoomsManager;
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing enhanced rooms manager...');
     enhancedRoomsManager = new EnhancedRoomsManager();
 });
 

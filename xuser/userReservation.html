@@ -135,14 +135,14 @@
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
         
-        .room-card {
+        .room-type-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
         
-        .room-card::before {
+        .room-type-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -153,23 +153,23 @@
             transition: left 0.5s;
         }
         
-        .room-card:hover::before {
+        .room-type-card:hover::before {
             left: 100%;
         }
         
-        .room-card:hover {
+        .room-type-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
-        .room-card.selected {
+        .room-type-card.selected {
             border-color: #3b82f6;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.05) 100%);
             transform: translateY(-4px);
             box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.3);
         }
 
-        .room-card.selected::after {
+        .room-type-card.selected::after {
             content: '✓';
             position: absolute;
             top: 15px;
@@ -341,6 +341,25 @@
         .advance-payment-slider {
             background: linear-gradient(to right, #10b981 0%, #10b981 var(--progress, 0%), #e2e8f0 var(--progress, 0%), #e2e8f0 100%);
         }
+
+        /* Room Type Specific Styles */
+        .room-type-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .availability-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-50">
@@ -365,7 +384,6 @@
                                 <i class="fas fa-search mr-1"></i>
                                 Track Reservation
                             </a>
-                            
                         </div>
                     </div>
                 </div>
@@ -381,7 +399,7 @@
                         </span>
                     </h2>
                     <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-                        Experience luxury and comfort like never before. Create unforgettable memories at our world-class hotel.
+                        Experience luxury and comfort like never before. Choose your preferred room type and let our front desk assign your perfect room.
                     </p>
                     <div class="flex justify-center space-x-8 text-sm">
                         <div class="flex items-center space-x-2">
@@ -393,8 +411,8 @@
                             <span>Free WiFi</span>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <i class="fas fa-car"></i>
-                            <span>Free Parking</span>
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>Personalized Service</span>
                         </div>
                     </div>
                 </div>
@@ -412,7 +430,7 @@
                         <div id="step1-indicator" class="step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm">
                             1
                         </div>
-                        <span class="ml-3 font-medium text-gray-700 hidden sm:block">Room Selection</span>
+                        <span class="ml-3 font-medium text-gray-700 hidden sm:block">Room Type & DateTime</span>
                     </div>
                     <div class="h-1 w-8 md:w-16 bg-gray-200 rounded"></div>
                     <div class="flex items-center">
@@ -448,63 +466,128 @@
 
         <!-- Reservation Form Container -->
         <div class="glass-card rounded-3xl shadow-2xl overflow-hidden">
-            <!-- Step 1: Room Selection -->
+            <!-- Step 1: Room Type Selection with DateTime -->
             <div id="step1" class="step-content p-8">
                 <div class="text-center mb-8">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Choose Your Perfect Room</h3>
-                    <p class="text-gray-600 text-lg">Select your dates and discover our luxury accommodations</p>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Choose Your Perfect Room Type</h3>
+                    <p class="text-gray-600 text-lg">Select your dates, times, and discover our luxury room categories</p>
+                    <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <p class="text-sm text-blue-700">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            <strong>Smart Room Assignment:</strong> Choose your preferred room type and our front desk team will assign your specific room at check-in, considering your preferences and special requests.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Date Selection Card -->
+                <!-- Date and Time Selection Card -->
                 <div class="glass-card-light rounded-2xl p-6 mb-8">
                     <h4 class="text-xl font-semibold mb-6 flex items-center">
                         <div class="feature-icon mr-3">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        Select Your Dates
+                        Select Your Dates & Times
                     </h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                        <!-- Check-in Date -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Check-in Date</label>
                             <input type="date" id="checkinDate" required
                                    class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
                         </div>
+                        
+                        <!-- Check-in Time -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                Check-in Time
+                                <span class="text-xs text-gray-500 ml-1">(Default: 3:00 PM)</span>
+                            </label>
+                            <select id="checkinTime" class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                                <option value="14:00:00">2:00 PM</option>
+                                <option value="15:00:00" selected>3:00 PM (Standard)</option>
+                                <option value="16:00:00">4:00 PM</option>
+                                <option value="17:00:00">5:00 PM</option>
+                                <option value="18:00:00">6:00 PM</option>
+                                <option value="19:00:00">7:00 PM</option>
+                                <option value="20:00:00">8:00 PM</option>
+                                <option value="21:00:00">9:00 PM</option>
+                                <option value="22:00:00">10:00 PM</option>
+                                <option value="12:00:00">12:00 PM (Early - ₱500 fee)</option>
+                                <option value="13:00:00">1:00 PM (Early - ₱500 fee)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Check-out Date -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Check-out Date</label>
                             <input type="date" id="checkoutDate" required
                                    class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
                         </div>
+                        
+                        <!-- Check-out Time -->
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Number of Guests</label>
-                            <select id="guestCount" required
-                                    class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
-                                <option value="1">1 Guest</option>
-                                <option value="2">2 Guests</option>
-                                <option value="3">3 Guests</option>
-                                <option value="4">4 Guests</option>
-                                <option value="5">5+ Guests</option>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                Check-out Time
+                                <span class="text-xs text-gray-500 ml-1">(Default: 12:00 PM)</span>
+                            </label>
+                            <select id="checkoutTime" class="form-input w-full px-4 py-4 rounded-xl focus:outline-none">
+                                <option value="08:00:00">8:00 AM (Early - ₱200 discount)</option>
+                                <option value="09:00:00">9:00 AM (Early - ₱200 discount)</option>
+                                <option value="10:00:00">10:00 AM (Early - ₱200 discount)</option>
+                                <option value="11:00:00">11:00 AM</option>
+                                <option value="12:00:00" selected>12:00 PM (Standard)</option>
+                                <option value="13:00:00">1:00 PM (Late - ₱300 fee)</option>
+                                <option value="14:00:00">2:00 PM (Late - ₱300 fee)</option>
+                                <option value="15:00:00">3:00 PM (Late - ₱300 fee)</option>
+                                <option value="16:00:00">4:00 PM (Late - ₱300 fee)</option>
                             </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Guest Count -->
+                    <div class="mt-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Number of Guests</label>
+                        <select id="guestCount" required
+                                class="form-input w-full md:w-64 px-4 py-4 rounded-xl focus:outline-none">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
+                        </select>
+                    </div>
+
+                    <!-- Pricing Adjustments Display -->
+                    <div id="pricingAdjustments" class="mt-6 hidden">
+                        <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                            <h5 class="font-semibold text-blue-800 mb-2">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Time-based Pricing Adjustments
+                            </h5>
+                            <div id="pricingDetails" class="space-y-1">
+                                <!-- Pricing details will be populated here -->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Available Rooms -->
-                <div id="roomsSection" class="hidden">
+                <!-- Available Room Types -->
+                <div id="roomTypesSection" class="hidden">
                     <h4 class="text-xl font-semibold mb-6 flex items-center">
                         <div class="feature-icon mr-3">
-                            <i class="fas fa-bed"></i>
+                            <i class="fas fa-building"></i>
                         </div>
-                        Available Rooms
+                        Available Room Types
+                        <span id="roomTypeCount" class="ml-2 text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full"></span>
                     </h4>
-                    <div id="roomsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                        <!-- Rooms will be populated here -->
+                    <div id="roomTypesList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                        <!-- Room types will be populated here -->
                     </div>
                 </div>
 
                 <!-- Loading State -->
-                <div id="roomsLoading" class="hidden text-center py-16">
+                <div id="roomTypesLoading" class="hidden text-center py-16">
                     <div class="loading-spinner mx-auto mb-4 w-8 h-8"></div>
-                    <p class="text-gray-600 text-lg">Finding the perfect rooms for you...</p>
+                    <p class="text-gray-600 text-lg">Finding available room types for your selected dates and times...</p>
                 </div>
 
                 <!-- Navigation -->
@@ -516,7 +599,7 @@
                 </div>
             </div>
 
-            <!-- Step 2: Services & Menu -->
+            <!-- Step 2: Services & Menu (unchanged) -->
             <div id="step2" class="step-content hidden p-8">
                 <div class="text-center mb-8">
                     <h3 class="text-3xl font-bold text-gray-800 mb-4">Enhance Your Experience</h3>
@@ -574,7 +657,7 @@
             <div id="step3" class="step-content hidden p-8">
                 <div class="text-center mb-8">
                     <h3 class="text-3xl font-bold text-gray-800 mb-4">Guest Information</h3>
-                    <p class="text-gray-600 text-lg">Tell us about yourself so we can provide the best service</p>
+                    <p class="text-gray-600 text-lg">Tell us about yourself so we can provide the best service and room assignment</p>
                 </div>
 
                 <form id="guestForm" class="space-y-8">
@@ -610,10 +693,16 @@
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Special Requests (Optional)</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">
+                            Special Requests & Room Preferences (Optional)
+                        </label>
                         <textarea id="specialRequests" rows="4" 
-                                  placeholder="Any special requests, dietary preferences, or accessibility needs..."
+                                  placeholder="Any special requests, room preferences (e.g., high floor, city view), dietary preferences, or accessibility needs..."
                                   class="form-input w-full px-4 py-4 rounded-xl focus:outline-none resize-none"></textarea>
+                        <p class="text-xs text-gray-500 mt-2">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Our front desk will consider these preferences when assigning your specific room within your selected room type.
+                        </p>
                     </div>
                 </form>
 
@@ -634,11 +723,11 @@
             <div id="step4" class="step-content hidden p-8">
                 <div class="text-center mb-8">
                     <h3 class="text-3xl font-bold text-gray-800 mb-4">Payment Information</h3>
-                    <p class="text-gray-600 text-lg">Secure your reservation with an advance payment</p>
+                    <p class="text-gray-600 text-lg">Secure your room type reservation with an advance payment</p>
                 </div>
 
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                    <!-- Booking Summary -->
+                    <!-- Booking Summary with Room Type Details -->
                     <div class="glass-card-light rounded-2xl p-6">
                         <h4 class="text-xl font-semibold mb-6 flex items-center">
                             <div class="feature-icon mr-3 text-green-600">
@@ -647,7 +736,7 @@
                             Booking Summary
                         </h4>
                         <div id="paymentBookingSummary" class="space-y-4">
-                            <!-- Will be populated -->
+                            <!-- Will be populated with room type details -->
                         </div>
                     </div>
 
@@ -675,7 +764,7 @@
                                     <span>Full Payment (100%)</span>
                                 </div>
                                 <p class="text-sm text-gray-600 mt-2">
-                                    Secure your booking with an advance payment. You can pay the remaining amount upon check-in.
+                                    Secure your room type reservation with an advance payment. You can pay the remaining amount upon check-in.
                                 </p>
                             </div>
 
@@ -764,8 +853,8 @@
             <!-- Step 5: Final Confirmation -->
             <div id="step5" class="step-content hidden p-8">
                 <div class="text-center mb-8">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Booking Confirmation</h3>
-                    <p class="text-gray-600 text-lg">Please review your reservation details before confirming</p>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Room Type Reservation Confirmation</h3>
+                    <p class="text-gray-600 text-lg">Please review your room type reservation details before confirming</p>
                 </div>
 
                 <!-- Final Booking Summary -->
@@ -786,20 +875,20 @@
                                 </div>
                             </div>
 
-                            <!-- Room Details -->
+                            <!-- Room Type Details -->
                             <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                 <h5 class="font-semibold mb-4 flex items-center text-lg">
                                     <div class="feature-icon mr-3 text-green-600">
-                                        <i class="fas fa-bed"></i>
+                                        <i class="fas fa-building"></i>
                                     </div>
-                                    Room Details
+                                    Room Type Details
                                 </h5>
                                 <div id="finalRoomSummary" class="text-gray-600 space-y-2">
                                     <!-- Will be populated -->
                                 </div>
                             </div>
 
-                            <!-- Stay Details -->
+                            <!-- Stay Details with DateTime -->
                             <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                                 <h5 class="font-semibold mb-4 flex items-center text-lg">
                                     <div class="feature-icon mr-3 text-purple-600">
@@ -867,10 +956,14 @@
                             <a href="#" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Terms and Conditions</a> 
                             and 
                             <a href="#" class="text-blue-600 hover:text-blue-800 font-medium hover:underline">Privacy Policy</a>. 
-                            I understand that this reservation is subject to availability and confirmation from the hotel management.
+                            I understand that this room type reservation is subject to availability and confirmation from the hotel management.
+                            <br><br>
+                            <strong>Room Assignment Policy:</strong> I understand that my specific room will be assigned by the front desk at check-in based on availability within my selected room type, considering my preferences and special requests.
                             <br><br>
                             <strong>Payment Policy:</strong> Advance payments are non-refundable but can be credited towards future bookings. 
                             The remaining balance must be paid upon check-in. Cancellations must be made at least 24 hours before check-in.
+                            <br><br>
+                            <strong>Time Policy:</strong> Early check-in and late check-out fees apply as indicated. Minimum stay duration is 4 hours.
                         </span>
                     </label>
                 </div>
@@ -884,7 +977,7 @@
                     <button id="confirmBooking"
                             class="btn-success px-8 py-4 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center">
                         <i class="fas fa-check mr-2"></i>
-                        <span class="btn-text">Confirm Booking</span>
+                        <span class="btn-text">Confirm Room Type Reservation</span>
                         <span class="loading-spinner hidden ml-3"></span>
                     </button>
                 </div>
@@ -898,8 +991,8 @@
                     <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
                         <i class="fas fa-check text-green-600 text-3xl"></i>
                     </div>
-                    <h4 class="text-3xl font-bold text-gray-800 mb-3">Booking Confirmed!</h4>
-                    <p class="text-gray-600 text-lg">Your reservation has been successfully submitted and is being processed.</p>
+                    <h4 class="text-3xl font-bold text-gray-800 mb-3">Room Type Reservation Confirmed!</h4>
+                    <p class="text-gray-600 text-lg">Your room type reservation has been successfully submitted and is being processed.</p>
                 </div>
                 
                 <div id="bookingDetails" class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 mb-8 text-left border border-blue-100">
@@ -908,14 +1001,14 @@
                 
                 <div class="text-sm text-gray-500 mb-8 bg-yellow-50 rounded-xl p-4 border border-yellow-200">
                     <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
-                    A detailed confirmation email has been sent to your email address with all booking information and next steps.
+                    A detailed confirmation email has been sent to your email address with all booking information and check-in instructions.
                 </div>
                 
                 <div class="space-y-3">
                     <button onclick="window.location.reload()" 
                             class="w-full px-6 py-4 btn-primary text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
                         <i class="fas fa-plus mr-2"></i>
-                        Make Another Booking
+                        Make Another Reservation
                     </button>
                     <button onclick="window.print()" 
                             class="w-full px-6 py-4 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-300">
@@ -943,7 +1036,7 @@
                     </div>
                     <p class="text-gray-400 mb-6 max-w-md">
                         Experience unparalleled luxury and comfort at our world-class hotel. 
-                        Every stay is crafted to create unforgettable memories.
+                        Every stay is crafted to create unforgettable memories with personalized room assignments.
                     </p>
                     <div class="flex space-x-4">
                         <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors cursor-pointer">
@@ -978,6 +1071,7 @@
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <div class="space-y-2 text-gray-400">
                         <a href="#" class="block hover:text-white transition-colors">About Us</a>
+                        <a href="#" class="block hover:text-white transition-colors">Room Types</a>
                         <a href="#" class="block hover:text-white transition-colors">Amenities</a>
                         <a href="#" class="block hover:text-white transition-colors">Gallery</a>
                         <a href="#" class="block hover:text-white transition-colors">Contact</a>
@@ -994,11 +1088,9 @@
     <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-3 max-w-sm"></div>
 
     <!-- Scripts -->
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="/reservation/js/user/userReservation.js"></script>
     <script src="/reservation/js/user/utils/userutils.js"></script>
-
 </body>
 </html>

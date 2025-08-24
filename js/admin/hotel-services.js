@@ -1,7 +1,8 @@
-// js/admin/hotel-services.js - Hotel Services Management
-class HotelServicesManager {
+// js/admin/hotel-services.js - Hotel Services Management with Axios
+
+class HotelServicesManager extends BaseManager {
     constructor() {
-        this.baseURL = window.location.origin + '/reservation';
+        super('HotelServicesManager');
         this.services = [];
         this.currentEditId = null;
         this.init();
@@ -9,6 +10,11 @@ class HotelServicesManager {
     
     async init() {
         try {
+            console.log('Initializing hotel services manager...');
+            
+            // Hide loading overlay first
+            this.hideLoadingOverlay();
+            
             // Check authentication
             const auth = await this.checkAuthentication();
             if (!auth) return;
@@ -23,60 +29,31 @@ class HotelServicesManager {
         } catch (error) {
             console.error('Failed to initialize hotel services manager:', error);
             this.showError('Failed to initialize hotel services manager: ' + error.message);
+            this.hideLoadingOverlay();
         }
     }
     
-    async checkAuthentication() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/check.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Authentication check failed: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.authenticated) {
-                window.location.href = `${this.baseURL}/api/auth/login.html`;
-                return false;
-            }
-            
-            // Update admin name
-            const adminNameEl = document.getElementById('adminName');
-            if (adminNameEl && result.user) {
-                const userName = result.user.name || `${result.user.first_name || ''} ${result.user.last_name || ''}`.trim() || 'Admin User';
-                adminNameEl.textContent = userName;
-            }
-            
-            return true;
-        } catch (error) {
-            console.error('Auth check failed:', error);
-            this.showError('Authentication failed. Please refresh the page.');
-            return false;
+    hideLoadingOverlay() {
+        const overlay = document.getElementById('loadingOverlay');
+        if (overlay) {
+            overlay.style.display = 'none';
         }
     }
     
     async loadServices() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/utilities/hotel-services.php`, {
-                credentials: 'same-origin',
-                headers: { 'Cache-Control': 'no-cache' }
-            });
+            console.log('Loading hotel services...');
             
-            if (!response.ok) {
-                throw new Error(`Failed to load hotel services: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const response = await this.api.get('/api/admin/pages/utilities/hotel-services.php');
+            const data = response.data;
             
             if (!data.success) {
                 throw new Error(data.error || 'Failed to load hotel services');
             }
             
             this.services = data.services || [];
+            console.log('Loaded services:', this.services);
+            
             this.renderServices();
             this.updateStats();
             
@@ -100,23 +77,23 @@ class HotelServicesManager {
             // Safely handle the price value
             let price = 0;
             try {
-                price = parseFloat(service.fee || 0);
+                price = parseFloat(service.price || 0);
                 if (isNaN(price)) price = 0;
             } catch (e) {
-                console.warn('Invalid price for service:', service.service_id, service.fee);
+                console.warn('Invalid price for service:', service.service_id, service.price);
                 price = 0;
             }
 
             const isComplimentary = service.is_complimentary;
-            const feeDisplay = isComplimentary ? 'Complimentary' : `₱${price.toLocaleString()}`;
+            const priceDisplay = isComplimentary ? 'Complimentary' : this.formatCurrency(price);
             const cardColor = isComplimentary ? 'border-green-200 bg-green-50' : 'border-blue-200 bg-blue-50';
             
             return `
                 <div class="service-card bg-white border ${cardColor} rounded-lg p-4 hover:shadow-md transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex-1">
-                            <h3 class="text-lg font-semibold text-gray-800">${service.service_name}</h3>
-                            ${service.description ? `<p class="text-sm text-gray-600 mt-1">${service.description}</p>` : ''}
+                            <h3 class="text-lg font-semibold text-gray-800">${this.escapeHtml(service.service_name)}</h3>
+                            ${service.description ? `<p class="text-sm text-gray-600 mt-1">${this.escapeHtml(service.description)}</p>` : ''}
                         </div>
                         <div class="flex space-x-2 ml-4">
                             <button onclick="hotelServicesManager.editService(${service.service_id})" 
@@ -132,7 +109,7 @@ class HotelServicesManager {
                     
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-4">
-                            <span class="text-lg font-bold text-gray-800">${feeDisplay}</span>
+                            <span class="text-lg font-bold text-gray-800">${priceDisplay}</span>
                             ${isComplimentary ? 
                                 '<span class="inline-block px-2 py-1 text-xs font-medium bg-green-100 text-green-800 border border-green-200 rounded-full">Free</span>' :
                                 '<span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200 rounded-full">Paid</span>'
@@ -203,13 +180,27 @@ class HotelServicesManager {
         // Modal events
         this.setupModalEvents();
         
-        // Logout functionality
-        const logoutLink = document.getElementById('logoutLink');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', async (e) => {
-                e.preventDefault();
-                await this.handleLogout();
-            });
+        // Setup common event listeners (logout, etc.)
+        this.setupCommonEventListeners();
+        
+        // Clock update
+        this.updateClock();
+        setInterval(() => this.updateClock(), 1000);
+    }
+    
+    updateClock() {
+        const clockElement = document.getElementById('currentDateTime');
+        if (clockElement) {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
+            clockElement.textContent = now.toLocaleDateString('en-US', options);
         }
     }
     
@@ -220,7 +211,7 @@ class HotelServicesManager {
         
         [closeBtn, cancelBtn].forEach(btn => {
             if (btn) {
-                btn.addEventListener('click', () => this.hideModal());
+                btn.addEventListener('click', () => this.hideModal('serviceModal'));
             }
         });
         
@@ -228,7 +219,7 @@ class HotelServicesManager {
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    this.hideModal();
+                    this.hideModal('serviceModal');
                 }
             });
         }
@@ -244,16 +235,16 @@ class HotelServicesManager {
         
         // Complimentary checkbox change
         const complimentaryCheckbox = document.getElementById('isComplimentary');
-        const feeInput = document.getElementById('serviceFee');
+        const priceInput = document.getElementById('serviceFee');
         
-        if (complimentaryCheckbox && feeInput) {
+        if (complimentaryCheckbox && priceInput) {
             complimentaryCheckbox.addEventListener('change', (e) => {
                 if (e.target.checked) {
-                    feeInput.value = '0.00';
-                    feeInput.disabled = true;
+                    priceInput.value = '0.00';
+                    priceInput.disabled = true;
                 } else {
-                    feeInput.disabled = false;
-                    feeInput.focus();
+                    priceInput.disabled = false;
+                    priceInput.focus();
                 }
             });
         }
@@ -264,17 +255,21 @@ class HotelServicesManager {
         const modalTitle = document.getElementById('modalTitle');
         const serviceForm = document.getElementById('serviceForm');
         const serviceId = document.getElementById('serviceId');
-        const feeInput = document.getElementById('serviceFee');
+        const priceInput = document.getElementById('serviceFee');
+        const complimentaryCheckbox = document.getElementById('isComplimentary');
         
         if (modalTitle) modalTitle.textContent = 'Add New Service';
         if (serviceForm) serviceForm.reset();
         if (serviceId) serviceId.value = '';
-        if (feeInput) {
-            feeInput.value = '0.00';
-            feeInput.disabled = false;
+        if (priceInput) {
+            priceInput.value = '0.00';
+            priceInput.disabled = false;
+        }
+        if (complimentaryCheckbox) {
+            complimentaryCheckbox.checked = false;
         }
         
-        this.showModal();
+        this.showModal('serviceModal');
     }
     
     editService(serviceId) {
@@ -284,21 +279,21 @@ class HotelServicesManager {
         this.currentEditId = serviceId;
         
         // Safely parse the fee
-        let fee = 0;
+        let price = 0;
         try {
-            fee = parseFloat(service.fee || 0);
-            if (isNaN(fee)) fee = 0;
+            price = parseFloat(service.price || 0);
+            if (isNaN(price)) price = 0;
         } catch (e) {
-            console.warn('Invalid fee for service:', serviceId, service.fee);
-            fee = 0;
+            console.warn('Invalid price for service:', serviceId, service.price);
+            price = 0;
         }
 
         const elements = [
             { id: 'modalTitle', value: 'Edit Service', prop: 'textContent' },
             { id: 'serviceId', value: service.service_id, prop: 'value' },
             { id: 'serviceName', value: service.service_name, prop: 'value' },
-            { id: 'serviceDescription', value: service.description, prop: 'value' },
-            { id: 'serviceFee', value: fee.toFixed(2), prop: 'value' },
+            { id: 'serviceDescription', value: service.description || '', prop: 'value' },
+            { id: 'serviceFee', value: price.toFixed(2), prop: 'value' },
             { id: 'isComplimentary', value: service.is_complimentary, prop: 'checked' }
         ];
         
@@ -310,12 +305,12 @@ class HotelServicesManager {
         });
         
         // Handle fee input state
-        const feeInput = document.getElementById('serviceFee');
-        if (feeInput) {
-            feeInput.disabled = service.is_complimentary;
+        const priceInput = document.getElementById('serviceFee');
+        if (priceInput) {
+            priceInput.disabled = service.is_complimentary;
         }
         
-        this.showModal();
+        this.showModal('serviceModal');
     }
     
     async deleteService(serviceId) {
@@ -332,36 +327,26 @@ class HotelServicesManager {
         }
         
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/utilities/hotel-services.php`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify({ service_id: serviceId })
+            console.log('Deleting service:', serviceId);
+            
+            await this.api.delete('/api/admin/pages/utilities/hotel-services.php', {
+                data: { service_id: serviceId }
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const result = await response.json();
-            
-            if (!result.success) {
-                throw new Error(result.error || 'Failed to delete service');
-            }
             
             this.showSuccess('Service deleted successfully');
             await this.loadServices();
             
         } catch (error) {
             console.error('Failed to delete service:', error);
-            this.showError('Failed to delete service: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to delete service: ' + errorMessage);
         }
     }
     
     async saveService() {
         try {
+            console.log('Saving service...');
+            
             const saveBtn = document.getElementById('saveBtn');
             const saveBtnText = document.getElementById('saveBtnText');
             
@@ -369,25 +354,32 @@ class HotelServicesManager {
             if (saveBtn) saveBtn.disabled = true;
             if (saveBtnText) saveBtnText.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
             
+            // Get form data
+            const serviceName = this.getElementValue('serviceName').trim();
+            const description = this.getElementValue('serviceDescription').trim();
+            const isComplimentary = document.getElementById('isComplimentary')?.checked || false;
+            let price = 0;
+            
+            if (!isComplimentary) {
+                price = parseFloat(this.getElementValue('serviceFee')) || 0;
+            }
+            
             const formData = {
-                service_name: this.getElementValue('serviceName').trim(),
-                description: this.getElementValue('serviceDescription').trim(),
-                fee: parseFloat(this.getElementValue('serviceFee')) || 0,
-                is_complimentary: document.getElementById('isComplimentary')?.checked || false
+                service_name: serviceName,
+                description: description,
+                price: price,
+                is_complimentary: isComplimentary
             };
+            
+            console.log('Form data:', formData);
             
             // Validation
             if (!formData.service_name) {
                 throw new Error('Please enter a service name');
             }
             
-            if (formData.fee < 0) {
+            if (formData.price < 0) {
                 throw new Error('Fee cannot be negative');
-            }
-            
-            // If complimentary, set fee to 0
-            if (formData.is_complimentary) {
-                formData.fee = 0;
             }
             
             const isEdit = this.currentEditId !== null;
@@ -395,38 +387,32 @@ class HotelServicesManager {
                 formData.service_id = this.currentEditId;
             }
             
-            const response = await fetch(`${this.baseURL}/api/admin/pages/utilities/hotel-services.php`, {
-                method: isEdit ? 'PUT' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(formData)
-            });
+            console.log('Sending request:', isEdit ? 'PUT' : 'POST', formData);
             
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
+            const response = isEdit 
+                ? await this.api.put('/api/admin/pages/utilities/hotel-services.php', formData)
+                : await this.api.post('/api/admin/pages/utilities/hotel-services.php', formData);
             
-            const result = await response.json();
+            const result = response.data;
             
             if (!result.success) {
                 throw new Error(result.error || 'Failed to save service');
             }
             
             this.showSuccess(`Service ${isEdit ? 'updated' : 'created'} successfully`);
-            this.hideModal();
+            this.hideModal('serviceModal');
             await this.loadServices();
             
         } catch (error) {
             console.error('Failed to save service:', error);
-            this.showError('Failed to save service: ' + error.message);
+            const errorMessage = error.response?.data?.error || error.message;
+            this.showError('Failed to save service: ' + errorMessage);
         } finally {
             // Re-enable button
             const saveBtn = document.getElementById('saveBtn');
             const saveBtnText = document.getElementById('saveBtnText');
             if (saveBtn) saveBtn.disabled = false;
-            if (saveBtnText) saveBtnText.textContent = 'Save Service';
+            if (saveBtnText) saveBtnText.innerHTML = '<i class="fas fa-save"></i><span>Save Service</span>';
         }
     }
     
@@ -434,79 +420,12 @@ class HotelServicesManager {
         const element = document.getElementById(id);
         return element ? element.value : '';
     }
-    
-    showModal() {
-        const modal = document.getElementById('serviceModal');
-        if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-    }
-    
-    hideModal() {
-        const modal = document.getElementById('serviceModal');
-        if (modal) {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-        this.currentEditId = null;
-    }
-    
-    async handleLogout() {
-        try {
-            const response = await fetch(`${this.baseURL}/api/auth/logout.php`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin'
-            });
-            
-            window.location.href = `${this.baseURL}/api/auth/login.html`;
-        } catch (error) {
-            console.error('Logout error:', error);
-            window.location.href = `${this.baseURL}/api/auth/login.html`;
-        }
-    }
-    
-    showSuccess(message) {
-        this.showNotification(message, 'success');
-    }
-    
-    showError(message) {
-        this.showNotification(message, 'error');
-    }
-    
-    showNotification(message, type = 'info') {
-        const colors = {
-            info: 'bg-blue-100 border-blue-400 text-blue-700',
-            success: 'bg-green-100 border-green-400 text-green-700',
-            warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-            error: 'bg-red-100 border-red-400 text-red-700'
-        };
-        
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 ${colors[type]} px-4 py-3 rounded shadow-lg z-50 max-w-md border`;
-        notification.innerHTML = `
-            <div class="flex items-center">
-                <span class="whitespace-pre-line">${message}</span>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-lg">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 5000);
-    }
 }
 
 // Initialize hotel services manager when DOM is loaded
 let hotelServicesManager;
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing hotel services manager...');
     hotelServicesManager = new HotelServicesManager();
 });
