@@ -55,3 +55,101 @@
 [FRONTDESK_BILLING] 2025-08-18 02:20:13 - Error handling POST request: Failed to create invoice: Invoice already exists for this reservation
 [FRONTDESK_BILLING] 2025-08-19 03:23:49 - Invoice created with ID: 3 for reservation: 16
 [FRONTDESK_BILLING] 2025-08-19 03:24:23 - Payment recorded: ₱5000 for invoice ID: 3
+[FRONTDESK_BILLING] 2025-08-22 04:20:33 - Invoice created with ID: 4 for reservation: 22
+[FRONTDESK_BILLING] 2025-08-22 04:20:54 - Error handling POST request: Failed to create invoice: Invoice already exists for this reservation
+[FRONTDESK_BILLING] 2025-08-22 04:29:00 - Payment recorded: ₱2300 for invoice ID: 4
+[FRONTDESK_BILLING] 2025-08-22 04:29:31 - Payment recorded: ₱960 for invoice ID: 3
+[FRONTDESK_BILLING] 2025-08-22 05:03:55 - Error retrieving billing records: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.due_date' in 'field list'
+[FRONTDESK_BILLING] 2025-08-22 05:03:55 - Error in GET request: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.due_date' in 'field list'
+[FRONTDESK_BILLING] 2025-08-22 05:03:55 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.due_date' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 04:51:21 - Unauthorized access attempt
+[FRONTDESK_BILLING] 2025-08-24 04:59:34 - Unauthorized access attempt - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 04:59:34 - Access denied for user role: unknown - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:00 - Unauthorized access attempt - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:00 - Access denied for user role: unknown - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:00 - Error handling POST request: Failed to create invoice: Invoice already exists for this reservation
+[FRONTDESK_BILLING] 2025-08-24 05:00:40 - Unauthorized access attempt - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:40 - Access denied for user role: unknown - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:40 - Invoice created with ID: 7 for reservation: 26
+[FRONTDESK_BILLING] 2025-08-24 05:00:47 - Unauthorized access attempt - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:47 - Access denied for user role: unknown - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:00:47 - Payment recorded: ₱4000 for invoice ID: 7
+[FRONTDESK_BILLING] 2025-08-24 05:23:57 - Access denied for user role: admin - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 05:43:09 - Access denied for user role: admin - but allowing for development
+[FRONTDESK_BILLING] 2025-08-24 08:52:42 - Error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:52:42 - Error in GET request: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:52:42 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:53:05 - Error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:53:05 - Error in GET request: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:53:05 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:53:29 - Error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:53:29 - Error in GET request: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:53:29 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:54:22 - Error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:54:22 - Error in GET request: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 08:54:22 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:00 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:08 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:11 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:11 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:14 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:39 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:00:42 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:01:11 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:01:31 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 09:01:31 - Creating invoice with input: {"action":"create_invoice","reservation_id":28,"total_amount":13220,"paid_amount":5000,"payment_method":"cash","payment_status":"Pending","notes":"Advance Payment"}
+[FRONTDESK_BILLING] 2025-08-24 09:01:31 - Failed to create invoice: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:22:26 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 09:22:47 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 09:22:47 - Creating invoice with input: {"action":"create_invoice","reservation_id":28,"total_amount":13220,"paid_amount":5000,"payment_method":null,"payment_status":"Pending","notes":"Advance Payment"}
+[FRONTDESK_BILLING] 2025-08-24 09:22:47 - Failed to create invoice: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:22:43 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:22:46 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:25:30 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:26:32 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:27:12 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:27:37 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:27:51 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 12:27:51 - Creating invoice with input: {"action":"create_invoice","reservation_id":28,"total_amount":13220,"paid_amount":5000,"payment_method":"cash","payment_status":"Pending","notes":""}
+[FRONTDESK_BILLING] 2025-08-24 12:27:51 - Failed to create invoice: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:33:47 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:34:00 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:38:17 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:39:29 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:40:47 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:42:15 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:53:21 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 12:55:44 - Database error retrieving invoices: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.payment_method' in 'field list'
+[FRONTDESK_BILLING] 2025-08-24 14:34:51 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 14:34:51 - Creating invoice with input: {"action":"create_invoice","reservation_id":28,"total_amount":13220,"paid_amount":5000,"payment_method":"cash","payment_status":"\ud83d\udfe1 Pending","notes":"Advance Payment"}
+[FRONTDESK_BILLING] 2025-08-24 14:34:51 - Invoice created successfully with ID: 8
+[FRONTDESK_BILLING] 2025-08-24 14:42:20 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-24 14:42:20 - Recording payment with input: {"action":"record_payment","invoice_id":8,"amount":8220,"payment_method":"1","reference_number":"PAY-1756039340024","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-24 14:42:20 - Payment recorded successfully: ₱8220 for invoice ID: 8
+[FRONTDESK_BILLING] 2025-08-24 14:49:34 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 14:49:34 - Creating invoice with input: {"action":"create_invoice","reservation_id":28,"total_amount":13220,"paid_amount":13220,"payment_method":null,"payment_status":"\ud83d\udfe2 Paid","notes":""}
+[FRONTDESK_BILLING] 2025-08-24 14:49:34 - Invoice already exists for this reservation
+[FRONTDESK_BILLING] 2025-08-24 14:50:08 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 14:50:08 - Creating invoice with input: {"action":"create_invoice","reservation_id":25,"total_amount":4600,"paid_amount":2300,"payment_method":null,"payment_status":"\ud83d\udfe1 Pending","notes":""}
+[FRONTDESK_BILLING] 2025-08-24 14:50:09 - Invoice created successfully with ID: 9
+[FRONTDESK_BILLING] 2025-08-24 14:50:26 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-24 14:50:26 - Recording payment with input: {"action":"record_payment","invoice_id":9,"amount":2300,"payment_method":"1","reference_number":"PAY-1756039826199","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-24 14:50:26 - Payment recorded successfully: ₱2300 for invoice ID: 9
+[FRONTDESK_BILLING] 2025-08-24 15:59:24 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 15:59:24 - Creating invoice with input: {"action":"create_invoice","reservation_id":24,"total_amount":4100,"paid_amount":1650,"payment_method":"cash","payment_status":"\ud83d\udfe1 Pending","notes":"Advance Payment"}
+[FRONTDESK_BILLING] 2025-08-24 15:59:24 - Invoice created successfully with ID: 10
+[FRONTDESK_BILLING] 2025-08-24 16:00:17 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-24 16:00:17 - Recording payment with input: {"action":"record_payment","invoice_id":10,"amount":1200,"payment_method":"1","reference_number":"PAY-1756044017117","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-24 16:00:17 - Payment recorded successfully: ₱1200 for invoice ID: 10
+[FRONTDESK_BILLING] 2025-08-24 16:34:02 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-24 16:34:02 - Recording payment with input: {"action":"record_payment","invoice_id":10,"amount":625,"payment_method":"1","reference_number":"PAY-1756046042880","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-24 16:34:02 - Payment recorded successfully: ₱625 for invoice ID: 10
+[FRONTDESK_BILLING] 2025-08-24 16:56:40 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-24 16:56:40 - Recording payment with input: {"action":"record_payment","invoice_id":10,"amount":625,"payment_method":"1","reference_number":"PAY-1756047400122","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-24 16:56:40 - Payment recorded successfully: ₱625 for invoice ID: 10
+[FRONTDESK_BILLING] 2025-08-24 23:27:34 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-24 23:27:34 - Creating invoice with input: {"action":"create_invoice","reservation_id":30,"total_amount":6060,"paid_amount":0,"payment_method":"cash","payment_status":"\ud83d\udd34 Unpaid","notes":""}
+[FRONTDESK_BILLING] 2025-08-24 23:27:34 - Invoice created successfully with ID: 11
+[FRONTDESK_BILLING] 2025-08-24 23:28:12 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-24 23:28:12 - Recording payment with input: {"action":"record_payment","invoice_id":11,"amount":3030,"payment_method":"1","reference_number":"PAY-1756070892127","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-24 23:28:12 - Payment recorded successfully: ₱3030 for invoice ID: 11

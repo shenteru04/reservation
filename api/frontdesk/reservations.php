@@ -29,6 +29,37 @@ function logError($message) {
     error_log("[FRONTDESK_RESERVATIONS] " . date('Y-m-d H:i:s') . " - " . $message . "\n", 3, $logFile);
 }
 
+// Function to log reservation actions
+function logReservationAction($db, $reservationId, $actionType, $userId, $userType, $oldData = null, $newData = null, $notes = '') {
+    try {
+        $stmt = $db->prepare("
+            INSERT INTO reservation_logs (
+                reservation_id, action_type, user_id, user_type, 
+                old_values, new_values, notes, ip_address, timestamp
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+        
+        $oldValues = $oldData ? json_encode($oldData) : null;
+        $newValues = $newData ? json_encode($newData) : null;
+        $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        
+        $stmt->execute([
+            $reservationId,
+            $actionType,
+            $userId,
+            $userType,
+            $oldValues,
+            $newValues,
+            $notes,
+            $ipAddress
+        ]);
+        
+        logError("Logged action: {$actionType} for reservation {$reservationId}");
+    } catch (Exception $e) {
+        logError("Failed to log reservation action: " . $e->getMessage());
+    }
+}
+
 // Check authentication and role
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     logError("Unauthorized access attempt");
@@ -191,7 +222,7 @@ function getAllReservations($db) {
             FROM reservations r
             LEFT JOIN customers c ON r.customer_id = c.customer_id
             LEFT JOIN rooms rm ON r.room_id = rm.room_id
-            LEFT JOIN room_types rt ON rm.room_type_id = rt.room_type_id
+            LEFT JOIN room_types rt ON COALESCE(rm.room_type_id, r.room_type_id) = rt.room_type_id
             $whereClause
         ";
         
@@ -205,14 +236,19 @@ function getAllReservations($db) {
                 r.reservation_id,
                 r.reservation_type_id,
                 r.room_id,
+                r.room_type_id,
                 r.customer_id,
                 r.check_in_date,
                 r.check_out_date,
+                r.checkin_datetime,
+                r.checkout_datetime,
                 r.reservation_status_id,
                 r.total_amount,
                 r.advance_payment,
                 r.guest_count,
                 r.special_requests,
+                r.booking_type,
+                r.room_assignment_pending,
                 r.created_at,
                 r.updated_at,
                 c.first_name,
@@ -236,7 +272,7 @@ function getAllReservations($db) {
             FROM reservations r
             LEFT JOIN customers c ON r.customer_id = c.customer_id
             LEFT JOIN rooms rm ON r.room_id = rm.room_id
-            LEFT JOIN room_types rt ON rm.room_type_id = rt.room_type_id
+            LEFT JOIN room_types rt ON COALESCE(rm.room_type_id, r.room_type_id) = rt.room_type_id
             LEFT JOIN reservation_status rs ON r.reservation_status_id = rs.reservation_status_id
             LEFT JOIN reservation_type rst ON r.reservation_type_id = rst.reservation_type_id
             LEFT JOIN advance_payments ap ON r.reservation_id = ap.reservation_id
@@ -261,14 +297,19 @@ function getAllReservations($db) {
                 'reservation_id' => (int)$reservation['reservation_id'],
                 'reservation_type_id' => (int)$reservation['reservation_type_id'],
                 'room_id' => (int)$reservation['room_id'],
+                'room_type_id' => (int)$reservation['room_type_id'],
                 'customer_id' => (int)$reservation['customer_id'],
                 'check_in_date' => $reservation['check_in_date'],
                 'check_out_date' => $reservation['check_out_date'],
+                'checkin_datetime' => $reservation['checkin_datetime'],
+                'checkout_datetime' => $reservation['checkout_datetime'],
                 'reservation_status_id' => (int)$reservation['reservation_status_id'],
                 'total_amount' => (float)($reservation['total_amount'] ?: 0),
                 'advance_payment' => (float)($reservation['advance_payment'] ?: 0),
                 'guest_count' => (int)($reservation['guest_count'] ?: 1),
                 'special_requests' => $reservation['special_requests'] ?: '',
+                'booking_type' => $reservation['booking_type'] ?: 'specific_room',
+                'room_assignment_pending' => (bool)($reservation['room_assignment_pending'] ?? false),
                 'created_at' => $reservation['created_at'],
                 'updated_at' => $reservation['updated_at'],
                 'first_name' => $reservation['first_name'] ?: '',
@@ -342,8 +383,8 @@ function getSingleReservation($db, $reservationId) {
                 ps.status_name as payment_status
             FROM reservations r
             JOIN customers c ON r.customer_id = c.customer_id
-            JOIN rooms room ON r.room_id = room.room_id
-            JOIN room_types rt ON room.room_type_id = rt.room_type_id
+            LEFT JOIN rooms room ON r.room_id = room.room_id
+            LEFT JOIN room_types rt ON COALESCE(room.room_type_id, r.room_type_id) = rt.room_type_id
             JOIN reservation_status rs ON r.reservation_status_id = rs.reservation_status_id
             LEFT JOIN advance_payments ap ON r.reservation_id = ap.reservation_id
             LEFT JOIN payment_methods pm ON ap.payment_method_id = pm.payment_method_id
@@ -505,6 +546,13 @@ function handlePut($db) {
         }
         
         $reservationId = $input['reservation_id'];
+        $action = $input['action'] ?? '';
+        
+        // Handle room assignment for room type bookings
+        if ($action === 'assign_room') {
+            handleRoomAssignment($db, $reservationId, $input);
+            return;
+        }
         
         // Get current reservation data
         $currentReservation = getCurrentReservation($db, $reservationId);
@@ -711,29 +759,57 @@ function createOrUpdateCustomer($db, $input) {
 
 function createReservation($db, $input, $customerId) {
     $advancePayment = (float)($input['advance_payment'] ?? 0);
-    
+
+    // Compose full datetime for check-in/out, using frontend value or default times
+    $check_in_date = $input['check_in_date'];
+    $check_out_date = $input['check_out_date'];
+    $checkin_time = '15:00:00'; // 3pm default
+    $checkout_time = '12:00:00'; // 12pm default
+
+    if (!empty($input['checkin_datetime'])) {
+        $checkin_datetime = $input['checkin_datetime'];
+    } else {
+        // If frontend supplies just a time, use that
+        if (!empty($input['checkin_time'])) {
+            $checkin_time = $input['checkin_time'];
+        }
+        $checkin_datetime = "$check_in_date $checkin_time";
+    }
+
+    if (!empty($input['checkout_datetime'])) {
+        $checkout_datetime = $input['checkout_datetime'];
+    } else {
+        if (!empty($input['checkout_time'])) {
+            $checkout_time = $input['checkout_time'];
+        }
+        $checkout_datetime = "$check_out_date $checkout_time";
+    }
+
     $stmt = $db->prepare("
         INSERT INTO reservations (
-            reservation_type_id, room_id, customer_id, check_in_date, 
-            check_out_date, reservation_status_id, total_amount, 
+            reservation_type_id, room_id, customer_id, check_in_date, checkin_datetime,
+            check_out_date, checkout_datetime, reservation_status_id, total_amount,
             advance_payment, guest_count, special_requests, created_at, updated_at
-        ) VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+        ) VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     ");
-    
+
     $stmt->execute([
         $input['room_id'],
         $customerId,
-        $input['check_in_date'],
-        $input['check_out_date'],
+        $check_in_date,
+        $checkin_datetime,
+        $check_out_date,
+        $checkout_datetime,
         $input['reservation_status_id'] ?? 1,
         (float)($input['total_amount'] ?? 0),
         $advancePayment,
         (int)($input['guest_count'] ?? 1),
         $input['special_requests'] ?? null
     ]);
-    
+
     return $db->lastInsertId();
 }
+
 
 function createAdvancePayment($db, $reservationId, $amount, $paymentMethodId, $referenceNumber = '') {
     // Determine payment status based on payment method and reference number
@@ -907,6 +983,9 @@ function getCurrentReservation($db, $reservationId) {
 }
 
 function updateReservation($db, $reservationId, $input) {
+    // Get current reservation data for logging
+    $currentReservation = getCurrentReservation($db, $reservationId);
+    
     $updateFields = [];
     $updateValues = [];
     
@@ -923,10 +1002,19 @@ function updateReservation($db, $reservationId, $input) {
         'special_requests' => 'special_requests'
     ];
     
+    $changedFields = [];
     foreach ($fieldMap as $inputField => $dbField) {
         if (isset($input[$inputField]) && $input[$inputField] !== '') {
             $updateFields[] = "$dbField = ?";
             $updateValues[] = $input[$inputField];
+            
+            // Track what changed for logging
+            if ($currentReservation && $currentReservation[$dbField] != $input[$inputField]) {
+                $changedFields[$dbField] = [
+                    'old' => $currentReservation[$dbField],
+                    'new' => $input[$inputField]
+                ];
+            }
         }
     }
     
@@ -937,6 +1025,27 @@ function updateReservation($db, $reservationId, $input) {
         $sql = "UPDATE reservations SET " . implode(', ', $updateFields) . " WHERE reservation_id = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute($updateValues);
+        
+        // Log the update if there were changes
+        if (!empty($changedFields)) {
+            $userId = $_SESSION['user_id'] ?? 0;
+            $userType = 'front_desk';
+            
+            // Determine the specific action type based on what changed
+            $actionType = 'reservation_updated';
+            if (isset($changedFields['reservation_status_id'])) {
+                $actionType = 'status_changed';
+            }
+            if (isset($changedFields['room_id'])) {
+                $actionType = 'room_assigned';
+            }
+            if (isset($changedFields['total_amount'])) {
+                $actionType = 'amount_updated';
+            }
+            
+            $notes = 'Reservation updated by front desk staff';
+            logReservationAction($db, $reservationId, $actionType, $userId, $userType, $currentReservation, $input, $notes);
+        }
     }
 }
 
@@ -973,5 +1082,74 @@ function deleteReservationServices($db, $reservationId) {
     // Delete service requests
     $deleteRequestsStmt = $db->prepare("DELETE FROM service_requests WHERE reservation_id = ?");
     $deleteRequestsStmt->execute([$reservationId]);
+}
+
+function handleRoomAssignment($db, $reservationId, $input) {
+    try {
+        if (empty($input['room_id'])) {
+            throw new Exception('Room ID is required for assignment');
+        }
+        
+        $roomId = (int)$input['room_id'];
+        
+        // Get reservation details
+        $reservation = getCurrentReservation($db, $reservationId);
+        if (!$reservation) {
+            throw new Exception('Reservation not found');
+        }
+        
+        // Check if room is available
+        if (!isRoomAvailable($db, $roomId, $reservation['check_in_date'], $reservation['check_out_date'], $reservationId)) {
+            throw new Exception('Selected room is not available for the reservation dates');
+        }
+        
+        // Begin transaction
+        $db->beginTransaction();
+        
+        try {
+            // Update reservation with room assignment
+            $updateStmt = $db->prepare("
+                UPDATE reservations 
+                SET room_id = ?, room_assignment_pending = 0, updated_at = NOW()
+                WHERE reservation_id = ?
+            ");
+            $updateStmt->execute([$roomId, $reservationId]);
+            
+            // Update room status to reserved
+            updateRoomStatusForReservation($db, $roomId, 2); // Confirmed status
+            
+            $db->commit();
+            
+            // Log the room assignment
+            $userId = $_SESSION['user_id'] ?? 0;
+            $userType = 'front_desk';
+            $oldData = ['room_id' => $reservation['room_id']];
+            $newData = ['room_id' => $roomId];
+            $notes = "Room {$roomId} assigned to reservation by front desk staff";
+            
+            logReservationAction($db, $reservationId, 'room_assigned', $userId, $userType, $oldData, $newData, $notes);
+            
+            logError("Room {$roomId} assigned to reservation {$reservationId}");
+            
+            echo json_encode([
+                'success' => true,
+                'message' => 'Room assigned successfully',
+                'reservation_id' => $reservationId,
+                'room_id' => $roomId
+            ]);
+            
+        } catch (Exception $e) {
+            $db->rollback();
+            throw $e;
+        }
+        
+    } catch (Exception $e) {
+        logError("Error assigning room: " . $e->getMessage());
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'error' => $e->getMessage()
+        ]);
+    }
 }
 ?>

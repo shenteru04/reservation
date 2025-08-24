@@ -468,3 +468,650 @@
 [FRONTDESK_RESERVATIONS] 2025-08-20 12:49:30 - Loaded 3 payment methods
 [FRONTDESK_RESERVATIONS] 2025-08-20 12:49:30 - Front desk retrieved 11 reservations (total: 11)
 [FRONTDESK_RESERVATIONS] 2025-08-20 12:49:39 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:15 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:15 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:19 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:31 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:31 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:48 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:00:51 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:03:46 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:03:46 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:05:36 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:05:36 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:50:39 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:50:39 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:52:57 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:52:57 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:54:31 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:55:46 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:55:46 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 04:55:52 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:07 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:07 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:14 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:17 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:17 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:24 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:24:24 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:54:11 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:54:11 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:57:21 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 05:57:21 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:11:51 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:11:51 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:15:54 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:15:54 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:29:41 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:29:53 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:41:18 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:41:18 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 06:41:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:32:20 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:32:20 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:32:58 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:32:58 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:33:07 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:36:44 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:36:44 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:37:01 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:37:01 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:37:38 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:37:44 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:38:12 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:38:12 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:38:58 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:39:04 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:39:12 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:39:33 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:39:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:39:50 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:39:59 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:43:37 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:43:59 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:43:59 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:44:33 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:44:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:44:46 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:44:51 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:44:53 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:44:57 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:45:01 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:47:01 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:47:01 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:47:07 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:47:57 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:48:05 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:48:56 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:48:56 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:08 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:09 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:14 - Received booking data: {"action":"update_status","reservation_id":23,"status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:14 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:14 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:14 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:14 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:23 - Received booking data: {"action":"update_status","reservation_id":23,"status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:23 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:23 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:23 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:23 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:33 - Received booking data: {"action":"update_status","reservation_id":23,"status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:33 - Error creating reservation: Missing required field: first_name
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:33 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:50 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:54:50 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:55:01 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:55:01 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:55:07 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 07:56:11 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:32 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:32 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:39 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:39 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:39 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:40 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:40 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:41 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:41 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:41 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:41 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:42 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Received PUT request for reservation 23 with data: {"reservation_id":23,"reservation_status_id":2}
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Status update: 1 -> 2 for reservation 23
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:43 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:01:50 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:30 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:30 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:37 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:39 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:41 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:51 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:51 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:52 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:52 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:04:52 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:06:17 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:07:18 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:07:18 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:07:30 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:10:14 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:10:14 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:13:16 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:13:16 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:14:46 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:14:46 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:15:07 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:15:07 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:15:29 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:15:29 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:15:30 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:17:54 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:17:54 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:18:01 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:29:38 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:29:38 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:29:52 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:29:52 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:40:00 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:40:00 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-21 08:40:08 - Error updating reservation: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:25:42 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:25:42 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:25:47 - Front desk updated reservation with ID: 22
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:25:47 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:25:55 - Front desk updated reservation with ID: 21
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:25:55 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:26:00 - Front desk updated reservation with ID: 17
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:26:00 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:26:05 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:07 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:09 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:09 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:13 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:34 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:34 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:45 - Front desk updated reservation with ID: 22
+[FRONTDESK_RESERVATIONS] 2025-08-21 09:30:45 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:14:40 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:14:40 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:14:57 - Front desk updated reservation with ID: 18
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:14:57 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:17:19 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:17:19 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:18:32 - Front desk retrieved single reservation: 12
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:19:06 - Front desk updated reservation with ID: 12
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:19:06 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:19:27 - Front desk updated reservation with ID: 12
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:19:27 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:21:15 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:21:15 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:21:24 - Front desk updated reservation with ID: 23
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:21:24 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:28 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:29 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:30 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:33 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:35 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:37 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:38 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:22:39 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:24:47 - Front desk retrieved 13 reservations (total: 13)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:25:35 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:25:40 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:26:11 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:27:18 - Front desk updated reservation with ID: 24
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:27:18 - Front desk retrieved 13 reservations (total: 13)
+[FRONTDESK_RESERVATIONS] 2025-08-22 01:27:24 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-22 03:44:44 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 03:44:44 - Front desk retrieved 13 reservations (total: 13)
+[FRONTDESK_RESERVATIONS] 2025-08-22 03:44:46 - Front desk retrieved 13 reservations (total: 13)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:18:04 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:18:04 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:18:09 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:18:17 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:18:17 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:18:31 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:19:24 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:19:24 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:19:33 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:19:46 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:19:56 - Loaded 3 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:19:56 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:20:10 - Front desk updated reservation with ID: 22
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:20:10 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:20:11 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 04:28:36 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:03:55 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:04:13 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:06:42 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:06:42 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:32:16 - Front desk retrieved single reservation: 22
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:32:50 - Front desk retrieved single reservation: 12
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:34:01 - Front desk updated reservation with ID: 21
+[FRONTDESK_RESERVATIONS] 2025-08-22 05:34:01 - Front desk retrieved 11 reservations (total: 11)
+[FRONTDESK_RESERVATIONS] 2025-08-22 12:17:10 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 12:17:10 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-22 12:18:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-22 12:18:24 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-22 12:18:33 - Front desk updated reservation with ID: 23
+[FRONTDESK_RESERVATIONS] 2025-08-22 12:18:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:36:38 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:36:38 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:36:40 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:47:35 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:47:54 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:47:54 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:47:56 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:48:30 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:48:33 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 02:48:37 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 03:05:50 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 03:06:03 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 03:06:03 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 03:06:26 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:21:49 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:21:49 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:21:55 - Front desk retrieved single reservation: 23
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:21:59 - Front desk retrieved single reservation: 23
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:22:12 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:36:22 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:36:56 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:38:16 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:38:50 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:38:50 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:39:34 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:39:38 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:46:09 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:47:49 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:47:49 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:48:06 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:48:06 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:50:38 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:50:44 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:50:44 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:50:49 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:56:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:56:24 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:56:32 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:56:32 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-23 16:56:43 - Front desk retrieved 12 reservations (total: 12)
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:29:16 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:29:17 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:29:19 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:29:19 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:29:24 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:32:05 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:32:05 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:32:16 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:32:22 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:32:41 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:32:41 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:53:23 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 02:53:23 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:02:18 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:02:18 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:02:35 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:02:56 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:02:56 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:03:04 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:03:45 - Front desk updated reservation with ID: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:03:45 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:13:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:13:24 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:20:34 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:20:34 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:21:24 - Room 24 assigned to reservation 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:21:24 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:21:36 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:21:39 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:24:51 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:24:51 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:37:53 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:37:56 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:57:46 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:57:46 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:58:42 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 03:58:43 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:00:49 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:00:51 - Front desk retrieved single reservation: 24
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:03:18 - Room 7 assigned to reservation 25
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:03:18 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:08:32 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:08:32 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:36:53 - Front desk updated reservation with ID: 25
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:36:53 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:36:58 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:36:58 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:44:36 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:44:36 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:47:01 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:47:10 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:47:25 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 04:56:07 - Front desk retrieved 2 reservations (total: 2)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:02:07 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:02:16 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:23:58 - Access denied for user role: admin
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:43:09 - Access denied for user role: admin
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:43:21 - Access denied for user role: admin
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:43:39 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:43:44 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:50:15 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:50:15 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Received booking data: {"first_name":"Shankai","last_name":"Bai","email":"shangkaibai@hotel.com","phone_number":"09354623235","room_id":33,"check_in_date":"2025-08-26","check_out_date":"2025-08-29","guest_count":2,"special_requests":null,"reservation_status_id":1,"total_amount":3920,"advance_payment":2000,"payment_method_id":1,"reference_number":null,"services":[4,5],"menu_items":[{"id":1,"quantity":1}]}
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Customer ID: 6
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Reservation ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Adding services: [4,5]
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'service_price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Error adding service 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'service_price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Adding menu items: [{"id":1,"quantity":1}]
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Added menu item 1 with quantity 1 and total 320
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Updated total amount to: 4240
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Created advance payment ID: 18
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Front desk created reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:13 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:31 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:51:31 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:52:02 - Logged action: status_changed for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:52:02 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:52:02 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:34 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:34 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:46 - Logged action: status_changed for reservation 26
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:46 - Front desk updated reservation with ID: 26
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:46 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:51 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:53:51 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:54:09 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:55:46 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 05:55:46 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:23:50 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:38:56 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:38:57 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:00 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:38 - Logged action: amount_updated for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:38 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:38 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:51 - Logged action: status_changed for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:51 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:51 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:55 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:39:55 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:43:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:43:24 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:43:28 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:43:58 - Logged action: amount_updated for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:43:58 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:43:58 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:46:03 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:46:03 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:46:08 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:47:52 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:47:52 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:47:56 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:48:25 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:48:25 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:48:29 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:51:09 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:51:09 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:51:12 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:10 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:10 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:15 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:28 - Logged action: status_changed for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:28 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:28 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:52:37 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:53:11 - Logged action: amount_updated for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:53:11 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:53:11 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:53:17 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 06:53:17 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:54:10 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:54:10 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:54:15 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:58:41 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:58:41 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:58:46 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:59:12 - Logged action: amount_updated for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:59:12 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:59:12 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 07:59:35 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:05:25 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:05:25 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:05:28 - Front desk retrieved single reservation: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:05:51 - Logged action: amount_updated for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:05:51 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:05:51 - Front desk retrieved 3 reservations (total: 3)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Received booking data: {"first_name":"Shankai","last_name":"Bai","email":"shangkaibai@hotel.com","phone_number":"0966343734643","room_id":14,"room_type_id":3,"check_in_date":"2025-08-27","check_out_date":"2025-08-31","checkin_datetime":"2025-08-27 16:00:00","checkout_datetime":"2025-08-31 13:00:00","guest_count":3,"special_requests":null,"reservation_type_id":1,"booking_type":"room","room_assignment_pending":0,"reservation_status_id":1,"total_amount":11810,"advance_payment":5000,"payment_method_id":1,"reference_number":null,"services":[4],"menu_items":[{"id":1,"quantity":1},{"id":4,"quantity":1},{"id":23,"quantity":1},{"id":10,"quantity":1},{"id":6,"quantity":1}]}
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Customer ID: 6
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Reservation ID: 28
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Adding services: [4]
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Error adding service 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'service_price' in 'field list'
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Adding menu items: [{"id":1,"quantity":1},{"id":4,"quantity":1},{"id":23,"quantity":1},{"id":10,"quantity":1},{"id":6,"quantity":1}]
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Added menu item 1 with quantity 1 and total 320
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Added menu item 4 with quantity 1 and total 270
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Added menu item 23 with quantity 1 and total 100
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Added menu item 10 with quantity 1 and total 30
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Added menu item 6 with quantity 1 and total 690
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Updated total amount to: 13220
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Created advance payment ID: 19
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Front desk created reservation with ID: 28
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:06:53 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:02 - Logged action: status_changed for reservation 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:02 - Front desk updated reservation with ID: 27
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:02 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:08 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:08 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:19 - Logged action: status_changed for reservation 28
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:19 - Front desk updated reservation with ID: 28
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:19 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:07:44 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:17:03 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:17:03 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:17:50 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:17:50 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:41:20 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:41:20 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:41:25 - Front desk retrieved 0 reservations (total: 0)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:41:27 - Front desk retrieved 1 reservations (total: 1)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:41:35 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:41:38 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:52:42 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:53:29 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 08:54:22 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:00 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:08 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:11 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:11 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:14 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:39 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:00:42 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:01:03 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:01:03 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:01:11 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:22:26 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:23:34 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 09:23:34 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:22:43 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:22:45 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:25:30 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:26:32 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:27:12 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:27:32 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:27:32 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:27:37 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:33:48 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:34:00 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:38:17 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:39:29 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:40:48 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:48:24 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:53:21 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:55:44 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 12:56:06 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:02:25 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:02:38 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:20 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:29 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:40 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:42 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:42 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:46 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:47 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:48 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:55 - Logged action: status_changed for reservation 28
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:55 - Front desk updated reservation with ID: 28
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:08:55 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:09:04 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:09:04 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:11:21 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:11:22 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:11:35 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:12:39 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:12:39 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:12:45 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:12:51 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:12:53 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:12:53 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:13:07 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:13:07 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:13:08 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:14:38 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 13:38:36 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:34:29 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:34:51 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:42:20 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:42:27 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:49:14 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:49:48 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:49:48 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:49:58 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:50:09 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 14:50:26 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:01:09 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:26:52 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:34:19 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:57:37 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:58:14 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:58:15 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:58:27 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 15:59:24 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:00:17 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:01:01 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:33:36 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:34:02 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:44:29 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:56:28 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:56:40 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:57:01 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 16:57:01 - Front desk retrieved 4 reservations (total: 4)
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:06:04 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:06:04 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:06:16 - Front desk retrieved single reservation: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:06:41 - Front desk retrieved single reservation: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:06:44 - Front desk retrieved single reservation: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:24:19 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:24:19 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:24:28 - Front desk retrieved single reservation: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 17:24:48 - Front desk retrieved single reservation: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:19:28 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:19:28 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:19:30 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:19:30 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:20:51 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:20:51 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:31:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:31:24 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:31:38 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:31:38 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:35:33 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:35:33 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:37:19 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:37:19 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:37:50 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:37:50 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:40:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:40:24 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:40:33 - Logged action: status_changed for reservation 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:40:33 - Front desk updated reservation with ID: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:40:33 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:42:03 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:42:03 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:42:13 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:42:14 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:42:16 - Front desk retrieved single reservation: 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:49:22 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:49:22 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:08 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:08 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:21 - Logged action: room_assigned for reservation 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:21 - Room 32 assigned to reservation 29
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:21 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:53 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:50:53 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:53:01 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:53:01 - Front desk retrieved 5 reservations (total: 5)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:54:05 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:54:05 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:57:45 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:57:45 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:58:03 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 22:58:03 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:01:24 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:01:24 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:22:13 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:22:13 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:05 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:05 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:16 - Logged action: room_assigned for reservation 30
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:16 - Room 19 assigned to reservation 30
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:16 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:45 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:26:48 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:12 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:21 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:21 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:27 - Logged action: status_changed for reservation 30
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:27 - Front desk updated reservation with ID: 30
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:27 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:28 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:27:35 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:28:12 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:28:33 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:28:33 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:28:47 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:29:41 - Loaded 5 payment methods
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:29:42 - Front desk retrieved 6 reservations (total: 6)
+[FRONTDESK_RESERVATIONS] 2025-08-24 23:35:02 - Front desk retrieved 6 reservations (total: 6)

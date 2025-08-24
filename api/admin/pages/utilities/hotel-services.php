@@ -1,5 +1,5 @@
 <?php
-// api/admin/pages/hotel-services.php - Enhanced Hotel Services Management API
+// api/admin/pages/utilities/hotel-services.php - Fixed Hotel Services Management API
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
@@ -26,6 +26,7 @@ function logError($message) {
     error_log("[HOTEL-SERVICES] " . date('Y-m-d H:i:s') . " - " . $message . "\n", 3, $logFile);
 }
 
+// Check authentication
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     logError("Unauthorized access attempt");
     http_response_code(401);
@@ -33,11 +34,11 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in']) || $_SESSION[
     exit();
 }
 
+// Database connection paths
 $dbPaths = [
-    __DIR__ . '/../../../config/db.php',
-    __DIR__ . '/../../config/db.php',
-    dirname(dirname(dirname(__DIR__))) . '/config/db.php',
-    $_SERVER['DOCUMENT_ROOT'] . '/reservation/config/db.php'
+    dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/config/db.php',
+    dirname(dirname(dirname(dirname(__DIR__)))) . '/config/db.php',
+    $_SERVER['DOCUMENT_ROOT'] . '/reservation/api/config/db.php'
 ];
 
 $dbLoaded = false;
@@ -45,12 +46,13 @@ foreach ($dbPaths as $path) {
     if (file_exists($path)) {
         require_once $path;
         $dbLoaded = true;
+        logError("Database config loaded from: " . $path);
         break;
     }
 }
 
 if (!$dbLoaded) {
-    logError("Database configuration file not found");
+    logError("Database configuration file not found in paths: " . implode(', ', $dbPaths));
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'Database configuration not found']);
     exit();
@@ -58,6 +60,21 @@ if (!$dbLoaded) {
 
 try {
     $db = getDB();
+    
+    // Create hotel_services table if it doesn't exist
+    $createTableSQL = "
+        CREATE TABLE IF NOT EXISTS hotel_services (
+            service_id INT AUTO_INCREMENT PRIMARY KEY,
+            service_name VARCHAR(255) NOT NULL UNIQUE,
+            description TEXT,
+            price DECIMAL(10,2) DEFAULT 0.00,
+            is_complimentary BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )
+    ";
+    $db->exec($createTableSQL);
+    
     $method = $_SERVER['REQUEST_METHOD'];
     
     switch ($method) {
@@ -91,15 +108,31 @@ try {
 
 function handleGet($db) {
     try {
-        $stmt = $db->prepare("
-            SELECT 
-                hs.*,
-                COUNT(ri.service_id) as usage_count
-            FROM hotel_services hs
-            LEFT JOIN request_items ri ON hs.service_id = ri.service_id
-            GROUP BY hs.service_id
-            ORDER BY hs.is_complimentary DESC, hs.service_name ASC
-        ");
+        // First check if request_items table exists
+        $checkTableSQL = "SHOW TABLES LIKE 'request_items'";
+        $tableExists = $db->query($checkTableSQL)->rowCount() > 0;
+        
+        if ($tableExists) {
+            $stmt = $db->prepare("
+                SELECT 
+                    hs.*,
+                    COALESCE(COUNT(ri.service_id), 0) as usage_count
+                FROM hotel_services hs
+                LEFT JOIN request_items ri ON hs.service_id = ri.service_id
+                GROUP BY hs.service_id
+                ORDER BY hs.is_complimentary DESC, hs.service_name ASC
+            ");
+        } else {
+            // If request_items table doesn't exist, just get services without usage count
+            $stmt = $db->prepare("
+                SELECT 
+                    *,
+                    0 as usage_count
+                FROM hotel_services
+                ORDER BY is_complimentary DESC, service_name ASC
+            ");
+        }
+        
         $stmt->execute();
         $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -109,7 +142,7 @@ function handleGet($db) {
                 'service_id' => (int)$service['service_id'],
                 'service_name' => $service['service_name'],
                 'description' => $service['description'] ?: '',
-                'fee' => (float)$service['fee'],
+                'price' => (float)$service['price'],
                 'is_complimentary' => (bool)$service['is_complimentary'],
                 'usage_count' => (int)$service['usage_count']
             ];
@@ -131,57 +164,69 @@ function handleGet($db) {
 
 function handlePost($db) {
     try {
-        $input = json_decode(file_get_contents('php://input'), true);
+        // Get raw input and decode
+        $inputData = file_get_contents('php://input');
+        logError("Raw POST input: " . $inputData);
+        
+        $input = json_decode($inputData, true);
         
         if (!$input) {
-            throw new Exception('Invalid JSON input');
+            logError("JSON decode error: " . json_last_error_msg());
+            throw new Exception('Invalid JSON input: ' . json_last_error_msg());
         }
         
+        logError("Decoded POST data: " . print_r($input, true));
+        
         // Validate required fields
-        $required = ['service_name'];
-        foreach ($required as $field) {
-            if (!isset($input[$field]) || trim($input[$field]) === '') {
-                throw new Exception("Missing required field: $field");
+        if (!isset($input['service_name']) || trim($input['service_name']) === '') {
+            throw new Exception("Missing required field: service_name");
+        }
+        
+        $serviceName = trim($input['service_name']);
+        $description = isset($input['description']) ? trim($input['description']) : '';
+        $isComplimentary = isset($input['is_complimentary']) ? (bool)$input['is_complimentary'] : false;
+        
+        // Handle price logic
+        $price = 0.00;
+        if (!$isComplimentary) {
+            if (isset($input['price'])) {
+                $price = floatval($input['price']);
+                if ($price < 0) {
+                    throw new Exception('Price cannot be negative');
+                }
             }
         }
         
-        // Set defaults
-        $fee = isset($input['fee']) ? floatval($input['fee']) : 0.00;
-        $isComplimentary = isset($input['is_complimentary']) ? (bool)$input['is_complimentary'] : false;
-        
-        // Validate fee
-        if ($fee < 0) {
-            throw new Exception('Fee cannot be negative');
-        }
-        
-        // If service is complimentary, fee should be 0
-        if ($isComplimentary && $fee > 0) {
-            $fee = 0.00;
-        }
+        logError("Processing service: Name='$serviceName', Description='$description', Price=$price, Complimentary=" . ($isComplimentary ? 'true' : 'false'));
         
         // Check if service name already exists
         $checkStmt = $db->prepare("SELECT service_id FROM hotel_services WHERE service_name = ?");
-        $checkStmt->execute([trim($input['service_name'])]);
+        $checkStmt->execute([$serviceName]);
         if ($checkStmt->fetch()) {
             throw new Exception('Service name already exists');
         }
         
         // Insert new service
         $stmt = $db->prepare("
-            INSERT INTO hotel_services (service_name, description, fee, is_complimentary)
+            INSERT INTO hotel_services (service_name, description, price, is_complimentary)
             VALUES (?, ?, ?, ?)
         ");
         
-        $stmt->execute([
-            trim($input['service_name']),
-            trim($input['description'] ?? ''),
-            $fee,
+        $result = $stmt->execute([
+            $serviceName,
+            $description,
+            $price,
             $isComplimentary ? 1 : 0
         ]);
         
+        if (!$result) {
+            logError("Insert failed: " . print_r($stmt->errorInfo(), true));
+            throw new Exception('Failed to insert service');
+        }
+        
         $serviceId = $db->lastInsertId();
         
-        logError("Hotel service created with ID: " . $serviceId);
+        logError("Hotel service created successfully with ID: " . $serviceId);
         
         echo json_encode([
             'success' => true,
@@ -201,10 +246,14 @@ function handlePost($db) {
 
 function handlePut($db) {
     try {
-        $input = json_decode(file_get_contents('php://input'), true);
+        $inputData = file_get_contents('php://input');
+        logError("Raw PUT input: " . $inputData);
+        
+        $input = json_decode($inputData, true);
         
         if (!$input) {
-            throw new Exception('Invalid JSON input');
+            logError("JSON decode error: " . json_last_error_msg());
+            throw new Exception('Invalid JSON input: ' . json_last_error_msg());
         }
         
         if (empty($input['service_id'])) {
@@ -213,62 +262,98 @@ function handlePut($db) {
         
         $serviceId = $input['service_id'];
         
+        // Get current service data
+        $currentStmt = $db->prepare("SELECT * FROM hotel_services WHERE service_id = ?");
+        $currentStmt->execute([$serviceId]);
+        $currentService = $currentStmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$currentService) {
+            throw new Exception('Service not found');
+        }
+        
         // Build dynamic update query
         $updateFields = [];
         $updateValues = [];
         
-        $allowedFields = ['service_name', 'description', 'fee', 'is_complimentary'];
+        // Handle service name update
+        if (isset($input['service_name']) && trim($input['service_name']) !== '') {
+            $serviceName = trim($input['service_name']);
+            // Check if service name conflicts
+            $checkStmt = $db->prepare("SELECT service_id FROM hotel_services WHERE service_name = ? AND service_id != ?");
+            $checkStmt->execute([$serviceName, $serviceId]);
+            if ($checkStmt->fetch()) {
+                throw new Exception('Service name already exists');
+            }
+            $updateFields[] = "service_name = ?";
+            $updateValues[] = $serviceName;
+        }
         
-        foreach ($allowedFields as $field) {
-            if (isset($input[$field])) {
-                if ($field === 'fee') {
-                    $fee = floatval($input[$field]);
-                    if ($fee < 0) {
-                        throw new Exception('Fee cannot be negative');
+        // Handle description update
+        if (isset($input['description'])) {
+            $updateFields[] = "description = ?";
+            $updateValues[] = trim($input['description']);
+        }
+        
+        // Handle complimentary status and price logic
+        $newIsComplimentary = isset($input['is_complimentary']) ? (bool)$input['is_complimentary'] : (bool)$currentService['is_complimentary'];
+        
+        if (isset($input['is_complimentary'])) {
+            $updateFields[] = "is_complimentary = ?";
+            $updateValues[] = $newIsComplimentary ? 1 : 0;
+            
+            if ($newIsComplimentary) {
+                // If marking as complimentary, set price to 0
+                $updateFields[] = "price = ?";
+                $updateValues[] = 0.00;
+            } else {
+                // If marking as not complimentary, use provided price or keep current if > 0
+                if (isset($input['price'])) {
+                    $newPrice = floatval($input['price']);
+                    if ($newPrice < 0) {
+                        throw new Exception('Price cannot be negative');
                     }
-                    $updateFields[] = "$field = ?";
-                    $updateValues[] = $fee;
-                } elseif ($field === 'is_complimentary') {
-                    $updateFields[] = "$field = ?";
-                    $updateValues[] = (bool)$input[$field] ? 1 : 0;
-                } else {
-                    $updateFields[] = "$field = ?";
-                    $updateValues[] = trim($input[$field]);
+                    $updateFields[] = "price = ?";
+                    $updateValues[] = $newPrice;
+                } elseif ($currentService['price'] == 0) {
+                    throw new Exception('Price is required for non-complimentary services');
                 }
             }
+        } elseif (isset($input['price'])) {
+            // Only updating price, not complimentary status
+            if ($newIsComplimentary) {
+                throw new Exception('Cannot set price for complimentary services');
+            }
+            $newPrice = floatval($input['price']);
+            if ($newPrice < 0) {
+                throw new Exception('Price cannot be negative');
+            }
+            $updateFields[] = "price = ?";
+            $updateValues[] = $newPrice;
         }
         
         if (empty($updateFields)) {
             throw new Exception('No fields to update');
         }
         
-        // If service is being set to complimentary, set fee to 0
-        if (isset($input['is_complimentary']) && $input['is_complimentary'] && !isset($input['fee'])) {
-            $updateFields[] = "fee = ?";
-            $updateValues[] = 0.00;
-        }
-        
-        // Check if service name conflicts (if being updated)
-        if (isset($input['service_name'])) {
-            $checkStmt = $db->prepare("SELECT service_id FROM hotel_services WHERE service_name = ? AND service_id != ?");
-            $checkStmt->execute([trim($input['service_name']), $serviceId]);
-            if ($checkStmt->fetch()) {
-                throw new Exception('Service name already exists');
-            }
-        }
-        
         // Update service
         $updateValues[] = $serviceId;
         $sql = "UPDATE hotel_services SET " . implode(', ', $updateFields) . " WHERE service_id = ?";
         
-        $stmt = $db->prepare($sql);
-        $stmt->execute($updateValues);
+        logError("Update SQL: " . $sql . " with values: " . print_r($updateValues, true));
         
-        if ($stmt->rowCount() === 0) {
-            throw new Exception('Service not found or no changes made');
+        $stmt = $db->prepare($sql);
+        $result = $stmt->execute($updateValues);
+        
+        if (!$result) {
+            logError("Update failed: " . print_r($stmt->errorInfo(), true));
+            throw new Exception('Failed to update service');
         }
         
-        logError("Hotel service updated with ID: " . $serviceId);
+        if ($stmt->rowCount() === 0) {
+            logError("No rows affected by update");
+        }
+        
+        logError("Hotel service updated successfully with ID: " . $serviceId);
         
         echo json_encode([
             'success' => true,
@@ -288,7 +373,8 @@ function handlePut($db) {
 
 function handleDelete($db) {
     try {
-        $input = json_decode(file_get_contents('php://input'), true);
+        $inputData = file_get_contents('php://input');
+        $input = json_decode($inputData, true);
         
         if (!$input || empty($input['service_id'])) {
             throw new Exception('Missing service_id');
@@ -296,13 +382,19 @@ function handleDelete($db) {
         
         $serviceId = $input['service_id'];
         
-        // Check if service is used in any requests
-        $checkStmt = $db->prepare("SELECT COUNT(*) as count FROM request_items WHERE service_id = ?");
-        $checkStmt->execute([$serviceId]);
-        $result = $checkStmt->fetch(PDO::FETCH_ASSOC);
+        // Check if request_items table exists before checking usage
+        $checkTableSQL = "SHOW TABLES LIKE 'request_items'";
+        $tableExists = $db->query($checkTableSQL)->rowCount() > 0;
         
-        if ($result['count'] > 0) {
-            throw new Exception('Cannot delete service that has been used in requests');
+        if ($tableExists) {
+            // Check if service is used in any requests
+            $checkStmt = $db->prepare("SELECT COUNT(*) as count FROM request_items WHERE service_id = ?");
+            $checkStmt->execute([$serviceId]);
+            $result = $checkStmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result['count'] > 0) {
+                throw new Exception('Cannot delete service that has been used in requests');
+            }
         }
         
         // Delete service

@@ -10,3 +10,6 @@
 [STATUS_UPDATE] 2025-08-18 02:19:18 - Reservation 3 status updated from 2 to 3
 [STATUS_UPDATE] 2025-08-18 02:19:26 - Room 18 status updated to 4 for reservation status 4
 [STATUS_UPDATE] 2025-08-18 02:19:26 - Reservation 3 status updated from 3 to 4
+[STATUS_UPDATE] 2025-08-21 07:49:06 - Error updating status: Missing status_id
+[STATUS_UPDATE] 2025-08-21 08:11:11 - Error updating status: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist
+[STATUS_UPDATE] 2025-08-21 08:30:03 - Error updating status: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.notifications' doesn't exist

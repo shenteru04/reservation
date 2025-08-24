@@ -29,6 +29,37 @@ function logError($message) {
     error_log("[FRONTDESK_DASHBOARD] " . date('Y-m-d H:i:s') . " - " . $message . "\n", 3, $logFile);
 }
 
+// Function to log reservation actions
+function logReservationAction($db, $reservationId, $actionType, $userId, $userType, $oldData = null, $newData = null, $notes = '') {
+    try {
+        $stmt = $db->prepare("
+            INSERT INTO reservation_logs (
+                reservation_id, action_type, user_id, user_type, 
+                old_values, new_values, notes, ip_address, timestamp
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+        
+        $oldValues = $oldData ? json_encode($oldData) : null;
+        $newValues = $newData ? json_encode($newData) : null;
+        $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        
+        $stmt->execute([
+            $reservationId,
+            $actionType,
+            $userId,
+            $userType,
+            $oldValues,
+            $newValues,
+            $notes,
+            $ipAddress
+        ]);
+        
+        logError("Logged action: {$actionType} for reservation {$reservationId}");
+    } catch (Exception $e) {
+        logError("Failed to log reservation action: " . $e->getMessage());
+    }
+}
+
 // Check authentication and role
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     logError("Unauthorized access attempt");
@@ -409,6 +440,15 @@ function quickCheckin($db, $input) {
             ");
             $updateRoomStmt->execute([$reservationId]);
             
+            // Log the check-in action
+            $userId = $_SESSION['user_id'] ?? 0;
+            $userType = 'front_desk';
+            $oldData = ['reservation_status_id' => 2];
+            $newData = ['reservation_status_id' => 3];
+            $notes = "Guest checked in by front desk staff";
+            
+            logReservationAction($db, $reservationId, 'check_in', $userId, $userType, $oldData, $newData, $notes);
+            
             $db->commit();
             
             echo json_encode([
@@ -459,6 +499,15 @@ function quickCheckout($db, $input) {
                 WHERE res.reservation_id = ?
             ");
             $updateRoomStmt->execute([$reservationId]);
+            
+            // Log the check-out action
+            $userId = $_SESSION['user_id'] ?? 0;
+            $userType = 'front_desk';
+            $oldData = ['reservation_status_id' => 3];
+            $newData = ['reservation_status_id' => 4];
+            $notes = "Guest checked out by front desk staff";
+            
+            logReservationAction($db, $reservationId, 'check_out', $userId, $userType, $oldData, $newData, $notes);
             
             $db->commit();
             

@@ -1,0 +1,12 @@
+[RESERVATION_LOGS_API] 2025-08-24 02:53:23 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:02:18 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:02:57 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:13:24 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:20:34 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:21:24 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:24:51 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:49:20 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:57:46 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 03:58:43 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 04:03:18 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
+[RESERVATION_LOGS_API] 2025-08-24 04:07:50 - Error fetching all logs: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.reservation_statuses' doesn't exist
