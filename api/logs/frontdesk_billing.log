@@ -153,3 +153,6 @@
 [FRONTDESK_BILLING] 2025-08-24 23:28:12 - Processing POST action: record_payment
 [FRONTDESK_BILLING] 2025-08-24 23:28:12 - Recording payment with input: {"action":"record_payment","invoice_id":11,"amount":3030,"payment_method":"1","reference_number":"PAY-1756070892127","notes":"Payment recorded via front desk"}
 [FRONTDESK_BILLING] 2025-08-24 23:28:12 - Payment recorded successfully: ₱3030 for invoice ID: 11
+[FRONTDESK_BILLING] 2025-08-25 16:56:23 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-25 16:56:23 - Recording payment with input: {"action":"record_payment","invoice_id":11,"amount":2000,"payment_method":"1","reference_number":"PAY-1756133783672","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-25 16:56:23 - Payment recorded successfully: ₱2000 for invoice ID: 11

@@ -126,8 +126,9 @@ try {
         $role = $roles[$user['role_id']] ?? 'guest';
     }
 
-    // Set session variables
-    $_SESSION['user_id'] = $user['employee_id'];
+    // FIXED: Set correct session variables that match what handyman dashboard expects
+    $_SESSION['user_id'] = $user['employee_id'];          // Keep for general use
+    $_SESSION['employee_id'] = $user['employee_id'];      // ADDED: For handyman dashboard
     $_SESSION['role'] = $role;
     $_SESSION['role_id'] = $user['role_id'];
     $_SESSION['name'] = trim($user['first_name'] . ' ' . $user['last_name']);
@@ -152,6 +153,7 @@ try {
         'success' => true,
         'user' => [
             'id' => $user['employee_id'],
+            'employee_id' => $user['employee_id'],  // ADDED: Include employee_id in response
             'name' => $_SESSION['name'],
             'email' => $_SESSION['email'],
             'role' => $role,

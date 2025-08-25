@@ -1,12 +1,21 @@
-<?php
+<?php 
 // api/auth/check.php - Check Authentication Status
+
+// Define the allowed origin.
+// IMPORTANT: In a production environment, replace 'http://localhost' with your actual frontend domain.
+$allowed_origin = 'http://localhost';
+
+// Set headers
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: ' . $allowed_origin);
+header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    // The browser sends an OPTIONS request first to check CORS policy.
+    // We respond with 200 OK to indicate the actual request is allowed.
     http_response_code(200);
     exit();
 }
@@ -38,6 +47,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['logged_in']) && $_SESSION['l
         'authenticated' => true,
         'user' => [
             'id' => $_SESSION['user_id'],
+            'employee_id' => $_SESSION['employee_id'] ?? $_SESSION['user_id'], // ADDED: Include employee_id
             'name' => $_SESSION['name'] ?? 'User',
             'email' => $_SESSION['email'] ?? '',
             'role' => $_SESSION['role'] ?? 'guest',

@@ -1153,7 +1153,144 @@ class EnhancedRoomsManager extends BaseManager {
             if (bulkSaveBtnText) bulkSaveBtnText.textContent = 'Create Rooms';
         }
     }
+// Updated methods for your EnhancedRoomsManager class
+
+// Fetch and display all room maintenance logs
+async viewAllMaintenanceLogs() {
+    const modal = document.getElementById('allMaintenanceLogModal');
+    const loading = document.getElementById('allMaintenanceLogLoading');
+    const content = document.getElementById('allMaintenanceLogContent');
+    const tableBody = document.getElementById('allMaintenanceLogTableBody');
+    const empty = document.getElementById('allMaintenanceLogEmpty');
+
+    loading.classList.remove('hidden');
+    content.classList.add('hidden');
+    empty.classList.add('hidden');
+    tableBody.innerHTML = '';
+
+    try {
+        // Use the 'all=1' parameter to get all maintenance logs
+        const response = await fetch(`/reservation/api/admin/pages/room-maintenance.php?all=1`);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            const text = await response.text();
+            console.error('Non-JSON response:', text);
+            throw new Error('Server returned non-JSON response');
+        }
+
+        const data = await response.json();
+        console.log('Maintenance logs response:', data); // Debug log
+
+        if (!data.success) {
+            throw new Error(data.error || data.message || 'Failed to load logs');
+        }
+
+        if (Array.isArray(data.records) && data.records.length > 0) {
+            tableBody.innerHTML = data.records.map(log => {
+                const statusClass = log.status_name === 'Completed'
+                    ? 'bg-green-100 text-green-800'
+                    : log.status_name === 'In Progress'
+                        ? 'bg-blue-100 text-blue-800'
+                        : 'bg-yellow-100 text-yellow-800';
+
+                return `
+                    <tr class="border-b hover:bg-slate-50">
+                        <td class="py-2 px-4 font-medium text-slate-800">Room ${log.room_number}</td>
+                        <td class="py-2 px-4">
+                            <span class="px-2 py-1 rounded-full text-xs ${statusClass}">
+                                ${log.status_name}
+                            </span>
+                        </td>
+                        <td class="py-2 px-4 text-slate-700">${this.escapeHtml(log.description || log.notes || 'No description')}</td>
+                        <td class="py-2 px-4 text-slate-600">${this.formatDate(log.created_at)}</td>
+                        <td class="py-2 px-4 text-green-600">₱${log.cost ? parseFloat(log.cost).toFixed(2) : '0.00'}</td>
+                        <td class="py-2 px-4 text-blue-700 font-medium">${this.escapeHtml(log.assigned_to_name || 'System')}</td>
+                    </tr>
+                `;
+            }).join('');
+        } else {
+            empty.classList.remove('hidden');
+        }
+    } catch (error) {
+        console.error('Failed to load maintenance logs:', error);
+        tableBody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-red-500">Failed to load logs: ${error.message}</td></tr>`;
+    } finally {
+        loading.classList.add('hidden');
+        content.classList.remove('hidden');
+        modal.classList.remove('hidden');
+    }
 }
+
+// Close the modal
+closeMaintenanceLogModal() {
+    const modal = document.getElementById('allMaintenanceLogModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+// Utility functions
+formatDate(dateStr) {
+    if (!dateStr) return 'N/A';
+    try {
+        return new Date(dateStr).toLocaleDateString();
+    } catch {
+        return 'Invalid Date';
+    }
+}
+
+escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Close the all maintenance log modal
+closeAllMaintenanceLogModal() {
+  const modal = document.getElementById('allMaintenanceLogModal');
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+}
+
+// Helper method to format dates (add this to your class if not already present)
+formatDate(dateString) {
+  if (!dateString) return 'N/A';
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return 'Invalid Date';
+    
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  } catch (error) {
+    console.error('Date formatting error:', error);
+    return 'Invalid Date';
+  }
+}
+
+// Helper method to safely escape HTML (add this to your class if not already present)
+escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Close the all maintenance log modal
+closeAllMaintenanceLogModal() {
+  const modal = document.getElementById('allMaintenanceLogModal');
+  if (modal) modal.classList.add('hidden');
+}
+}
+
 
 // Initialize enhanced rooms manager when DOM is loaded
 let enhancedRoomsManager;

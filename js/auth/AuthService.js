@@ -1,6 +1,11 @@
 class AuthService {
     static baseURL = window.location.origin + '/reservation';
     
+    /**
+     * Creates a default Axios configuration object.
+     * @param {number} [timeout=15000] - Request timeout in milliseconds.
+     * @returns {object} Axios config object.
+     */
     // Configure default Axios settings
     static getAxiosConfig(timeout = 15000) {
         return {
@@ -13,6 +18,12 @@ class AuthService {
         };
     }
     
+    /**
+     * Logs in a user with email and password.
+     * @param {string} email - The user's email.
+     * @param {string} password - The user's password.
+     * @returns {Promise<object>} The response data from the server.
+     */
     static async login(email, password) {
         try {
             console.log('Attempting login for:', email);
@@ -36,6 +47,10 @@ class AuthService {
         }
     }
     
+    /**
+     * Logs out the current user by calling the backend API.
+     * @returns {Promise<object>} The response data from the server.
+     */
     static async logout() {
         try {
             console.log('Attempting logout...');
@@ -59,6 +74,40 @@ class AuthService {
             this.clearUserData();
             
             throw this.handleAxiosError(error, 'Logout failed');
+        }
+    }
+    
+    /**
+     * Performs a full logout, including clearing local data, caches, and redirecting.
+     */
+    static async logoutAndRedirect() {
+        try {
+            await this.logout(); // Call the backend logout endpoint
+            console.log('Logout successful on server.');
+        } catch (error) {
+            console.error('Server logout failed, proceeding with client-side cleanup.', error);
+        } finally {
+            // Clear all stored user data regardless of server response
+            this.clearUserData();
+
+            // Clear service worker cache for a clean state
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            }
+
+            // Clear browser cache for this origin
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                await Promise.all(
+                    cacheNames.map(cacheName => caches.delete(cacheName))
+                );
+            }
+
+            // Redirect to the login page
+            window.location.replace(`${this.baseURL}/pages/auth/login.html`);
         }
     }
     
@@ -220,6 +269,10 @@ class AuthService {
         }
     }
 
+    /**
+     * Clears all authentication-related data from both sessionStorage and localStorage.
+     * This ensures a complete logout from the client side.
+     */
     static clearUserData() {
         const keys = ['user', 'logged_in', 'role', 'token', 'refresh_token'];
         
@@ -229,6 +282,9 @@ class AuthService {
         });
     }
 
+    /**
+     * Checks if a user is already authenticated and redirects them to their dashboard if so.
+     */
     static async checkExistingAuth() {
         try {
             const auth = await this.checkAuth();
@@ -241,6 +297,10 @@ class AuthService {
         }
     }
     
+    /**
+     * Protects a page by checking for authentication. Redirects to login if not authenticated.
+     * @returns {Promise<object|boolean>} The user object if authenticated, false otherwise.
+     */
     static async requireAuth() {
         const auth = await this.checkAuth();
         if (!auth.authenticated) {
@@ -250,6 +310,10 @@ class AuthService {
         return auth.user;
     }
     
+    /**
+     * Redirects the user to the appropriate dashboard based on their role.
+     * @param {string} role - The user's role (e.g., 'admin', 'handyman').
+     */
     static redirectBasedOnRole(role) {
         const baseURL = window.location.origin + '/reservation';
         let dashboardPath;
@@ -274,6 +338,7 @@ class AuthService {
         
         console.log(`Redirecting ${role} to:`, dashboardPath);
         
+        // This check prevents a redirect loop if the user is already on the correct page.
         if (!window.location.href.includes(dashboardPath)) {
             window.location.href = dashboardPath;
         }
@@ -293,6 +358,7 @@ class LoginForm {
         this.submitBtn = this.form.querySelector('button[type="submit"]');
         this.emailInput = this.form.querySelector('#email');
         this.passwordInput = this.form.querySelector('#password');
+        this.rememberMeCheckbox = this.form.querySelector('#remember-me');
         
         if (!this.submitBtn) {
             console.error('Submit button not found');
@@ -313,19 +379,13 @@ class LoginForm {
         }
 
         // Check for existing authentication on load
-        this.checkExistingAuth();
+        AuthService.checkExistingAuth();
     }
     
     async checkExistingAuth() {
-        try {
-            const auth = await AuthService.checkAuth();
-            if (auth.authenticated) {
-                console.log('User already authenticated, redirecting...');
-                AuthService.redirectBasedOnRole(auth.user.role);
-            }
-        } catch (error) {
-            console.log('No existing authentication found');
-        }
+        // This method is now deprecated. Use AuthService.checkExistingAuth() directly.
+        console.warn('LoginForm.checkExistingAuth() is deprecated. Use AuthService.checkExistingAuth() instead.');
+        await AuthService.checkExistingAuth();
     }
     
     validateEmail() {
@@ -353,6 +413,7 @@ class LoginForm {
         
         const email = this.emailInput.value.trim();
         const password = this.passwordInput.value;
+        const rememberMe = this.rememberMeCheckbox ? this.rememberMeCheckbox.checked : false;
         
         this.resetErrors();
         
@@ -375,13 +436,16 @@ class LoginForm {
             if (result.success) {
                 this.showSuccess('Login successful! Redirecting...');
                 
+                // Use localStorage for "Remember Me", otherwise sessionStorage
+                const storage = rememberMe ? localStorage : sessionStorage;
+
                 // Store user data
-                sessionStorage.setItem('user', JSON.stringify(result.user));
-                sessionStorage.setItem('logged_in', 'true');
-                sessionStorage.setItem('role', result.user.role);
+                storage.setItem('user', JSON.stringify(result.user));
+                storage.setItem('logged_in', 'true');
+                storage.setItem('role', result.user.role);
                 
                 if (result.token) {
-                    sessionStorage.setItem('token', result.token);
+                    storage.setItem('token', result.token);
                 }
                 
                 setTimeout(() => {
@@ -453,39 +517,6 @@ class LoginForm {
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = new LoginForm('loginForm');
 });
-
-// Enhanced logout function with better error handling
-async function logout() {
-    try {
-        const result = await AuthService.logout();
-        console.log('Logout successful:', result);
-        
-        // Clear service worker cache
-        if ('serviceWorker' in navigator) {
-            const registrations = await navigator.serviceWorker.getRegistrations();
-            for (let registration of registrations) {
-                registration.unregister();
-            }
-        }
-        
-        // Clear browser cache for this origin
-        if ('caches' in window) {
-            const cacheNames = await caches.keys();
-            await Promise.all(
-                cacheNames.map(cacheName => caches.delete(cacheName))
-            );
-        }
-        
-        window.location.replace(`${window.location.origin}/reservation/pages/auth/login.html`);
-        
-        return result;
-    } catch (error) {
-        console.error('Logout failed:', error);
-        // Redirect even if logout fails
-        window.location.replace(`${window.location.origin}/reservation/pages/auth/login.html`);
-        throw error;
-    }
-}
 
 // Axios interceptor for automatic token handling
 axios.interceptors.request.use(
