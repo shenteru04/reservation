@@ -2899,3 +2899,91 @@
 [DASHBOARD] 2025-08-24 17:05:46 - Pending reservations: 1
 [DASHBOARD] 2025-08-24 17:05:46 - Recent checkins retrieved: 3
 [DASHBOARD] 2025-08-24 17:05:46 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 03:42:23 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 03:42:23 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 03:42:23 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 03:42:23 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 03:42:23 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 03:42:23 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 03:42:23 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 03:42:23 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 10:54:11 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 10:54:11 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 10:54:11 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 10:54:11 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 10:54:11 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 10:54:11 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 10:54:11 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 10:54:11 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 10:54:51 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 10:54:51 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 10:54:51 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 10:54:51 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 10:54:51 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 10:54:51 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 10:54:51 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 10:54:51 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 10:55:08 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 10:55:08 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 10:55:08 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 10:55:08 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 10:55:08 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 10:55:08 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 10:55:08 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 10:55:08 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 10:55:11 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 10:55:11 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 10:55:11 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 10:55:11 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 10:55:11 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 10:55:11 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 10:55:11 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 10:55:11 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 10:55:13 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 10:55:13 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 10:55:13 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 10:55:13 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 10:55:13 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 10:55:13 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 10:55:13 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 10:55:13 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 11:41:18 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 11:41:18 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 11:41:18 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 11:41:18 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 11:41:18 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 11:41:18 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 11:41:19 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 11:41:19 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 14:37:01 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 14:37:01 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 14:37:01 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 14:37:01 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 14:37:01 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 14:37:01 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 14:37:01 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 14:37:01 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 14:37:48 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 14:37:48 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 14:37:48 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 14:37:48 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 14:37:48 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 14:37:48 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 14:37:48 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 14:37:48 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 15:49:20 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 15:49:20 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 15:49:20 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 15:49:20 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 15:49:20 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 15:49:20 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 15:49:20 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 15:49:20 - Dashboard data compiled successfully
+[DASHBOARD] 2025-08-25 16:56:58 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin/../config/db.php
+[DASHBOARD] 2025-08-25 16:56:58 - Database connection established for user: admin@hotel.com
+[DASHBOARD] 2025-08-25 16:56:58 - Occupied rooms: 1
+[DASHBOARD] 2025-08-25 16:56:58 - Today's checkins: 0
+[DASHBOARD] 2025-08-25 16:56:58 - Error getting today's revenue: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[DASHBOARD] 2025-08-25 16:56:59 - Pending reservations: 0
+[DASHBOARD] 2025-08-25 16:56:59 - Recent checkins retrieved: 5
+[DASHBOARD] 2025-08-25 16:56:59 - Dashboard data compiled successfully

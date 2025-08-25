@@ -1,0 +1,40 @@
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Request started: GET /reservation/api/admin/pages/room-maintenance.php?limit=1000
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Attempting to load database config...
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Found config at: ../../config/db.php
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Database config loaded successfully
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Database connection established
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Processing method: GET
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - HandleGet started with params: {"limit":"1000"}
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Get all records: false
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Use high limit: true
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Where clause: 
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Table check passed
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Count SQL: SELECT COUNT(*) as total FROM room_maintenance_log rml
+                     LEFT JOIN rooms r ON rml.room_id = r.room_id
+                     LEFT JOIN maintenance_status ms ON rml.maintenance_status_id = ms.maintenance_status_id
+                     
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Total records found: 6
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Has cost column: true
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Main SQL: SELECT 
+                    rml.log_id,
+                    rml.room_id,
+                    r.room_number,
+                    rml.maintenance_status_id,
+                    ms.status_name,
+                    rml.description,
+                    rml.assigned_to,
+                    rml.priority,
+                    rml.estimated_completion,
+                    rml.completion_date,
+                    rml.notes,
+                    rml.cost,
+                    rml.created_at,
+                    rml.updated_at
+                FROM room_maintenance_log rml
+                LEFT JOIN rooms r ON rml.room_id = r.room_id
+                LEFT JOIN maintenance_status ms ON rml.maintenance_status_id = ms.maintenance_status_id
+                
+                ORDER BY rml.created_at DESC LIMIT ? OFFSET ?
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Params: [1000,0]
+[ROOM-MAINTENANCE] 2025-08-25 09:25:43 - Error in handleGet: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'rml.log_id' in 'field list' in C:\xampp\htdocs\reservation\api\admin\pages\room-maintenance.php on line 221
+[ROOM-MAINTENANCE] 2025-08-25 10:07:45 - Error fetching maintenance logs: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'rml.assigned_to' in 'field list'

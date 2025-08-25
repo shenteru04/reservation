@@ -637,3 +637,184 @@
 [USERS] 2025-08-24 05:45:32 - Database connection established for users management
 [USERS] 2025-08-24 05:45:32 - Fetching all users
 [USERS] 2025-08-24 05:45:32 - Retrieved 3 users
+[USERS] 2025-08-25 04:02:14 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 04:02:14 - Database connection established for users management
+[USERS] 2025-08-25 04:02:14 - Fetching all users
+[USERS] 2025-08-25 04:02:14 - Retrieved 3 users
+[USERS] 2025-08-25 10:30:48 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:30:48 - Database connection established for users management
+[USERS] 2025-08-25 10:30:48 - Fetching all users
+[USERS] 2025-08-25 10:30:48 - Retrieved 3 users
+[USERS] 2025-08-25 10:34:04 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:34:04 - Database connection established for users management
+[USERS] 2025-08-25 10:34:04 - Creating user with data: {"employee_id":null,"first_name":"John ","last_name":"Zarsosa","email":"john@hotel.com","phone_num":"542423324253","role_id":"3","is_active":1,"password":"password"}
+[USERS] 2025-08-25 10:34:04 - Error creating user: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:34:04 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:35:29 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:35:29 - Database connection established for users management
+[USERS] 2025-08-25 10:35:29 - Fetching all users
+[USERS] 2025-08-25 10:35:29 - Retrieved 3 users
+[USERS] 2025-08-25 10:35:53 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:35:53 - Database connection established for users management
+[USERS] 2025-08-25 10:35:53 - Creating user with data: {"employee_id":null,"first_name":"John ","last_name":"Zarsosa","email":"john@hotel.com","phone_num":"4265236347","role_id":"3","is_active":1,"password":"password"}
+[USERS] 2025-08-25 10:35:53 - Error creating user: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:35:53 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:36:20 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:36:20 - Database connection established for users management
+[USERS] 2025-08-25 10:36:20 - Fetching all users
+[USERS] 2025-08-25 10:36:20 - Retrieved 3 users
+[USERS] 2025-08-25 10:36:28 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:36:28 - Database connection established for users management
+[USERS] 2025-08-25 10:36:28 - Fetching all users
+[USERS] 2025-08-25 10:36:28 - Retrieved 3 users
+[USERS] 2025-08-25 10:37:43 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:37:43 - Database connection established for users management
+[USERS] 2025-08-25 10:37:43 - Creating user with data: {"first_name":"John","last_name":"Zarsosa","email":"john@hotel.com","phone_num":"542423324253","role_id":3,"is_active":1,"password":"password"}
+[USERS] 2025-08-25 10:37:43 - Error creating user: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:37:43 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:37:59 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:37:59 - Database connection established for users management
+[USERS] 2025-08-25 10:37:59 - Fetching all users
+[USERS] 2025-08-25 10:37:59 - Retrieved 3 users
+[USERS] 2025-08-25 10:38:31 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:38:31 - Database connection established for users management
+[USERS] 2025-08-25 10:38:31 - Creating user with data: {"employee_id":null,"first_name":"John ","last_name":"Zarsosa","email":"john@hotel.com","phone_num":"542423324253","role_id":"3","is_active":1,"password":"password"}
+[USERS] 2025-08-25 10:38:31 - Error creating user: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:38:31 - Database error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.users' doesn't exist
+[USERS] 2025-08-25 10:55:06 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:55:06 - Database connection established for users management
+[USERS] 2025-08-25 10:55:06 - Fetching all users
+[USERS] 2025-08-25 10:55:06 - Retrieved 3 users
+[USERS] 2025-08-25 10:55:23 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:55:23 - Database connection established for users management
+[USERS] 2025-08-25 10:55:23 - Fetching all users
+[USERS] 2025-08-25 10:55:23 - Retrieved 3 users
+[USERS] 2025-08-25 10:58:18 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:58:18 - Database connection established for users management
+[USERS] 2025-08-25 10:58:18 - Creating user with data: {"employee_id":null,"first_name":"John ","last_name":"Zarsosa","email":"john@hotel.com","phone_num":"542423324253","role_id":"3","is_active":1,"password":"password"}
+[USERS] 2025-08-25 10:58:18 - New user created with ID: 10
+[USERS] 2025-08-25 10:58:18 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 10:58:18 - Database connection established for users management
+[USERS] 2025-08-25 10:58:18 - Fetching all users
+[USERS] 2025-08-25 10:58:18 - Retrieved 4 users
+[USERS] 2025-08-25 11:41:23 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 11:41:23 - Database connection established for users management
+[USERS] 2025-08-25 11:41:23 - Fetching all users
+[USERS] 2025-08-25 11:41:23 - Retrieved 4 users
+[USERS] 2025-08-25 11:41:26 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 11:41:26 - Database connection established for users management
+[USERS] 2025-08-25 11:41:26 - Fetching all users
+[USERS] 2025-08-25 11:41:26 - Retrieved 4 users
+[USERS] 2025-08-25 11:41:27 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 11:41:27 - Database connection established for users management
+[USERS] 2025-08-25 11:41:27 - Fetching all users
+[USERS] 2025-08-25 11:41:27 - Retrieved 4 users
+[USERS] 2025-08-25 14:32:35 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:32:35 - Database connection established for users management
+[USERS] 2025-08-25 14:32:35 - Fetching all users
+[USERS] 2025-08-25 14:32:35 - Retrieved 4 users
+[USERS] 2025-08-25 14:32:42 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:32:42 - Database connection established for users management
+[USERS] 2025-08-25 14:32:42 - Fetching all users
+[USERS] 2025-08-25 14:32:42 - Retrieved 4 users
+[USERS] 2025-08-25 14:32:46 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:32:46 - Database connection established for users management
+[USERS] 2025-08-25 14:32:46 - Attempting to delete user: 10
+[USERS] 2025-08-25 14:32:46 - Billing table check failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel_management.billing' doesn't exist
+[USERS] 2025-08-25 14:32:46 - User deleted: 10
+[USERS] 2025-08-25 14:32:46 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:32:46 - Database connection established for users management
+[USERS] 2025-08-25 14:32:46 - Fetching all users
+[USERS] 2025-08-25 14:32:46 - Retrieved 3 users
+[USERS] 2025-08-25 14:34:02 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:34:02 - Database connection established for users management
+[USERS] 2025-08-25 14:34:02 - Creating user with data: {"employee_id":null,"first_name":"Jamil","last_name":"Fajardo","email":"jamil@hotel.com","phone_num":"4265236347","role_id":"3","is_active":1,"password":"password"}
+[USERS] 2025-08-25 14:34:02 - New user created with ID: 11
+[USERS] 2025-08-25 14:34:02 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:34:02 - Database connection established for users management
+[USERS] 2025-08-25 14:34:02 - Fetching all users
+[USERS] 2025-08-25 14:34:02 - Retrieved 4 users
+[USERS] 2025-08-25 14:36:20 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:36:20 - Database connection established for users management
+[USERS] 2025-08-25 14:36:20 - Fetching all users
+[USERS] 2025-08-25 14:36:20 - Retrieved 4 users
+[USERS] 2025-08-25 14:37:50 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 14:37:50 - Database connection established for users management
+[USERS] 2025-08-25 14:37:50 - Fetching all users
+[USERS] 2025-08-25 14:37:50 - Retrieved 4 users
+[USERS] 2025-08-25 15:11:37 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:11:37 - Database connection established for users management
+[USERS] 2025-08-25 15:11:37 - Fetching all users
+[USERS] 2025-08-25 15:11:37 - Retrieved 4 users
+[USERS] 2025-08-25 15:48:16 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:48:16 - Database connection established for users management
+[USERS] 2025-08-25 15:48:16 - Fetching all users
+[USERS] 2025-08-25 15:48:16 - Retrieved 4 users
+[USERS] 2025-08-25 15:49:22 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:49:22 - Database connection established for users management
+[USERS] 2025-08-25 15:49:22 - Fetching all users
+[USERS] 2025-08-25 15:49:22 - Retrieved 4 users
+[USERS] 2025-08-25 15:51:29 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:51:29 - Database connection established for users management
+[USERS] 2025-08-25 15:51:29 - Fetching all users
+[USERS] 2025-08-25 15:51:29 - Retrieved 4 users
+[USERS] 2025-08-25 15:51:47 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:51:47 - Database connection established for users management
+[USERS] 2025-08-25 15:51:47 - Fetching all users
+[USERS] 2025-08-25 15:51:47 - Retrieved 4 users
+[USERS] 2025-08-25 15:51:49 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:51:49 - Database connection established for users management
+[USERS] 2025-08-25 15:51:49 - Fetching all users
+[USERS] 2025-08-25 15:51:49 - Retrieved 4 users
+[USERS] 2025-08-25 15:52:17 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:52:17 - Database connection established for users management
+[USERS] 2025-08-25 15:52:17 - Fetching all users
+[USERS] 2025-08-25 15:52:17 - Retrieved 4 users
+[USERS] 2025-08-25 15:52:22 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:52:22 - Database connection established for users management
+[USERS] 2025-08-25 15:52:22 - Fetching all users
+[USERS] 2025-08-25 15:52:22 - Retrieved 4 users
+[USERS] 2025-08-25 15:52:25 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:52:25 - Database connection established for users management
+[USERS] 2025-08-25 15:52:25 - Fetching all users
+[USERS] 2025-08-25 15:52:25 - Retrieved 4 users
+[USERS] 2025-08-25 15:53:47 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:53:47 - Database connection established for users management
+[USERS] 2025-08-25 15:53:47 - Fetching all users
+[USERS] 2025-08-25 15:53:47 - Retrieved 4 users
+[USERS] 2025-08-25 15:53:50 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:53:50 - Database connection established for users management
+[USERS] 2025-08-25 15:53:50 - Fetching all users
+[USERS] 2025-08-25 15:53:50 - Retrieved 4 users
+[USERS] 2025-08-25 15:53:54 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 15:53:54 - Database connection established for users management
+[USERS] 2025-08-25 15:53:54 - Fetching all users
+[USERS] 2025-08-25 15:53:54 - Retrieved 4 users
+[USERS] 2025-08-25 16:54:34 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:54:34 - Database connection established for users management
+[USERS] 2025-08-25 16:54:34 - Fetching all users
+[USERS] 2025-08-25 16:54:34 - Retrieved 4 users
+[USERS] 2025-08-25 16:54:37 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:54:37 - Database connection established for users management
+[USERS] 2025-08-25 16:54:37 - Fetching all users
+[USERS] 2025-08-25 16:54:37 - Retrieved 4 users
+[USERS] 2025-08-25 16:57:10 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:57:10 - Database connection established for users management
+[USERS] 2025-08-25 16:57:10 - Fetching all users
+[USERS] 2025-08-25 16:57:10 - Retrieved 4 users
+[USERS] 2025-08-25 16:57:14 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:57:14 - Database connection established for users management
+[USERS] 2025-08-25 16:57:14 - Fetching all users
+[USERS] 2025-08-25 16:57:14 - Retrieved 4 users
+[USERS] 2025-08-25 16:58:13 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:58:13 - Database connection established for users management
+[USERS] 2025-08-25 16:58:13 - Creating user with data: {"employee_id":null,"first_name":"Apple Jane","last_name":"Edrolin","email":"apple@gmail.com","phone_num":"4265236347","role_id":"2","is_active":1,"password":"password"}
+[USERS] 2025-08-25 16:58:13 - New user created with ID: 13
+[USERS] 2025-08-25 16:58:13 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:58:13 - Database connection established for users management
+[USERS] 2025-08-25 16:58:13 - Fetching all users
+[USERS] 2025-08-25 16:58:13 - Retrieved 5 users
+[USERS] 2025-08-25 16:58:22 - Database config loaded from: C:\xampp\htdocs\reservation\api\admin\pages/../../config/db.php
+[USERS] 2025-08-25 16:58:22 - Database connection established for users management
+[USERS] 2025-08-25 16:58:22 - Fetching all users
+[USERS] 2025-08-25 16:58:22 - Retrieved 5 users
