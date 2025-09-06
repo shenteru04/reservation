@@ -1,0 +1,167 @@
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:42:14 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:42:14 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:42:14 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:45:27 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:45:27 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:45:27 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:45:27 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:48:14 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:48:14 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:48:14 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:48:14 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:49:53 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:49:53 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:49:53 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:49:53 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:50:49 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:50:49 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:50:49 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:50:49 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 12:26:52 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 12:26:52 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 12:26:52 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 12:26:52 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:05:08 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:05:08 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:05:08 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:05:08 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:07:00 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:07:00 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:07:00 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:07:00 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:28:55 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:28:55 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:28:55 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:28:55 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:31:42 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:31:42 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:31:42 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:31:42 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:34:05 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:34:05 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:34:05 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:34:05 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:36:04 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:36:04 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:36:04 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-27 04:36:04 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-29 01:23:47 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-29 01:23:47 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-29 01:23:47 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-29 01:23:47 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:42:24 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:42:24 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:42:24 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:42:24 - Retrieved 14 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:24 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:24 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:24 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:24 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:59 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:59 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:59 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:48:59 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:50:28 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:50:28 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:50:28 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 00:50:28 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 01:59:05 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 01:59:05 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 01:59:05 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 01:59:05 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 02:23:36 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 02:23:36 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 02:23:36 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-31 02:23:36 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-03 04:22:06 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-03 04:22:06 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-03 04:22:06 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-03 04:22:06 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:05:17 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:05:17 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:05:17 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:05:17 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:06:59 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:06:59 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:06:59 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-04 06:06:59 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:38:37 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:38:37 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:38:37 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:38:37 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:45:21 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:45:21 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:45:21 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:45:21 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:46:54 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:46:54 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:46:54 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 04:46:54 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:00:27 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:00:27 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:00:27 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:00:27 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:03:18 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:03:18 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:03:18 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:03:18 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:15 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:15 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:15 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:15 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:28 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:28 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:28 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:05:28 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:07:21 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:07:21 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:07:21 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 05:07:21 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:32:40 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:32:40 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:32:40 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:32:40 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:46:47 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:46:47 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:46:47 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:46:47 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:56:57 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:56:57 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:56:57 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:56:57 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:57:04 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:57:04 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:57:04 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:57:04 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:58:10 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:58:10 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:58:10 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 14:58:10 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:11:30 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:11:30 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:11:30 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:11:30 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:18:39 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:18:39 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:18:39 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:18:39 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:20:14 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:20:14 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:20:14 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:20:14 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:30:04 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:30:04 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:30:04 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:30:04 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:26 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:26 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:26 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:26 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:46 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:46 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:46 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:45:46 - Retrieved 13 hotel services
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:49:24 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:49:24 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:49:24 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-09-05 15:49:24 - Retrieved 13 hotel services
