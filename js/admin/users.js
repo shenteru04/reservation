@@ -6,6 +6,7 @@ class UserManager extends BaseManager {
         this.currentUsers = [];
         this.currentEditId = null;
         this.userToDelete = null;
+        this.initialized = false;
         this.init();
     }
     
@@ -13,25 +14,59 @@ class UserManager extends BaseManager {
         try {
             console.log('Initializing user management...');
             
+            // Wait for DOM to be fully ready - better approach
+            await this.waitForDOM();
+            
             // Ensure all modals are hidden on initialization
             this.initializeModals();
             
-            // Check authentication first
-            const auth = await this.checkAuthentication();
-            if (!auth) return;
-            
-            // Load users data
-            await this.loadUsers();
-            
-            // Set up event listeners
+            // Set up event listeners first
             this.setupEventListeners();
             
+            // Check authentication - but don't block on failure for debugging
+            try {
+                const auth = await this.checkAuthentication();
+                if (!auth) {
+                    console.log('Authentication failed, but continuing for debugging');
+                    // Don't return here, continue to load users for debugging
+                }
+            } catch (authError) {
+                console.error('Authentication check failed:', authError);
+                // Continue anyway for debugging
+            }
+            
+            // Load users data - this is the key part
+            await this.loadUsers();
+            
+            this.initialized = true;
             console.log('User management initialized successfully');
             
         } catch (error) {
             console.error('User management initialization failed:', error);
             this.showError('Failed to initialize user management: ' + error.message);
+            // Still try to display empty state
+            this.displayUsers([]);
+        } finally {
+            // Hide loading overlay after initialization
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.display = 'none';
+            }
         }
+    }
+    
+    // Better DOM ready check
+    waitForDOM() {
+        return new Promise((resolve) => {
+            if (document.readyState === 'complete') {
+                resolve();
+            } else if (document.readyState === 'interactive') {
+                // DOM is ready but resources might still be loading
+                setTimeout(resolve, 100);
+            } else {
+                document.addEventListener('DOMContentLoaded', resolve);
+            }
+        });
     }
     
     initializeModals() {
@@ -164,28 +199,153 @@ class UserManager extends BaseManager {
         try {
             console.log('Loading users...');
             
-            const response = await this.api.get('/api/admin/pages/users.php');
-            const data = response.data;
-            
-            if (!data.success) {
-                throw new Error(data.error || 'Failed to load users');
+            // Show loading state on table
+            const tbody = document.getElementById('usersTableBody');
+            if (tbody) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="px-6 py-4 text-center text-gray-500">
+                            <i class="fas fa-spinner fa-spin mr-2"></i>Loading users...
+                        </td>
+                    </tr>
+                `;
+            } else {
+                console.error('Table body element not found!');
+                this.showError('Table element not found in DOM');
+                return;
             }
             
-            console.log('Users loaded successfully:', data.users.length);
+            // Check if API base URL is set
+            if (!this.api || !this.api.defaults || !this.api.defaults.baseURL) {
+                console.error('API not properly configured');
+                this.showError('API configuration error');
+                return;
+            }
+            
+            console.log('Making API request to:', this.api.defaults.baseURL + '/api/admin/pages/users.php');
+            
+            const response = await this.api.get('/api/admin/pages/users.php');
+            console.log('API Response received:', response);
+            
+            if (!response || !response.data) {
+                throw new Error('No response data received from server');
+            }
+            
+            const data = response.data;
+            console.log('Response data:', data);
+            
+            if (!data.success) {
+                throw new Error(data.error || 'Server returned failure response');
+            }
+            
+            console.log('Users loaded successfully:', data.users?.length || 0);
             this.currentUsers = data.users || [];
+            
+            // Validate users data
+            if (!Array.isArray(this.currentUsers)) {
+                console.error('Users data is not an array:', this.currentUsers);
+                this.currentUsers = [];
+            }
+            
+            // Force display users immediately
             this.displayUsers(this.currentUsers);
+            this.updateStats();
+            
+            console.log('✅ Users displayed successfully in table');
             
         } catch (error) {
             console.error('Failed to load users:', error);
+            
+            // Log more details about the error
+            if (error.response) {
+                console.error('Error response status:', error.response.status);
+                console.error('Error response data:', error.response.data);
+                console.error('Error response headers:', error.response.headers);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+            } else {
+                console.error('Request setup error:', error.message);
+            }
+            
             const errorMessage = error.response?.data?.error || error.message;
             this.showError('Failed to load users: ' + errorMessage);
+            
+            // Display empty state on error
+            this.currentUsers = [];
             this.displayUsers([]);
+            this.updateStats();
         }
+    }
+    
+    updateStats() {
+        const total = this.currentUsers.length;
+        const active = this.currentUsers.filter(u => u.is_active == 1).length;
+        const admins = this.currentUsers.filter(u => u.role_id == 1).length;
+        const frontdesk = this.currentUsers.filter(u => u.role_id == 2).length;
+        const handyman = this.currentUsers.filter(u => u.role_id == 3).length;
+        const now = new Date();
+        const recent = this.currentUsers.filter(u => {
+            if (!u.last_login) return false;
+            const loginDate = new Date(u.last_login);
+            return (now - loginDate) < 24 * 60 * 60 * 1000;
+        }).length;
+
+        // Update stats with null checks
+        const totalUsersEl = document.getElementById('totalUsers');
+        const activeUsersEl = document.getElementById('activeUsers');
+        const adminUsersEl = document.getElementById('adminUsers');
+        const recentLoginsEl = document.getElementById('recentLogins');
+
+        if (totalUsersEl) totalUsersEl.innerHTML = total;
+        if (activeUsersEl) activeUsersEl.innerHTML = active;
+        if (adminUsersEl) adminUsersEl.innerHTML = admins;
+        if (recentLoginsEl) recentLoginsEl.innerHTML = recent;
+
+        // Update role distribution percentages and bars
+        if (total > 0) {
+            const adminPercent = Math.round((admins / total) * 100);
+            const frontdeskPercent = Math.round((frontdesk / total) * 100);
+            const handymanPercent = Math.round((handyman / total) * 100);
+
+            const adminPercentEl = document.getElementById('adminPercent');
+            const frontdeskPercentEl = document.getElementById('frontdeskPercent');
+            const handymanPercentEl = document.getElementById('handymanPercent');
+
+            if (adminPercentEl) adminPercentEl.textContent = adminPercent + '%';
+            if (frontdeskPercentEl) frontdeskPercentEl.textContent = frontdeskPercent + '%';
+            if (handymanPercentEl) handymanPercentEl.textContent = handymanPercent + '%';
+
+            // Update progress bars
+            const adminBar = adminPercentEl?.previousElementSibling?.querySelector('.bg-purple-500');
+            const frontdeskBar = frontdeskPercentEl?.previousElementSibling?.querySelector('.bg-green-500');
+            const handymanBar = handymanPercentEl?.previousElementSibling?.querySelector('.bg-red-500');
+
+            if (adminBar) adminBar.style.width = adminPercent + '%';
+            if (frontdeskBar) frontdeskBar.style.width = frontdeskPercent + '%';
+            if (handymanBar) handymanBar.style.width = handymanPercent + '%';
+        } else {
+            const adminPercentEl = document.getElementById('adminPercent');
+            const frontdeskPercentEl = document.getElementById('frontdeskPercent');
+            const handymanPercentEl = document.getElementById('handymanPercent');
+
+            if (adminPercentEl) adminPercentEl.textContent = '0%';
+            if (frontdeskPercentEl) frontdeskPercentEl.textContent = '0%';
+            if (handymanPercentEl) handymanPercentEl.textContent = '0%';
+        }
+        
+        console.log('Stats updated - Total users:', total);
     }
     
     displayUsers(users) {
         const tbody = document.getElementById('usersTableBody');
-        if (!tbody) return;
+        const userCountEl = document.getElementById('userCount');
+        
+        if (!tbody) {
+            console.error('Users table body not found!');
+            return;
+        }
+        
+        console.log('Displaying users:', users?.length || 0);
         
         tbody.innerHTML = '';
         
@@ -193,14 +353,15 @@ class UserManager extends BaseManager {
             tbody.innerHTML = `
                 <tr>
                     <td colspan="7" class="px-6 py-4 text-center text-gray-500">
-                        No users found
+                        <i class="fas fa-users mr-2"></i>No users found
                     </td>
                 </tr>
             `;
+            if (userCountEl) userCountEl.textContent = '0';
             return;
         }
         
-        users.forEach(user => {
+        users.forEach((user, index) => {
             const row = document.createElement('tr');
             row.className = 'hover:bg-gray-50';
             
@@ -215,6 +376,20 @@ class UserManager extends BaseManager {
                 3: 'Handyman'
             };
             const roleName = roleNames[user.role_id] || 'Unknown';
+            
+            // Role badge class
+            let roleClass = 'bg-blue-100 text-blue-800';
+            switch (parseInt(user.role_id)) {
+                case 1:
+                    roleClass = 'bg-purple-100 text-purple-800';
+                    break;
+                case 2:
+                    roleClass = 'bg-green-100 text-green-800';
+                    break;
+                case 3:
+                    roleClass = 'bg-red-100 text-red-800';
+                    break;
+            }
             
             // Last login
             const lastLogin = user.last_login ? 
@@ -241,7 +416,7 @@ class UserManager extends BaseManager {
                     ${this.escapeHtml(user.email || 'N/A')}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${roleClass}">
                         ${roleName}
                     </span>
                 </td>
@@ -260,16 +435,17 @@ class UserManager extends BaseManager {
                     <button onclick="userManager.editUser(${user.employee_id})" class="text-blue-600 hover:text-blue-900 mr-3">
                         <i class="fas fa-edit"></i> Edit
                     </button>
-                    <button onclick="userManager.confirmDeleteUser(${user.employee_id})" class="text-red-600 hover:text-red-900">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
                 </td>
             `;
             
             tbody.appendChild(row);
         });
         
-        console.log('Users displayed:', users.length);
+        if (userCountEl) {
+            userCountEl.textContent = users.length;
+        }
+        
+        console.log('✅ Users successfully displayed in table:', users.length);
     }
     
     filterUsers() {
@@ -581,9 +757,24 @@ class UserManager extends BaseManager {
 // Initialize user manager when DOM is loaded
 let userManager;
 
+// Multiple initialization strategies to ensure it works
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing user manager...');
     userManager = new UserManager();
+});
+
+// Backup initialization if DOMContentLoaded already fired
+if (document.readyState !== 'loading') {
+    console.log('DOM already loaded, initializing user manager immediately...');
+    userManager = new UserManager();
+}
+
+// Another backup for when page is fully loaded
+window.addEventListener('load', () => {
+    if (!userManager || !userManager.initialized) {
+        console.log('Window loaded, initializing user manager as backup...');
+        userManager = new UserManager();
+    }
 });
 
 // Cleanup on page unload

@@ -227,13 +227,42 @@
                             </div>
                         </div>
 
+                        <!-- OTP Field (Hidden by Default) -->
+                        <div id="otpField" class="space-y-2 hidden">
+                            <label for="otp" class="flex items-center text-sm font-semibold text-gray-700">
+                                <i class="fas fa-sms text-blue-500 mr-2"></i>
+                                Verification Code
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="text" 
+                                    id="otp" 
+                                    name="otp" 
+                                    maxlength="6"
+                                    class="w-full px-4 py-3 pl-12 bg-white/90 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 input-focus focus:outline-none focus:border-blue-500 focus:bg-white"
+                                    placeholder="Enter 6-digit code"
+                                    inputmode="numeric"
+                                    autocomplete="one-time-code"
+                                >
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <i class="fas fa-code text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <button type="button" id="resendOtp" class="text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                                    Resend Code
+                                </button>
+                                <span id="otpTimer" class="text-gray-600"></span>
+                            </div>
+                        </div>
+
                         <!-- Remember Me & Forgot Password -->
                         <div class="flex items-center justify-between">
                             <label class="flex items-center">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                                <input type="checkbox" id="rememberMe" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                                 <span class="ml-2 text-sm text-gray-600">Remember me</span>
                             </label>
-                            <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                            <a href="admin-forgot-password.html" class="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
                                 Forgot password?
                             </a>
                         </div>
@@ -241,10 +270,11 @@
                         <!-- Submit Button -->
                         <button 
                             type="submit" 
+                            id="submitButton"
                             class="w-full btn-shimmer text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3"
                         >
                             <i class="fas fa-sign-in-alt"></i>
-                            <span>Access Dashboard</span>
+                            <span id="submitButtonText">Access Dashboard</span>
                         </button>
                     </form>
 
@@ -266,7 +296,7 @@
                                 <i class="fas fa-check-circle text-green-500"></i>
                             </div>
                             <div class="ml-3">
-                                <p class="text-sm text-green-700">Login successful! Redirecting...</p>
+                                <p class="text-sm text-green-700" id="successText"></p>
                             </div>
                         </div>
                     </div>
@@ -334,42 +364,6 @@
                 });
             }
 
-            // Form submission
-            const form = document.getElementById('loginForm');
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            const submitBtn = form.querySelector('button[type="submit"]');
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Add loading state
-                const originalContent = submitBtn.innerHTML;
-                submitBtn.innerHTML = `
-                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    <span>Authenticating...</span>
-                `;
-                submitBtn.disabled = true;
-
-                // Hide previous messages
-                errorMessage.classList.add('hidden');
-                successMessage.classList.add('hidden');
-
-                // Simulate authentication (replace with actual logic)
-                setTimeout(() => {
-                    // Reset button
-                    submitBtn.innerHTML = originalContent;
-                    submitBtn.disabled = false;
-
-                    // For demo purposes, show success
-                    successMessage.classList.remove('hidden');
-                    
-                    setTimeout(() => {
-                        window.location.href = '../admin/dashboard.html';
-                    }, 1500);
-                }, 2000);
-            });
-
             // Add floating animation to inputs on focus
             const inputs = document.querySelectorAll('input');
             inputs.forEach(input => {
@@ -384,5 +378,6 @@
         });
     </script>
     <script src="../../js/auth/AuthService.js"></script>
+    
 </body>
 </html>

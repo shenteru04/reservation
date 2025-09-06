@@ -87,7 +87,7 @@ class FrontDeskManager {
     
     redirectToLogin() {
         console.log('Redirecting to login...');
-        window.location.href = `${this.baseURL}/html/auth/login.html`;
+        window.location.href = `${this.baseURL}/index.html`;
     }
     
     updateStaffInfo(user) {

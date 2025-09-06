@@ -17,7 +17,7 @@ class LogoutHandler {
             }
             
             // Make logout request
-            const response = await fetch(`${this.baseURL}/html/api/auth/logout.php`, {
+            const response = await fetch(`${this.baseURL}/api/auth/logout.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

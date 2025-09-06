@@ -340,7 +340,7 @@ class OnlineReservation {
 
     async loadRoomTypes() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/room-types.php`);
+            const response = await fetch(`${this.baseURL}/api/user/room-types-public.php`);
             if (!response.ok) throw new Error('Failed to load room types');
             
             const data = await response.json();
@@ -356,7 +356,7 @@ class OnlineReservation {
 
     async loadHotelServices() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/utilities/hotel-services.php`);
+            const response = await fetch(`${this.baseURL}/api/user/hotel-services-public.php`);
             if (!response.ok) throw new Error('Failed to load hotel services');
             
             const data = await response.json();
@@ -374,7 +374,7 @@ class OnlineReservation {
 
     async loadMenuItems() {
         try {
-            const response = await fetch(`${this.baseURL}/api/admin/pages/menu-items.php`);
+            const response = await fetch(`${this.baseURL}/api/user/menu-items-public.php`);
             if (!response.ok) throw new Error('Failed to load menu items');
             
             const data = await response.json();

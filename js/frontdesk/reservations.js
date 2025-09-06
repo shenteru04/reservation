@@ -1,4 +1,29 @@
 // js/frontdesk/reservations.js - Fixed Front Desk Reservations Management
+
+function formatTimeTo12Hour(time24) {
+    if (!time24) return 'N/A';
+    
+    const [hours, minutes] = time24.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    
+    return `${hour12}:${minutes} ${ampm}`;
+}
+
+// Add this utility function to convert 12-hour to 24-hour format
+function formatTimeTo24Hour(time12) {
+    if (!time12) return '15:00:00'; // default
+    
+    const [time, ampm] = time12.split(' ');
+    const [hours, minutes] = time.split(':');
+    let hour = parseInt(hours);
+    
+    if (ampm === 'PM' && hour !== 12) hour += 12;
+    if (ampm === 'AM' && hour === 12) hour = 0;
+    
+    return `${hour.toString().padStart(2, '0')}:${minutes}:00`;
+}
 class FrontDeskReservations {
     constructor() {
         this.baseURL = window.location.origin + '/reservation';
@@ -882,31 +907,34 @@ createReservationRow(reservation) {
     const checkinDate = new Date(reservation.check_in_date).toLocaleDateString();
     const checkoutDate = new Date(reservation.check_out_date).toLocaleDateString();
 
-    // Time extraction
+    // Time extraction with 12-hour format conversion
     let checkinTime = '';
     let checkoutTime = '';
     if (reservation.checkin_datetime && reservation.checkin_datetime.includes(' ')) {
-        checkinTime = reservation.checkin_datetime.split(' ')[1]?.substring(0, 5) || '';
+        const time24 = reservation.checkin_datetime.split(' ')[1]?.substring(0, 5) || '';
+        checkinTime = formatTimeTo12Hour(time24);
     }
     if (reservation.checkout_datetime && reservation.checkout_datetime.includes(' ')) {
-        checkoutTime = reservation.checkout_datetime.split(' ')[1]?.substring(0, 5) || '';
+        const time24 = reservation.checkout_datetime.split(' ')[1]?.substring(0, 5) || '';
+        checkoutTime = formatTimeTo12Hour(time24);
     }
     const timeInfo =
         `<div class="text-xs text-gray-500">
             <div>Time: ${checkinTime || 'N/A'} - ${checkoutTime || 'N/A'}</div>
         </div>`;
 
-    // Reservation type: always "Walk-In" for front desk
-    let reservationType = reservation.reservation_type_name || '';
+    // Rest of the method remains the same...
+    let reservationType = reservation.type_name || '';
     if (!reservationType || reservationType.toLowerCase().includes('front') || reservationType.toLowerCase().includes('walk')) {
         reservationType = 'Walk-In';
     }
- const showAssignRoom = 
+
+    const showAssignRoom = 
         (reservation.status_name === 'Pending' || reservation.status_name === 'Confirmed') && 
         (!reservation.room_id || !reservation.room_number) && 
         reservation.room_type_id;
 
-        return `
+    return `
         <tr class="hover:bg-gray-50 transition-colors table-row">
             <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm font-medium text-gray-900">#${reservation.reservation_id}</div>
@@ -925,8 +953,8 @@ createReservationRow(reservation) {
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
-                    <div><strong>In:</strong> ${checkinDate} ${checkinTime ? `<span class="text-xs">(${checkinTime})</span>` : ''}</div>
-                    <div><strong>Out:</strong> ${checkoutDate} ${checkoutTime ? `<span class="text-xs">(${checkoutTime})</span>` : ''}</div>
+                    <div><strong>In:</strong> ${checkinDate} ${checkinTime !== 'N/A' ? `<span class="text-xs">(${checkinTime})</span>` : ''}</div>
+                    <div><strong>Out:</strong> ${checkoutDate} ${checkoutTime !== 'N/A' ? `<span class="text-xs">(${checkoutTime})</span>` : ''}</div>
                     ${timeInfo}
                 </div>
             </td>
@@ -965,7 +993,6 @@ createReservationRow(reservation) {
         </tr>
     `;
 }
-
     
     createLogRow(log) {
         const actionColors = {
@@ -2038,6 +2065,7 @@ async saveReservation() {
             if (btnText) btnText.textContent = this.currentEditId ? 'Updating...' : 'Saving...';
             if (btnSpinner) btnSpinner.classList.remove('hidden');
         }
+
         const formData = this.collectFormData();
         if (!this.validateFormData(formData)) {
             if (saveBtn) {
@@ -2051,20 +2079,25 @@ async saveReservation() {
         // Always set Walk-In type for front desk
         let reservationTypeId = 1;
 
-        // Get times from form (fix: use fallback to avoid undefined!)
+        // Get times from form with 12-hour to 24-hour conversion
         const checkinDate = formData.checkinDate;
         const checkoutDate = formData.checkoutDate;
-        // Use fallback if elements are missing
-        let checkinTime = '15:00:00';
-        let checkoutTime = '12:00:00';
+        
+        // Default times in 12-hour format
+        let checkinTime12 = '3:00 PM';  // Changed from 15:00:00
+        let checkoutTime12 = '12:00 PM'; // Changed from 12:00:00
+        
         const checkinTimeEl = document.getElementById('checkinTime');
         const checkoutTimeEl = document.getElementById('checkoutTime');
-        if (checkinTimeEl && checkinTimeEl.value) checkinTime = checkinTimeEl.value;
-        if (checkoutTimeEl && checkoutTimeEl.value) checkoutTime = checkoutTimeEl.value;
+        if (checkinTimeEl && checkinTimeEl.value) checkinTime12 = checkinTimeEl.value;
+        if (checkoutTimeEl && checkoutTimeEl.value) checkoutTime12 = checkoutTimeEl.value;
 
-        // Fix: Ensure variables are defined before using
-        const checkin_datetime = (checkinDate && checkinTime) ? `${checkinDate} ${checkinTime}` : '';
-        const checkout_datetime = (checkoutDate && checkoutTime) ? `${checkoutDate} ${checkoutTime}` : '';
+        // Convert to 24-hour format for database storage
+        const checkinTime24 = formatTimeTo24Hour(checkinTime12);
+        const checkoutTime24 = formatTimeTo24Hour(checkoutTime12);
+
+        const checkin_datetime = (checkinDate && checkinTime24) ? `${checkinDate} ${checkinTime24}` : '';
+        const checkout_datetime = (checkoutDate && checkoutTime24) ? `${checkoutDate} ${checkoutTime24}` : '';
 
         const requestData = {
             // Customer info
@@ -2077,12 +2110,12 @@ async saveReservation() {
             room_type_id: document.getElementById('roomTypeSelect')?.value ? parseInt(document.getElementById('roomTypeSelect').value) : null,
             check_in_date: checkinDate,
             check_out_date: checkoutDate,
-            checkin_datetime, // fixed variable name!
-            checkout_datetime, // fixed variable name!
+            checkin_datetime,
+            checkout_datetime,
             guest_count: parseInt(formData.guestCount),
             special_requests: formData.specialRequests || null,
             reservation_type_id: reservationTypeId,
-            booking_type: "room", // always room for front desk
+            booking_type: "room",
             room_assignment_pending: 0,
             reservation_status_id: 1, // Pending
             // Financial info
@@ -2097,9 +2130,11 @@ async saveReservation() {
                 quantity: item.quantity
             }))
         };
+
         if (this.currentEditId) {
             requestData.reservation_id = this.currentEditId;
         }
+
         const url = `${this.baseURL}/api/frontdesk/reservations.php`;
         const response = await fetch(url, {
             method: this.currentEditId ? 'PUT' : 'POST',
@@ -2110,21 +2145,27 @@ async saveReservation() {
             credentials: 'same-origin',
             body: JSON.stringify(requestData)
         });
+
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Server responded with ${response.status}: ${errorText}`);
         }
+
         const result = await response.json();
+
         if (!result.success) {
             throw new Error(result.error || 'Failed to save reservation');
         }
+
         this.showSuccess(
             this.currentEditId
                 ? 'Reservation updated successfully!'
                 : `Reservation created successfully! ID: #${result.reservation_id}`
         );
+
         this.hideModal();
         await this.loadReservations(this.currentPage);
+
     } catch (error) {
         this.showError('Failed to save reservation: ' + error.message);
     } finally {
@@ -2138,89 +2179,105 @@ async saveReservation() {
         }
     }
 }
+
 // PATCH editReservation: If booking_type is 'room_type_selection' or room_assignment_pending==1 treat as room type (no room_id required)
 // and set checkin_datetime/checkout_datetime if available
 
- async editReservation(reservationId) {
-        try {
-            const response = await fetch(`${this.baseURL}/api/frontdesk/reservations.php?id=${reservationId}`, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Cache-Control': 'no-cache',
-                    'Accept': 'application/json'
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`Server responded with ${response.status}`);
+async editReservation(reservationId) {
+    try {
+        const response = await fetch(`${this.baseURL}/api/frontdesk/reservations.php?id=${reservationId}`, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Accept': 'application/json'
             }
-            const data = await response.json();
-            if (!data.success) {
-                throw new Error(data.error || 'Failed to load reservation details');
-            }
-            const reservation = data.reservation;
-            this.currentEditId = reservationId;
-            document.getElementById('modalTitle').textContent = `Edit Reservation #${reservationId}`;
-            document.getElementById('modalSubtitle').textContent = 'Update reservation details (Type: Walk-In)';
-            document.getElementById('reservationId').value = reservationId;
-            document.getElementById('firstName').value = reservation.first_name || '';
-            document.getElementById('lastName').value = reservation.last_name || '';
-            document.getElementById('email').value = reservation.email || '';
-            document.getElementById('phoneNumber').value = reservation.phone_number || '';
+        });
 
-            let roomTypeId = reservation.room_type_id;
-            if (roomTypeId) {
-                document.getElementById('roomTypeSelect').value = roomTypeId;
-            }
-            document.getElementById('checkinDate').value = reservation.check_in_date;
-            document.getElementById('checkoutDate').value = reservation.check_out_date;
-            document.getElementById('guestCount').value = reservation.guest_count || 1;
-            document.getElementById('specialRequests').value = reservation.special_requests || '';
-
-            // PATCH: Set checkin/checkout time if available
-            if (document.getElementById('checkinTime') && reservation.checkin_datetime) {
-                document.getElementById('checkinTime').value = reservation.checkin_datetime.split(' ')[1] || '15:00:00';
-            }
-            if (document.getElementById('checkoutTime') && reservation.checkout_datetime) {
-                document.getElementById('checkoutTime').value = reservation.checkout_datetime.split(' ')[1] || '12:00:00';
-            }
-
-            // Load available rooms for this type and dates
-            if (roomTypeId) {
-                await this.loadAvailableRooms(roomTypeId, reservation.check_in_date, reservation.check_out_date);
-                setTimeout(() => {
-                    document.getElementById('roomSelect').value = reservation.room_id;
-                }, 100);
-            } else {
-                this.resetRoomSelect();
-            }
-            this.populateHotelServices();
-            this.populateMenuItems();
-
-            // Set advance payment information if exists
-            if (reservation.advance_payment > 0) {
-                document.getElementById('paymentMethodSelect').value = reservation.payment_method_id || '';
-                document.getElementById('advanceAmount').value = reservation.advance_payment;
-                document.getElementById('referenceNumber').value = reservation.reference_number || '';
-                if (reservation.payment_method_id) {
-                    document.getElementById('advancePaymentFields').classList.remove('hidden');
-                }
-            }
-
-            this.setMinimumDates();
-            this.updateCheckoutMinDate();
-            setTimeout(() => {
-                this.calculateTotalAmount();
-            }, 200);
-            this.showModal();
-            setTimeout(() => {
-                const firstNameField = document.getElementById('firstName');
-                if (firstNameField) firstNameField.focus();
-            }, 300);
-        } catch (error) {
-            this.showError('Failed to load reservation details: ' + error.message);
+        if (!response.ok) {
+            throw new Error(`Server responded with ${response.status}`);
         }
+
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.error || 'Failed to load reservation details');
+        }
+
+        const reservation = data.reservation;
+        this.currentEditId = reservationId;
+
+        document.getElementById('modalTitle').textContent = `Edit Reservation #${reservationId}`;
+        document.getElementById('modalSubtitle').textContent = 'Update reservation details (Type: Walk-In)';
+        document.getElementById('reservationId').value = reservationId;
+        document.getElementById('firstName').value = reservation.first_name || '';
+        document.getElementById('lastName').value = reservation.last_name || '';
+        document.getElementById('email').value = reservation.email || '';
+        document.getElementById('phoneNumber').value = reservation.phone_number || '';
+
+        let roomTypeId = reservation.room_type_id;
+        if (roomTypeId) {
+            document.getElementById('roomTypeSelect').value = roomTypeId;
+        }
+
+        document.getElementById('checkinDate').value = reservation.check_in_date;
+        document.getElementById('checkoutDate').value = reservation.check_out_date;
+        document.getElementById('guestCount').value = reservation.guest_count || 1;
+        document.getElementById('specialRequests').value = reservation.special_requests || '';
+
+        // Set checkin/checkout time with 12-hour format conversion
+        if (document.getElementById('checkinTime') && reservation.checkin_datetime) {
+            const time24 = reservation.checkin_datetime.split(' ')[1] || '15:00:00';
+            const time12 = formatTimeTo12Hour(time24.substring(0, 5));
+            document.getElementById('checkinTime').value = time12;
+        }
+        if (document.getElementById('checkoutTime') && reservation.checkout_datetime) {
+            const time24 = reservation.checkout_datetime.split(' ')[1] || '12:00:00';
+            const time12 = formatTimeTo12Hour(time24.substring(0, 5));
+            document.getElementById('checkoutTime').value = time12;
+        }
+
+        // Load available rooms for this type and dates
+        if (roomTypeId) {
+            await this.loadAvailableRooms(roomTypeId, reservation.check_in_date, reservation.check_out_date);
+            setTimeout(() => {
+                document.getElementById('roomSelect').value = reservation.room_id;
+            }, 100);
+        } else {
+            this.resetRoomSelect();
+        }
+
+        this.populateHotelServices();
+        this.populateMenuItems();
+
+        // Set advance payment information if exists
+        if (reservation.advance_payment > 0) {
+            document.getElementById('paymentMethodSelect').value = reservation.payment_method_id || '';
+            document.getElementById('advanceAmount').value = reservation.advance_payment;
+            document.getElementById('referenceNumber').value = reservation.reference_number || '';
+            if (reservation.payment_method_id) {
+                document.getElementById('advancePaymentFields').classList.remove('hidden');
+            }
+        }
+
+        this.setMinimumDates();
+        this.updateCheckoutMinDate();
+
+        setTimeout(() => {
+            this.calculateTotalAmount();
+        }, 200);
+
+        this.showModal();
+
+        setTimeout(() => {
+            const firstNameField = document.getElementById('firstName');
+            if (firstNameField) firstNameField.focus();
+        }, 300);
+
+    } catch (error) {
+        this.showError('Failed to load reservation details: ' + error.message);
     }
+}
     // Helper method to get room type from room ID
     async getRoomTypeFromRoomId(roomId) {
         try {
@@ -2933,31 +2990,375 @@ async saveReservation() {
     }
     
     // Export functionality
-    async exportReservations() {
-        try {
-            console.log('Exporting reservations...');
+    // Replace the existing exportReservations method in your FrontDeskReservations class
+
+async exportReservations() {
+    try {
+        console.log('Exporting reservations...');
+        
+        // Show loading state
+        const exportBtn = document.getElementById('exportBtn');
+        if (exportBtn) {
+            exportBtn.disabled = true;
+            exportBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Exporting...';
+        }
+        
+        // Build query parameters for export
+        const params = new URLSearchParams();
+        this.addFiltersToParams(params);
+        params.append('export', 'csv');
+        
+        const response = await fetch(`${this.baseURL}/api/frontdesk/reservations.php?${params}`, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: { 
+                'Cache-Control': 'no-cache',
+                'Accept': 'text/csv, application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Export failed: ${response.status}`);
+        }
+        
+        const contentType = response.headers.get('content-type');
+        
+        if (contentType && contentType.includes('application/json')) {
+            // Server returned JSON (possibly an error)
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.error || 'Export failed');
+            }
             
-            // Build query parameters for export
-            const params = new URLSearchParams();
-            this.addFiltersToParams(params);
-            params.append('export', 'csv');
-            
-            // Create download link
-            const url = `${this.baseURL}/api/frontdesk/reservations.php?${params}`;
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `reservations_${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            this.showSuccess('Reservations export started. Check your downloads folder.');
-            
-        } catch (error) {
-            console.error('Failed to export reservations:', error);
-            this.showError('Failed to export reservations: ' + error.message);
+            // If JSON contains data, convert to CSV
+            if (data.reservations) {
+                this.downloadCSVFromData(data.reservations);
+                return;
+            }
+        }
+        
+        // Handle CSV response
+        const csvContent = await response.text();
+        
+        // Check if the response is actually CSV
+        if (csvContent.trim().length === 0) {
+            throw new Error('No data to export');
+        }
+        
+        // Validate and fix CSV format
+        const fixedCSV = this.validateAndFixCSV(csvContent);
+        
+        // Create and download the file
+        this.downloadCSVFile(fixedCSV, `reservations_${new Date().toISOString().split('T')[0]}.csv`);
+        
+        this.showSuccess('Reservations exported successfully!');
+        
+    } catch (error) {
+        console.error('Failed to export reservations:', error);
+        
+        // Fallback: Export current page data as CSV
+        this.showError('Server export failed. Generating CSV from current data...');
+        this.downloadCSVFromData(this.reservations);
+        
+    } finally {
+        // Reset export button
+        const exportBtn = document.getElementById('exportBtn');
+        if (exportBtn) {
+            exportBtn.disabled = false;
+            exportBtn.innerHTML = '<i class="fas fa-download mr-2"></i>Export';
         }
     }
+}
+
+// New method to validate and fix CSV format
+validateAndFixCSV(csvContent) {
+    try {
+        const lines = csvContent.split('\n').filter(line => line.trim().length > 0);
+        
+        if (lines.length === 0) {
+            throw new Error('Empty CSV content');
+        }
+        
+        // Check if first line looks like headers
+        const firstLine = lines[0];
+        const hasHeaders = firstLine.includes('Reservation ID') || 
+                          firstLine.includes('reservation_id') || 
+                          firstLine.includes('Customer') ||
+                          firstLine.includes('customer_name');
+        
+        if (!hasHeaders) {
+            // Add headers if missing
+            const headers = [
+                'Reservation ID',
+                'Customer Name',
+                'Email',
+                'Phone',
+                'Room Number',
+                'Room Type',
+                'Check-in Date',
+                'Check-out Date',
+                'Guests',
+                'Total Amount',
+                'Advance Payment',
+                'Status',
+                'Created Date'
+            ];
+            lines.unshift(headers.join(','));
+        }
+        
+        // Ensure all lines have consistent comma separation
+        const fixedLines = lines.map(line => {
+            // Handle quoted fields properly
+            if (line.includes('"')) {
+                return line;
+            }
+            
+            // Fix common CSV issues
+            return line.replace(/,+/g, ',') // Remove multiple consecutive commas
+                      .replace(/^,|,$/g, ''); // Remove leading/trailing commas
+        });
+        
+        return fixedLines.join('\n');
+        
+    } catch (error) {
+        console.error('CSV validation failed:', error);
+        return csvContent; // Return original if validation fails
+    }
+}
+
+// New method to generate CSV from data array
+downloadCSVFromData(reservations) {
+    try {
+        if (!reservations || reservations.length === 0) {
+            this.showError('No reservation data to export');
+            return;
+        }
+        
+        // Define CSV headers
+        const headers = [
+            'Reservation ID',
+            'Customer Name', 
+            'Email',
+            'Phone',
+            'Room Number',
+            'Room Type',
+            'Check-in Date',
+            'Check-out Date',
+            'Check-in Time',
+            'Check-out Time',
+            'Guests',
+            'Total Amount',
+            'Advance Payment',
+            'Payment Method',
+            'Reference Number',
+            'Status',
+            'Special Requests',
+            'Created Date'
+        ];
+        
+        // Generate CSV rows
+        const csvRows = [headers.join(',')];
+        
+        reservations.forEach(reservation => {
+            // Extract times from datetime fields
+            let checkinTime = '';
+            let checkoutTime = '';
+            if (reservation.checkin_datetime && reservation.checkin_datetime.includes(' ')) {
+                checkinTime = reservation.checkin_datetime.split(' ')[1]?.substring(0, 8) || '';
+            }
+            if (reservation.checkout_datetime && reservation.checkout_datetime.includes(' ')) {
+                checkoutTime = reservation.checkout_datetime.split(' ')[1]?.substring(0, 8) || '';
+            }
+            
+            const row = [
+                `"#${reservation.reservation_id}"`,
+                `"${(reservation.customer_name || `${reservation.first_name || ''} ${reservation.last_name || ''}`).trim()}"`,
+                `"${reservation.email || 'N/A'}"`,
+                `"${reservation.phone_number || 'N/A'}"`,
+                `"${reservation.room_number || 'Not Assigned'}"`,
+                `"${reservation.room_type_name || reservation.type_name || 'N/A'}"`,
+                `"${new Date(reservation.check_in_date).toLocaleDateString()}"`,
+                `"${new Date(reservation.check_out_date).toLocaleDateString()}"`,
+                `"${checkinTime || 'N/A'}"`,
+                `"${checkoutTime || 'N/A'}"`,
+                `"${reservation.guest_count || 1}"`,
+                `"₱${parseFloat(reservation.total_amount || 0).toLocaleString()}"`,
+                `"₱${parseFloat(reservation.advance_payment || 0).toLocaleString()}"`,
+                `"${reservation.payment_method || 'N/A'}"`,
+                `"${reservation.reference_number || 'N/A'}"`,
+                `"${reservation.status_name || reservation.reservation_status || 'N/A'}"`,
+                `"${(reservation.special_requests || 'None').replace(/"/g, '""')}"`,
+                `"${new Date(reservation.created_at).toLocaleString()}"`
+            ];
+            
+            csvRows.push(row.join(','));
+        });
+        
+        const csvContent = csvRows.join('\n');
+        const filename = `reservations_${new Date().toISOString().split('T')[0]}.csv`;
+        
+        this.downloadCSVFile(csvContent, filename);
+        this.showSuccess(`${reservations.length} reservations exported successfully!`);
+        
+    } catch (error) {
+        console.error('Failed to generate CSV from data:', error);
+        this.showError('Failed to generate CSV file: ' + error.message);
+    }
+}
+
+// New method to handle CSV file download
+downloadCSVFile(csvContent, filename) {
+    try {
+        // Create blob with proper CSV content type and UTF-8 BOM for Excel compatibility
+        const BOM = '\uFEFF';
+        const blob = new Blob([BOM + csvContent], { 
+            type: 'text/csv;charset=utf-8;' 
+        });
+        
+        // Create download link
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        URL.revokeObjectURL(url);
+        
+    } catch (error) {
+        console.error('Failed to download CSV file:', error);
+        this.showError('Failed to download file: ' + error.message);
+    }
+}
+
+// Also update the exportReservationLogs method with similar improvements
+async exportReservationLogs() {
+    try {
+        console.log('Exporting reservation logs...');
+        
+        // Show loading state
+        const exportLogsBtn = document.getElementById('exportLogsBtn');
+        if (exportLogsBtn) {
+            exportLogsBtn.disabled = true;
+            exportLogsBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Exporting...';
+        }
+        
+        // Build query parameters for export
+        const params = new URLSearchParams({
+            action: 'export_logs',
+            format: 'csv'
+        });
+        
+        // Add current filters
+        this.addLogsFiltersToParams(params);
+        
+        const response = await fetch(`${this.baseURL}/api/frontdesk/reservation_logs.php?${params}`, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: { 
+                'Cache-Control': 'no-cache',
+                'Accept': 'text/csv, application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Logs export failed: ${response.status}`);
+        }
+        
+        const contentType = response.headers.get('content-type');
+        
+        if (contentType && contentType.includes('application/json')) {
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.error || 'Logs export failed');
+            }
+            
+            if (data.logs) {
+                this.downloadLogsCSVFromData(data.logs);
+                return;
+            }
+        }
+        
+        const csvContent = await response.text();
+        
+        if (csvContent.trim().length === 0) {
+            throw new Error('No logs data to export');
+        }
+        
+        const fixedCSV = this.validateAndFixCSV(csvContent);
+        this.downloadCSVFile(fixedCSV, `reservation_logs_${new Date().toISOString().split('T')[0]}.csv`);
+        
+        this.showSuccess('Reservation logs exported successfully!');
+        
+    } catch (error) {
+        console.error('Failed to export reservation logs:', error);
+        
+        // Fallback: Export current logs data
+        this.showError('Server export failed. Generating CSV from current logs data...');
+        this.downloadLogsCSVFromData(this.reservationLogs);
+        
+    } finally {
+        // Reset export button
+        const exportLogsBtn = document.getElementById('exportLogsBtn');
+        if (exportLogsBtn) {
+            exportLogsBtn.disabled = false;
+            exportLogsBtn.innerHTML = '<i class="fas fa-download mr-2"></i>Export Logs';
+        }
+    }
+}
+
+// New method to generate logs CSV from data
+downloadLogsCSVFromData(logs) {
+    try {
+        if (!logs || logs.length === 0) {
+            this.showError('No logs data to export');
+            return;
+        }
+        
+        const headers = [
+            'Timestamp',
+            'Reservation ID',
+            'Customer Name',
+            'Action Type',
+            'Room Info',
+            'User Type',
+            'User ID',
+            'Notes'
+        ];
+        
+        const csvRows = [headers.join(',')];
+        
+        logs.forEach(log => {
+            const row = [
+                `"${new Date(log.timestamp).toLocaleString()}"`,
+                `"#${log.reservation_id}"`,
+                `"${log.customer?.name || 'N/A'}"`,
+                `"${log.action_type.replace('_', ' ').toUpperCase()}"`,
+                `"${log.room?.room_number ? `Room ${log.room.room_number}` : 'N/A'}"`,
+                `"${log.user_type || 'System'}"`,
+                `"${log.user_id || 'N/A'}"`,
+                `"${(log.notes || 'No notes').replace(/"/g, '""')}"`
+            ];
+            
+            csvRows.push(row.join(','));
+        });
+        
+        const csvContent = csvRows.join('\n');
+        const filename = `reservation_logs_${new Date().toISOString().split('T')[0]}.csv`;
+        
+        this.downloadCSVFile(csvContent, filename);
+        this.showSuccess(`${logs.length} log entries exported successfully!`);
+        
+    } catch (error) {
+        console.error('Failed to generate logs CSV:', error);
+        this.showError('Failed to generate logs CSV: ' + error.message);
+    }
+}
     
     // Print functionality
     printReservations() {

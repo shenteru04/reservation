@@ -537,7 +537,7 @@ class HandymanDashboard {
 
   redirectToLogin() {
     console.log('Redirecting to login...');
-    window.location.href = `${this.baseURL}/html/auth/login.html`;
+    window.location.href = `${this.baseURL}/index.html`;
   }
 
   // Deprecated: Keep for backward compatibility but redirect to handleLogout

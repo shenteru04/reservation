@@ -679,35 +679,241 @@ class FrontdeskBillingManager {
     }
 
     viewInvoice(invoiceId) {
-        try {
-            const invoice = this.invoices.find(inv => inv.invoice_id === invoiceId);
-            if (!invoice) {
-                this.showError('Invoice not found');
-                return;
-            }
-
-            document.getElementById('modalInvoiceNumber').textContent = invoice.invoice_number;
-            document.getElementById('modalCustomerName').textContent = invoice.customer_name;
-            document.getElementById('modalEmail').textContent = invoice.email;
-            document.getElementById('modalRoomNumber').textContent = invoice.room_number;
-            document.getElementById('modalTotalAmount').textContent = `₱${parseFloat(invoice.total_amount).toLocaleString()}`;
-            document.getElementById('modalPaidAmount').textContent = `₱${parseFloat(invoice.paid_amount || 0).toLocaleString()}`;
-            document.getElementById('modalBalance').textContent = `₱${parseFloat(invoice.balance || 0).toLocaleString()}`;
-            document.getElementById('modalPaymentMethod').textContent = invoice.payment_method || 'N/A';
-            document.getElementById('modalStatus').textContent = invoice.payment_status;
-
-            // Show modal
-            const modal = document.getElementById('viewInvoiceModal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            }
-        } catch (error) {
-            console.error('Error viewing invoice:', error);
-            this.showError('Failed to view invoice details');
+    try {
+        const invoice = this.invoices.find(inv => inv.invoice_id === invoiceId);
+        if (!invoice) {
+            this.showError('Invoice not found');
+            return;
         }
-    }
 
+        // Calculate balance and format dates
+        const totalAmount = parseFloat(invoice.total_amount || 0);
+        const paidAmount = parseFloat(invoice.paid_amount || 0);
+        const balance = totalAmount - paidAmount;
+        const createdDate = invoice.created_at 
+            ? new Date(invoice.created_at).toLocaleDateString() 
+            : 'N/A';
+
+        // Format currency with proper locale
+        const formatCurrency = (amount) => `₱${amount.toLocaleString('en-PH', { 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+        })}`;
+
+        // Build invoice details with better structure
+        const invoiceDetails = this.buildInvoiceDetailsHTML({
+            invoiceNumber: invoice.invoice_number || 'N/A',
+            createdDate,
+            customerName: invoice.customer_name || 'N/A',
+            email: invoice.email || 'No email provided',
+            roomNumber: invoice.room_number || 'N/A',
+            totalAmount: formatCurrency(totalAmount),
+            paidAmount: formatCurrency(paidAmount),
+            balance: formatCurrency(balance),
+            paymentMethod: invoice.payment_method || 'Cash',
+            paymentStatus: invoice.payment_status || 'Pending',
+            notes: invoice.notes || ''
+        });
+
+        // Display using SweetAlert2 with better styling
+        Swal.fire({
+            title: 'Invoice Details',
+            html: invoiceDetails,
+            width: '600px',
+            showCloseButton: true,
+            showConfirmButton: true,
+            confirmButtonText: 'Close',
+            customClass: {
+                popup: 'invoice-modal',
+                title: 'invoice-modal-title',
+                htmlContainer: 'invoice-modal-content'
+            }
+        });
+        
+    } catch (error) {
+        console.error('Error viewing invoice:', error);
+        this.showError('Failed to view invoice details. Please try again.');
+    }
+}
+
+// Helper method to build formatted invoice details
+buildInvoiceDetailsHTML(data) {
+    return `
+        <div class="invoice-details">
+            <div class="invoice-header">
+                <h3>Invoice #${data.invoiceNumber}</h3>
+                <p class="invoice-date">Created: ${data.createdDate}</p>
+            </div>
+            
+            <div class="invoice-section">
+                <h4>Customer Information</h4>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Name:</strong> ${data.customerName}
+                    </div>
+                    <div class="info-item">
+                        <strong>Email:</strong> ${data.email}
+                    </div>
+                    <div class="info-item">
+                        <strong>Room:</strong> ${data.roomNumber}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="invoice-section">
+                <h4>Payment Information</h4>
+                <div class="payment-grid">
+                    <div class="payment-row">
+                        <span class="payment-label">Total Amount:</span>
+                        <span class="payment-amount">${data.totalAmount}</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Paid Amount:</span>
+                        <span class="payment-amount paid">${data.paidAmount}</span>
+                    </div>
+                    <div class="payment-row balance-row">
+                        <span class="payment-label"><strong>Balance:</strong></span>
+                        <span class="payment-amount balance"><strong>${data.balance}</strong></span>
+                    </div>
+                </div>
+                
+                <div class="payment-info">
+                    <div class="info-item">
+                        <strong>Payment Method:</strong> ${data.paymentMethod}
+                    </div>
+                    <div class="info-item">
+                        <strong>Status:</strong> 
+                        <span class="status-badge status-${data.paymentStatus.toLowerCase()}">
+                            ${data.paymentStatus}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            ${data.notes ? `
+                <div class="invoice-section">
+                    <h4>Notes</h4>
+                    <p class="notes">${data.notes}</p>
+                </div>
+            ` : ''}
+        </div>
+        
+        <style>
+            .invoice-details {
+                text-align: left;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            
+            .invoice-header {
+                border-bottom: 2px solid #e0e0e0;
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .invoice-header h3 {
+                margin: 0;
+                color: #333;
+                font-size: 1.5em;
+            }
+            
+            .invoice-date {
+                color: #666;
+                margin: 5px 0 0 0;
+            }
+            
+            .invoice-section {
+                margin-bottom: 20px;
+            }
+            
+            .invoice-section h4 {
+                color: #444;
+                margin-bottom: 10px;
+                font-size: 1.1em;
+                border-bottom: 1px solid #f0f0f0;
+                padding-bottom: 5px;
+            }
+            
+            .info-grid, .payment-info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .info-item {
+                background: #f9f9f9;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 0.9em;
+            }
+            
+            .payment-grid {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 6px;
+                margin-bottom: 15px;
+            }
+            
+            .payment-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 0;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .payment-row:last-child {
+                border-bottom: none;
+            }
+            
+            .balance-row {
+                margin-top: 10px;
+                padding-top: 15px;
+                border-top: 2px solid #dee2e6;
+                font-size: 1.1em;
+            }
+            
+            .payment-amount.balance {
+                color: #dc3545;
+            }
+            
+            .payment-amount.paid {
+                color: #28a745;
+            }
+            
+            .status-badge {
+                padding: 3px 8px;
+                border-radius: 12px;
+                font-size: 0.8em;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            
+            .status-paid {
+                background: #d4edda;
+                color: #155724;
+            }
+            
+            .status-pending {
+                background: #fff3cd;
+                color: #856404;
+            }
+            
+            .status-overdue {
+                background: #f8d7da;
+                color: #721c24;
+            }
+            
+            .notes {
+                background: #f8f9fa;
+                padding: 12px;
+                border-radius: 4px;
+                border-left: 4px solid #007bff;
+                font-style: italic;
+                margin: 0;
+            }
+        </style>
+    `;
+}
     recordPayment(invoiceId) {
         try {
             console.log('Recording payment for invoice:', invoiceId);
