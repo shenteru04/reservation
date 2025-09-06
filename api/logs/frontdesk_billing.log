@@ -156,3 +156,15 @@
 [FRONTDESK_BILLING] 2025-08-25 16:56:23 - Processing POST action: record_payment
 [FRONTDESK_BILLING] 2025-08-25 16:56:23 - Recording payment with input: {"action":"record_payment","invoice_id":11,"amount":2000,"payment_method":"1","reference_number":"PAY-1756133783672","notes":"Payment recorded via front desk"}
 [FRONTDESK_BILLING] 2025-08-25 16:56:23 - Payment recorded successfully: ₱2000 for invoice ID: 11
+[FRONTDESK_BILLING] 2025-08-26 12:28:13 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-26 12:28:13 - Creating invoice with input: {"action":"create_invoice","reservation_id":32,"total_amount":4620,"paid_amount":2310,"payment_method":"cash","payment_status":"\ud83d\udfe1 Pending","notes":"Advance Payment"}
+[FRONTDESK_BILLING] 2025-08-26 12:28:13 - Invoice created successfully with ID: 12
+[FRONTDESK_BILLING] 2025-08-31 03:46:29 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-31 03:46:29 - Creating invoice with input: {"action":"create_invoice","reservation_id":24,"total_amount":4100,"paid_amount":0,"payment_method":null,"payment_status":"\ud83d\udd34 Unpaid","notes":""}
+[FRONTDESK_BILLING] 2025-08-31 03:46:29 - Invoice already exists for this reservation
+[FRONTDESK_BILLING] 2025-08-31 03:46:36 - Processing POST action: create_invoice
+[FRONTDESK_BILLING] 2025-08-31 03:46:36 - Creating invoice with input: {"action":"create_invoice","reservation_id":33,"total_amount":7800,"paid_amount":0,"payment_method":null,"payment_status":"\ud83d\udd34 Unpaid","notes":""}
+[FRONTDESK_BILLING] 2025-08-31 03:46:36 - Invoice created successfully with ID: 13
+[FRONTDESK_BILLING] 2025-08-31 03:47:40 - Processing POST action: record_payment
+[FRONTDESK_BILLING] 2025-08-31 03:47:40 - Recording payment with input: {"action":"record_payment","invoice_id":13,"amount":3350,"payment_method":"2","reference_number":"PAY-1756604860384","notes":"Payment recorded via front desk"}
+[FRONTDESK_BILLING] 2025-08-31 03:47:40 - Payment recorded successfully: ₱3350 for invoice ID: 13

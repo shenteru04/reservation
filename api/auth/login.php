@@ -1,5 +1,5 @@
 <?php
-// api/auth/login.php - Fixed Login API
+// api/auth/login.php - Updated with MFA support
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('log_errors', 1);
@@ -39,8 +39,10 @@ try {
         session_start();
     }
     
-    // Include database configuration
+    // Include required files
     require_once __DIR__ . '/../config/db.php';
+    require_once __DIR__ . '/../mailer.php';
+    require_once __DIR__ . '/../services/OTPService.php';
 
     // Get database connection
     try {
@@ -67,7 +69,87 @@ try {
         sendResponse(['success' => false, 'error' => 'Invalid JSON'], 400);
     }
 
-    // Check required fields
+    // Get client information
+    $ipAddress = $_SERVER['REMOTE_ADDR'] ?? null;
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? null;
+
+    // Handle MFA verification step
+    if (isset($data['step']) && $data['step'] === 'verify_otp') {
+        if (empty($data['employee_id']) || empty($data['otp_code'])) {
+            sendResponse(['success' => false, 'error' => 'Employee ID and OTP code are required'], 400);
+        }
+
+        $employeeId = $data['employee_id'];
+        $otpCode = $data['otp_code'];
+
+        logError("OTP verification attempt for employee ID: " . $employeeId);
+
+        // Initialize OTP service
+        $otpService = new OTPService($db);
+        $verificationResult = $otpService->verifyOTP($employeeId, $otpCode, 'login', $ipAddress);
+
+        if ($verificationResult['success']) {
+            // Get employee details for session
+            $stmt = $db->prepare("
+                SELECT e.employee_id, e.first_name, e.last_name, e.email, 
+                       e.role_id, e.is_active, r.role_name
+                FROM employees e 
+                LEFT JOIN user_roles r ON e.role_id = r.role_id 
+                WHERE e.employee_id = ?
+            ");
+            $stmt->execute([$employeeId]);
+            $user = $stmt->fetch();
+
+            if (!$user || !$user['is_active']) {
+                sendResponse(['success' => false, 'error' => 'Account not found or inactive'], 403);
+            }
+
+            // Set session variables
+            $role = strtolower($user['role_name'] ?? 'guest');
+            if (empty($role) || $role === 'guest') {
+                $roles = [1 => 'admin', 2 => 'front desk', 3 => 'handyman'];
+                $role = $roles[$user['role_id']] ?? 'guest';
+            }
+
+            $_SESSION['user_id'] = $user['employee_id'];
+            $_SESSION['employee_id'] = $user['employee_id'];
+            $_SESSION['role'] = $role;
+            $_SESSION['role_id'] = $user['role_id'];
+            $_SESSION['name'] = trim($user['first_name'] . ' ' . $user['last_name']);
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['login_time'] = time();
+            $_SESSION['logged_in'] = true;
+            $_SESSION['mfa_verified'] = true;
+
+            // Update last login
+            try {
+                $updateStmt = $db->prepare("UPDATE employees SET last_login = NOW() WHERE employee_id = ?");
+                $updateStmt->execute([$employeeId]);
+            } catch (PDOException $e) {
+                logError("Failed to update last login: " . $e->getMessage());
+            }
+
+            logError("MFA login successful for employee ID: " . $employeeId);
+
+            sendResponse([
+                'success' => true,
+                'step' => 'complete',
+                'user' => [
+                    'id' => $user['employee_id'],
+                    'employee_id' => $user['employee_id'],
+                    'name' => $_SESSION['name'],
+                    'email' => $_SESSION['email'],
+                    'role' => $role,
+                    'role_id' => $user['role_id']
+                ],
+                'message' => 'Login successful'
+            ]);
+        } else {
+            sendResponse(['success' => false, 'error' => $verificationResult['error']], 401);
+        }
+    }
+
+    // Handle initial login step (email/password)
     if (empty($data['email']) || empty($data['password'])) {
         logError("Missing email or password");
         sendResponse(['success' => false, 'error' => 'Email and password are required'], 400);
@@ -76,13 +158,13 @@ try {
     $email = trim(strtolower($data['email']));
     $password = $data['password'];
     
-    logError("Attempting login for email: " . $email);
+    logError("Initial login attempt for email: " . $email);
 
     // Check if user exists and get user data
     try {
         $stmt = $db->prepare("
             SELECT e.employee_id, e.first_name, e.last_name, e.email, e.password, 
-                   e.role_id, e.is_active, r.role_name
+                   e.role_id, e.is_active, e.mfa_enabled, r.role_name
             FROM employees e 
             LEFT JOIN user_roles r ON e.role_id = r.role_id 
             WHERE LOWER(e.email) = ? 
@@ -115,52 +197,73 @@ try {
         sendResponse(['success' => false, 'error' => 'Invalid email or password'], 401);
     }
 
-    // Get role name (fallback to role_id if role_name not found)
-    $role = strtolower($user['role_name'] ?? 'guest');
-    if (empty($role) || $role === 'guest') {
-        $roles = [
-            1 => 'admin',
-            2 => 'front desk', 
-            3 => 'handyman'
-        ];
-        $role = $roles[$user['role_id']] ?? 'guest';
+    logError("Password verification successful for: " . $email);
+
+    // Check if MFA is required
+    if ($user['mfa_enabled']) {
+        logError("MFA required for user: " . $email);
+        
+        // Initialize OTP service and send OTP
+        $otpService = new OTPService($db);
+        $otpResult = $otpService->generateAndSendOTP($user['employee_id'], 'login', $ipAddress, $userAgent);
+        
+        if ($otpResult['success']) {
+            // Store temporary session data (not fully logged in yet)
+            $_SESSION['temp_employee_id'] = $user['employee_id'];
+            $_SESSION['temp_login_time'] = time();
+            
+            sendResponse([
+                'success' => true,
+                'step' => 'mfa_required',
+                'employee_id' => $user['employee_id'],
+                'message' => 'Please check your email for the verification code',
+                'expires_in' => $otpResult['expires_in'] ?? 300
+            ]);
+        } else {
+            logError("Failed to send OTP: " . $otpResult['error']);
+            sendResponse(['success' => false, 'error' => 'Failed to send verification code'], 500);
+        }
+    } else {
+        // No MFA required, complete login
+        $role = strtolower($user['role_name'] ?? 'guest');
+        if (empty($role) || $role === 'guest') {
+            $roles = [1 => 'admin', 2 => 'front desk', 3 => 'handyman'];
+            $role = $roles[$user['role_id']] ?? 'guest';
+        }
+
+        $_SESSION['user_id'] = $user['employee_id'];
+        $_SESSION['employee_id'] = $user['employee_id'];
+        $_SESSION['role'] = $role;
+        $_SESSION['role_id'] = $user['role_id'];
+        $_SESSION['name'] = trim($user['first_name'] . ' ' . $user['last_name']);
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['login_time'] = time();
+        $_SESSION['logged_in'] = true;
+
+        // Update last login
+        try {
+            $updateStmt = $db->prepare("UPDATE employees SET last_login = NOW() WHERE employee_id = ?");
+            $updateStmt->execute([$user['employee_id']]);
+        } catch (PDOException $e) {
+            logError("Failed to update last login: " . $e->getMessage());
+        }
+
+        logError("Login successful (no MFA) for user: " . $email . " with role: " . $role);
+
+        sendResponse([
+            'success' => true,
+            'step' => 'complete',
+            'user' => [
+                'id' => $user['employee_id'],
+                'employee_id' => $user['employee_id'],
+                'name' => $_SESSION['name'],
+                'email' => $_SESSION['email'],
+                'role' => $role,
+                'role_id' => $user['role_id']
+            ],
+            'message' => 'Login successful'
+        ]);
     }
-
-    // FIXED: Set correct session variables that match what handyman dashboard expects
-    $_SESSION['user_id'] = $user['employee_id'];          // Keep for general use
-    $_SESSION['employee_id'] = $user['employee_id'];      // ADDED: For handyman dashboard
-    $_SESSION['role'] = $role;
-    $_SESSION['role_id'] = $user['role_id'];
-    $_SESSION['name'] = trim($user['first_name'] . ' ' . $user['last_name']);
-    $_SESSION['email'] = $user['email'];
-    $_SESSION['login_time'] = time();
-    $_SESSION['logged_in'] = true;
-
-    logError("Login successful for user: " . $email . " with role: " . $role);
-
-    // Update last login timestamp
-    try {
-        $updateStmt = $db->prepare("UPDATE employees SET last_login = NOW() WHERE employee_id = ?");
-        $updateStmt->execute([$user['employee_id']]);
-        logError("Last login timestamp updated");
-    } catch (PDOException $e) {
-        logError("Failed to update last login: " . $e->getMessage());
-        // Don't fail the login for this
-    }
-
-    // Send success response
-    sendResponse([
-        'success' => true,
-        'user' => [
-            'id' => $user['employee_id'],
-            'employee_id' => $user['employee_id'],  // ADDED: Include employee_id in response
-            'name' => $_SESSION['name'],
-            'email' => $_SESSION['email'],
-            'role' => $role,
-            'role_id' => $user['role_id']
-        ],
-        'message' => 'Login successful'
-    ]);
 
 } catch (Exception $e) {
     logError("Unexpected error: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine());

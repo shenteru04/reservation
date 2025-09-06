@@ -1,0 +1,201 @@
+[ROOM_TYPES_PUBLIC] 2025-09-05 05:00:27 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 05:00:28 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'
+[ROOM_TYPES_PUBLIC] 2025-09-05 05:03:18 - Room type Executive Room excluded: no available rooms (0 available)
+[ROOM_TYPES_PUBLIC] 2025-09-05 05:03:18 - Room type Galaxy Room excluded: no available rooms (0 available)
+[ROOM_TYPES_PUBLIC] 2025-09-05 05:03:19 - Room 7 excluded: status ID 3 (out of order/maintenance)
+[ROOM_TYPES_PUBLIC] 2025-09-05 05:03:19 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'r.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 7 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 2 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 8 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 10 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 13 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 6 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 11 availability check: 3 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 5 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 1 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 9 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 4 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 3 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:47 - Room type 12 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:46:48 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:08 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:12 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:19 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:25 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:28 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:47:29 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 7 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 2 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 8 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 10 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 13 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 6 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 11 availability check: 3 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 5 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 1 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 9 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 4 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 3 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Room type 12 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:56:57 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 7 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 2 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 8 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 10 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 13 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 6 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 11 availability check: 3 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 5 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 1 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 9 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 4 availability check: 2 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 3 availability check: 1 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Room type 12 availability check: 0 rooms available (no date filter)
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 7: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 2: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 8: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 10: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 13: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 6: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 11: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 5: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 1: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 9: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 4: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 3: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 14:57:04 - Error checking availability for room type 12: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'res.status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:11:30 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'
+[ROOM_TYPES_PUBLIC] 2025-09-05 15:18:39 - Error checking room type availability: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'where clause'

@@ -1,0 +1,10 @@
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:35:14 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:38:23 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:46:33 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:46:33 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:46:33 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:46:33 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:47:33 - Database config loaded from: C:/xampp/htdocs/reservation/api/config/db.php
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:47:33 - Database connection established
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:47:33 - Ensured hotel_services table exists
+[HOTEL_SERVICES_PUBLIC] 2025-08-26 11:47:33 - Database error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'field list'
